@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register-pharmacy',
@@ -33,7 +34,7 @@ import { MatSelectModule } from '@angular/material/select';
   styleUrl: './register-pharmacy.component.css',
 })
 export class RegisterPharmacyComponent {
-  constructor(private _formBuilder: FormBuilder) {}
+  constructor(private _formBuilder: FormBuilder,private router: Router) {}
   firstFormGroup: FormGroup = this._formBuilder.group({
     pharmacynameCtrl: ['',Validators.required],
     ownersnamectrl: [''],
@@ -56,4 +57,8 @@ export class RegisterPharmacyComponent {
   hidepw = true;
   hidecpw = true;
   linear = true;
+
+  navigateToDestination(destination:String) {
+    this.router.navigate([destination]);
+  }
 }
