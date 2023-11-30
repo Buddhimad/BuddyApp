@@ -6,7 +6,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatSelectModule} from '@angular/material/select';
 
 @Component({
   selector: 'app-register-pharmacy',
@@ -18,7 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   templateUrl: './register-pharmacy.component.html',
   styleUrl: './register-pharmacy.component.css'
@@ -31,7 +32,8 @@ export class RegisterPharmacyComponent {
   }
   firstFormGroup: FormGroup = this._formBuilder.group({firstCtrl: ['']});
   secondFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
-  thirdFormGroup: FormGroup = this._formBuilder.group({secondCtrl: ['']});
+  thirdFormGroup: FormGroup = this._formBuilder.group({thirdCtrl: ['']});
+  fourthFormGroup: FormGroup = this._formBuilder.group({forthCtrl: ['']});
   useremailFormControl = new FormControl('', [Validators.required, Validators.email]);
   value = '';
   hidepw = true;

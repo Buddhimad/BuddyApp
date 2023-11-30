@@ -6,7 +6,7 @@
       <mat-stepper labelPosition="bottom" #stepper>
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Step One</ng-template>
+            <ng-template matStepLabel></ng-template>
             <div class="row mt-3">
               <div class="col-sm-6">
                 <mat-form-field class="full-width">
@@ -146,7 +146,7 @@
         </mat-step>
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
-            <ng-template matStepLabel>Step Two</ng-template>
+            <ng-template matStepLabel></ng-template>
             <div class="row mt-3">
               <div class="col-sm-6">
                 <mat-form-field class="full-width">
@@ -216,7 +216,47 @@
                 Next
               </button>
             </div>
-
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup">
+          <div class="row mt-3">
+            <div class="col-sm-4">
+          <mat-form-field class="full-width">
+            <mat-label>Province</mat-label>
+            <mat-select  name="province">
+             
+                <!-- <mat-option value="southern">Southern</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+          <mat-form-field class="full-width">
+            <mat-label>District</mat-label>
+            <mat-select name="district">
+                <!-- <mat-option value="galle">Galle</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="col-sm-4">
+          <mat-form-field class="full-width">
+            <mat-label>Town</mat-label>
+            <mat-select name="town">
+                <!-- <mat-option value="galle">Galle</mat-option> -->
+            </mat-select>
+          </mat-form-field>
+          </div>
+          <div class="d-flex mt-3">
+            <button
+              mat-raised-button
+              color="primary"
+              class="primary-color ml-auto btn-rnext"
+              matStepperNext
+            >
+              Next
+            </button>
+          </div>
+          </div>
           </form>
         </mat-step>
         <mat-step>
