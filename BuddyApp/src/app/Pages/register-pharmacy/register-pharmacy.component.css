@@ -215,3 +215,32 @@ h2 {
 .ml-auto{
     margin-left: auto !important;
 }
+
+input[type=file] {
+  width: -webkit-fill-available;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  /* border-radius: 8px; */
+  border: 1px solid #c4c8cb;
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: black;
+  padding: 10px 20px;
+  /* border-radius: 8px; */
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #fb8633;
+}
+
+.text-grey{
+  color: rgba(0, 0, 0, 0.6);
+}
