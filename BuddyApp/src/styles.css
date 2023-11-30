@@ -1,0 +1,29 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('./assets/fonts/icomoon/icomoon.ttf') format('ttf'),
+         url('./assets/fonts/icomoon/icomoon.woff') format('woff');
+    /* Add other font properties like font-weight and font-style if needed */
+  }
+.primary-color{
+    background-color: #fb8633 !important;
+}
+.ml-auto{
+    margin-left: auto;
+}
+
+.justify-center{
+    justify-content: center;
+}
+
+.black-color{
+    background-color: black !important;
+}
+
+.mat-step-icon-selected {
+    background-color: #000000 !important;
+  }

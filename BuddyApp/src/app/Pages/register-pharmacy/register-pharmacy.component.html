@@ -1,0 +1,231 @@
+<div class="container">
+  <div class="row align-items-center justify-content-center">
+    <div class="col-md-12 mt-3">
+      <h3><strong>Buddy</strong></h3>
+      <p class="mb-4">Crafting Connections, Delivering Excellence</p>
+      <mat-stepper labelPosition="bottom" #stepper>
+        <mat-step [stepControl]="firstFormGroup">
+          <form [formGroup]="firstFormGroup">
+            <ng-template matStepLabel>Step One</ng-template>
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>User email</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [(ngModel)]="value"
+                    [formControl]="useremailFormControl"
+                  />
+                  @if (value) {
+                  <button
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="value = ''"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  } @if (useremailFormControl.hasError('email') &&
+                  !useremailFormControl.hasError('required')) {
+                  <mat-error>Please enter a valid email address</mat-error>
+                  } @if (useremailFormControl.hasError('required')) {
+                  <mat-error>User email is <strong>required</strong></mat-error>
+                  }
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Pharmacy name</mat-label>
+                  <input
+                    matInput
+                    placeholder="Enter pharmacy name"
+                    formControlName="firstCtrl"
+                    required
+                  />
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Enter your password</mat-label>
+                  <input
+                    matInput
+                    [type]="hidepw ? 'password' : 'text'"
+                    required
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hidepw = !hidepw"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidepw"
+                  >
+                    <mat-icon>{{
+                      hidepw ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Re-confirm your password</mat-label>
+                  <input
+                    matInput
+                    [type]="hidecpw ? 'password' : 'text'"
+                    required
+                  />
+                  <button
+                    mat-icon-button
+                    matSuffix
+                    (click)="hidecpw = !hidecpw"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hidecpw"
+                  >
+                    <mat-icon>{{
+                      hidecpw ? "visibility_off" : "visibility"
+                    }}</mat-icon>
+                  </button>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-6 col-md-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Owner's name</mat-label>
+                  <input matInput placeholder="Enter owner's name" required />
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <mat-form-field
+                  hintLabel="Max 10 characters"
+                  class="full-width"
+                >
+                  <mat-label>Owner's NIC</mat-label>
+                  <input
+                    matInput
+                    #nicinput
+                    maxlength="10"
+                    placeholder="Enter owner's NIC"
+                    required
+                  />
+                  <mat-hint align="end"
+                    >{{ nicinput.value.length }}/10</mat-hint
+                  >
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Owner's contact no</mat-label>
+                  <input
+                    type="tel"
+                    matInput
+                    placeholder="Owner's contact no"
+                    #contactnoinput
+                    maxlength="10"
+                    required
+                  />
+                  <mat-hint align="end"
+                    >{{ contactnoinput.value.length }}/10</mat-hint
+                  >
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="d-flex mt-3">
+              <button
+                mat-raised-button
+                color="primary"
+                class="primary-color ml-auto btn-rnext"
+                matStepperNext
+              >
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="secondFormGroup">
+          <form [formGroup]="secondFormGroup">
+            <ng-template matStepLabel>Step Two</ng-template>
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Pharmacy Address</mat-label>
+                  <textarea
+                    matInput
+                    placeholder="Enter pharmacy address"
+                    required
+                  ></textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Owner's Address</mat-label>
+                    <textarea
+                      matInput
+                      placeholder="Enter owner's address"
+                      required
+                    ></textarea>
+                  </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-4">
+                    <mat-form-field class="">
+                        <mat-label>Copy of Owner's NIC</mat-label>
+                        <input
+                          type="text"
+                          matInput
+                          placeholder="Copy of Owner's NIC"
+                          disabled
+                        />
+                    </mat-form-field>
+                    <button mat-fab color="accent" aria-label="Upload copy of owner's NIC">
+                        <mat-icon>attach_file</mat-icon>
+                      </button>
+                </div>
+                <div class="col-sm-8">
+                    <mat-form-field class="">
+                        <mat-label>Copy of Owner's Home Electricity Bill or Water Bill</mat-label>
+                        <input
+                          type="text"
+                          matInput
+                          placeholder="Copy of Owner's Home Electricity Bill or Water Bill"
+                          disabled
+                        />
+                    </mat-form-field>
+                    <button mat-fab color="accent" aria-label="Upload  Copy of Owner's Home Electricity Bill or Water Bill">
+                        <mat-icon>attach_file</mat-icon>
+                      </button>
+                </div>
+                
+            </div>
+            <div class="row mt-3">
+                <div class="col-sm-4">
+                    Copy of Pharmacy Electricity Bill or Water Bill
+                </div>
+                <div class="col-sm-4">
+                    Upload photo of Pharmacy
+                </div>
+                <div class="col-sm-4">
+                    Copy of Pharmacy Business Registration
+                </div>
+            </div>
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button matStepperNext>Next</button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button mat-button matStepperPrevious>Back</button>
+            <button mat-button (click)="stepper.reset()">Reset</button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>
