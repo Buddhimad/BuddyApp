@@ -53,6 +53,16 @@ export class RegisterPharmacyComponent {
     Validators.email,
   ]);
   pharmacynameFormControl = new FormControl('', [Validators.required]);
+  passwordFormControl=new FormControl('',[Validators.required]);
+  confirmpasswordFormControl=new FormControl('',[Validators.required]);
+  ownersnameFormControl=new FormControl('',[Validators.required]);
+  ownernicFormControl=new FormControl('',[Validators.required]);
+  ownercontactnoFormControl=new FormControl('',[Validators.required]);
+  pharmacyaddressFormControl=new FormControl('',[Validators.required]);
+  owneraddressFormControl=new FormControl('',[Validators.required]);
+  provinceFormControl=new FormControl('',[Validators.required]);
+  districtFormControl=new FormControl('',[Validators.required]);
+  townFormControl=new FormControl('',[Validators.required]);
   useremailvalue = '';
   pharmacynamevalue = '';
   ownersnamevalue = '';

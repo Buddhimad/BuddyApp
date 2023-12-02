@@ -68,6 +68,7 @@
                     matInput
                     [type]="hidepw ? 'password' : 'text'"
                     required
+                    [formControl]="passwordFormControl"
                   />
                   <button
                     mat-icon-button
@@ -80,6 +81,9 @@
                       hidepw ? "visibility_off" : "visibility"
                     }}</mat-icon>
                   </button>
+                  @if (passwordFormControl.hasError('required')) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
@@ -89,6 +93,7 @@
                     matInput
                     [type]="hidecpw ? 'password' : 'text'"
                     required
+                    [formControl]="confirmpasswordFormControl"
                   />
                   <button
                     mat-icon-button
@@ -101,6 +106,9 @@
                       hidecpw ? "visibility_off" : "visibility"
                     }}</mat-icon>
                   </button>
+                  @if (confirmpasswordFormControl.hasError('required')) {
+                    <mat-error>Password confirm is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
             </div>
@@ -108,7 +116,7 @@
               <div class="col-sm-6 col-md-4">
                 <mat-form-field class="full-width">
                   <mat-label>Owner's name</mat-label>
-                  <input matInput placeholder="Enter owner's name" required [(ngModel)]="ownersnamevalue" formControlName="ownersnamectrl"/>
+                  <input matInput placeholder="Enter owner's name" [formControl]="ownersnameFormControl" required [(ngModel)]="ownersnamevalue" formControlName="ownersnamectrl"/>
                   @if (ownersnamevalue) {
                     <button
                       matSuffix
@@ -119,11 +127,13 @@
                       <mat-icon>close</mat-icon>
                     </button>
                     }
+                    @if (ownersnameFormControl.hasError('required')) {
+                      <mat-error>Owner's name is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-4">
                 <mat-form-field
-                  hintLabel="Max 10 characters"
                   class="full-width"
                 >
                   <mat-label>Owner's NIC</mat-label>
@@ -135,10 +145,11 @@
                     required
                     [(ngModel)]="ownernicvalue"
                     formControlName="ownernicctrl"
+                    [formControl]="ownernicFormControl"
                   />
                   <mat-hint align="end"
-                    >{{ nicinput.value.length }}/10</mat-hint
-                  >
+                  >{{ nicinput.value.length }}/10</mat-hint
+                >
                   @if (ownernicvalue) {
                     <button
                       matSuffix
@@ -149,6 +160,9 @@
                       <mat-icon>close</mat-icon>
                     </button>
                     }
+                    @if (ownernicFormControl.hasError('required')) {
+                      <mat-error>Owner's NIC <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-4">
@@ -163,6 +177,7 @@
                     required
                     [(ngModel)]="ownercontactnovalue"
                     formControlName="ownercontactnoctrl"
+                    [formControl]="ownercontactnoFormControl"
                   />
                   <mat-hint align="end"
                     >{{ contactnoinput.value.length }}/10</mat-hint
@@ -177,6 +192,9 @@
                       <mat-icon>close</mat-icon>
                     </button>
                     }
+                    @if (ownercontactnoFormControl.hasError('required')) {
+                      <mat-error>Owner's contact number is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
             </div>
@@ -205,6 +223,7 @@
                     required
                     [(ngModel)]="pharmacyaddressvalue"
                     formControlName="pharmacyaddressctrl"
+                    [formControl]="pharmacyaddressFormControl"
                   />
                   @if (pharmacyaddressvalue) {
                     <button
@@ -216,6 +235,9 @@
                       <mat-icon>close</mat-icon>
                     </button>
                     }
+                    @if (pharmacyaddressFormControl.hasError('required')) {
+                      <mat-error>Pharmacy address is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
@@ -227,6 +249,7 @@
                       required
                       [(ngModel)]="owneraddressvalue"
                       formControlName="owneraddressctrl"
+                      [formControl]="owneraddressFormControl"
                     />
                     @if (owneraddressvalue) {
                       <button
@@ -238,6 +261,9 @@
                         <mat-icon>close</mat-icon>
                       </button>
                       }
+                      @if (owneraddressFormControl.hasError('required')) {
+                        <mat-error>Owner's address is <strong>required</strong></mat-error>
+                        }
                   </mat-form-field>
               </div>
             </div>
@@ -291,31 +317,45 @@
           </form>
         </mat-step>
         <mat-step [stepControl]="thirdFormGroup">
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <h4>Pharmacy Location</h4>
+            </div>
+          </div>
           <form [formGroup]="thirdFormGroup">
           <div class="row mt-3">
             <div class="col-sm-4">
           <mat-form-field class="full-width">
             <mat-label>Province</mat-label>
-            <mat-select  name="province">
+            <mat-select  name="province" [formControl]="provinceFormControl">
              
                 <!-- <mat-option value="southern">Southern</mat-option> -->
             </mat-select>
+            @if (provinceFormControl.hasError('required')) {
+              <mat-error>Pharmacy located province is <strong>required</strong></mat-error>
+              }
           </mat-form-field>
           </div>
           <div class="col-sm-4">
           <mat-form-field class="full-width">
             <mat-label>District</mat-label>
-            <mat-select name="district">
+            <mat-select name="district" [formControl]="districtFormControl">
                 <!-- <mat-option value="galle">Galle</mat-option> -->
             </mat-select>
+            @if (districtFormControl.hasError('required')) {
+              <mat-error>Pharmacy located district is <strong>required</strong></mat-error>
+              }
           </mat-form-field>
           </div>
           <div class="col-sm-4">
           <mat-form-field class="full-width">
             <mat-label>Town</mat-label>
-            <mat-select name="town">
+            <mat-select name="town" [formControl]="townFormControl">
                 <!-- <mat-option value="galle">Galle</mat-option> -->
             </mat-select>
+            @if (townFormControl.hasError('required')) {
+              <mat-error>Pharmacy located town is <strong>required</strong></mat-error>
+              }
           </mat-form-field>
           </div>
           <div class="d-flex mt-3">
