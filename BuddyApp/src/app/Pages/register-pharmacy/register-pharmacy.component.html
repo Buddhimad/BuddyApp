@@ -13,7 +13,7 @@
                   <mat-label>User email</mat-label>
                   <input
                     matInput
-                    type="text"
+                    type="email"
                     [(ngModel)]="useremailvalue"
                     [formControl]="useremailFormControl"
                   />
@@ -203,7 +203,19 @@
                     matInput
                     placeholder="Enter pharmacy address"
                     required
+                    [(ngModel)]="pharmacyaddressvalue"
+                    formControlName="pharmacyaddressctrl"
                   />
+                  @if (pharmacyaddressvalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="pharmacyaddressvalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
@@ -213,7 +225,19 @@
                       matInput
                       placeholder="Enter owner's address"
                       required
+                      [(ngModel)]="owneraddressvalue"
+                      formControlName="owneraddressctrl"
                     />
+                    @if (owneraddressvalue) {
+                      <button
+                        matSuffix
+                        mat-icon-button
+                        aria-label="Clear"
+                        (click)="owneraddressvalue = ''"
+                      >
+                        <mat-icon>close</mat-icon>
+                      </button>
+                      }
                   </mat-form-field>
               </div>
             </div>
@@ -308,7 +332,7 @@
           </form>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
+          <ng-template matStepLabel></ng-template>
           <div class="wrapperAlert">
 
             <div class="contentAlert">

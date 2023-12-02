@@ -41,7 +41,11 @@ export class RegisterPharmacyComponent {
     ownernicctrl: [''],
     ownercontactnoctrl: [''],
   });
-  secondFormGroup: FormGroup = this._formBuilder.group({ secondCtrl: [''] });
+  secondFormGroup: FormGroup = this._formBuilder.group({ 
+    secondCtrl: [''] ,
+    pharmacyaddressctrl:[''],
+    owneraddressctrl:['']
+  });
   thirdFormGroup: FormGroup = this._formBuilder.group({ thirdCtrl: [''] });
   fourthFormGroup: FormGroup = this._formBuilder.group({ forthCtrl: [''] });
   useremailFormControl = new FormControl('', [
@@ -54,6 +58,8 @@ export class RegisterPharmacyComponent {
   ownersnamevalue = '';
   ownernicvalue = '';
   ownercontactnovalue = '';
+  pharmacyaddressvalue='';
+  owneraddressvalue='';
   hidepw = true;
   hidecpw = true;
   linear = true;

@@ -16,18 +16,54 @@
                     placeholder="Enter full name"
                     formControlName="fullnameCtrl"
                     required
+                    [(ngModel)]="fullnamevalue"
+                    [formControl]="fullnameFormControl"
+                    required
                   />
+                  @if (fullnamevalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="fullnamevalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                   @if (fullnameFormControl.hasError('required')) {
+                  <mat-error>Fullname is <strong>required</strong></mat-error>
+                  }
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="w-100">
                   <mat-label>User E-mail</mat-label>
                   <input
+                  type="email"
                     matInput
                     placeholder="Enter user email"
                     formControlName="useremailCtrl"
+                    [(ngModel)]="useremailvalue"
                     required
+                    [formControl]="useremailFormControl"
+                    
                   />
+                  @if (useremailvalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="useremailvalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }@if (useremailFormControl.hasError('email') &&
+                    !useremailFormControl.hasError('required')) {
+                    <mat-error>Please provide a valid email address</mat-error>
+                    }
+                    @if (useremailFormControl.hasError('required')) {
+                      <mat-error>User email is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
             </div>
@@ -35,7 +71,7 @@
               <div class="col-md-6">
                 <mat-form-field class="w-100">
                   <mat-label>Enter your password</mat-label>
-                  <input matInput [type]="hidepw ? 'password' : 'text'" />
+                  <input matInput [type]="hidepw ? 'password' : 'text'"  formControlName="pwdCtrl" [formControl]="pwdFormControl"/>
                   <button
                     mat-icon-button
                     matSuffix
@@ -47,12 +83,15 @@
                       hidepw ? "visibility_off" : "visibility"
                     }}</mat-icon>
                   </button>
+                  @if (pwdFormControl.hasError('required')) {
+                    <mat-error>Password is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-md-6">
                 <mat-form-field class="w-100">
                   <mat-label>Confirm your password</mat-label>
-                  <input matInput [type]="hidecpw ? 'password' : 'text'" />
+                  <input matInput [type]="hidecpw ? 'password' : 'text'" [formControl]="cpwFormControl"/>
                   <button
                     mat-icon-button
                     matSuffix
@@ -64,6 +103,9 @@
                       hidecpw ? "visibility_off" : "visibility"
                     }}</mat-icon>
                   </button>
+                  @if (cpwFormControl.hasError('required')) {
+                    <mat-error>Confirming password is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
             </div>
@@ -80,21 +122,21 @@
                   </mat-select>
                   @if (selected.hasError('required')) {
                   <mat-error>You must make a selection</mat-error>
-                  } @if (selected.hasError('pattern') &&
-                  !selected.hasError('required')) {
-                  <mat-error>Your selection is invalid</mat-error>
-                  }
+                  } 
                 </mat-form-field>
               </div>
               <div class="col-md-3">
                 <mat-form-field class="w-100">
                   <mat-label>Date of birth</mat-label>
-                  <input matInput [matDatepicker]="picker" />
+                  <input matInput [matDatepicker]="picker"  [formControl]="dobFormControl"/>
                   <mat-datepicker-toggle
                     matIconSuffix
                     [for]="picker"
                   ></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
+                  @if (dobFormControl.hasError('required')) {
+                    <mat-error>Date of birth is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-md-3">
@@ -105,10 +147,26 @@
                     #nicinput
                     maxlength="10"
                     placeholder="Enter your NIC no"
+                    [(ngModel)]="nicvalue"
+                    formControlName="nicCtrl"
+                    [formControl]="nicFormControl"
                   />
                   <mat-hint align="end"
                     >{{ nicinput.value.length }}/10</mat-hint
                   >
+                  @if (nicvalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="nicvalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                    @if (nicFormControl.hasError('required')) {
+                      <mat-error>NIC number is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
               <div class="col-md-3">
@@ -120,10 +178,26 @@
                     #contactnoinput
                     maxlength="10"
                     placeholder="Enter your contact number"
+                    [(ngModel)]="contactvalue"
+                    formControlName="contactCtrl"
+                    [formControl]="contactFormControl"
                   />
                   <mat-hint align="end"
                     >{{ contactnoinput.value.length }}/10</mat-hint
                   >
+                  @if (contactvalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="contactvalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                    @if (contactFormControl.hasError('required')) {
+                      <mat-error>Contact number is <strong>required</strong></mat-error>
+                      }
                 </mat-form-field>
               </div>
             </div>
@@ -148,16 +222,21 @@
                   <mat-label>Address</mat-label>
                   <input
                     matInput
-                    formControlName="secondCtrl"
+                    formControlName="addressCtrl"
                     placeholder="Enter your address"
                     required
+                    [formControl]="addressFormControl"
                   />
+                  @if (addressFormControl.hasError('required')) {
+                    <mat-error>Address is <strong>required</strong></mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <div class="input-group">
                   <label for="upconic" class="mb-2 text-grey">Upload copy of NIC</label>
                   <input type="file" id="upconic">
+                 
                   </div>
               </div>
               <div class="col-md-4">
@@ -177,18 +256,24 @@
               <div class="col-md-4">
                 <mat-form-field class="full-width" style="margin-top: 32px;">
                   <mat-label>Province</mat-label>
-                  <mat-select  name="province">
+                  <mat-select  name="province" [formControl]="provinceFormControl">
                    
                       <!-- <mat-option value="southern">Southern</mat-option> -->
                   </mat-select>
+                  @if (provinceFormControl.hasError('required')) {
+                    <mat-error>Select your Province</mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-md-4">
                 <mat-form-field class="full-width" style="margin-top: 32px;">
                   <mat-label>District</mat-label>
-                  <mat-select name="district">
+                  <mat-select name="district" [formControl]="districtFormControl">
                       <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
+                  @if (districtFormControl.hasError('required')) {
+                    <mat-error>Select your District</mat-error>
+                    }
                 </mat-form-field>
               </div>
             </div>
@@ -196,9 +281,12 @@
               <div class="col-md-4">
                 <mat-form-field class="full-width">
                   <mat-label>Town</mat-label>
-                  <mat-select name="town">
+                  <mat-select name="town" [formControl]="townFormControl">
                       <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
+                  @if (townFormControl.hasError('required')) {
+                    <mat-error>Select your Town</mat-error>
+                    }
                 </mat-form-field>
               </div>
               <div class="col-md-8">

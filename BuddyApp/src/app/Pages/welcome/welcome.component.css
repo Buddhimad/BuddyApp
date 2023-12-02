@@ -150,4 +150,9 @@ body {
     .primary-color{
         background-color: #fb8633;
     }
+
+    .btn-signup-customer{
+      background-color: black !important;
+      color: #fb8633 !important;
+    }
   

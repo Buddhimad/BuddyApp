@@ -6,17 +6,17 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
 } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatStepperModule } from '@angular/material/stepper';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {SelectErrorStateMatcher} from './../../utility/Validators/SelectErrorStateMatcher';
-import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { SelectErrorStateMatcher } from './../../utility/Validators/SelectErrorStateMatcher';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -33,30 +33,68 @@ import { Router } from '@angular/router';
     MatIconModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
   ],
   templateUrl: './register-delivery-person.component.html',
   styleUrl: './register-delivery-person.component.css',
 })
 export class RegisterDeliveryPersonComponent {
-  constructor(private _formBuilder: FormBuilder,private router: Router) {}
-  hidepw=true;
-  hidecpw=true;
-
-  selected = new FormControl('valid', [Validators.required]);
-
-  selectFormControl = new FormControl('valid', [Validators.required]);
+  constructor(private _formBuilder: FormBuilder, private router: Router) {}
+  hidepw = true;
+  hidecpw = true;
+  fullnamevalue = '';
+  useremailvalue = '';
+  nicvalue = '';
+  contactvalue = '';
 
   firstFormGroup = this._formBuilder.group({
     fullnameCtrl: ['', Validators.required],
-    useremailCtrl:['', Validators.email]
+    useremailCtrl: ['', Validators.email],
+    pwdCtrl:['',Validators.required],
+    nicCtrl: ['', Validators.required],
+    contactCtrl: ['', Validators.required],
   });
   secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
+    addressCtrl: ['', Validators.required],
   });
 
+  selected = new FormControl('', [Validators.required]);
+  selectFormControl = new FormControl('', [Validators.required]);
+  fullnameFormControl = new FormControl('', [Validators.required]);
+  useremailFormControl = new FormControl('', [
+    Validators.required,
+    Validators.email,
+  ]);
+  pwdFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  cpwFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  dobFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  nicFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  contactFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  addressFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  provinceFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  districtFormControl=new FormControl('',[
+    Validators.required
+  ]);
+  townFormControl=new FormControl('',[
+    Validators.required
+  ]);
   matcher = new SelectErrorStateMatcher();
-  navigateToDestination(destination:String) {
+  navigateToDestination(destination: String) {
     this.router.navigate([destination]);
   }
+  
 }
