@@ -1,0 +1,9 @@
+.content {
+    display: flex;
+    height: 100%;
+    
+  }
+
+  body{
+    overflow: hidden !important;
+  }
