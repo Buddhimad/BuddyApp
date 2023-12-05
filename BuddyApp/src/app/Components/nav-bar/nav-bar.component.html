@@ -5,10 +5,76 @@
     <span class="app-title"><h3><strong>Buddy</strong></h3></span>
     <span class="example-spacer"></span>
     <!-- <mat-icon matBadge="15" matBadgeColor="warn">home</mat-icon> -->
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <button mat-icon-button class="notification-icon favorite-icon" aria-label="Notifications" [matMenuTriggerFor]="notificationMenu">
       <mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon>
     </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
+    <mat-menu #notificationMenu="matMenu" xPosition="before" style="margin-top: 20px !important; width: 350px !important;" class="custom-dropdown">
+      <div class="title-wrap d-flex align-items-center">
+        <h3 class="title mb-0">Notifications</h3>
+        <a href="#" class="small ml-auto">Mark all as read</a>
+      </div>
+
+      <ul class="custom-notifications">
+        <li class="unread" *ngFor="let notification of notification_list">
+          <a href="#" class="d-flex">
+            <div class="img me-3">
+              <img src="{{notification.profile_pic_url}}" alt="Image" class="img-fluid">
+            </div>
+            <div class="text">
+              <strong>{{notification.responders_name}} </strong>  respond to your {{notification.notice_type}} notice 
+              {{notification.time_stamp| dateAgo}}
+            </div>
+          </a>
+        </li>
+
+        <!-- <li class="unread">
+          <a href="#" class="d-flex">
+            <div class="img mr-3">
+              <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="text">
+              <strong>Alex Stafford</strong> marked the task done a day ago
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="d-flex">
+            <div class="img mr-3">
+              <img src="images/person_3.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="text">
+              <strong>Devin Richards</strong> mentioned you in her comment on Invoices 2 days ago
+            </div>
+          </a>
+        </li>
+
+        <li class="">
+          <a href="#" class="d-flex">
+            <div class="img mr-3">
+              <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="text">
+              <strong>Alex Stafford</strong> marked the task done a day ago
+            </div>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="d-flex">
+            <div class="img mr-3">
+              <img src="images/person_3.jpg" alt="Image" class="img-fluid">
+            </div>
+            <div class="text">
+              <strong>Devin Richards</strong> mentioned you in her comment on Invoices 2 days ago
+            </div>
+          </a>
+        </li> -->
+
+      </ul>
+      <p class="text-center m-0 p-0"><a href="#" class="small">View All</a></p>
+    </mat-menu>
+    <button mat-icon-button class="account-icon" aria-label="Example icon-button with share icon">
       <mat-icon>person</mat-icon>
     </button>
   </mat-toolbar>

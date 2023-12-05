@@ -1,5 +1,8 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import url('https://fonts.googleapis.com/css2?family=Khand:wght@500&display=swap');
+/* styles.css */
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons&display=swap');
+
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -27,4 +30,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .mat-step-icon-selected {
     background-color: #000000 !important;
+  }
+
+  .mat-mdc-menu-panel{
+    min-width: 400px !important;
+      max-width: auto !important;
+      max-height: auto;
+      margin-top: 10px;
+      padding: 10px;
+  }
+
+  .mat-mdc-menu-panel a{
+    text-decoration: none !important;
+    color: #fb8633;
   }
