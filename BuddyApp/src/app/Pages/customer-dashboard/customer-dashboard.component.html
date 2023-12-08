@@ -1,12 +1,27 @@
-<app-nav-bar/>
-<mat-drawer-container class="drawer-container vh-100" autosize >
-<app-customer-side-nav/>
-    <div class="fluid-container mt-5 main">
-       content
+<app-nav-bar />
+<mat-drawer-container class="mat-drawer-container vh-100">
+  <app-customer-side-nav />
+  <!-- <div class="container mt-5 main"> -->
+  <!-- <mat-drawer-content> -->
+    <div class="container mt-5 main">
+  
+      <router-outlet ></router-outlet>
 
-       <button mat-fab matTooltip="Write a Notice"  aria-label="Write a Notice" style="position: absolute; bottom: 40px;right:40px; background-color: #fb8633 !important;">
+      <button
+        mat-fab
+        matTooltip="Write a Notice"
+        aria-label="Write a Notice"
+        style="
+          position: absolute;
+          bottom: 40px;
+          right: 40px;
+          background-color: #fb8633 !important;
+        "
+      >
         <mat-icon>edit</mat-icon>
       </button>
-      </div>
+    </div>
+  <!-- </mat-drawer-content> -->
 
+  <!-- </div> -->
 </mat-drawer-container>
