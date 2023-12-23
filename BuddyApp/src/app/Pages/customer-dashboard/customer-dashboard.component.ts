@@ -5,7 +5,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { CustomerSideNavComponent } from "../../Components/customer-side-nav/customer-side-nav.component";
 import {MatIconModule} from '@angular/material/icon';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 @Component({
     selector: 'app-customer-dashboard',
@@ -16,6 +16,10 @@ import { RouterOutlet } from '@angular/router';
 })
 export class CustomerDashboardComponent {
  
+    constructor(private router: Router) { }
 
+    navigateToDestination(destination:String) {
+      this.router.navigate([destination]);
+    }
   
 }

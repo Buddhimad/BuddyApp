@@ -5,6 +5,7 @@ import { RegisterDeliveryPersonComponent } from './Pages/register-delivery-perso
 import { RegisterCustomerComponent } from './Pages/register-customer/register-customer.component';
 import { CustomerDashboardComponent } from './Pages/customer-dashboard/customer-dashboard.component';
 import { NoticesComponent } from './Components/notices/notices.component';
+import { CreateNoticeComponent } from './Components/create-notice/create-notice.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -29,6 +30,10 @@ export const routes: Routes = [
       {
         path:'deliverynotices',
         component:NoticesComponent
+      },
+      {
+        path:'createnotice',
+        component:CreateNoticeComponent
       }
     ],
   },
