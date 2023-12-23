@@ -83,6 +83,12 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       reader.readAsDataURL(file);
     }
   }
+  // {
+  //   name: 'Delivery',
+  //   path: 'notice/delivery',
+  //   icon: 'local_shipping',
+  //   response_count: 150,
+  // },
   side_nav_list: SideNavLiElement[] = [
     {
       name: 'All',
@@ -95,13 +101,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       path: 'notice/pharmacy',
       icon: 'medication',
       response_count: 100,
-    },
-    {
-      name: 'Delivery',
-      path: 'notice/delivery',
-      icon: 'local_shipping',
-      response_count: 150,
-    },
+    }
   ];
 
   settings_list = [
