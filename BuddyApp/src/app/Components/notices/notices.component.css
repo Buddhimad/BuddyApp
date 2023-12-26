@@ -156,7 +156,7 @@
 
 
 .box-header {
-  margin: 0 auto;
+  /* margin: 0 auto; */
   padding: 0 30px 10px;
   width: initial;
 }
@@ -289,10 +289,18 @@
 
 .shop-open{
   background-color: lightgreen;
+ 
+}
+.shop-open .mat-icon{
+  color: black !important;
 }
 
 .shop-close{
   background-color: #EF5350;
+ 
+}
+.shop-close .mat-icon{
+  color: black !important;
 }
 
 .thumbs_up{
@@ -301,19 +309,28 @@
   transition: 0.3s;
   margin-left: auto;
   cursor:pointer !important;
+  color: black !important;
+}
+
+.thumbs_up .mat-icon{
+  color: black !important;
 }
 
 .not_respond{
-  background-color: #FFA726 !important;
+  background-color: #EEEEEE !important;
 }
 
 .respond{
-  background-color: #ff7043 !important;
+  background-color: #FB8C00 !important;
 }
 
 .primary_chip{
-  background-color: #FFA726 !important;
+  background-color: #EEEEEE!important;
 }
 .va-bottom{
   vertical-align: bottom !important;
+}
+
+mat-chip .mat-icon{
+  color: #FB8C00 !important;
 }

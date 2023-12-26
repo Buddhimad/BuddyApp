@@ -60,6 +60,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       'customer-side-navigation'
     );
   }
+
   openDrawerFunction() {
     if (!this.isShowing) {
       return (this.isShowing = true);
@@ -92,7 +93,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
   side_nav_list: SideNavLiElement[] = [
     {
       name: 'All',
-      path: 'notice',
+      path: 'customer/dashboard',
       icon: 'home',
       response_count: 250,
     },
@@ -124,5 +125,9 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
   onRippleClick(): void {
     // Handle the click event here
     console.log('Ripple effect clicked!');
+  }
+
+  changeRoutes(route:String){
+      this.sharedService.callChangeRouteFunction(route);
   }
 }

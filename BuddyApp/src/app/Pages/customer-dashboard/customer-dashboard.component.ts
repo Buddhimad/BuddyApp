@@ -6,6 +6,8 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { CustomerSideNavComponent } from "../../Components/customer-side-nav/customer-side-nav.component";
 import {MatIconModule} from '@angular/material/icon';
 import { Router, RouterOutlet } from '@angular/router';
+import { SharedService } from '../../Services/shared-service.service';
+import { Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-customer-dashboard',
@@ -15,10 +17,21 @@ import { Router, RouterOutlet } from '@angular/router';
     imports: [CommonModule, NavBarComponent, MatButtonModule, MatSidenavModule, CustomerSideNavComponent,MatIconModule,RouterOutlet]
 })
 export class CustomerDashboardComponent {
- 
-    constructor(private router: Router) { }
+  private subscription: Subscription;
+  iscreatenoticeshow:Boolean=true;
+  
+    constructor(private router: Router, private sharedService: SharedService) {
+      this.subscription = this.sharedService.routeControlFunction.subscribe((route:any)=>{
+        this.navigateToDestination(route);
+      })
+     }
 
     navigateToDestination(destination:String) {
+      if(destination=="/customer/dashboard/createnotice"){
+          this.iscreatenoticeshow=false;
+      }else{
+        this.iscreatenoticeshow=true;
+      }
       this.router.navigate([destination]);
     }
   

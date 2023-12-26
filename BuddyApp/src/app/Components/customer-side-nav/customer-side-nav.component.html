@@ -32,7 +32,7 @@
       </mat-chip-set>
 
       @for (li_element of side_nav_list; track li_element) {
-      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick()">
+      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{ li_element.icon }}</mat-icon>
         <div matListItemTitle matBadge="{{li_element.response_count}}" matBadgeColor="warn">
           <strong>{{ li_element.name }}</strong>

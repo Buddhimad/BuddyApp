@@ -25,7 +25,6 @@ export class NavBarComponent{
  
 
   openDrawer(): void {
-    console.log("clicked nav button");
     this.sharedService.callSharedFunction();
   }
 

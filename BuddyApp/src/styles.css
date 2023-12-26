@@ -44,3 +44,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-decoration: none !important;
     color: #fb8633;
   }
+
+  .mat-drawer-content{
+    background-color: whitesmoke !important;
+  }
