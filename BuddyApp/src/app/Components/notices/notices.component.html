@@ -17,17 +17,17 @@
             <span class="time">2 days ago</span>
           </header>
           <div class="main ms-4 mt-3">
-            <div class="row mt-3">
-              <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="d-flex mt-3">
+              <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon" fontIcon="call"></mat-icon> <strong class="ms-2">Contact</strong> : <span class="ms-2">0765363828</span>
             </div>
             </div>
-            <div class="row mt-3">
-              <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-                  <mat-icon aria-hidden="false" class="ms-2 va-bottom" aria-label="District icon" fontIcon="zoom_in_map"></mat-icon><strong class="ms-2">District</strong> : <span class="ms-2">Galle</span>
+            <div class="d-flex mt-3">
+              <div class="flex-fill">
+                  <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon" fontIcon="zoom_in_map"></mat-icon><strong class="ms-2">District</strong> : <span class="ms-2">Galle</span>
               </div>
-              <div class="col-12 col-sm-12 col-md-12 col-lg-6">
-                 <mat-icon aria-hidden="false" class="ms-2 va-bottom" aria-label="Town icon" fontIcon="location_city"></mat-icon><strong class="ms-2">Town</strong> : <span class="ms-2">Galle</span>
+              <div class="flex-fill">
+                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon" fontIcon="location_city"></mat-icon><strong class="ms-2">Town</strong> : <span class="ms-2">Galle</span>
               </div>
             </div>
             <div class="row mt-3">
@@ -42,16 +42,17 @@
           <div class="box-buttons">
             <div class="row mt-3">
               <mat-chip-listbox
-              class="clearfix"
+              class="d-flex "
                 aria-label="pharmacy_information_listbox"
                 style="padding-left: 60px"
               >
                 <mat-chip
-                  class="primary_chip"
+                  class="primary_chip flex-fill"
                   matTooltip="Sent"
                   matTooltipHideDelay="100"
                 >
                   <mat-icon
+                    class="align-middle"
                     matChipAvatar
                     aria-hidden="false"
                     aria-label="contact icon"
@@ -60,7 +61,7 @@
                   120
                 </mat-chip>
                 <mat-chip
-                  class="primary_chip"
+                  class="primary_chip flex-fill"
                   matTooltip="Views"
                   matTooltipHideDelay="100"
                 >
@@ -73,21 +74,8 @@
                   20
                 </mat-chip>
                 <mat-chip
-                  class="primary_chip"
+                  class="primary_chip flex-fill"
                   matTooltip="Respond"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="mark_email_read"
-                  ></mat-icon>
-                  5
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip float-right"
-                  matTooltip="View"
                   matTooltipHideDelay="100"
                   data-bs-toggle="collapse"
                   data-bs-target="#noticeid_response_list" 
@@ -98,11 +86,25 @@
                     matChipAvatar
                     aria-hidden="false"
                     aria-label="contact icon"
+                    fontIcon="mark_email_read"
+                  ></mat-icon>
+                  5
+                </mat-chip>
+                <!-- <mat-chip
+                  class="primary_chip float-right"
+                  matTooltip="View"
+                  matTooltipHideDelay="100"
+                
+                >
+                  <mat-icon
+                    matChipAvatar
+                    aria-hidden="false"
+                    aria-label="contact icon"
                     fontIcon="expand_circle_down"
                    
                   ></mat-icon>
                   5
-                </mat-chip>
+                </mat-chip> -->
                 <!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#noticeid_response_list" aria-expanded="false" aria-controls="noticeid_response_list">
                   Button
                 </button> -->
@@ -139,8 +141,8 @@
               </div>
               <div class="box-content">
                 <div class="bottom">
-                  <mat-chip-listbox aria-label="pharmacy_information_listbox">
-                    <mat-chip class="primary_chip" matTooltip="Price" matTooltipHideDelay="100">
+                  <mat-chip-listbox class="d-flex bd-highlight" aria-label="pharmacy_information_listbox">
+                    <mat-chip class="bd-highlight primary_chip" matTooltip="Price" matTooltipHideDelay="100">
                       <mat-icon
                         matChipAvatar
                         aria-hidden="false"
@@ -150,21 +152,14 @@
                       1200
                     </mat-chip>
                     <mat-chip
-                      class="chip shop-open"
+                      class="chip bd-highlight shop-open"
                       matTooltip="We're Open"
                       matTooltipHideDelay="100"
                     >
-                      <mat-icon
-                        color="success"
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="is shop open icon"
-                        fontIcon="meeting_room"
-                      ></mat-icon>
                       Open
                     </mat-chip>
                     <mat-chip
-                      class="chip thumbs_up not_respond"
+                      class="chip ms-auto bd-highlight thumbs_up not_respond"
                       matTooltip="Let us know you received response"
                       matTooltipHideDelay="100"
                     >
@@ -176,6 +171,8 @@
                         fontIcon="thumb_up"
                       ></mat-icon>
                     </mat-chip>
+                    </mat-chip-listbox>
+                    <mat-chip-listbox>
                     <mat-chip
                       class="w-100 primary_chip"
                       matTooltip="Contact us"
@@ -234,8 +231,8 @@
               </div>
               <div class="box-content">
                 <div class="bottom">
-                  <mat-chip-listbox aria-label="pharmacy_information_listbox">
-                    <mat-chip class="primary_chip" matTooltip="Price" matTooltipHideDelay="100">
+                  <mat-chip-listbox class="d-flex bd-highlight" aria-label="pharmacy_information_listbox">
+                    <mat-chip class="primary_chip bd-highlight" matTooltip="Price" matTooltipHideDelay="100">
                       <mat-icon
                         matChipAvatar
                         aria-hidden="false"
@@ -245,21 +242,14 @@
                       1200
                     </mat-chip>
                     <mat-chip
-                      class="chip shop-close"
+                      class="chip shop-close bd-highlight"
                       matTooltip="We're Close"
                       matTooltipHideDelay="100"
                     >
-                      <mat-icon
-                        color="success"
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="is shop open icon"
-                        fontIcon="meeting_room"
-                      ></mat-icon>
                       Closed
                     </mat-chip>
                     <mat-chip
-                      class="chip thumbs_up respond"
+                      class="chip ms-auto bd-highlight thumbs_up respond"
                       matTooltip="Thank you for noticing us"
                       matTooltipHideDelay="100"
                     >
@@ -271,6 +261,8 @@
                         fontIcon="thumb_up"
                       ></mat-icon>
                     </mat-chip>
+                    </mat-chip-listbox>
+                    <mat-chip-listbox>
                     <mat-chip
                       class="w-100 primary_chip"
                       matTooltip="Contact us"
