@@ -6,6 +6,7 @@ import { RegisterCustomerComponent } from './Pages/register-customer/register-cu
 import { CustomerDashboardComponent } from './Pages/customer-dashboard/customer-dashboard.component';
 import { NoticesComponent } from './Components/notices/notices.component';
 import { CreateNoticeComponent } from './Components/create-notice/create-notice.component';
+import { ShopProfileComponent } from './Components/shop-profile/shop-profile.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -34,6 +35,10 @@ export const routes: Routes = [
       {
         path:'createnotice',
         component:CreateNoticeComponent
+      },
+      {
+        path:'shopname/profile',
+        component:ShopProfileComponent
       }
     ],
   },
