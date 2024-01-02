@@ -107,6 +107,12 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
 
   settings_list = [
     {
+      name: 'Verify Account',
+      path: 'verify/account',
+      icon: 'verified_user',
+      response_count: 250,
+    },
+    {
       name: 'Security',
       path: 'security',
       icon: 'security',
@@ -114,7 +120,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
     },
     {
       name: 'Profile',
-      path: 'profile',
+      path: 'customer/dashboard/account',
       icon: 'account_circle',
       response_count: 250,
     },
@@ -124,7 +130,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
 
   onRippleClick(): void {
     // Handle the click event here
-    console.log('Ripple effect clicked!');
+   // console.log('Ripple effect clicked!');
   }
 
   changeRoutes(route:String){

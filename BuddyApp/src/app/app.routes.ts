@@ -7,6 +7,8 @@ import { CustomerDashboardComponent } from './Pages/customer-dashboard/customer-
 import { NoticesComponent } from './Components/notices/notices.component';
 import { CreateNoticeComponent } from './Components/create-notice/create-notice.component';
 import { ShopProfileComponent } from './Components/shop-profile/shop-profile.component';
+import { CustomerAccountComponent } from './Components/customer-account/customer-account.component';
+import { VeryfyCustomerComponent } from './Components/veryfy-customer/veryfy-customer.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -39,6 +41,14 @@ export const routes: Routes = [
       {
         path:'shopname/profile',
         component:ShopProfileComponent
+      },
+      {
+        path:'account',
+        component:CustomerAccountComponent
+      },
+      {
+        path:'verify/account',
+        component:VeryfyCustomerComponent
       }
     ],
   },

@@ -50,7 +50,7 @@
     <mat-chip class="subheader-box mat-subheader" cdkDrag>Settings</mat-chip>
     </mat-chip-set>
       @for (li_element of settings_list; track li_element) {
-      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick()">
+      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{li_element.icon}}</mat-icon>
         <div matListItemTitle><strong>{{li_element.name}}</strong></div>
         <!-- <div matListItemLine>{{note.updated | date}}</div> -->
