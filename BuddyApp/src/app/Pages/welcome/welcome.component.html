@@ -9,17 +9,22 @@
         <div class="col-md-7">
           <h3><strong>Buddy</strong></h3>
           <p class="mb-4">Crafting Connections, Delivering Excellence</p>
-          <form action="#" method="post">
+          <form (ngSubmit)="login($event)" [formGroup]="firstFormGroup">
             <div class="form-group">
               <mat-form-field class="full-width">
                 <mat-label>Enter your user email</mat-label>
-                <input matInput />
+                <input
+                  matInput
+                  formControlName="username"
+                  [(ngModel)]="user.username"/>
               </mat-form-field>
             </div>
             <div class="form-group">
               <mat-form-field class="full-width">
                 <mat-label>Enter your password</mat-label>
-                <input matInput [type]="hide ? 'password' : 'text'" />
+                <input matInput [type]="hide ? 'password' : 'text'"
+                       formControlName="password"
+                       [(ngModel)]="user.password"/>
                 <button
                   mat-icon-button
                   matSuffix
@@ -29,25 +34,29 @@
                 >
                   <mat-icon>{{
                     hide ? "visibility_off" : "visibility"
-                  }}</mat-icon>
+                    }}</mat-icon>
                 </button>
               </mat-form-field>
             </div>
             <div class="d-flex mb-5 align-items-center">
               <label class="control control--checkbox mb-0"
-                ><span class="caption">Remember me</span>
-                <input type="checkbox" checked="checked" />
+              ><span class="caption">Remember me</span>
+                <input type="checkbox" checked="checked"/>
                 <div class="control__indicator"></div>
               </label>
               <span class="ml-auto"
-                ><a href="#" class="forgot-pass">Forgot Password</a></span
+              ><a href="#" class="forgot-pass">Forgot Password</a></span
               >
             </div>
 
             <!-- <input type="submit" value="Log In" class="btn btn-block btn-primary"> -->
-            <button mat-raised-button color="primary" class="full-width primary-color">Sign In</button>
-            <button mat-raised-button class="full-width btn-signup-customer mt-2" (click)="navigateToDestination('/registercustomer')">Sign Up as a Customer</button>
-            <button mat-raised-button color="primary" class="full-width black-color mt-2" (click)="navigateToDestination('/registerpharmacy')">Sign Up as a Pharmacy</button>
+            <button mat-raised-button color="primary" class="full-width primary-color" type="submit">Sign In</button>
+            <button mat-raised-button class="full-width btn-signup-customer mt-2"
+                    (click)="navigateToDestination('/registercustomer')">Sign Up as a Customer
+            </button>
+            <button mat-raised-button color="primary" class="full-width black-color mt-2"
+                    (click)="navigateToDestination('/registerpharmacy')">Sign Up as a Pharmacy
+            </button>
             <!-- <button mat-raised-button color="primary" class="full-width black-color mt-2" (click)="navigateToDestination('/registerdeliveryperson')">Sign Up as a Delivery Person</button> -->
           </form>
         </div>
