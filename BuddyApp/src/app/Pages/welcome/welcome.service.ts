@@ -12,7 +12,6 @@ export class WelcomeService {
   }
 
   login(customer: any): Observable<any> {
-    console.log(customer)
-    return this.http.post<any>(this.sharedService.publicUrl + 'customer/login', customer);
+    return this.http.post<any>(this.sharedService.publicUrl + 'app_user/login', customer);
   }
 }

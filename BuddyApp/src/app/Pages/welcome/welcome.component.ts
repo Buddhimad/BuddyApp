@@ -48,8 +48,8 @@ export class WelcomeComponent {
   login(e: any) {
     e.preventDefault()
     this.welcomeService.login(this.user).subscribe(result => {
-      if (result) {
-        // this.router.navigate(['/customer/dashboard']);
+      if (result.app_user) {
+        this.router.navigate(['/customer/dashboard']);
       }
     })
   }
