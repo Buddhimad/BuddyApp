@@ -108,7 +108,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
   settings_list = [
     {
       name: 'Verify Account',
-      path: 'verify/account',
+      path: 'customer/dashboard/verify/account',
       icon: 'verified_user',
       response_count: 250,
     },
