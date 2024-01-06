@@ -114,7 +114,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
     },
     {
       name: 'Security',
-      path: 'security',
+      path: 'customer/dashboard/security',
       icon: 'security',
       response_count: 250,
     },

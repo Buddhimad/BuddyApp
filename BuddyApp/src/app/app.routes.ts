@@ -10,6 +10,7 @@ import { ShopProfileComponent } from './Components/shop-profile/shop-profile.com
 import { CustomerAccountComponent } from './Components/customer-account/customer-account.component';
 import { VeryfyCustomerComponent } from './Components/veryfy-customer/veryfy-customer.component';
 import { NotificationPanelComponent } from './Components/notification-panel/notification-panel.component';
+import { SecurityComponent } from './Components/security/security.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -54,6 +55,10 @@ export const routes: Routes = [
       {
         path:'notifications',
         component:NotificationPanelComponent
+      },
+      {
+        path:'security',
+        component:SecurityComponent
       }
     ],
   }
