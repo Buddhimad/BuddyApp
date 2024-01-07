@@ -12,7 +12,7 @@ export class RegisterCustomerService {
   }
 
   addCustomer(customer: any): Observable<any> {
-    return this.http.post<any>(this.sharedService.publicUrl + 'customer/addCustomer', customer);
+    return this.http.post<any>(this.sharedService.publicUrl + 'app_user/signup', customer);
   }
 
   getProvinces(): Observable<any> {

@@ -6,7 +6,7 @@ import {
   FormBuilder,
   FormGroup,
   FormsModule,
-  ReactiveFormsModule,
+  ReactiveFormsModule, AbstractControl,
 } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
@@ -19,6 +19,7 @@ import {EmailErrorStateMatcher} from './../../utility/Validators/EmailErrorState
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {RegisterCustomerService} from "./register-customer.service";
+import {PasswordConfirm} from "./chk-password";
 
 @Component({
   selector: 'app-register-customer',
@@ -40,88 +41,58 @@ import {RegisterCustomerService} from "./register-customer.service";
   styleUrl: './register-customer.component.css',
 })
 export class RegisterCustomerComponent implements OnInit {
-  firstFormGroup: any;
-  secondFormGroup: any;
   hidepw = true;
   hidecpw = true;
-  addressvalue = '';
-  fullnameValue = '';
-  useremailValue = "";
-  nicValue = "";
-  contactnoValue = "";
+  pdmTxt = 'Confirm your password';
+  firstFormGroup: any;
+  secondFormGroup: any;
 
-  provinces:any = []
-  districts:any = []
-  towns:any = []
-
-  constructor(private _formBuilder: FormBuilder, private router: Router, private registerCustomerS: RegisterCustomerService) {
+  constructor(private _formBuilder: FormBuilder) {
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      fullnameCtrl: [
-        '',
-        [Validators.required, Validators.pattern(/^[a-zA-Z ]*$/)],
-      ],
-      birthdayCtrl: ['', Validators.required],
-      nicnoCtrl: ['', Validators.required],
-      contactnoCtrl: ['', Validators.required],
-      pwCtrl: ['', Validators.required],
-      cpwCtrl: ['', Validators.required]
+      full_name: ['', Validators.required],
+      email: ['', Validators.required],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
+      nic: ['', Validators.required],
+      contact_number_1: ['', Validators.required],
+      password: ['', [Validators.required, PasswordConfirm()]],
+      passwordC: ['', [Validators.required, PasswordConfirm()]]
     });
-    this.firstFormGroup.get('fullnameCtrl').valueChanges.subscribe(() => {
-      this.firstFormGroup.get('fullnameCtrl').invalid &&
-      this.firstFormGroup.get('fullnameCtrl').touched;
-    });
-
     this.secondFormGroup = this._formBuilder.group({
-      addressCtrl: ['', Validators.required],
-      provinceCtrl: ['', Validators.required],
-      districtCtrl: ['', Validators.required],
-      townCtrl: ['', Validators.required]
+      lastCtrl: ['', Validators.required],
+      secondCtrl: ['', Validators.required]
     });
 
-    this.getProvinces()
+    this.firstFormGroup.controls['passwordC'].valueChanges.subscribe((passwordC: any) => {
+      // console.log(passwordC)
+      if (passwordC !== this.firstFormGroup.get('password').value) {
+        this.pdmTxt = 'Password does not match'
+      }
+      if (passwordC === '') {
+        this.pdmTxt = 'Confirm your password'
+      }
+    });
   }
 
+  // ValidatePasswordEql(control: AbstractControl) {
+  //   // console.log(this.firstFormGroup)
+  //   if (control.value !== '123') {
+  //     // this.pdmTxt = 'Password does not match'
+  //     return {invalidUrl: true};
+  //   }
+  //   // this.pdmTxt = 'Confirm your password'
+  //   return null;
+  // }
 
-  useremailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
-
-  navigateToDestination(destination: String) {
-    this.router.navigate([destination]);
-  }
-
-  genderFormControl = new FormControl(null, [Validators.required]);
-
-  email_error_state_matcher = new EmailErrorStateMatcher();
-
-  getProvinces() {
-    this.registerCustomerS.getProvinces().subscribe(result => {
-      this.provinces = result.provinces
-    })
-  }
-
-  getDistricts(province:any) {
-    this.registerCustomerS.getDistricts(province).subscribe(result => {
-      this.districts = result.districts
-    })
-  }
-
-  getTowns(district:any) {
-    this.registerCustomerS.getTowns(district).subscribe(result => {
-      this.towns = result.towns
-    })
-  }
-
-  onSubmit() {
-    // this.registerCustomerS.addCustomer(this.patient).subscribe((patient) => {
-    //   this.patient.patientId = patient.patientId;
-    //   this.success = 1;
-    // }, (error) => {
-    //   this.success = 2;
-    // })
+  chkPasswordC(password: any) {
+    // console.log(password.value !== this.firstFormGroup.get('passwordC').value)
+    // if (password.value !== this.firstFormGroup.get('passwordC').value) {
+    //   this.pdm = true
+    // } else {
+    //   this.pdm = false
+    // }
   }
 }
