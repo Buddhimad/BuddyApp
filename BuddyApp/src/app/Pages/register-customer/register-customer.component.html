@@ -221,7 +221,7 @@
                               (ngModelChange)="getDistricts($event)">
 
                     <mat-option *ngFor="let province of provinces" [value]="province"
-                                >{{province.province}}</mat-option>
+                                >{{province.province.province_name}}</mat-option>
                   </mat-select>
                   <mat-error>Your province is <strong>required</strong></mat-error>
                 </mat-form-field>
@@ -232,7 +232,7 @@
                   <mat-select name="district" formControlName="district"
                               (ngModelChange)="getTowns($event)">
                     <mat-option *ngFor="let district of districts" [value]="district"
-                                >{{district.district}}</mat-option>
+                                >{{district.district.district_name}}</mat-option>
                     <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
                   <mat-error>Your district is <strong>required</strong></mat-error>
@@ -242,7 +242,7 @@
                 <mat-form-field class="full-width">
                   <mat-label>Town</mat-label>
                   <mat-select name="town" formControlName="town">
-                    <mat-option *ngFor="let town of towns" [value]="town">{{town}}</mat-option>
+                    <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>
                     <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
                   <mat-error>Your town is <strong>required</strong></mat-error>
@@ -317,7 +317,7 @@
               color="primary"
               class="primary-color ml-auto btn-rnext"
             >
-              Finish
+              Done
             </button>
           </div>
         </mat-step>

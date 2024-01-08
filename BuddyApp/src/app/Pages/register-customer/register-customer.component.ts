@@ -98,44 +98,71 @@ export class RegisterCustomerComponent implements OnInit {
   loadTowns() {
     this.registerCustomerS.getTowns().subscribe((result) => {
       // console.log(towns)
-      let provinces = new Set();
-      result.towns.forEach((town: any) => {
-        provinces.add(town['province_name'])
-      })
+      let provinces = result.towns.filter((obj: any, index: any, arr: any) => {
+        // Check if the index of the first occurrence of the object with the same 'name'
+        // is the same as the current index
+        return arr.findIndex((item: any) => item.province_id === obj.province_id) === index;
+      });
+
+      // let provinces = new Set();
+      // result.towns.forEach((town: any) => {
+      //   provinces.add(town['province_name'])
+      // })
       // this.provinces = provinces
 
-      let provincesArr = Array.from(provinces);
-      let districts = new Set();
+      // let provincesArr = Array.from(provinces);
+      // let districts = new Set();
       let towns: any[] = []
       // provinces.forEach((province: any) => {
-      for (let i = 0; i < provincesArr.length; i++) {
-        result.towns.forEach((town: any) => {
-          if (provincesArr[i] === town['province_name']) {
-            districts.add(town['district_name'])
-          }
-        })
+      for (let i = 0; i < provinces.length; i++) {
+        provinces[i] = {
+          province_id: provinces[i].province_id,
+          province_name: provinces[i].province_name,
+        }
+        // result.towns.forEach((town: any) => {
+        //   if (provinces[i] === town['province_name']) {
+        //     districts.add(town['district_name'])
+        //   }
+        // })
+        let districts = result.towns.filter((obj: any, index: any, arr: any) => {
+          return arr.findIndex((item: any) => item.province_id === obj.province_id && provinces[i].province_name === obj.province_name) === index;
+        });
 
-        let districtsArr = Array.from(districts)
 
-        for (let j = 0; j < districtsArr.length; j++) {
+        // let districtsArr = Array.from(districts)
+
+        for (let j = 0; j < districts.length; j++) {
+          // districts[i] = {
+          //   district_id: districts[i].district_id,
+          //   district_name: districts[i].district_name,
+          // }
+          // let towns = result.towns.filter((obj: any, index: any, arr: any) => {
+          //   return arr.findIndex((item: any) => item.district_id === obj.district_id && districts[i].district_name === obj.district_name) === index;
+          // });
           result.towns.forEach((town: any) => {
-            if (districtsArr[j] === town['district_name']) {
-              towns.push(town['town_name'])
+            if (districts[j].district_id === town['district_id']) {
+              towns.push({
+                town_id: town.town_id,
+                town_name: town.town_name
+              })
             }
           })
-          districtsArr[j] = {
-            district: districtsArr[j],
+          districts[j] = {
+            district: {
+              district_id: districts[j].district_id,
+              district_name: districts[j].district_name,
+            },
             towns: towns
           }
         }
 
-        provincesArr[i] = {
-          province: provincesArr[i],
-          districts: districtsArr
+        provinces[i] = {
+          province: provinces[i],
+          districts: districts
         }
       }
-      console.log(provincesArr)
-      this.provinces = provincesArr
+      // console.log(provinces)
+      this.provinces = provinces
     })
   }
 
@@ -145,20 +172,28 @@ export class RegisterCustomerComponent implements OnInit {
 
   getTowns(district: any) {
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-      this.towns = district.towns
+    this.towns = district.towns
     // })
   }
 
   onSubmit(e: any) {
     e.preventDefault()
-    console.log(this.firstFormGroup.value)
-    console.log(this.secondFormGroup.value)
-    // this.registerCustomerS.addCustomer(this.customer).subscribe((customer) => {
-    //   // this.patient.patientId = patient.patientId;
-    //   // this.success = 1;
-    // }, (error) => {
-    //   console.log(error)
-    //   // this.success = 2;
-    // })
+    if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
+      // console.log(this.firstFormGroup.value)
+      // console.log(this.secondFormGroup.value)
+      let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
+      // console.log(customerForm)
+      customerForm.district = customerForm.district.district.district_id
+      customerForm.province = customerForm.province.province.province_id
+      console.log(customerForm)
+
+      this.registerCustomerS.addCustomer(customerForm).subscribe((customer) => {
+        // this.patient.patientId = patient.patientId;
+        // this.success = 1;
+      }, (error) => {
+        console.log(error)
+        // this.success = 2;
+      })
+    }
   }
 }
