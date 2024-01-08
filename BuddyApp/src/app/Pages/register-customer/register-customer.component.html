@@ -24,7 +24,7 @@
                   >
                     <mat-icon>close</mat-icon>
                   </button>
-                  <mat-error>Valid Full Name is <strong>required</strong></mat-error>
+                  <mat-error>Full Name is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
 
@@ -45,7 +45,7 @@
                   >
                     <mat-icon>close</mat-icon>
                   </button>
-                  <mat-error>Valid Email is <strong>required</strong></mat-error>
+                  <mat-error>Email is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
 
@@ -147,7 +147,7 @@
                       hidepw ? "visibility_off" : "visibility"
                       }}</mat-icon>
                   </button>
-                  <mat-error>Enter your password</mat-error>
+                  <mat-error>Password is <strong>required</strong></mat-error>
                 </mat-form-field>
               </div>
               <div class="col-md-6">
@@ -170,7 +170,7 @@
                       }}</mat-icon>
                   </button>
                   <mat-error>{{pdmTxt}}</mat-error>
-<!--                  <span *ngIf="pdm">Password does not match</span>-->
+                  <!--                  <span *ngIf="pdm">Password does not match</span>-->
                 </mat-form-field>
               </div>
             </div>
@@ -187,26 +187,148 @@
             </div>
           </form>
         </mat-step>
+
         <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup">
-            <!--            <ng-template matStepLabel>Fill out your address</ng-template>-->
-            <mat-form-field>
-              <input matInput placeholder="Address" formControlName="secondCtrl" required>
-            </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+          <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit($event)">
+
+            <div class="row mt-3">
+              <div class="col-md-12">
+                <mat-form-field class="full-width">
+                  <mat-label>Address</mat-label>
+                  <input
+                    matInput
+                    placeholder="Enter your address"
+                    required
+                    formControlName="address"
+                  />
+                  <button
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="secondFormGroup.get('address').reset()"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  <mat-error>Address is <strong>required</strong></mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Province</mat-label>
+                  <mat-select name="province" formControlName="province"
+                              (ngModelChange)="getDistricts($event)">
+
+                    <mat-option *ngFor="let province of provinces" [value]="province"
+                                >{{province.province}}</mat-option>
+                  </mat-select>
+                  <mat-error>Your province is <strong>required</strong></mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>District</mat-label>
+                  <mat-select name="district" formControlName="district"
+                              (ngModelChange)="getTowns($event)">
+                    <mat-option *ngFor="let district of districts" [value]="district"
+                                >{{district.district}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>Your district is <strong>required</strong></mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Town</mat-label>
+                  <mat-select name="town" formControlName="town">
+                    <mat-option *ngFor="let town of towns" [value]="town">{{town}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>Your town is <strong>required</strong></mat-error>
+                </mat-form-field>
+              </div>
+
+              <div style="display: flex;justify-content: flex-end;margin-top: 20px">
+                  <div>
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="primary-color ml-auto btn-rnext"
+                      matStepperPrevious
+                    >
+                      Back
+                    </button>
+                  </div>
+                  <div style="margin-left: 20px">
+                    <button
+                      mat-raised-button
+                      color="primary"
+                      class="primary-color ml-auto btn-rnext"
+                      matStepperNext
+                      type="submit"
+                    >
+                      Finish
+                    </button>
+                  </div>
+              </div>
             </div>
           </form>
         </mat-step>
         <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          You are now done.
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button (click)="stepper.reset()">Reset</button>
+<!--          <ng-template matStepLabel>Done</ng-template>-->
+          <div class="wrapperAlert">
+
+            <div class="contentAlert">
+
+              <div class="topHalf">
+
+                <p>
+                  <svg viewBox="0 0 512 512" width="100" title="check-circle">
+                    <path
+                      d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/>
+                  </svg>
+                </p>
+                <h1>Congratulations</h1>
+
+                <ul class="bg-bubbles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
+              </div>
+              <div class="bottomHalf">
+                <p>Well Done!, Your account is now active!</p>
+
+              </div>
+            </div>
+
+          </div>
+          <div class="d-flex mt-3">
+            <button
+              mat-raised-button
+              color="primary"
+              class="primary-color ml-auto btn-rnext"
+            >
+              Finish
+            </button>
           </div>
         </mat-step>
+        <!--        <mat-step>-->
+        <!--          <ng-template matStepLabel>Done</ng-template>-->
+        <!--          You are now done.-->
+        <!--          <div>-->
+        <!--            <button mat-button matStepperPrevious>Back</button>-->
+        <!--            <button mat-button (click)="stepper.reset()">Reset</button>-->
+        <!--          </div>-->
+        <!--        </mat-step>-->
       </mat-horizontal-stepper>
     </div>
   </div>

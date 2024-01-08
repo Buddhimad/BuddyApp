@@ -15,15 +15,15 @@ export class RegisterCustomerService {
     return this.http.post<any>(this.sharedService.publicUrl + 'app_user/signup', customer);
   }
 
-  getProvinces(): Observable<any> {
-    return this.http.get<any>(this.sharedService.publicUrl + 'town/get_provinces');
-  }
+  // getProvinces(): Observable<any> {
+  //   return this.http.get<any>(this.sharedService.publicUrl + 'town/get_provinces');
+  // }
+  //
+  // getDistricts(province: any): Observable<any> {
+  //   return this.http.get<any>(this.sharedService.publicUrl + 'town/get_districts?province=' + province);
+  // }
 
-  getDistricts(province: any): Observable<any> {
-    return this.http.get<any>(this.sharedService.publicUrl + 'town/get_districts?province=' + province);
-  }
-
-  getTowns(district: any): Observable<any> {
-    return this.http.get<any>(this.sharedService.publicUrl + 'town/get_towns?district=' + district);
+  getTowns(): Observable<any> {
+    return this.http.get<any>(this.sharedService.publicUrl + 'town/get_towns');
   }
 }

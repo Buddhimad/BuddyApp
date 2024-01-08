@@ -19,7 +19,7 @@ import {EmailErrorStateMatcher} from './../../utility/Validators/EmailErrorState
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {RegisterCustomerService} from "./register-customer.service";
-import {PasswordConfirm} from "./chk-password";
+import {PasswordConfirm} from "../../validations/chk-password";
 
 @Component({
   selector: 'app-register-customer',
@@ -47,23 +47,39 @@ export class RegisterCustomerComponent implements OnInit {
   firstFormGroup: any;
   secondFormGroup: any;
 
-  constructor(private _formBuilder: FormBuilder) {
+  provinces: any = []
+  districts: any = []
+  towns: any = []
+
+  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService) {
   }
 
   ngOnInit() {
+    // this.firstFormGroup = this._formBuilder.group({
+    //   full_name: ['', Validators.required],
+    //   email: ['', Validators.required],
+    //   gender: ['', Validators.required],
+    //   dob: ['', Validators.required],
+    //   nic: ['', Validators.required],
+    //   contact_number_1: ['', Validators.required],
+    //   password: ['', [Validators.required, PasswordConfirm()]],
+    //   passwordC: ['', [Validators.required, PasswordConfirm()]]
+    // });
     this.firstFormGroup = this._formBuilder.group({
-      full_name: ['', Validators.required],
-      email: ['', Validators.required],
-      gender: ['', Validators.required],
-      dob: ['', Validators.required],
-      nic: ['', Validators.required],
-      contact_number_1: ['', Validators.required],
-      password: ['', [Validators.required, PasswordConfirm()]],
-      passwordC: ['', [Validators.required, PasswordConfirm()]]
+      full_name: ['im', Validators.required],
+      email: ['im', Validators.required],
+      gender: ['Male', Validators.required],
+      dob: ['2024-01-01', Validators.required],
+      nic: ['95', Validators.required],
+      contact_number_1: ['077', Validators.required],
+      password: ['qwe', [Validators.required, PasswordConfirm()]],
+      passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
     });
     this.secondFormGroup = this._formBuilder.group({
-      lastCtrl: ['', Validators.required],
-      secondCtrl: ['', Validators.required]
+      address: ['', Validators.required],
+      province: ['', Validators.required],
+      district: ['', Validators.required],
+      town: ['', Validators.required]
     });
 
     this.firstFormGroup.controls['passwordC'].valueChanges.subscribe((passwordC: any) => {
@@ -75,24 +91,74 @@ export class RegisterCustomerComponent implements OnInit {
         this.pdmTxt = 'Confirm your password'
       }
     });
+
+    this.loadTowns()
   }
 
-  // ValidatePasswordEql(control: AbstractControl) {
-  //   // console.log(this.firstFormGroup)
-  //   if (control.value !== '123') {
-  //     // this.pdmTxt = 'Password does not match'
-  //     return {invalidUrl: true};
-  //   }
-  //   // this.pdmTxt = 'Confirm your password'
-  //   return null;
-  // }
+  loadTowns() {
+    this.registerCustomerS.getTowns().subscribe((result) => {
+      // console.log(towns)
+      let provinces = new Set();
+      result.towns.forEach((town: any) => {
+        provinces.add(town['province_name'])
+      })
+      // this.provinces = provinces
 
-  chkPasswordC(password: any) {
-    // console.log(password.value !== this.firstFormGroup.get('passwordC').value)
-    // if (password.value !== this.firstFormGroup.get('passwordC').value) {
-    //   this.pdm = true
-    // } else {
-    //   this.pdm = false
-    // }
+      let provincesArr = Array.from(provinces);
+      let districts = new Set();
+      let towns: any[] = []
+      // provinces.forEach((province: any) => {
+      for (let i = 0; i < provincesArr.length; i++) {
+        result.towns.forEach((town: any) => {
+          if (provincesArr[i] === town['province_name']) {
+            districts.add(town['district_name'])
+          }
+        })
+
+        let districtsArr = Array.from(districts)
+
+        for (let j = 0; j < districtsArr.length; j++) {
+          result.towns.forEach((town: any) => {
+            if (districtsArr[j] === town['district_name']) {
+              towns.push(town['town_name'])
+            }
+          })
+          districtsArr[j] = {
+            district: districtsArr[j],
+            towns: towns
+          }
+        }
+
+        provincesArr[i] = {
+          province: provincesArr[i],
+          districts: districtsArr
+        }
+      }
+      console.log(provincesArr)
+      this.provinces = provincesArr
+    })
+  }
+
+  getDistricts(province: any) {
+    this.districts = province.districts
+  }
+
+  getTowns(district: any) {
+    // this.registerCustomerS.getTowns(district).subscribe(result => {
+      this.towns = district.towns
+    // })
+  }
+
+  onSubmit(e: any) {
+    e.preventDefault()
+    console.log(this.firstFormGroup.value)
+    console.log(this.secondFormGroup.value)
+    // this.registerCustomerS.addCustomer(this.customer).subscribe((customer) => {
+    //   // this.patient.patientId = patient.patientId;
+    //   // this.success = 1;
+    // }, (error) => {
+    //   console.log(error)
+    //   // this.success = 2;
+    // })
   }
 }
