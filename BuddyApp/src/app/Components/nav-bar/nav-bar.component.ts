@@ -8,6 +8,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
 import { Notification } from './../../Interfaces/notification';
 import {DateAgoPipe} from './../../Pipes/date-ago.pipe'
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-nav-bar',
@@ -18,19 +19,25 @@ import {DateAgoPipe} from './../../Pipes/date-ago.pipe'
     imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, MatBadgeModule, MatMenuModule, DateAgoPipe]
 })
 export class NavBarComponent{
-  constructor(private sharedService: SharedService) {
+  public href: string = "";
+  constructor(private sharedService: SharedService,private router:Router) {
     // intl.strings = englishStrings;
     // intl.changes.next();
   }
  
 
   openDrawer(): void {
-    this.sharedService.callSharedFunction();
+  //  this.sharedService.callSharedFunction();
+  // this.href = this.router.url;
+  // console.log(this.router.url);
+    this.sharedService.callOpenSideNavFunction('/sp/pharmacy/dashboard');
   }
 
   changeRoutes(url:any):void{
     this.sharedService.callChangeRouteFunction(url);
   }
+
+
 
   notification_list:Notification[]=[
     {

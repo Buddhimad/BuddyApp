@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { Subscription } from 'rxjs';
@@ -18,9 +18,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatRippleModule } from '@angular/material/core';
 
-
 @Component({
-  selector: 'app-customer-side-nav',
+  selector: 'app-sp-side-nav',
   standalone: true,
   imports: [
     CommonModule,
@@ -36,22 +35,16 @@ import { MatRippleModule } from '@angular/material/core';
     MatBadgeModule,
     MatRippleModule,
   ],
-  templateUrl: './customer-side-nav.component.html',
-  styleUrl: './customer-side-nav.component.css',
+  templateUrl: './sp-side-nav.component.html',
+  styleUrl: './sp-side-nav.component.css',
 })
-export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
+export class SPSideNavComponent {
+  isOpen = false;
   private subscription: Subscription;
-  nativeElement: any;
-  _document: any;
-  isShowing = false;
-  imageUrl: any;
 
-  constructor(
-    private sharedService: SharedService,
-    @Inject(DOCUMENT) _document: Document
-  ) {
-    this._document = _document;
+  constructor(private sharedService: SharedService) {
     // this.subscription = this.sharedService.sharedFunction$.subscribe(() => {
+    //   console.log("fucked SP");
     //   this.openDrawerFunction();
     // });
     this.subscription=this.sharedService.sideNavControlFunction.subscribe((user:any)=>{
@@ -61,17 +54,11 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
        // }
     })
   }
-  ngAfterViewInit(): void {
-    this.nativeElement = this._document.getElementById(
-      'customer-side-navigation'
-    );
-  }
-
   openDrawerFunction() {
-    if (!this.isShowing) {
-      return (this.isShowing = true);
+    if (!this.isOpen) {
+      return (this.isOpen = true);
     } else {
-      return (this.isShowing = false);
+      return (this.isOpen = false);
     }
   }
 
@@ -79,36 +66,19 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
     this.subscription.unsubscribe();
   }
 
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.imageUrl = e.target.result;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-  // {
-  //   name: 'Delivery',
-  //   path: 'notice/delivery',
-  //   icon: 'local_shipping',
-  //   response_count: 150,
-  // },
   side_nav_list: SideNavLiElement[] = [
     {
-      name: 'All',
+      name: 'Received',
       path: 'customer/dashboard',
       icon: 'home',
       response_count: 250,
     },
     {
-      name: 'Pharmacy',
+      name: 'Responded',
       path: 'notice/pharmacy',
-      icon: 'medication',
+      icon: 'back_hand',
       response_count: 100,
-    }
+    },
   ];
 
   settings_list = [
@@ -131,15 +101,9 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       response_count: 250,
     },
   ];
+  onRippleClick(): void {}
 
-
-
-  onRippleClick(): void {
-    // Handle the click event here
-   // console.log('Ripple effect clicked!');
-  }
-
-  changeRoutes(route:String){
-      this.sharedService.callChangeRouteFunction(route);
+  changeRoutes(route: String) {
+    this.sharedService.callChangeRouteFunction(route);
   }
 }
