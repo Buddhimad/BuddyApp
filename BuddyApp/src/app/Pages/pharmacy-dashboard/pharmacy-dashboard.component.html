@@ -1,0 +1,141 @@
+<div class="inbox inbox-scroll">
+    <div class="inbox-list">
+      <div class="message-item unread">
+        <div class="box-header">
+            <h3>
+              <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')" class="subject"
+                ><img
+                  src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
+                  alt=""
+                />
+                Buddhima Vajirapani Dahanayake</a
+              >
+              <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
+              <div class="rating">
+                <!-- Five stars -->
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+              </div>
+            </h3>
+            <span
+              ><mat-icon
+                aria-hidden="false"
+                aria-label="response_settings"
+                fontIcon="more_vert"
+                [matMenuTriggerFor]="response_settings_menu"
+              ></mat-icon
+            ></span>
+            <div class="window"><span></span></div>
+            <mat-menu #response_settings_menu="matMenu">
+              <button mat-menu-item>Item 1</button>
+              <button mat-menu-item>Item 2</button>
+            </mat-menu>
+          </div>
+        <div class="main ms-4 mt-3">
+          <div class="d-flex mt-3">
+            <div class="flex-fill">
+              <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon" fontIcon="call"></mat-icon> <strong class="ms-2">Contact</strong> : <span class="ms-2">0765363828</span>
+          </div>
+          </div>
+          <div class="d-flex mt-3">
+            <div class="flex-fill">
+                <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon" fontIcon="zoom_in_map"></mat-icon><strong class="ms-2">District</strong> : <span class="ms-2">Galle</span>
+            </div>
+            <div class="flex-fill">
+               <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon" fontIcon="location_city"></mat-icon><strong class="ms-2">Town</strong> : <span class="ms-2">Galle</span>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+              <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon" fontIcon="description"></mat-icon> <strong class="ms-2">Prescription</strong>
+          </div>
+          </div>
+          <div class="row mt-3">
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+          </div>
+          </div>
+        <div class="box-buttons">
+          <div class="row mt-3">
+            <mat-chip-listbox
+            class="d-flex "
+              aria-label="pharmacy_information_listbox"
+            >
+              <mat-chip
+                class="primary_chip flex-fill write-response-chip"
+                matTooltip="Reply"
+                matTooltipHideDelay="100"
+                data-bs-toggle="collapse"
+                data-bs-target="#response-noticeid"
+                aria-expanded="false"
+                aria-controls="response-noticeid"
+              >
+                <mat-icon
+                  class="justify-content-center"
+                  style="place-content: center;"
+                  matChipAvatar
+                  aria-hidden="false"
+                  aria-label="write response icon"
+                  fontIcon="edit"
+                ></mat-icon>
+                <span style="-webkit-text-stroke: thick;"> Write Response</span>
+              </mat-chip>
+            </mat-chip-listbox>
+          </div>
+         
+        </div>
+        <div class="collapse mt-3" id="response-noticeid">
+          <div class="card unread mt-2">
+            <form class="p-3">
+              <div class="form-group row mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Is customer's full Prescription available in your pharmacy">
+                <label for="isfully-available-notice-id" class="col-sm-4 col-form-label col-form-label-sm"><strong>Fully Available</strong></label>
+                <div class="col-sm-8">
+                  <input class="form-check-input" type="checkbox" id="isfully-available-notice-id" checked>
+                </div>
+              </div>
+              <div class="form-group row mt-2"  data-bs-toggle="tooltip" data-bs-placement="top" title="Price of prescription">
+                <label for="price-notice-id" class="col-sm-4 col-form-label col-form-label-sm"><strong>Price</strong></label>
+                <div class="col-sm-8">
+                  <input type="number" min="0" class="form-control form-control-sm" id="price-notice-id" placeholder="LKR">
+                </div>
+              </div>
+              <div class="form-group row mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Questions regarding Prescription">
+                <label for="question-to-noticeid" class="col-sm-4 col-form-label col-form-label-sm"><strong>To Customer</strong></label>
+                <div class="col-sm-8">
+                  <textarea class="form-control form-control-sm" id="question-to-noticeid" placeholder="Questions to Customer"></textarea>
+                </div>
+              </div>
+              <div class="form-group row mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Closing time of Pharmacy">
+                <label for="open-time-noticeid" class="col-sm-4 col-form-label col-form-label-sm"><strong>Open Till</strong></label>
+                <div class="col-sm-8">
+                  <input [ngxTimepicker]="picker" class="form-control form-control-sm" id="open-time-noticeid">
+                  <ngx-material-timepicker #picker></ngx-material-timepicker>
+                </div>
+              </div>
+              <div class="form-group row mt-2">
+                <mat-chip
+                class="flex-fill send-response-chip"
+                matTooltip="Send to Customer"
+                matTooltipHideDelay="100"
+              >
+                <mat-icon
+                  class="justify-content-center"
+                  style="place-content: center;"
+                  matChipAvatar
+                  aria-hidden="false"
+                  aria-label="send response to customer icon"
+                  fontIcon="send"
+                ></mat-icon>
+                <span style="-webkit-text-stroke: thick;"> Send</span>
+              </mat-chip>
+              </div>
+              </form>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+    <div class="force-overflow"></div>
+  </div>

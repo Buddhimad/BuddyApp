@@ -11,6 +11,8 @@ import { CustomerAccountComponent } from './Components/customer-account/customer
 import { VeryfyCustomerComponent } from './Components/veryfy-customer/veryfy-customer.component';
 import { NotificationPanelComponent } from './Components/notification-panel/notification-panel.component';
 import { SecurityComponent } from './Components/security/security.component';
+import { ServiceProviderIndexComponent } from './Pages/service-provider-index/service-provider-index.component';
+import { PharmacyDashboardComponent } from './Pages/pharmacy-dashboard/pharmacy-dashboard.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -61,5 +63,24 @@ export const routes: Routes = [
         component:SecurityComponent
       }
     ],
+  },
+  {
+    path:'sp',
+    component:ServiceProviderIndexComponent,
+    children:[
+      {
+        path:'pharmacy',
+        children:[
+          {
+            path:'dashboard',
+            component:PharmacyDashboardComponent
+          },
+          {
+            path:'notifications',
+            component:NotificationPanelComponent
+          }
+        ]
+      }
+    ]
   }
 ];

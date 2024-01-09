@@ -1,0 +1,22 @@
+.content {
+    display: flex;
+    height: 100%;
+  
+  }
+  
+  body {
+    overflow: hidden !important;
+  }
+  
+  .drawer-container {
+    background-color: whitesmoke;
+  }
+  
+  
+  
+  .main {
+    margin-top: 75px !important;
+    /* padding: 10px; */
+  }
+  
+  
