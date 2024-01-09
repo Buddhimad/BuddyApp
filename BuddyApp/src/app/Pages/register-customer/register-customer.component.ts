@@ -55,26 +55,26 @@ export class RegisterCustomerComponent implements OnInit {
   }
 
   ngOnInit() {
-    // this.firstFormGroup = this._formBuilder.group({
-    //   full_name: ['', Validators.required],
-    //   email: ['', Validators.required],
-    //   gender: ['', Validators.required],
-    //   dob: ['', Validators.required],
-    //   nic: ['', Validators.required],
-    //   contact_number_1: ['', Validators.required],
-    //   password: ['', [Validators.required, PasswordConfirm()]],
-    //   passwordC: ['', [Validators.required, PasswordConfirm()]]
-    // });
     this.firstFormGroup = this._formBuilder.group({
-      full_name: ['im', Validators.required],
-      email: ['im', Validators.required],
-      gender: ['Male', Validators.required],
-      dob: ['2024-01-01', Validators.required],
-      nic: ['95', Validators.required],
-      contact_number_1: ['077', Validators.required],
-      password: ['qwe', [Validators.required, PasswordConfirm()]],
-      passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
+      full_name: ['', Validators.required],
+      email: ['', Validators.required],
+      gender: ['', Validators.required],
+      dob: ['', Validators.required],
+      nic: ['', Validators.required],
+      contact_number_1: ['', Validators.required],
+      password: ['', [Validators.required, PasswordConfirm()]],
+      passwordC: ['', [Validators.required, PasswordConfirm()]]
     });
+    // this.firstFormGroup = this._formBuilder.group({
+    //   full_name: ['im', Validators.required],
+    //   email: ['im', Validators.required],
+    //   gender: ['Male', Validators.required],
+    //   dob: ['2024-01-01', Validators.required],
+    //   nic: ['95', Validators.required],
+    //   contact_number_1: ['077', Validators.required],
+    //   password: ['qwe', [Validators.required, PasswordConfirm()]],
+    //   passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
+    // });
     this.secondFormGroup = this._formBuilder.group({
       address: ['', Validators.required],
       province: ['', Validators.required],
@@ -182,9 +182,19 @@ export class RegisterCustomerComponent implements OnInit {
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
+      customerForm = JSON.parse(JSON.stringify(customerForm))
       // console.log(customerForm)
-      customerForm.district = customerForm.district.district.district_id
-      customerForm.province = customerForm.province.province.province_id
+      customerForm.username = customerForm.email
+      customerForm.user_id = '2222'
+      // customerForm.district = customerForm.district.district.district_id
+      // customerForm.province = customerForm.province.province.province_id
+      customerForm.town_town_id = customerForm.town
+      customerForm.user_verify = 1
+      customerForm.user_type = 'customer'
+      customerForm.created_at = '2023-02-02'
+      customerForm.updated_at = '2023-02-02'
+      customerForm.district = undefined
+      customerForm.province = undefined
       console.log(customerForm)
 
       this.registerCustomerS.addCustomer(customerForm).subscribe((customer) => {
