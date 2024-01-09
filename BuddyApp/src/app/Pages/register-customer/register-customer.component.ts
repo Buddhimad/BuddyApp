@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
   FormControl,
@@ -20,6 +20,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {RegisterCustomerService} from "./register-customer.service";
 import {PasswordConfirm} from "../../validations/chk-password";
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-register-customer',
@@ -51,6 +52,8 @@ export class RegisterCustomerComponent implements OnInit {
   districts: any = []
   towns: any = []
 
+  @ViewChild('stepper') private myStepper: MatStepper;
+
   constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService) {
   }
 
@@ -65,16 +68,16 @@ export class RegisterCustomerComponent implements OnInit {
       password: ['', [Validators.required, PasswordConfirm()]],
       passwordC: ['', [Validators.required, PasswordConfirm()]]
     });
-    // this.firstFormGroup = this._formBuilder.group({
-    //   full_name: ['im', Validators.required],
-    //   email: ['im', Validators.required],
-    //   gender: ['Male', Validators.required],
-    //   dob: ['2024-01-01', Validators.required],
-    //   nic: ['95', Validators.required],
-    //   contact_number_1: ['077', Validators.required],
-    //   password: ['qwe', [Validators.required, PasswordConfirm()]],
-    //   passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
-    // });
+    this.firstFormGroup = this._formBuilder.group({
+      full_name: ['im', Validators.required],
+      email: ['im', Validators.required],
+      gender: ['Male', Validators.required],
+      dob: ['2024-01-01', Validators.required],
+      nic: ['95', Validators.required],
+      contact_number_1: ['077', Validators.required],
+      password: ['qwe', [Validators.required, PasswordConfirm()]],
+      passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
+    });
     this.secondFormGroup = this._formBuilder.group({
       address: ['', Validators.required],
       province: ['', Validators.required],
@@ -185,7 +188,7 @@ export class RegisterCustomerComponent implements OnInit {
       customerForm = JSON.parse(JSON.stringify(customerForm))
       // console.log(customerForm)
       customerForm.username = customerForm.email
-      customerForm.user_id = '2222'
+      customerForm.user_id = '2233'
       // customerForm.district = customerForm.district.district.district_id
       // customerForm.province = customerForm.province.province.province_id
       customerForm.town_town_id = customerForm.town
@@ -198,6 +201,7 @@ export class RegisterCustomerComponent implements OnInit {
       console.log(customerForm)
 
       this.registerCustomerS.addCustomer(customerForm).subscribe((customer) => {
+        this.myStepper.next();
         // this.patient.patientId = patient.patientId;
         // this.success = 1;
       }, (error) => {
