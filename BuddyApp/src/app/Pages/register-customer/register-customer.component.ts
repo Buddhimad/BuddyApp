@@ -20,7 +20,10 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {RegisterCustomerService} from "./register-customer.service";
 import {PasswordConfirm} from "../../validations/chk-password";
-import { MatStepper } from '@angular/material/stepper';
+import {MatStepper} from '@angular/material/stepper';
+import {ValidateNIC} from "../../validations/nic-validator";
+import {ValidateTelephone} from "../../validations/telephone-validator";
+import {ValidateEmail} from "../../validations/email-validator";
 
 @Component({
   selector: 'app-register-customer',
@@ -44,7 +47,12 @@ import { MatStepper } from '@angular/material/stepper';
 export class RegisterCustomerComponent implements OnInit {
   hidepw = true;
   hidecpw = true;
-  pdmTxt = 'Confirm your password';
+  errFields = {
+    pdmTxt: 'Confirm your password',
+    nicTxt: 'NIC is required',
+    contactTxt: 'Contact Number is required',
+    emailTxt: 'Email is required'
+  }
   firstFormGroup: any;
   secondFormGroup: any;
 
@@ -60,39 +68,29 @@ export class RegisterCustomerComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       full_name: ['', Validators.required],
-      email: ['', Validators.required],
+      email: ['', [Validators.required, ValidateEmail(this.errFields)]],
       gender: ['', Validators.required],
       dob: ['', Validators.required],
-      nic: ['', Validators.required],
-      contact_number_1: ['', Validators.required],
-      password: ['', [Validators.required, PasswordConfirm()]],
-      passwordC: ['', [Validators.required, PasswordConfirm()]]
+      nic: ['', [Validators.required, ValidateNIC(this.errFields)]],
+      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields)]],
+      password: ['', [Validators.required, PasswordConfirm(this.errFields)]],
+      passwordC: ['', [Validators.required, PasswordConfirm(this.errFields)]]
     });
-    this.firstFormGroup = this._formBuilder.group({
-      full_name: ['im', Validators.required],
-      email: ['im', Validators.required],
-      gender: ['Male', Validators.required],
-      dob: ['2024-01-01', Validators.required],
-      nic: ['95', Validators.required],
-      contact_number_1: ['077', Validators.required],
-      password: ['qwe', [Validators.required, PasswordConfirm()]],
-      passwordC: ['qwe', [Validators.required, PasswordConfirm()]]
-    });
+    // this.firstFormGroup = this._formBuilder.group({
+    //   full_name: ['im', Validators.required],
+    //   email: ['im', [Validators.required, ValidateEmail(this.errFields)]],
+    //   gender: ['Male', Validators.required],
+    //   dob: ['2024-01-01', Validators.required],
+    //   nic: ['95', [Validators.required, ValidateNIC(this.errFields)]],
+    //   contact_number_1: ['077', [Validators.required, ValidateTelephone(this.errFields)]],
+    //   password: ['qwe', [Validators.required, PasswordConfirm(this.errFields)]],
+    //   passwordC: ['qwe', [Validators.required, PasswordConfirm(this.errFields)]]
+    // });
     this.secondFormGroup = this._formBuilder.group({
       address: ['', Validators.required],
       province: ['', Validators.required],
       district: ['', Validators.required],
       town: ['', Validators.required]
-    });
-
-    this.firstFormGroup.controls['passwordC'].valueChanges.subscribe((passwordC: any) => {
-      // console.log(passwordC)
-      if (passwordC !== this.firstFormGroup.get('password').value) {
-        this.pdmTxt = 'Password does not match'
-      }
-      if (passwordC === '') {
-        this.pdmTxt = 'Confirm your password'
-      }
     });
 
     this.loadTowns()

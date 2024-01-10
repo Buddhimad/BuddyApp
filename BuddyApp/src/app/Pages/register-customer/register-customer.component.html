@@ -24,7 +24,7 @@
                   >
                     <mat-icon>close</mat-icon>
                   </button>
-                  <mat-error>Full Name is <strong>required</strong></mat-error>
+                  <mat-error>Full Name is required</mat-error>
                 </mat-form-field>
               </div>
 
@@ -45,7 +45,7 @@
                   >
                     <mat-icon>close</mat-icon>
                   </button>
-                  <mat-error>Email is <strong>required</strong></mat-error>
+                  <mat-error>{{errFields.emailTxt}}</mat-error>
                 </mat-form-field>
               </div>
 
@@ -57,7 +57,7 @@
                       <mat-option value="Male">Male</mat-option>
                       <mat-option value="Female">Female</mat-option>
                     </mat-select>
-                    <mat-error>Select your gender</mat-error>
+                    <mat-error>Gender is required</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -73,7 +73,7 @@
                       [for]="picker"
                     ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                    <mat-error>Enter your birthday</mat-error>
+                    <mat-error>Date of birth is required</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -97,7 +97,7 @@
                     >
                       <mat-icon>close</mat-icon>
                     </button>
-                    <mat-error>Enter your NIC number</mat-error>
+                    <mat-error>{{errFields.nicTxt}}</mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-md-3">
@@ -120,7 +120,7 @@
                     >
                       <mat-icon>close</mat-icon>
                     </button>
-                    <mat-error>Enter your contact number</mat-error>
+                    <mat-error>{{errFields.contactTxt}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>
@@ -147,7 +147,7 @@
                       hidepw ? "visibility_off" : "visibility"
                       }}</mat-icon>
                   </button>
-                  <mat-error>Password is <strong>required</strong></mat-error>
+                  <mat-error>Password is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-md-6">
@@ -169,7 +169,7 @@
                       hidecpw ? "visibility_off" : "visibility"
                       }}</mat-icon>
                   </button>
-                  <mat-error>{{pdmTxt}}</mat-error>
+                  <mat-error>{{errFields.pdmTxt}}</mat-error>
                   <!--                  <span *ngIf="pdm">Password does not match</span>-->
                 </mat-form-field>
               </div>
@@ -209,7 +209,7 @@
                   >
                     <mat-icon>close</mat-icon>
                   </button>
-                  <mat-error>Address is <strong>required</strong></mat-error>
+                  <mat-error>Address is required</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -223,7 +223,7 @@
                     <mat-option *ngFor="let province of provinces" [value]="province"
                                 >{{province.province.province_name}}</mat-option>
                   </mat-select>
-                  <mat-error>Your province is <strong>required</strong></mat-error>
+                  <mat-error>Province is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-4">
@@ -235,7 +235,7 @@
                                 >{{district.district.district_name}}</mat-option>
                     <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
-                  <mat-error>Your district is <strong>required</strong></mat-error>
+                  <mat-error>District is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-4">
@@ -245,7 +245,7 @@
                     <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>
                     <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
-                  <mat-error>Your town is <strong>required</strong></mat-error>
+                  <mat-error>Town is required</mat-error>
                 </mat-form-field>
               </div>
 
