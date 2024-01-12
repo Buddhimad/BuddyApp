@@ -1,16 +1,17 @@
 <div class="row justify-content-center">
-  
+
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
     <div class="inbox inbox-scroll">
       <div class="inbox-list">
-        <div class="message-item unread">
-          <input class="checkbox" type="checkbox" />
+        <div class="message-item unread" *ngFor="let notice of notices">
+          <input class="checkbox" type="checkbox"/>
           <header>
             <div class="sender-info">
               <span class="subject">Notice ID</span>
               <div class="d-flex">
                 <mat-icon matListItemIcon style="margin-left: -5px"
-                  >medication</mat-icon
+                >medication
+                </mat-icon
                 >
                 <span class="from" style="margin-top: 3px">Pharmacy</span>
               </div>
@@ -20,30 +21,38 @@
           <div class="main ms-4 mt-3">
             <div class="d-flex mt-3">
               <div class="flex-fill">
-                <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon" fontIcon="call"></mat-icon> <strong class="ms-2">Contact</strong> : <span class="ms-2">0765363828</span>
-            </div>
+                <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon"
+                          fontIcon="call"></mat-icon>
+                <strong class="ms-2">Contact</strong> : <span class="ms-2">{{notice.contact_number_1}}</span>
+              </div>
             </div>
             <div class="d-flex mt-3">
               <div class="flex-fill">
-                  <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon" fontIcon="zoom_in_map"></mat-icon><strong class="ms-2">District</strong> : <span class="ms-2">Galle</span>
+                <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon"
+                          fontIcon="zoom_in_map"></mat-icon>
+                <strong class="ms-2">District</strong> : <span class="ms-2">{{notice.district_name}}</span>
               </div>
               <div class="flex-fill">
-                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon" fontIcon="location_city"></mat-icon><strong class="ms-2">Town</strong> : <span class="ms-2">Galle</span>
+                <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon"
+                          fontIcon="location_city"></mat-icon>
+                <strong class="ms-2">Town</strong> : <span class="ms-2">{{notice.town_name}}</span>
               </div>
             </div>
             <div class="row mt-3">
               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
-                <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon" fontIcon="description"></mat-icon> <strong class="ms-2">Prescription</strong>
-            </div>
+                <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon"
+                          fontIcon="description"></mat-icon>
+                <strong class="ms-2">Prescription</strong>
+              </div>
             </div>
             <div class="row mt-3">
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
+              <p>{{notice.notice_txt}}</p>
             </div>
-            </div>
+          </div>
           <div class="box-buttons">
             <div class="row mt-3">
               <mat-chip-listbox
-              class="d-flex "
+                class="d-flex "
                 aria-label="pharmacy_information_listbox"
                 style="padding-left: 60px"
               >
@@ -79,8 +88,8 @@
                   matTooltip="Respond"
                   matTooltipHideDelay="100"
                   data-bs-toggle="collapse"
-                  data-bs-target="#noticeid_response_list" 
-                  aria-expanded="false" 
+                  data-bs-target="#noticeid_response_list"
+                  aria-expanded="false"
                   aria-controls="noticeid_response_list"
                 >
                   <mat-icon
@@ -95,14 +104,14 @@
                   class="primary_chip float-right"
                   matTooltip="View"
                   matTooltipHideDelay="100"
-                
+
                 >
                   <mat-icon
                     matChipAvatar
                     aria-hidden="false"
                     aria-label="contact icon"
                     fontIcon="expand_circle_down"
-                   
+
                   ></mat-icon>
                   5
                 </mat-chip> -->
@@ -111,17 +120,18 @@
                 </button> -->
               </mat-chip-listbox>
             </div>
-           
+
           </div>
           <div class="collapse mt-3" id="noticeid_response_list">
             <div class="card unread mt-2">
               <div class="box-header">
                 <h3>
-                  <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')" class="subject"
-                    ><img
-                      src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
-                      alt=""
-                    />
+                  <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')"
+                     class="subject"
+                  ><img
+                    src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
+                    alt=""
+                  />
                     Roswell Parian</a
                   >
                   <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
@@ -135,12 +145,12 @@
                   </div>
                 </h3>
                 <span
-                  ><mat-icon
-                    aria-hidden="false"
-                    aria-label="response_settings"
-                    fontIcon="more_vert"
-                    [matMenuTriggerFor]="response_settings_menu"
-                  ></mat-icon
+                ><mat-icon
+                  aria-hidden="false"
+                  aria-label="response_settings"
+                  fontIcon="more_vert"
+                  [matMenuTriggerFor]="response_settings_menu"
+                ></mat-icon
                 ></span>
                 <div class="window"><span></span></div>
                 <mat-menu #response_settings_menu="matMenu">
@@ -180,8 +190,8 @@
                         fontIcon="thumb_up"
                       ></mat-icon>
                     </mat-chip>
-                    </mat-chip-listbox>
-                    <mat-chip-listbox class="d-flex">
+                  </mat-chip-listbox>
+                  <mat-chip-listbox class="d-flex">
                     <mat-chip
                       class="primary_chip flex-fill"
                       matTooltip="Contact us"
@@ -215,11 +225,12 @@
             <div class="card unread mt-2">
               <div class="box-header">
                 <h3>
-                  <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')" class="subject"
-                    ><img
-                      src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
-                      alt=""
-                    />
+                  <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')"
+                     class="subject"
+                  ><img
+                    src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
+                    alt=""
+                  />
                     Roswell Parian</a
                   >
                   <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
@@ -233,12 +244,12 @@
                   </div>
                 </h3>
                 <span
-                  ><mat-icon
-                    aria-hidden="false"
-                    aria-label="response_settings"
-                    fontIcon="more_vert"
-                    [matMenuTriggerFor]="response_settings_menu"
-                  ></mat-icon
+                ><mat-icon
+                  aria-hidden="false"
+                  aria-label="response_settings"
+                  fontIcon="more_vert"
+                  [matMenuTriggerFor]="response_settings_menu"
+                ></mat-icon
                 ></span>
                 <div class="window"><span></span></div>
                 <mat-menu #response_settings_menu="matMenu">
@@ -278,8 +289,8 @@
                         fontIcon="thumb_up"
                       ></mat-icon>
                     </mat-chip>
-                    </mat-chip-listbox>
-                    <mat-chip-listbox class="d-flex">
+                  </mat-chip-listbox>
+                  <mat-chip-listbox class="d-flex">
                     <mat-chip
                       class="primary_chip flex-fill"
                       matTooltip="Contact us"
@@ -312,270 +323,270 @@
             </div>
           </div>
         </div>
-        <div class="message-item unread">
-          <input class="checkbox" type="checkbox" />
-          <header>
-            <div class="sender-info">
-              <span class="subject">Notice ID</span>
-              <div class="d-flex">
-                <mat-icon matListItemIcon style="margin-left: -5px"
-                  >medication</mat-icon
-                >
-                <span class="from" style="margin-top: 3px">Pharmacy</span>
-              </div>
-            </div>
-            <span class="time">2 days ago</span>
-          </header>
-          <div class="box-buttons">
-            <div class="row mt-3">
-              <mat-chip-listbox
-                aria-label="pharmacy_information_listbox"
-                style="padding-left: 60px"
-              >
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Sent"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="outgoing_mail"
-                  ></mat-icon>
-                  120
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Views"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="visibility"
-                  ></mat-icon>
-                  20
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Respond"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="mark_email_read"
-                  ></mat-icon>
-                  5
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
-          </div>
-          <!-- <div class="main">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>
-              </div> -->
-        </div>
-        <div class="message-item unread">
-          <input class="checkbox" type="checkbox" />
-          <header>
-            <div class="sender-info">
-              <span class="subject">Notice ID</span>
-              <div class="d-flex">
-                <mat-icon matListItemIcon style="margin-left: -5px"
-                  >medication</mat-icon
-                >
-                <span class="from" style="margin-top: 3px">Pharmacy</span>
-              </div>
-            </div>
-            <span class="time">2 days ago</span>
-          </header>
-          <div class="box-buttons">
-            <div class="row mt-3">
-              <mat-chip-listbox
-                aria-label="pharmacy_information_listbox"
-                style="padding-left: 60px"
-              >
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Sent"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="outgoing_mail"
-                  ></mat-icon>
-                  120
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Views"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="visibility"
-                  ></mat-icon>
-                  20
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Respond"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="mark_email_read"
-                  ></mat-icon>
-                  5
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
-          </div>
-          <!-- <div class="main">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>
-              </div> -->
-        </div>
-        <div class="message-item unread">
-          <input class="checkbox" type="checkbox" />
-          <header>
-            <div class="sender-info">
-              <span class="subject">Notice ID</span>
-              <div class="d-flex">
-                <mat-icon matListItemIcon style="margin-left: -5px"
-                  >medication</mat-icon
-                >
-                <span class="from" style="margin-top: 3px">Pharmacy</span>
-              </div>
-            </div>
-            <span class="time">2 days ago</span>
-          </header>
-          <div class="box-buttons">
-            <div class="row mt-3">
-              <mat-chip-listbox
-                aria-label="pharmacy_information_listbox"
-                style="padding-left: 60px"
-              >
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Sent"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="outgoing_mail"
-                  ></mat-icon>
-                  120
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Views"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="visibility"
-                  ></mat-icon>
-                  20
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Respond"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="mark_email_read"
-                  ></mat-icon>
-                  5
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
-          </div>
-          <!-- <div class="main">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>
-              </div> -->
-        </div>
-        <div class="message-item unread">
-          <input class="checkbox" type="checkbox" />
-          <header>
-            <div class="sender-info">
-              <span class="subject">Notice ID</span>
-              <div class="d-flex">
-                <mat-icon matListItemIcon style="margin-left: -5px"
-                  >medication</mat-icon
-                >
-                <span class="from" style="margin-top: 3px">Pharmacy</span>
-              </div>
-            </div>
-            <span class="time">2 days ago</span>
-          </header>
-          <div class="box-buttons">
-            <div class="row mt-3">
-              <mat-chip-listbox
-                aria-label="pharmacy_information_listbox"
-                style="padding-left: 60px"
-              >
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Sent"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="outgoing_mail"
-                  ></mat-icon>
-                  120
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Views"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="visibility"
-                  ></mat-icon>
-                  20
-                </mat-chip>
-                <mat-chip
-                  class="primary_chip"
-                  matTooltip="Respond"
-                  matTooltipHideDelay="100"
-                >
-                  <mat-icon
-                    matChipAvatar
-                    aria-hidden="false"
-                    aria-label="contact icon"
-                    fontIcon="mark_email_read"
-                  ></mat-icon>
-                  5
-                </mat-chip>
-              </mat-chip-listbox>
-            </div>
-          </div>
-          <!-- <div class="main">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>
-              </div> -->
-        </div>
+        <!--        <div class="message-item unread">-->
+        <!--          <input class="checkbox" type="checkbox" />-->
+        <!--          <header>-->
+        <!--            <div class="sender-info">-->
+        <!--              <span class="subject">Notice ID</span>-->
+        <!--              <div class="d-flex">-->
+        <!--                <mat-icon matListItemIcon style="margin-left: -5px"-->
+        <!--                  >medication</mat-icon-->
+        <!--                >-->
+        <!--                <span class="from" style="margin-top: 3px">Pharmacy</span>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <span class="time">2 days ago</span>-->
+        <!--          </header>-->
+        <!--          <div class="box-buttons">-->
+        <!--            <div class="row mt-3">-->
+        <!--              <mat-chip-listbox-->
+        <!--                aria-label="pharmacy_information_listbox"-->
+        <!--                style="padding-left: 60px"-->
+        <!--              >-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Sent"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="outgoing_mail"-->
+        <!--                  ></mat-icon>-->
+        <!--                  120-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Views"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="visibility"-->
+        <!--                  ></mat-icon>-->
+        <!--                  20-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Respond"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="mark_email_read"-->
+        <!--                  ></mat-icon>-->
+        <!--                  5-->
+        <!--                </mat-chip>-->
+        <!--              </mat-chip-listbox>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; <div class="main">-->
+        <!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>-->
+        <!--              </div> &ndash;&gt;-->
+        <!--        </div>-->
+        <!--        <div class="message-item unread">-->
+        <!--          <input class="checkbox" type="checkbox" />-->
+        <!--          <header>-->
+        <!--            <div class="sender-info">-->
+        <!--              <span class="subject">Notice ID</span>-->
+        <!--              <div class="d-flex">-->
+        <!--                <mat-icon matListItemIcon style="margin-left: -5px"-->
+        <!--                  >medication</mat-icon-->
+        <!--                >-->
+        <!--                <span class="from" style="margin-top: 3px">Pharmacy</span>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <span class="time">2 days ago</span>-->
+        <!--          </header>-->
+        <!--          <div class="box-buttons">-->
+        <!--            <div class="row mt-3">-->
+        <!--              <mat-chip-listbox-->
+        <!--                aria-label="pharmacy_information_listbox"-->
+        <!--                style="padding-left: 60px"-->
+        <!--              >-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Sent"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="outgoing_mail"-->
+        <!--                  ></mat-icon>-->
+        <!--                  120-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Views"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="visibility"-->
+        <!--                  ></mat-icon>-->
+        <!--                  20-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Respond"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="mark_email_read"-->
+        <!--                  ></mat-icon>-->
+        <!--                  5-->
+        <!--                </mat-chip>-->
+        <!--              </mat-chip-listbox>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; <div class="main">-->
+        <!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>-->
+        <!--              </div> &ndash;&gt;-->
+        <!--        </div>-->
+        <!--        <div class="message-item unread">-->
+        <!--          <input class="checkbox" type="checkbox" />-->
+        <!--          <header>-->
+        <!--            <div class="sender-info">-->
+        <!--              <span class="subject">Notice ID</span>-->
+        <!--              <div class="d-flex">-->
+        <!--                <mat-icon matListItemIcon style="margin-left: -5px"-->
+        <!--                  >medication</mat-icon-->
+        <!--                >-->
+        <!--                <span class="from" style="margin-top: 3px">Pharmacy</span>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <span class="time">2 days ago</span>-->
+        <!--          </header>-->
+        <!--          <div class="box-buttons">-->
+        <!--            <div class="row mt-3">-->
+        <!--              <mat-chip-listbox-->
+        <!--                aria-label="pharmacy_information_listbox"-->
+        <!--                style="padding-left: 60px"-->
+        <!--              >-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Sent"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="outgoing_mail"-->
+        <!--                  ></mat-icon>-->
+        <!--                  120-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Views"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="visibility"-->
+        <!--                  ></mat-icon>-->
+        <!--                  20-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Respond"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="mark_email_read"-->
+        <!--                  ></mat-icon>-->
+        <!--                  5-->
+        <!--                </mat-chip>-->
+        <!--              </mat-chip-listbox>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; <div class="main">-->
+        <!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>-->
+        <!--              </div> &ndash;&gt;-->
+        <!--        </div>-->
+        <!--        <div class="message-item unread">-->
+        <!--          <input class="checkbox" type="checkbox" />-->
+        <!--          <header>-->
+        <!--            <div class="sender-info">-->
+        <!--              <span class="subject">Notice ID</span>-->
+        <!--              <div class="d-flex">-->
+        <!--                <mat-icon matListItemIcon style="margin-left: -5px"-->
+        <!--                  >medication</mat-icon-->
+        <!--                >-->
+        <!--                <span class="from" style="margin-top: 3px">Pharmacy</span>-->
+        <!--              </div>-->
+        <!--            </div>-->
+        <!--            <span class="time">2 days ago</span>-->
+        <!--          </header>-->
+        <!--          <div class="box-buttons">-->
+        <!--            <div class="row mt-3">-->
+        <!--              <mat-chip-listbox-->
+        <!--                aria-label="pharmacy_information_listbox"-->
+        <!--                style="padding-left: 60px"-->
+        <!--              >-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Sent"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="outgoing_mail"-->
+        <!--                  ></mat-icon>-->
+        <!--                  120-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Views"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="visibility"-->
+        <!--                  ></mat-icon>-->
+        <!--                  20-->
+        <!--                </mat-chip>-->
+        <!--                <mat-chip-->
+        <!--                  class="primary_chip"-->
+        <!--                  matTooltip="Respond"-->
+        <!--                  matTooltipHideDelay="100"-->
+        <!--                >-->
+        <!--                  <mat-icon-->
+        <!--                    matChipAvatar-->
+        <!--                    aria-hidden="false"-->
+        <!--                    aria-label="contact icon"-->
+        <!--                    fontIcon="mark_email_read"-->
+        <!--                  ></mat-icon>-->
+        <!--                  5-->
+        <!--                </mat-chip>-->
+        <!--              </mat-chip-listbox>-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--          &lt;!&ndash; <div class="main">-->
+        <!--                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>-->
+        <!--              </div> &ndash;&gt;-->
+        <!--        </div>-->
       </div>
       <div class="force-overflow"></div>
     </div>
@@ -694,7 +705,7 @@
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum id metus lacus.</p>
               </div>
         </div>
-     
+
       </div>
       <div class="force-overflow"></div>
     </div>
@@ -736,7 +747,7 @@
           <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. </p>
         </div>
         </div>
-       
+
     </div>
 
   </div> -->
