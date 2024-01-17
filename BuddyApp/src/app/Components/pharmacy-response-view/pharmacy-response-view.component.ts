@@ -12,13 +12,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 
 @Component({
-  selector: 'app-pharmacy-dashboard',
+  selector: 'app-pharmacy-response-view',
   standalone: true,
   imports: [CommonModule,MatIconModule,MatTooltipModule,MatMenuModule,MatChipsModule,MatInputModule,MatFormFieldModule,NgxMaterialTimepickerModule],
-  templateUrl: './pharmacy-dashboard.component.html',
-  styleUrl: './pharmacy-dashboard.component.css'
+  templateUrl: './pharmacy-response-view.component.html',
+  styleUrl: './pharmacy-response-view.component.css'
 })
-export class PharmacyDashboardComponent {
+export class PharmacyResponseViewComponent {
   private subscription: Subscription;
   constructor(private router: Router, private sharedService: SharedService) {
     this.subscription = this.sharedService.routeControlFunction.subscribe((route:any)=>{

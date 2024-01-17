@@ -69,13 +69,13 @@ export class SPSideNavComponent {
   side_nav_list: SideNavLiElement[] = [
     {
       name: 'Received',
-      path: 'customer/dashboard',
+      path: 'sp/pharmacy/dashboard',
       icon: 'home',
       response_count: 250,
     },
     {
       name: 'Responded',
-      path: 'notice/pharmacy',
+      path: 'sp/pharmacy/respond',
       icon: 'back_hand',
       response_count: 100,
     },
@@ -96,7 +96,7 @@ export class SPSideNavComponent {
     },
     {
       name: 'Profile',
-      path: 'customer/dashboard/account',
+      path: 'sp/pharmacy/account',
       icon: 'account_circle',
       response_count: 250,
     },

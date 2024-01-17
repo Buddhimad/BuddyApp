@@ -13,6 +13,9 @@ import { NotificationPanelComponent } from './Components/notification-panel/noti
 import { SecurityComponent } from './Components/security/security.component';
 import { ServiceProviderIndexComponent } from './Pages/service-provider-index/service-provider-index.component';
 import { PharmacyDashboardComponent } from './Pages/pharmacy-dashboard/pharmacy-dashboard.component';
+import { PharmacyResponseViewComponent } from './Components/pharmacy-response-view/pharmacy-response-view.component';
+import { CustomerProfileComponent } from './Components/customer-profile/customer-profile.component';
+import { PharmacyAccountComponent } from './Components/pharmacy-account/pharmacy-account.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -76,8 +79,20 @@ export const routes: Routes = [
             component:PharmacyDashboardComponent
           },
           {
+            path:'respond',
+            component:PharmacyResponseViewComponent
+          },
+          {
             path:'notifications',
             component:NotificationPanelComponent
+          },
+          {
+            path:'customername/profile',
+            component:CustomerProfileComponent
+          },
+          {
+            path:'account',
+            component:PharmacyAccountComponent
           }
         ]
       }

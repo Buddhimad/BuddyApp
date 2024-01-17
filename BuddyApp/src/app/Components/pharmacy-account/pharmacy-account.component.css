@@ -1,0 +1,308 @@
+.box {
+    border-radius: 20px;
+    padding: 10px;
+    /* text-align: center; */
+    background: white;
+  }
+  .profile-section{
+    height: calc(100vh - 85px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .box1 {
+   
+    margin-top: 10px;
+  }
+  
+  .content {
+    margin: 15px 2px;
+  }
+  .profile-pic {
+    color: transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+  }
+  .profile-pic input {
+    display: none;
+  }
+  .profile-pic img {
+    position: absolute;
+    object-fit: cover;
+    width: 130px;
+    height: 130px;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.35);
+    border-radius: 100px;
+    z-index: 0;
+  }
+  .profile-pic .-label {
+    cursor: pointer;
+    height: 130px;
+    width: 130px;
+  }
+  .profile-pic:hover .-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    color: #fafafa;
+    transition: background-color 0.2s ease-in-out;
+    border-radius: 100px;
+    margin-bottom: 0;
+  }
+  .profile-pic span {
+    display: inline-flex;
+    padding: 0.2em;
+    height: 2em;
+  }
+  
+  
+  .level {
+    font-size: 0.8em;
+    background-color: #FFB74D;
+    width: fit-content;
+    padding: 3px;
+    border-radius: 5px;
+    font-weight: bolder;
+    letter-spacing: 1px;
+    height: 25px;
+    display: block;
+    margin: 0px auto 10px;
+  }
+
+  .level mat-icon{
+    font-size: 1.5em;
+  }
+  
+  .name {
+    font-size: 1.25em;
+    font-weight: bolder;
+    letter-spacing: 1px;
+  }
+  
+  .job_title {
+    font-size: 0.65em;
+    font-weight: bolder;
+    color: gray;
+    margin-top: -2px;
+  }
+  
+  .job_discription {
+    font-size: 0.7em;
+    color: gray;
+    margin: 10px 30px 20px;
+  }
+
+  .h-fit-content{
+    height: fit-content !important;
+  }
+
+  .rating {
+    display: inline-block;
+  }
+
+  .star {
+    color: #FB8C00;
+    font-size: 25px;
+  }
+
+  .card-title {
+    font-size: 14px;
+    color: #4F4F4F;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .inbox-scroll::-webkit-scrollbar {
+    width: 20px;
+  }
+  
+  .inbox-scroll::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  
+  .inbox-scroll::-webkit-scrollbar-thumb {
+    background-color: #d6dee1;
+    border-radius: 20px;
+    border: 6px solid transparent;
+    background-clip: content-box;
+  }
+  
+  .inbox-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: #a8bbbf;
+  }
+
+  .va-top{
+    vertical-align: top;
+  }
+  
+  .text-grey{
+    color: dimgrey;
+  }
+
+  .ratings-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 7px;
+    box-shadow: 2px 2px 10px 0px #3d3b3b21;
+    padding: 15px;
+  }
+  .ratings-card .card-title {
+    font-size: 14px;
+    color: #4F4F4F;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .ratings-card .card-content {
+    margin-top: 10px;
+    display: flex;
+    column-gap: 35px;
+  }
+  .ratings-card .card-content > div {
+    flex: 1;
+  }
+  .ratings-card .card-content .ratings-wrapper {
+    width: 100%;
+    display: flex;
+    column-gap: 5px;
+    margin: 10px 0px;
+    align-items: center;
+  }
+  .ratings-card .card-content .ratings-wrapper .rating-star {
+    width: 35%;
+    font-size: 15px;
+    font-weight: 700;
+    color: dimgrey;
+  }
+  .ratings-card .card-content .ratings-wrapper .rating-precentage {
+    width: calc(65% - 5px);
+    height: 6px;
+    background: #C4C4C4;
+    border-radius: 10px;
+  }
+  .ratings-card .card-content .ratings-wrapper .rating-precentage .inner {
+    border-radius: inherit;
+    width: var(--value);
+    height: 100%;
+    background: #FB8C00;
+  }
+  
+  .ratings-card.ratings-vertical {
+    /* width: 320px; */
+  }
+  .ratings-card.ratings-vertical .card-content {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    column-gap: unset;
+  }
+  .ratings-card.ratings-vertical .card-content > div:last-of-type {
+    margin-top: -10px;
+  }
+  
+.review-card{
+  width: 100%;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 2px 2px 10px 0px #3d3b3b21;
+  padding: 15px;
+
+}
+
+.review-card .card-title {
+  font-size: 14px;
+  color: #4F4F4F;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.testimonial-box{
+  box-shadow: 2px 2px 30px rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  padding: 20px;
+  margin: 15px;
+  cursor: pointer;
+}
+.review-profile-img{
+  width:50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 10px;
+}
+.review-profile-img img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.profile{
+  display: flex;
+  align-items: center;
+}
+.name-user{
+  display: flex;
+  flex-direction: column;
+}
+.name-user strong{
+  color: #3d3d3d;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+.name-user span{
+  color: #979797;
+  font-size: 0.8rem;
+}
+.reviews{
+  color: #f9d71c;
+}
+.box-top{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.client-comment p{
+  font-size: 0.9rem;
+  color: #4b4b4b;
+}
+.testimonial-box:hover{
+  transform: translateY(-10px);
+  transition: all ease 0.3s;
+}
+
+@media(max-width:1060px){
+  .testimonial-box{
+      width:45%;
+      padding: 10px;
+  }
+}
+@media(max-width:790px){
+  .testimonial-box{
+      width:100%;
+  }
+  .testimonial-heading h1{
+      font-size: 1.4rem;
+  }
+}
+@media(max-width:340px){
+  .box-top{
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+  }
+  .reviews{
+      margin-top: 10px;
+  }
+}
+
+.color-grey{
+  background-color: #263238 !important;
+}
