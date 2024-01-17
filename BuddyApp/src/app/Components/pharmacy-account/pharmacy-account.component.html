@@ -157,20 +157,20 @@
               </div>
             </div>
             <div class="row p-1">
-             <label class="text-grey"><strong> <mat-icon aria-hidden="false" aria-label="duration icon" fontIcon="meeting_room"></mat-icon> Duration</strong></label>
+             <label class="text-grey"><strong> <mat-icon class="align-top" aria-hidden="false" aria-label="duration icon" fontIcon="meeting_room"></mat-icon> Duration</strong></label>
               <table class="table table-bordered mt-2">
                 <thead>
                   <tr>
-                    <th scope="col">Day</th>
-                    <th scope="col">Is Open</th>
-                    <th scope="col">Open</th>
-                    <th scope="col">Close</th>
+                    <th scope="col" class="text-primary text-center">Day</th>
+                    <th scope="col" class="text-primary text-center">Is Open</th>
+                    <th scope="col" class="text-primary text-center">Open</th>
+                    <th scope="col" class="text-primary text-center">Close</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let day of weekdays">
-                    <th scope="row">{{ day.name }}</th>
-                    <td>
+                    <th scope="row" class="text-success">{{ day.name }}</th>
+                    <td class="text-center">
                       <input
                         type="checkbox"
                         name=""
