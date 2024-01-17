@@ -1,6 +1,6 @@
 import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 
-export function PasswordConfirm(): ValidatorFn {
+export function PasswordConfirm(errFields: any): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     // const value: string = control.value || '';
     //
@@ -28,6 +28,12 @@ export function PasswordConfirm(): ValidatorFn {
 
     // if(formGroup!==undefined){
     //   console.log(control.value,otherFieldValue)
+    if (formGroup.get('passwordC')?.value !== formGroup.get('password')?.value) {
+      errFields.pdmTxt = 'Password does not match'
+    }
+    if (formGroup.get('passwordC')?.value === '') {
+      errFields.pdmTxt = 'Confirm your password'
+    }
     if (passwordCValue !== '' && passwordCValue !== passwordValue) {
       // this.pdmTxt = 'Password does not match'
       formGroup.get('passwordC')?.markAsTouched();
