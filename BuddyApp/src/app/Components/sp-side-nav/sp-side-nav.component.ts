@@ -84,13 +84,13 @@ export class SPSideNavComponent {
   settings_list = [
     {
       name: 'Verify Account',
-      path: 'customer/dashboard/verify/account',
+      path: 'sp/pharmacy/verify',
       icon: 'verified_user',
       response_count: 250,
     },
     {
       name: 'Security',
-      path: 'customer/dashboard/security',
+      path: 'sp/pharmacy/security',
       icon: 'security',
       response_count: 250,
     },
@@ -99,11 +99,14 @@ export class SPSideNavComponent {
       path: 'sp/pharmacy/account',
       icon: 'account_circle',
       response_count: 250,
-    },
+    }
   ];
   onRippleClick(): void {}
 
   changeRoutes(route: String) {
     this.sharedService.callChangeRouteFunction(route);
   }
+
+  
 }
+

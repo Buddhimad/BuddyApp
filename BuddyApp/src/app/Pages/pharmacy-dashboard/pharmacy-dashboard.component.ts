@@ -22,6 +22,7 @@ export class PharmacyDashboardComponent {
   private subscription: Subscription;
   constructor(private router: Router, private sharedService: SharedService) {
     this.subscription = this.sharedService.routeControlFunction.subscribe((route:any)=>{
+      console.log(route);
       this.navigateToDestination(route);
     })
    }

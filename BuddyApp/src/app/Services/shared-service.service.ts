@@ -17,6 +17,7 @@ export class SharedService {
   public sideNavControlFunction=this.sideNavControlSubject.asObservable();
 
   public callChangeRouteFunction(route: any): void {
+    console.log(route);
     this.routeControlSubject.next(route);
   }
 
