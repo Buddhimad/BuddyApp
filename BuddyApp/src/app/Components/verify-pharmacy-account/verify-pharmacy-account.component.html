@@ -92,42 +92,96 @@
             <strong>Owner's Information </strong>
           </mat-panel-title>
           <mat-panel-description>
-            Photo of Electricity or Water bill
+            Provide required Owner's Information
             <mat-icon class="success">check_circle</mat-icon>
           </mat-panel-description>
         </mat-expansion-panel-header>
-        <div class="d-flex flex-fill">
-          <div class="input-group">
-            <label for="upphphoto" class="mb-2 text-grey"></label>
-            <input type="file" id="upphphoto" />
-          </div>
+        <div class="row">
+          <mat-form-field class="d-flex flex-fill">
+            <mat-label>Owner's name</mat-label>
+            <input matInput placeholder="Enter owner's name" />
+          </mat-form-field>
+        </div>
+        <div class="row">
+            <mat-form-field
+                  class="d-flex flex-fill"
+                >
+                  <mat-label>Owner's NIC</mat-label>
+                  <input
+                    matInput
+                    #nicinput
+                    maxlength="10"
+                    placeholder="Enter owner's NIC"
+                    required
+                   
+                  />
+                  <!-- [(ngModel)]="ownernicvalue" -->
+                  <!-- formControlName="ownernicctrl" -->
+                  <!-- [formControl]="ownernicFormControl" -->
+                  <!-- <mat-hint align="end"
+                  >{{ nicinput.value.length }}/10</mat-hint
+                >
+                  @if (ownernicvalue) {
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="ownernicvalue = ''"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    }
+                    @if (ownernicFormControl.hasError('required')) {
+                      <mat-error>Owner's NIC <strong>required</strong></mat-error>
+                      } -->
+                </mat-form-field>
         </div>
 
-        <mat-action-row>
-          <button mat-button color="warn" (click)="prevStep()">Previous</button>
-          <button mat-button color="primary" (click)="nextStep()">Next</button>
-        </mat-action-row>
-      </mat-expansion-panel>
+        <div class="row">
+            <mat-form-field class="d-flex flex-fill">
+                <mat-label>Owner's contact no</mat-label>
+                <input
+                  type="tel"
+                  matInput
+                  placeholder="Owner's contact no"
+                  #contactnoinput
+                  maxlength="10"
+                  required
+                
+                />
+                <!-- [(ngModel)]="ownercontactnovalue" -->
+                <!-- formControlName="ownercontactnoctrl" -->
+                <!-- [formControl]="ownercontactnoFormControl" -->
+                <!-- <mat-hint align="end"
+                  >{{ contactnoinput.value.length }}/10</mat-hint
+                >
+                @if (ownercontactnovalue) {
+                  <button
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="ownercontactnovalue = ''"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
+                  }
+                  @if (ownercontactnoFormControl.hasError('required')) {
+                    <mat-error>Owner's contact number is <strong>required</strong></mat-error>
+                    } -->
+              </mat-form-field>
+        </div>
 
-      <mat-expansion-panel
-        [expanded]="step === 2"
-        (opened)="setStep(2)"
-        hideToggle
-      >
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <strong>Verify Location </strong>
-          </mat-panel-title>
-          <mat-panel-description>
-            Photo of Electricity or Water bill
-            <mat-icon>upload</mat-icon>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <div class="d-flex flex-fill">
-          <div class="input-group">
-            <label for="upphphoto" class="mb-2 text-grey"></label>
-            <input type="file" id="upphphoto" />
-          </div>
+        <div class="row">
+            <div class="input-group d-flex flex-fill mb-3">
+                <label for="upnic" class="mb-2 text-grey" style="color: rgba(0, 0, 0, 0.6);">Copy of owner's NIC</label>
+                <input id="upnic" type="file" placeholder="Copy of Owner's NIC">
+                </div>
+        </div>
+        <div class="row">
+            <div class="input-group d-flex flex-fill mb-3">
+                <label for="upohebowb" class="mb-2 text-grey">Copy of Owner's Home Electricity Bill or Water Bill</label>
+                <input type="file" id="upohebowb">
+                </div>
         </div>
 
         <mat-action-row>
