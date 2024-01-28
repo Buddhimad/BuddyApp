@@ -18,6 +18,7 @@ import { CustomerProfileComponent } from './Components/customer-profile/customer
 import { PharmacyAccountComponent } from './Components/pharmacy-account/pharmacy-account.component';
 import { ServiceProviderAccountSecurityComponent } from './Components/service-provider-account-security/service-provider-account-security.component';
 import { VerifyPharmacyAccountComponent } from './Components/verify-pharmacy-account/verify-pharmacy-account.component';
+import { PharmacyBillingInfoComponent } from './Components/pharmacy-billing-info/pharmacy-billing-info.component';
 
 export const routes: Routes = [
   { path: '', component: WelcomeComponent },
@@ -103,6 +104,10 @@ export const routes: Routes = [
           {
             path:'verify',
             component:VerifyPharmacyAccountComponent
+          },
+          {
+            path:'billing',
+            component:PharmacyBillingInfoComponent
           }
         ]
       }

@@ -99,6 +99,12 @@ export class SPSideNavComponent {
       path: 'sp/pharmacy/account',
       icon: 'account_circle',
       response_count: 250,
+    },
+    {
+      name: 'Billing',
+      path: 'sp/pharmacy/billing',
+      icon: 'payments',
+      response_count: 250,
     }
   ];
   onRippleClick(): void {}

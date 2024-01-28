@@ -1,0 +1,202 @@
+<div class="content-grid content-grid-scroll">
+  <div class="row align-items-stretch">
+    <div class="c-dashboardInfo col-6">
+      <div class="wrap">
+        <h4
+          class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
+        >
+          Total Response Count<svg
+            class="MuiSvgIcon-root-19"
+            focusable="false"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            role="presentation"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+            ></path>
+          </svg>
+        </h4>
+        <span class="hind-font caption-12 c-dashboardInfo__count">150</span
+        ><span class="hind-font caption-12 c-dashboardInfo__subInfo"
+          >Today respond: 1</span
+        >
+      </div>
+    </div>
+    <div class="c-dashboardInfo col-6">
+      <div class="wrap">
+        <h4
+          class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
+        >
+          Credit Amount<svg
+            class="MuiSvgIcon-root-19"
+            focusable="false"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            role="presentation"
+          >
+            <path fill="none" d="M0 0h24v24H0z"></path>
+            <path
+              d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"
+            ></path>
+          </svg>
+        </h4>
+        <span class="hind-font caption-12 c-dashboardInfo__count"
+          >LKR 1,500</span
+        >
+      </div>
+    </div>
+  </div>
+  <section class="mt-2">
+    <mat-accordion class="mb-3 recharge-account-panel">
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title><strong> New Payment </strong></mat-panel-title>
+          <mat-panel-description> Recharge your account </mat-panel-description>
+          <mat-icon>payments</mat-icon>
+        </mat-expansion-panel-header>
+        <p>Please submit relavance information to confirm your Payment.</p>
+
+        <div class="d-flex justify-content-between">
+          <mat-form-field floatLabel="always">
+            <mat-label>Amount</mat-label>
+            <input matInput type="number" class="example-right-align" placeholder="0">
+            <span matTextPrefix>LKR&nbsp;</span>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Paid Date</mat-label>
+            <input matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+
+        <p>Upload a photo or pdf of payment receipt</p>
+
+        <div class="input-group d-flex flex-fill mb-3">
+          <input id="upnic" type="file" placeholder="Photo or Pdf of payment receipt">
+        </div>
+
+        <mat-action-row>
+          <button mat-button class="btn-primary">Submit</button>
+        </mat-action-row>
+        
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+  <section class="mt-3">
+    <mat-accordion>
+      <mat-expansion-panel
+      hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>Payment ID</mat-panel-title>
+          <mat-panel-description>
+          LKR 1000
+          </mat-panel-description>
+          <mat-icon *ngIf="status=='complete'" class="status_complete">check_circle</mat-icon>
+          <mat-icon *ngIf="status=='pending'" class="status_pending">pending</mat-icon>
+          <mat-icon *ngIf="status=='failed'" class="status_cancel">cancel</mat-icon>
+        </mat-expansion-panel-header>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Paid Date : <strong>2024/01/28</strong></p>
+          </div>
+          <div>
+            <p>Deposit Value : <strong>LKR 1000</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Latest Response Count : <strong>150</strong></p>
+          </div>
+          <div>
+            <p>Latest Credit Amount : <strong>LKR 1500</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Last Response Count : <strong>10</strong></p>
+          </div>
+          <div>
+            <p>Last Balance : <strong>LKR 100</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Reviwed Date : <strong>2024/01/28</strong></p>
+          </div>
+          <div>
+            <p>Status : <strong>Paid</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Message to user : <strong>N/A</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Receipt : <strong><a href="javascript:void(0);"><mat-icon class="align-bottom" aria-hidden="false" aria-label="receipt" fontIcon="receipt_long"></mat-icon></a></strong></p>
+          </div>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel
+      hideToggle
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>Payment ID</mat-panel-title>
+          <mat-panel-description>
+          LKR 1000
+          </mat-panel-description>
+          <mat-icon *ngIf="status=='complete'&&status1!='pending'" class="status_complete">check_circle</mat-icon>
+          <mat-icon *ngIf="status1=='pending'" class="status_pending">pending</mat-icon>
+          <mat-icon *ngIf="status=='failed'" class="status_cancel">cancel</mat-icon>
+        </mat-expansion-panel-header>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Paid Date : <strong>2024/01/28</strong></p>
+          </div>
+          <div>
+            <p>Deposit Value : <strong>LKR 1000</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Latest Response Count : <strong>150</strong></p>
+          </div>
+          <div>
+            <p>Latest Credit Amount : <strong>LKR 1500</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Last Response Count : <strong>10</strong></p>
+          </div>
+          <div>
+            <p>Last Balance : <strong>LKR 100</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Reviwed Date : <strong>2024/01/28</strong></p>
+          </div>
+          <div>
+            <p>Status : <strong>Pending</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Message to user : <strong>N/A</strong></p>
+          </div>
+        </div>
+        <div class="d-flex justify-content-between mb-2">
+          <div>
+            <p>Receipt : <strong><a href="javascript:void(0);"><mat-icon class="align-bottom" aria-hidden="false" aria-label="receipt" fontIcon="receipt_long"></mat-icon></a></strong></p>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
+</div>
