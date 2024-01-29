@@ -42,11 +42,12 @@
 }
 
 .c-dashboardInfo:nth-child(1) .wrap:after {
-  background: linear-gradient(82.59deg, #00c48c 0%, #00a173 100%);
+  background: linear-gradient(82.59deg, #fb8633 0%, #ff6c03 100%);
 }
 
 .c-dashboardInfo:nth-child(2) .wrap:after {
-  background: linear-gradient(81.67deg, #0084f4 0%, #1a4da2 100%);
+  /* background: linear-gradient(81.67deg, #0084f4 0%, #1a4da2 100%); */
+  background: linear-gradient(82.59deg, #fb8633 0%, #ff6c03 100%);
 }
 
 .c-dashboardInfo:nth-child(3) .wrap:after {

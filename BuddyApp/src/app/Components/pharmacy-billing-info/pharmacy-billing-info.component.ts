@@ -10,12 +10,13 @@ import {NativeDateAdapter} from '@angular/material/core';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatNativeDateModule} from '@angular/material/core';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-pharmacy-billing-info',
   standalone: true,
   providers: [NativeDateAdapter],
-  imports: [CommonModule,MatExpansionModule,MatIconModule,MatButtonModule,MatInputModule,MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule,MatNativeDateModule],
+  imports: [CommonModule,MatExpansionModule,MatIconModule,MatButtonModule,MatInputModule,MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule,MatNativeDateModule,MatTooltipModule],
   templateUrl: './pharmacy-billing-info.component.html',
   styleUrl: './pharmacy-billing-info.component.css'
 })
