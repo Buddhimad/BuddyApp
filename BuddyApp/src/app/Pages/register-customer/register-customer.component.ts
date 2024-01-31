@@ -24,6 +24,7 @@ import {MatStepper} from '@angular/material/stepper';
 import {ValidateNIC} from "../../validations/nic-validator";
 import {ValidateTelephone} from "../../validations/telephone-validator";
 import {ValidateEmail} from "../../validations/email-validator";
+import {SharedService} from "../../Services/shared-service.service";
 
 @Component({
   selector: 'app-register-customer',
@@ -62,7 +63,7 @@ export class RegisterCustomerComponent implements OnInit {
 
   @ViewChild('stepper') private myStepper: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService) {
+  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService, private sharedService: SharedService) {
   }
 
   ngOnInit() {
@@ -97,73 +98,11 @@ export class RegisterCustomerComponent implements OnInit {
   }
 
   loadTowns() {
-    this.registerCustomerS.getTowns().subscribe((result) => {
-      // console.log(towns)
-      let provinces = result.towns.filter((obj: any, index: any, arr: any) => {
-        // Check if the index of the first occurrence of the object with the same 'name'
-        // is the same as the current index
-        return arr.findIndex((item: any) => item.province_id === obj.province_id) === index;
-      });
-
-      // let provinces = new Set();
-      // result.towns.forEach((town: any) => {
-      //   provinces.add(town['province_name'])
-      // })
-      // this.provinces = provinces
-
-      // let provincesArr = Array.from(provinces);
-      // let districts = new Set();
-      let towns: any[] = []
-      // provinces.forEach((province: any) => {
-      for (let i = 0; i < provinces.length; i++) {
-        provinces[i] = {
-          province_id: provinces[i].province_id,
-          province_name: provinces[i].province_name,
-        }
-        // result.towns.forEach((town: any) => {
-        //   if (provinces[i] === town['province_name']) {
-        //     districts.add(town['district_name'])
-        //   }
-        // })
-        let districts = result.towns.filter((obj: any, index: any, arr: any) => {
-          return arr.findIndex((item: any) => item.province_id === obj.province_id && provinces[i].province_name === obj.province_name) === index;
-        });
-
-
-        // let districtsArr = Array.from(districts)
-
-        for (let j = 0; j < districts.length; j++) {
-          // districts[i] = {
-          //   district_id: districts[i].district_id,
-          //   district_name: districts[i].district_name,
-          // }
-          // let towns = result.towns.filter((obj: any, index: any, arr: any) => {
-          //   return arr.findIndex((item: any) => item.district_id === obj.district_id && districts[i].district_name === obj.district_name) === index;
-          // });
-          result.towns.forEach((town: any) => {
-            if (districts[j].district_id === town['district_id']) {
-              towns.push({
-                town_id: town.town_id,
-                town_name: town.town_name
-              })
-            }
-          })
-          districts[j] = {
-            district: {
-              district_id: districts[j].district_id,
-              district_name: districts[j].district_name,
-            },
-            towns: towns
-          }
-        }
-
-        provinces[i] = {
-          province: provinces[i],
-          districts: districts
-        }
-      }
-      // console.log(provinces)
-      this.provinces = provinces
+    // this.sharedService.getTowns()
+    // console.log(22)
+    this.sharedService.getTowns().subscribe(towns => {
+      this.provinces = towns
+      // console.log(this.provinces)
     })
   }
 
@@ -208,4 +147,5 @@ export class RegisterCustomerComponent implements OnInit {
       })
     }
   }
+
 }
