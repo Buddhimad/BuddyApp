@@ -1,3 +1,16 @@
+.inner-container {
+  position: sticky;
+  top: 0;
+  padding: 10px;
+  font-weight: bold;
+  background: #ffffff;
+  border-radius: 7px;
+  text-align: center;
+  overflow: hidden;
+  /* padding: 40px 25px 20px; */
+  z-index: 1;
+}
+
 .inbox {
     margin: auto;
     height: calc(100vh - 75px);
@@ -138,7 +151,7 @@
     height: 60px;
     line-height: 60px;
     margin: 0;
-    outline: 1px #001E33;
+    /* outline: 1px #001E33; */
     padding: 0;
     width: 33.33333333333%;
   }
@@ -424,4 +437,10 @@
   flex-shrink: 0;
 }
 
-  
+.btn-primary {
+  background-color: orange;
+  font-weight: 600;
+  width: 200px;
+  border: none;
+  color: #212121;
+}
