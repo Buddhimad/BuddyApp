@@ -23,7 +23,7 @@ export class RegisterCustomerService {
   //   return this.http.get<any>(this.sharedService.publicUrl + 'town/get_districts?province=' + province);
   // }
 
-  getTowns(): Observable<any> {
-    return this.http.get<any>(this.sharedService.publicUrl + 'town/get_towns');
-  }
+  // getTowns(): any {
+  //   return this.sharedService.loadTowns();
+  // }
 }
