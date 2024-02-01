@@ -48,7 +48,9 @@ export class WelcomeComponent {
   login(e: any) {
     e.preventDefault()
     this.welcomeService.login(this.user).subscribe(result => {
+      console.log(result.app_user)
       if (result.app_user) {
+        localStorage.setItem('user', JSON.stringify(result.app_user))
         this.router.navigate(['/customer/dashboard']);
       }
     })

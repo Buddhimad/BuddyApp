@@ -3,7 +3,7 @@
     <div class="col-md-12 mt-3">
       <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
         <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
+          <form [formGroup]="firstFormGroup" #myFirstFormGroup>
             <ng-template matStepLabel>Basic Information</ng-template>
             <div class="row mt-3">
               <!-- <div class="col-sm-12 col-md-3 col-lg-3">
@@ -67,44 +67,44 @@
               </div>
             </div>
 
-<!--            <section *ngIf='selectedNoticeType!="pharmacy_notice"&&selectedNoticeType=="delivery_notice"'>-->
-<!--              <div class="row mt-3">-->
-<!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
-<!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
-<!--                    <mat-label>Select Package Type</mat-label>-->
-<!--                    <mat-select [(value)]="selected_package_type">-->
-<!--                      <mat-option>None</mat-option>-->
-<!--                      <mat-option value="option1">Option 1</mat-option>-->
-<!--                      <mat-option value="option2">Option 2</mat-option>-->
-<!--                      <mat-option value="option3">Option 3</mat-option>-->
-<!--                    </mat-select>-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
-<!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
-<!--                    <mat-label>Suitable Vehicle Type</mat-label>-->
-<!--                    <mat-select [(value)]="selected_suitable_vehicle_type">-->
-<!--                      <mat-option>None</mat-option>-->
-<!--                      <mat-option value="option1">Option 1</mat-option>-->
-<!--                      <mat-option value="option2">Option 2</mat-option>-->
-<!--                      <mat-option value="option3">Option 3</mat-option>-->
-<!--                    </mat-select>-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
-<!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
-<!--                    <mat-label>Package Weight</mat-label>-->
-<!--                    <input matInput placeholder="" value="">-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
-<!--                  <div class="input-group w-100">-->
-<!--                    <label for="upphopackage" class="mb-2 text-grey">Photos of Package</label>-->
-<!--                    <input type="file" id="upphopackage">-->
-<!--                  </div>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </section>-->
+            <!--            <section *ngIf='selectedNoticeType!="pharmacy_notice"&&selectedNoticeType=="delivery_notice"'>-->
+            <!--              <div class="row mt-3">-->
+            <!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
+            <!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
+            <!--                    <mat-label>Select Package Type</mat-label>-->
+            <!--                    <mat-select [(value)]="selected_package_type">-->
+            <!--                      <mat-option>None</mat-option>-->
+            <!--                      <mat-option value="option1">Option 1</mat-option>-->
+            <!--                      <mat-option value="option2">Option 2</mat-option>-->
+            <!--                      <mat-option value="option3">Option 3</mat-option>-->
+            <!--                    </mat-select>-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
+            <!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
+            <!--                    <mat-label>Suitable Vehicle Type</mat-label>-->
+            <!--                    <mat-select [(value)]="selected_suitable_vehicle_type">-->
+            <!--                      <mat-option>None</mat-option>-->
+            <!--                      <mat-option value="option1">Option 1</mat-option>-->
+            <!--                      <mat-option value="option2">Option 2</mat-option>-->
+            <!--                      <mat-option value="option3">Option 3</mat-option>-->
+            <!--                    </mat-select>-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
+            <!--                  <mat-form-field class="w-100" style="margin-top: 32px;">-->
+            <!--                    <mat-label>Package Weight</mat-label>-->
+            <!--                    <input matInput placeholder="" value="">-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-12 col-md-3 col-lg-3">-->
+            <!--                  <div class="input-group w-100">-->
+            <!--                    <label for="upphopackage" class="mb-2 text-grey">Photos of Package</label>-->
+            <!--                    <input type="file" id="upphopackage">-->
+            <!--                  </div>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--            </section>-->
             <div class="d-flex mt-3">
               <button
                 mat-raised-button
@@ -119,58 +119,58 @@
         </mat-step>
 
         <mat-step [stepControl]="secondFormGroup">
-          <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit($event)">
+          <form [formGroup]="secondFormGroup" #mySecondFormGroup (ngSubmit)="onSubmit($event)">
             <ng-template matStepLabel>Location Details</ng-template>
-<!--            <section *ngIf='selectedNoticeType=="pharmacy_notice"&&selectedNoticeType!="delivery_notice"'>-->
-              <div class="row mt-3">
-                <div class="col-sm-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Searching Province</mat-label>
-                    <mat-select name="province" formControlName="province"
-                                (ngModelChange)="getDistricts($event)">
+            <!--            <section *ngIf='selectedNoticeType=="pharmacy_notice"&&selectedNoticeType!="delivery_notice"'>-->
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Searching Province</mat-label>
+                  <mat-select name="province" formControlName="province"
+                              (ngModelChange)="getDistricts($event)">
 
-                      <mat-option *ngFor="let province of provinces" [value]="province"
-                      >{{province.province.province_name}}</mat-option>
-                    </mat-select>
-                    <mat-error>Province is required</mat-error>
-                    <!-- @if (provinceFormControl.hasError('required')) {
-                      <mat-error>Searching province is <strong>required</strong></mat-error>
-                      } -->
-                  </mat-form-field>
-                </div>
-                <div class="col-sm-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Searching District</mat-label>
-                    <mat-select name="district" formControlName="district"
-                                (ngModelChange)="getTowns($event)">
-                      <mat-option *ngFor="let district of districts" [value]="district"
-                      >{{district.district.district_name}}</mat-option>
-                      <!-- <mat-option value="galle">Galle</mat-option> -->
-                    </mat-select>
-                    <mat-error>District is required</mat-error>
-                    <!-- @if (districtFormControl.hasError('required')) {
-                      <mat-error>Pharmacy located district is <strong>required</strong></mat-error>
-                      } -->
-                  </mat-form-field>
-                </div>
+                    <mat-option *ngFor="let province of provinces" [value]="province"
+                    >{{province.province.province_name}}</mat-option>
+                  </mat-select>
+                  <mat-error>Province is required</mat-error>
+                  <!-- @if (provinceFormControl.hasError('required')) {
+                    <mat-error>Searching province is <strong>required</strong></mat-error>
+                    } -->
+                </mat-form-field>
+              </div>
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Searching District</mat-label>
+                  <mat-select name="district" formControlName="district"
+                              (ngModelChange)="getTowns($event)">
+                    <mat-option *ngFor="let district of districts" [value]="district"
+                    >{{district.district.district_name}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>District is required</mat-error>
+                  <!-- @if (districtFormControl.hasError('required')) {
+                    <mat-error>Pharmacy located district is <strong>required</strong></mat-error>
+                    } -->
+                </mat-form-field>
+              </div>
 
+            </div>
+            <div class="row mt-3">
+              <div class="col-sm-6">
+                <mat-form-field class="full-width">
+                  <mat-label>Searching Town</mat-label>
+                  <mat-select name="town" formControlName="town">
+                    <mat-option *ngFor="let town of towns" [value]="town">{{town.town_name}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>Town is required</mat-error>
+                  <!-- @if (townFormControl.hasError('required')) {
+                    <mat-error>Pharmacy located town is <strong>required</strong></mat-error>
+                    } -->
+                </mat-form-field>
               </div>
-              <div class="row mt-3">
-                <div class="col-sm-6">
-                  <mat-form-field class="full-width">
-                    <mat-label>Searching Town</mat-label>
-                    <mat-select name="town" formControlName="town">
-                      <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>
-                      <!-- <mat-option value="galle">Galle</mat-option> -->
-                    </mat-select>
-                    <mat-error>Town is required</mat-error>
-                    <!-- @if (townFormControl.hasError('required')) {
-                      <mat-error>Pharmacy located town is <strong>required</strong></mat-error>
-                      } -->
-                  </mat-form-field>
-                </div>
-              </div>
-              <div class="clearfix"></div>
+            </div>
+            <div class="clearfix"></div>
             <div style="display: flex;justify-content: flex-end;margin-top: 20px">
               <div>
                 <button
@@ -195,100 +195,100 @@
             </div>
 
 
-<!--            </section>-->
-<!--            <section *ngIf='selectedNoticeType!="pharmacy_notice"&&selectedNoticeType=="delivery_notice"'>-->
-<!--              <div class="row mt-3">-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching Province</mat-label>-->
-<!--                    <mat-select name="province" formControlName="searching_provinceFormControl">-->
+            <!--            </section>-->
+            <!--            <section *ngIf='selectedNoticeType!="pharmacy_notice"&&selectedNoticeType=="delivery_notice"'>-->
+            <!--              <div class="row mt-3">-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching Province</mat-label>-->
+            <!--                    <mat-select name="province" formControlName="searching_provinceFormControl">-->
 
-<!--                      &lt;!&ndash; <mat-option value="southern">Southern</mat-option> &ndash;&gt;-->
-<!--                    </mat-select>-->
-<!--                    &lt;!&ndash; @if (provinceFormControl.hasError('required')) {-->
-<!--                      <mat-error>Searching province is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching District</mat-label>-->
-<!--                    <mat-select name="district" formControlName="searching_districtFormControl">-->
-<!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
-<!--                    </mat-select>-->
-<!--                    &lt;!&ndash; @if (districtFormControl.hasError('required')) {-->
-<!--                      <mat-error>Pharmacy located district is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching Town</mat-label>-->
-<!--                    <mat-select name="town" formControlName="searching_townFormControl">-->
-<!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
-<!--                    </mat-select>-->
-<!--                    &lt;!&ndash; @if (townFormControl.hasError('required')) {-->
-<!--                      <mat-error>Pharmacy located town is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="row mt-3">-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching Province</mat-label>-->
-<!--                    <mat-select name="province" formControlName="province"-->
-<!--                                (ngModelChange)="getDistricts($event)">-->
+            <!--                      &lt;!&ndash; <mat-option value="southern">Southern</mat-option> &ndash;&gt;-->
+            <!--                    </mat-select>-->
+            <!--                    &lt;!&ndash; @if (provinceFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Searching province is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching District</mat-label>-->
+            <!--                    <mat-select name="district" formControlName="searching_districtFormControl">-->
+            <!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
+            <!--                    </mat-select>-->
+            <!--                    &lt;!&ndash; @if (districtFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Pharmacy located district is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching Town</mat-label>-->
+            <!--                    <mat-select name="town" formControlName="searching_townFormControl">-->
+            <!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
+            <!--                    </mat-select>-->
+            <!--                    &lt;!&ndash; @if (townFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Pharmacy located town is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--              </div>-->
+            <!--              <div class="row mt-3">-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching Province</mat-label>-->
+            <!--                    <mat-select name="province" formControlName="province"-->
+            <!--                                (ngModelChange)="getDistricts($event)">-->
 
-<!--                      <mat-option *ngFor="let province of provinces" [value]="province"-->
-<!--                      >{{province.province.province_name}}</mat-option>-->
-<!--                    </mat-select>-->
-<!--                    <mat-error>Province is required</mat-error>-->
-<!--                    &lt;!&ndash; @if (provinceFormControl.hasError('required')) {-->
-<!--                      <mat-error>Searching province is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching District</mat-label>-->
-<!--                    <mat-select name="district" formControlName="district"-->
-<!--                                (ngModelChange)="getTowns($event)">-->
-<!--                      <mat-option *ngFor="let district of districts" [value]="district"-->
-<!--                      >{{district.district.district_name}}</mat-option>-->
-<!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
-<!--                    </mat-select>-->
-<!--                    <mat-error>District is required</mat-error>-->
-<!--                    &lt;!&ndash; @if (districtFormControl.hasError('required')) {-->
-<!--                      <mat-error>Pharmacy located district is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="col-sm-4">-->
-<!--                  <mat-form-field class="full-width">-->
-<!--                    <mat-label>Searching Town</mat-label>-->
-<!--                    <mat-select name="town" formControlName="town">-->
-<!--                      <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>-->
-<!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
-<!--                    </mat-select>-->
-<!--                    &lt;!&ndash; @if (townFormControl.hasError('required')) {-->
-<!--                      <mat-error>Pharmacy located town is <strong>required</strong></mat-error>-->
-<!--                      } &ndash;&gt;-->
-<!--                  </mat-form-field>-->
-<!--                </div>-->
-<!--                <div class="d-flex mt-3">-->
-<!--                  <button-->
-<!--                    mat-raised-button-->
-<!--                    color="primary"-->
-<!--                    class="primary-color ml-auto btn-rnext"-->
-<!--                    matStepperNext-->
-<!--                  >-->
-<!--                    Next-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
+            <!--                      <mat-option *ngFor="let province of provinces" [value]="province"-->
+            <!--                      >{{province.province.province_name}}</mat-option>-->
+            <!--                    </mat-select>-->
+            <!--                    <mat-error>Province is required</mat-error>-->
+            <!--                    &lt;!&ndash; @if (provinceFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Searching province is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching District</mat-label>-->
+            <!--                    <mat-select name="district" formControlName="district"-->
+            <!--                                (ngModelChange)="getTowns($event)">-->
+            <!--                      <mat-option *ngFor="let district of districts" [value]="district"-->
+            <!--                      >{{district.district.district_name}}</mat-option>-->
+            <!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
+            <!--                    </mat-select>-->
+            <!--                    <mat-error>District is required</mat-error>-->
+            <!--                    &lt;!&ndash; @if (districtFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Pharmacy located district is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="col-sm-4">-->
+            <!--                  <mat-form-field class="full-width">-->
+            <!--                    <mat-label>Searching Town</mat-label>-->
+            <!--                    <mat-select name="town" formControlName="town">-->
+            <!--                      <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>-->
+            <!--                      &lt;!&ndash; <mat-option value="galle">Galle</mat-option> &ndash;&gt;-->
+            <!--                    </mat-select>-->
+            <!--                    &lt;!&ndash; @if (townFormControl.hasError('required')) {-->
+            <!--                      <mat-error>Pharmacy located town is <strong>required</strong></mat-error>-->
+            <!--                      } &ndash;&gt;-->
+            <!--                  </mat-form-field>-->
+            <!--                </div>-->
+            <!--                <div class="d-flex mt-3">-->
+            <!--                  <button-->
+            <!--                    mat-raised-button-->
+            <!--                    color="primary"-->
+            <!--                    class="primary-color ml-auto btn-rnext"-->
+            <!--                    matStepperNext-->
+            <!--                  >-->
+            <!--                    Next-->
+            <!--                  </button>-->
+            <!--                </div>-->
+            <!--              </div>-->
 
-<!--            </section>-->
+            <!--            </section>-->
           </form>
         </mat-step>
         <mat-step>
@@ -321,8 +321,10 @@
                 </ul>
               </div>
               <div class="bottomHalf">
-                <p>You have publish your pharmacy notice for Pharmacies located in southern province galle district
-                  galle town</p>
+                <p>You have publish your pharmacy notice for Pharmacies located in
+                  {{selectedArea.province}} Province
+                  {{selectedArea.district}} District
+                  {{selectedArea.town}} Town</p>
               </div>
             </div>
           </div>
@@ -331,9 +333,9 @@
               mat-raised-button
               color="primary"
               class="primary-color ml-auto btn-rnext"
-              (click)="stepper.reset()"
+              (click)="myFirstFormGroup.reset();mySecondFormGroup.reset();stepper.reset()"
             >
-              Finish
+              Done
             </button>
           </div>
         </mat-step>
