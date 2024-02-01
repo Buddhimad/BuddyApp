@@ -31,7 +31,7 @@ mat-drawer{
     height: 130px;
     width: 130px;
   }
-  .profile-pic:hover .-label {
+  /* .profile-pic:hover .-label {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ mat-drawer{
     transition: background-color 0.2s ease-in-out;
     border-radius: 100px;
     margin-bottom: 0;
-  }
+  } */
   .profile-pic span {
     display: inline-flex;
     padding: 0.2em;
@@ -110,3 +110,38 @@ mat-drawer{
 /* .ripple-container:hover {
   background-color: #1565C0; 
 } */
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .sp-dashboard-sidenav{
+    width: 100% !important;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .sp-dashboard-sidenav{
+    width: 100% !important;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .sp-dashboard-sidenav{
+    width: 100% !important;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .sp-dashboard-sidenav{
+    width: 320px !important;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .sp-dashboard-sidenav{
+    width: 320px !important;
+  }
+}
