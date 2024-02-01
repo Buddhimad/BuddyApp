@@ -353,3 +353,24 @@
   .send-response-chip .mat-icon{
     color: #212121 !important;
   }
+
+  .inner-container {
+    position: sticky;
+    top: 0;
+    padding: 10px;
+    font-weight: bold;
+    background: #ffffff;
+    border-radius: 7px;
+    text-align: center;
+    overflow: hidden;
+    /* padding: 40px 25px 20px; */
+    z-index: 1;
+  }
+
+  .btn-primary {
+    background-color: orange;
+    font-weight: 600;
+    width: 200px;
+    border: none;
+    color: #212121;
+  }
