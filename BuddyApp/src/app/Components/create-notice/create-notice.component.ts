@@ -44,13 +44,19 @@ export class CreateNoticeComponent implements OnInit {
   districts: any = []
   towns: any = []
 
+  selectedArea = {
+    province: '',
+    district: '',
+    town: ''
+  }
+
   @ViewChild('stepper') private myStepper: MatStepper;
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
-      person_name: ['asd', Validators.required],
-      contact_number_1: ['123', Validators.required],
-      contact_number_2: ['1233', Validators.required],
+      person_name: ['', Validators.required],
+      contact_number_1: ['', Validators.required],
+      contact_number_2: [''],
       notice_txt: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
@@ -84,17 +90,22 @@ export class CreateNoticeComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    this.districts = province.districts
+    if (province !== null) {
+      this.districts = province.districts
+    }
   }
 
   getTowns(district: any) {
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    this.towns = district.towns
+    if (district !== null) {
+      this.towns = district.towns
+    }
     // })
   }
 
   onSubmit(e: any) {
     e.preventDefault()
+    // console.log(JSON.parse(localStorage.getItem('user')))
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
@@ -105,12 +116,15 @@ export class CreateNoticeComponent implements OnInit {
       noticeForm.notice_id = '2233'
       // customerForm.district = customerForm.district.district.district_id
       // customerForm.province = customerForm.province.province.province_id
-      noticeForm.town_town_id = noticeForm.town
+      noticeForm.town_town_id = noticeForm.town.town_id
       // customerForm.user_verify = 1
-      // noticeForm.customer_customer_id
+      noticeForm.customer_customer_id = JSON.parse(localStorage.getItem('user'))['user_id']
       noticeForm.notice_type = 'customer_notice'
       noticeForm.created_at = '2023-02-02'
       noticeForm.updated_at = '2023-02-02'
+      this.selectedArea.province = noticeForm.province.province.province_name
+      this.selectedArea.district = noticeForm.district.district.district_name
+      this.selectedArea.town = noticeForm.town.town_name
       // customerForm.district = undefined
       // customerForm.province = undefined
       console.log(noticeForm)
