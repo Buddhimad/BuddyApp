@@ -2,88 +2,114 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
     <div class="profile-section inbox-scroll">
       <div class="box1 box ">
-          <div class="content">
-            <!-- <div class="image">
-              <img src="https://i.postimg.cc/bryMmCQB/profile-image.jpg" alt="Profile Image">
-            </div> -->
-            <div class="profile-pic d-flex justify-content-center mb-3">
-              <label class="-label" for="file">
-                <span class="glyphicon glyphicon-camera"></span>
-                <span>Change Image</span>
-              </label>
-              <input id="file" type="file" onchange="loadFile(event)" />
-              <img
-                src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
-                id="output"
-                width="200"
-              />
+        <div class="content">
+          <!-- <div class="image">
+            <img src="https://i.postimg.cc/bryMmCQB/profile-image.jpg" alt="Profile Image">
+          </div> -->
+          <div class="profile-pic d-flex justify-content-center mb-3">
+            <label class="-label" for="file">
+              <span class="glyphicon glyphicon-camera"></span>
+              <span>Change Image</span>
+            </label>
+            <input id="file" type="file" onchange="loadFile(event)"/>
+            <img
+              src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+              id="output"
+              width="200"
+            />
+          </div>
+          <div class="d-flex justify-content-center">
+            <h4>{{user.full_name}}</h4>
+          </div>
+          <div class="d-flex justify-content-center level">
+            <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>
+            <p class="">Verified Customer</p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="rating">
+              <!-- Five stars -->
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9734;</span>
             </div>
-            <div class="d-flex justify-content-center">
-              <h4>Buddhima Vajirapani Dahanayake</h4>
-            </div>
-            <div class="d-flex justify-content-center level">
-              <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon><p class="">Verified Customer</p>
-            </div>
-            <div class="d-flex justify-content-center">
-              <div class="rating">
-                <!-- Five stars -->
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
-              </div>
-            </div>
-           
-            <div class="d-flex justify-content-between mt-3">
-             <h5 class="card-title">Intro</h5>
-             <button mat-raised-button color="primary" class="color-grey h-fit-content"
-             (click)="showEdit()" *ngIf="!isEditClick"
-             ><mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon>Edit</button>
-            </div>
-            <hr>
-            <div  *ngIf="isEditClick">
-              <div class="card card-body">
-                <div class="container">
+          </div>
+
+          <div class="d-flex justify-content-between mt-3">
+            <h5 class="card-title">Intro</h5>
+            <button mat-raised-button color="primary" class="color-grey h-fit-content"
+                    (click)="showEdit()" *ngIf="!isEditClick"
+            >
+              <mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon>
+              Edit
+            </button>
+          </div>
+          <hr>
+          <div *ngIf="isEditClick">
+            <div class="card card-body">
+              <div class="container">
+                <form [formGroup]="firstFormGroup">
                   <div class="row p-1">
-                    <label class="text-grey"><mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location" class="me-2"></mat-icon><span class="va-top"><strong>Address</strong></span></label>
+                    <label class="text-grey">
+                      <mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location"
+                                class="me-2"></mat-icon>
+                      <span class="va-top"><strong>Address</strong></span></label>
                     <mat-form-field>
                       <mat-label>Enter your address</mat-label>
-                      <textarea matInput></textarea>
-                    </mat-form-field>
-                    </div>
-                    <div class="row p-1">
-                    <label class="text-grey"><mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon><span class="va-top"><strong>Province</strong></span></label>
-                    <mat-form-field>
-                      <mat-label>Select your province</mat-label>
-                      <mat-select>
-                        <mat-option value="one">First option</mat-option>
-                        <mat-option value="two">Second option</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                    </div>
-                    <div class="row p-1">
-                    <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on" class="me-2"></mat-icon><span class="va-top"><strong>District</strong></span></label>
-                    <mat-form-field>
-                      <mat-label>Select your district</mat-label>
-                      <mat-select>
-                        <mat-option value="one">First option</mat-option>
-                        <mat-option value="two">Second option</mat-option>
-                      </mat-select>
-                    </mat-form-field>
-                   </div>
-                    <div class="row p-1">
-                    <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city" class="me-2"></mat-icon><span class="va-top"><Strong>Town</Strong></span></label>
-                    <mat-form-field>
-                      <mat-label>Select your town</mat-label>
-                      <mat-select>
-                        <mat-option value="one">First option</mat-option>
-                        <mat-option value="two">Second option</mat-option>
-                      </mat-select>
+                      <textarea matInput formControlName="address"></textarea>
+                      <mat-error>Address is required</mat-error>
                     </mat-form-field>
                   </div>
                   <div class="row p-1">
-                    <label class="text-grey"><mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon><span class="va-top"><Strong>Contact Number</Strong></span></label>
+                    <label class="text-grey">
+                      <mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon>
+                      <span class="va-top"><strong>Province</strong></span></label>
+                    <mat-form-field>
+                      <mat-label>Select your province</mat-label>
+                      <mat-select name="province" formControlName="province"
+                                  (ngModelChange)="getDistricts($event)">
+
+                        <mat-option *ngFor="let province of provinces" [value]="province.province.province_id"
+                        >{{province.province.province_name}}</mat-option>
+                      </mat-select>
+                      <mat-error>Province is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="row p-1">
+                    <label class="text-grey">
+                      <mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on"
+                                class="me-2"></mat-icon>
+                      <span class="va-top"><strong>District</strong></span></label>
+                    <mat-form-field>
+                      <mat-label>Select your district</mat-label>
+                      <mat-select name="district" formControlName="district"
+                                  (ngModelChange)="getTowns($event)">
+                        <mat-option *ngFor="let district of districts" [value]="district.district.district_id"
+                        >{{district.district.district_name}}</mat-option>
+                        <!-- <mat-option value="galle">Galle</mat-option> -->
+                      </mat-select>
+                      <mat-error>District is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="row p-1">
+                    <label class="text-grey">
+                      <mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city"
+                                class="me-2"></mat-icon>
+                      <span class="va-top"><Strong>Town</Strong></span></label>
+                    <mat-form-field>
+                      <mat-label>Select your town</mat-label>
+                      <mat-select name="town" formControlName="town">
+                        <mat-option *ngFor="let town of towns" [value]="town.town_id">{{town.town_name}}</mat-option>
+                        <!-- <mat-option value="galle">Galle</mat-option> -->
+                      </mat-select>
+                      <mat-error>Town is required</mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="row p-1">
+                    <label class="text-grey">
+                      <mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon>
+                      <span class="va-top"><Strong>Contact Number</Strong></span></label>
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                       <mat-form-field class="example-full-width">
                         <mat-label>Phone number 1</mat-label>
@@ -102,127 +128,152 @@
                   </div>
                   <div class="d-flex justify-content-end p-1">
                     <button mat-raised-button color="primary" class="primary-color h-fit-content"
-                    (click)="showEdit()"
-                    ><mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>Save</button>
+                            type="submit"
+                    >
+                      <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>
+                      Save
+                    </button>
+                    <button mat-raised-button color="primary" class="primary-color h-fit-content"
+                            (click)="showEdit()" style="margin-left: 10px"
+                    >
+                      <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>
+                      Cancel
+                    </button>
                   </div>
-                </div>
-              
+                </form>
               </div>
+
             </div>
-            <div *ngIf="!isEditClick">
+          </div>
+          <div *ngIf="!isEditClick">
             <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location" class="me-2"></mat-icon><span class="va-top"><strong>Address</strong></span></label>
-              <p class="ms-5">123 Main Street, Shopville</p>
-              </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon><span class="va-top"><strong>Province</strong></span></label>
-              <p class="ms-5">Example Province</p>
-              </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on" class="me-2"></mat-icon><span class="va-top"><strong>District</strong></span></label>
-              <p class="ms-5">Example District</p>
-             </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city" class="me-2"></mat-icon><span class="va-top"><Strong>Town</Strong></span></label>
-              <p class="ms-5">Example Town</p>
+              <label class="text-grey">
+                <mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location"
+                          class="me-2"></mat-icon>
+                <span class="va-top"><strong>Address</strong></span></label>
+              <p class="ms-5">{{user.address}}</p>
             </div>
             <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon><span class="va-top"><Strong>Contact Number</Strong></span></label>
+              <label class="text-grey">
+                <mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon>
+                <span class="va-top"><strong>Province</strong></span></label>
+              <p class="ms-5">{{user.province_name}}</p>
+            </div>
+            <div class="row p-1">
+              <label class="text-grey">
+                <mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on"
+                          class="me-2"></mat-icon>
+                <span class="va-top"><strong>District</strong></span></label>
+              <p class="ms-5">{{user.district_name}}</p>
+            </div>
+            <div class="row p-1">
+              <label class="text-grey">
+                <mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city"
+                          class="me-2"></mat-icon>
+                <span class="va-top"><Strong>Town</Strong></span></label>
+              <p class="ms-5">{{user.town_name}}</p>
+            </div>
+            <div class="row p-1">
+              <label class="text-grey">
+                <mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon>
+                <span class="va-top"><Strong>Contact Number</Strong></span></label>
               <p class="ms-5">0765363827</p>
             </div>
           </div>
-          </div>
-        
         </div>
-          <div class="ratings-card ratings-vertical mt-2">
-            <div class="d-flex justify-content-between">
-              <div class="card-title">Ratings</div>
-              <div>
-                <span class="me-2"><strong>3.8</strong></span>
-                <div class="rating">
-                  <!-- Five stars -->
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9734;</span>
-                </div>
-                </div>
-            </div>
-          
-            <div class="card-content">
-              <div class="group-a">
-                <div class="ratings-wrapper">
-                  <div class="rating-star">5 Star</div>
-                  <div class="rating-precentage">
-                    <div class="inner" style="--value:69%"></div>
-                  </div>
-                </div>
-                <div class="ratings-wrapper">
-                  <div class="rating-star">4 Star</div>
-                  <div class="rating-precentage">
-                    <div class="inner" style="--value:50%"></div>
-                  </div>
-                </div>
-                <div class="ratings-wrapper">
-                  <div class="rating-star">3 Star</div>
-                  <div class="rating-precentage">
-                    <div class="inner" style="--value:75%"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="group-b">
-                <div class="ratings-wrapper">
-                  <div class="rating-star">2 Star</div>
-                  <div class="rating-precentage">
-                    <div class="inner" style="--value:95%"></div>
-                  </div>
-                </div>
-                <div class="ratings-wrapper">
-                  <div class="rating-star">1 Star</div>
-                  <div class="rating-precentage">
-                    <div class="inner" style="--value:90%"></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div>
-            <div class="review-card mt-2">
-              <div class="card-title">Reviews & Ratings</div>
-              <div class="testimonial-box">
-                <!--top------------------------->
-                <div class="box-top">
-                    <!--profile----->
-                    <div class="profile">
-                        <!--img---->
-                        <div class="review-profile-img">
-                            <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
-                        </div>
-                        <!--name-and-username-->
-                        <div class="name-user">
-                            <strong>Liam mendes</strong>
-                            <span>liammendes</span>
-                        </div>
-                    </div>
-                    <!--reviews------>
-                    <div class="rating">
-                      <!-- Five stars -->
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9734;</span>
-                    </div>
-                </div>
-                <!--Comments---------------------------------------->
-                <div class="client-comment">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                </div>
-            </div>
-            </div>      
-          </div>
-        <div class="force-overflow"></div>
+
       </div>
+      <div class="ratings-card ratings-vertical mt-2">
+        <div class="d-flex justify-content-between">
+          <div class="card-title">Ratings</div>
+          <div>
+            <span class="me-2"><strong>3.8</strong></span>
+            <div class="rating">
+              <!-- Five stars -->
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9734;</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-content">
+          <div class="group-a">
+            <div class="ratings-wrapper">
+              <div class="rating-star">5 Star</div>
+              <div class="rating-precentage">
+                <div class="inner" style="--value:69%"></div>
+              </div>
+            </div>
+            <div class="ratings-wrapper">
+              <div class="rating-star">4 Star</div>
+              <div class="rating-precentage">
+                <div class="inner" style="--value:50%"></div>
+              </div>
+            </div>
+            <div class="ratings-wrapper">
+              <div class="rating-star">3 Star</div>
+              <div class="rating-precentage">
+                <div class="inner" style="--value:75%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="group-b">
+            <div class="ratings-wrapper">
+              <div class="rating-star">2 Star</div>
+              <div class="rating-precentage">
+                <div class="inner" style="--value:95%"></div>
+              </div>
+            </div>
+            <div class="ratings-wrapper">
+              <div class="rating-star">1 Star</div>
+              <div class="rating-precentage">
+                <div class="inner" style="--value:90%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="review-card mt-2">
+          <div class="card-title">Reviews & Ratings</div>
+          <div class="testimonial-box">
+            <!--top------------------------->
+            <div class="box-top">
+              <!--profile----->
+              <div class="profile">
+                <!--img---->
+                <div class="review-profile-img">
+                  <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"/>
+                </div>
+                <!--name-and-username-->
+                <div class="name-user">
+                  <strong>Liam mendes</strong>
+                  <span>liammendes</span>
+                </div>
+              </div>
+              <!--reviews------>
+              <div class="rating">
+                <!-- Five stars -->
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9733;</span>
+                <span class="star">&#9734;</span>
+              </div>
+            </div>
+            <!--Comments---------------------------------------->
+            <div class="client-comment">
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident
+                temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates
+                incidunt blanditiis sed atque cumque.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="force-overflow"></div>
+    </div>
   </div>
 </div>

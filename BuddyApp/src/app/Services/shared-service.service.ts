@@ -112,4 +112,16 @@ export class SharedService {
       })
     })
   }
+
+  getUser(): Observable<any> {
+    // let provincesObj: any = []
+    // let districtsObj: any = []
+    // let townsObj: any = []
+    // console.log(this.publicUrl + 'app_user/get_user?user_id=' + JSON.parse(localStorage.getItem('user')).user_id)
+    return new Observable(observer => {
+      this.http.get<any>(this.publicUrl + 'app_user/get_user?user_id=' + JSON.parse(localStorage.getItem('user')).user_id).subscribe((result) => {
+        observer.next(result.app_user)
+      })
+    })
+  }
 }
