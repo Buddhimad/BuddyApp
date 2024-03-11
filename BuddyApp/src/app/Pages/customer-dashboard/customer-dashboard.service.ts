@@ -12,6 +12,6 @@ export class CustomerDashboardService {
   }
 
   getNoticesCustomer(customer: any): Observable<any> {
-    return this.http.get<any>(this.sharedService.publicUrl + 'notice/get_notices_customer?customer=' + customer);
+    return this.http.get<any>(this.sharedService.publicUrl + 'notice/get_notices_customer/' + customer);
   }
 }

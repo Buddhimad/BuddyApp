@@ -11,6 +11,7 @@ export class CreateNoticeService {
   constructor(private http: HttpClient, private sharedService: SharedService) { }
 
   addNotice(notice: any): Observable<any> {
+    // console.log(notice)
     return this.http.post<any>(this.sharedService.publicUrl + 'notice/add_notice_customer', notice);
   }
   // getTowns(): any {

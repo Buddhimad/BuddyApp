@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {
   FormBuilder,
   Validators,
@@ -15,6 +15,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {RegisterCustomerService} from "../../Pages/register-customer/register-customer.service";
 import {CreateNoticeService} from "./create-notice.service";
 import {SharedService} from "../../Services/shared-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-create-notice',
@@ -49,6 +50,7 @@ export class CreateNoticeComponent implements OnInit {
     district: '',
     town: ''
   }
+  // localStorage = this.document.defaultView?.localStorage;
 
   @ViewChild('stepper') private myStepper: MatStepper;
 
@@ -58,6 +60,12 @@ export class CreateNoticeComponent implements OnInit {
       contact_number_1: ['', Validators.required],
       contact_number_2: [''],
       notice_txt: ['']
+    });
+    this.firstFormGroup = this._formBuilder.group({
+      person_name: ['im', Validators.required],
+      contact_number_1: ['0771234567', Validators.required],
+      contact_number_2: [''],
+      notice_txt: ['qwe']
     });
     this.secondFormGroup = this._formBuilder.group({
       province: ['', Validators.required],
@@ -70,7 +78,8 @@ export class CreateNoticeComponent implements OnInit {
 
   isOptional = false;
 
-  constructor(private _formBuilder: FormBuilder, private createNoticeS: CreateNoticeService, private sharedService: SharedService) {
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private _formBuilder: FormBuilder, private createNoticeS: CreateNoticeService, private sharedService: SharedService, private router: Router) {
   }
 
   // {value: 'delivery_notice', viewValue: 'Delivery Notice'}
@@ -85,19 +94,20 @@ export class CreateNoticeComponent implements OnInit {
 
   loadTowns() {
     this.sharedService.getTowns().subscribe(towns => {
+      // console.log(towns)
       this.provinces = towns
     })
   }
 
   getDistricts(province: any) {
-    if (province !== null) {
+    if (province !== undefined) {
       this.districts = province.districts
     }
   }
 
   getTowns(district: any) {
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    if (district !== null) {
+    if (district !== undefined) {
       this.towns = district.towns
     }
     // })
@@ -110,26 +120,38 @@ export class CreateNoticeComponent implements OnInit {
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       let noticeForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
-      noticeForm = JSON.parse(JSON.stringify(noticeForm))
-      // console.log(customerForm)
-      // customerForm.username = customerForm.email
-      noticeForm.notice_id = '2233'
-      // customerForm.district = customerForm.district.district.district_id
-      // customerForm.province = customerForm.province.province.province_id
-      noticeForm.town_town_id = noticeForm.town.town_id
-      // customerForm.user_verify = 1
-      noticeForm.customer_customer_id = JSON.parse(localStorage.getItem('user'))['user_id']
-      noticeForm.notice_type = 'customer_notice'
-      noticeForm.created_at = '2023-02-02'
-      noticeForm.updated_at = '2023-02-02'
-      this.selectedArea.province = noticeForm.province.province.province_name
-      this.selectedArea.district = noticeForm.district.district.district_name
-      this.selectedArea.town = noticeForm.town.town_name
-      // customerForm.district = undefined
-      // customerForm.province = undefined
-      console.log(noticeForm)
+      // noticeForm = JSON.parse(JSON.stringify(noticeForm))
+      // // console.log(customerForm)
+      // // customerForm.username = customerForm.email
+      // noticeForm.notice_id = '2233'
+      // // customerForm.district = customerForm.district.district.district_id
+      // // customerForm.province = customerForm.province.province.province_id
+      // noticeForm.town_town_id = noticeForm.town.town_id
+      // // customerForm.user_verify = 1
+      // noticeForm.customer_customer_id = JSON.parse(localStorage.getItem('user'))['user_id']
+      // noticeForm.notice_type = 'customer_notice'
+      // noticeForm.created_at = '2023-02-02'
+      // noticeForm.updated_at = '2023-02-02'
+      // this.selectedArea.province = noticeForm.province.province.province_name
+      // this.selectedArea.district = noticeForm.district.district.district_name
+      // this.selectedArea.town = noticeForm.town.town_name
+      // // customerForm.district = undefined
+      // // customerForm.province = undefined
+      // console.log(noticeForm)
 
-      this.createNoticeS.addNotice(noticeForm).subscribe((notice) => {
+      let c_notice = {
+        noticeTxt: noticeForm.notice_txt,
+        noticeType: 'customer',
+        contactNumber_1: noticeForm.contact_number_1,
+        contactNumber_2: noticeForm.contact_number_2,
+        personName: noticeForm.person_name,
+        customer: {
+          id: this.sharedService.getUserIdByLS()
+        },
+        town: noticeForm.town
+      };
+
+      this.createNoticeS.addNotice(c_notice).subscribe((notice) => {
         this.myStepper.next();
         // this.patient.patientId = patient.patientId;
         // this.success = 1;
@@ -138,5 +160,9 @@ export class CreateNoticeComponent implements OnInit {
         // this.success = 2;
       })
     }
+  }
+
+  resetForm() {
+    this.router.navigate(['/'])
   }
 }

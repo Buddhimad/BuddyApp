@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {Component, Inject, OnInit} from '@angular/core';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
@@ -20,8 +20,10 @@ export class NoticesComponent implements OnInit {
   private subscription: Subscription;
   iscreatenoticeshow: Boolean = true;
   notices: any[] = []
+  // localStorage = this.document.defaultView?.localStorage;
 
-  constructor(private router: Router, private sharedService: SharedService, private customerDashboardService: CustomerDashboardService) {
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private router: Router, private sharedService: SharedService, private customerDashboardService: CustomerDashboardService) {
     this.subscription = this.sharedService.routeControlFunction.subscribe((route: any) => {
       this.navigateToDestination(route);
     })
@@ -41,9 +43,14 @@ export class NoticesComponent implements OnInit {
   }
 
   getNoticesCustomer() {
-    this.customerDashboardService.getNoticesCustomer('234').subscribe(result => {
-      this.notices = result.notices
-      console.log(result.notices)
-    })
+    // console.log(localStorage)
+    try {
+      this.customerDashboardService.getNoticesCustomer(this.sharedService.getUserIdByLS()).subscribe(result => {
+        this.notices = result
+        console.log(result)
+      })
+    } catch (e) {
+      // console.log(e);
+    }
   }
 }

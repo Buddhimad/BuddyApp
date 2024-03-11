@@ -4,14 +4,14 @@
           <div class="section-vc-one mt-3 mb-3">
               <div class="box pt-2">
                   <div class="img-container">
-                      <img src="http://siga-aluminio.com.mx/wp-content/uploads/2019/01/person2.jpg" alt="profile" class="profile-img"> 
+                      <img src="http://siga-aluminio.com.mx/wp-content/uploads/2019/01/person2.jpg" alt="profile" class="profile-img">
                   </div>
                   <div class="quote">
                     <mat-icon id="quote" aria-hidden="false" aria-label="radio_button_checked icon" fontIcon="radio_button_checked"></mat-icon>
                     <!-- <i class="fa-solid fa-quote-right" id="quote"></i> -->
                   </div>
                     <div class="d-flex justify-content-center">
-                      <h4>Buddhima Vajirapani Dahanayake</h4>
+                      <h4>{{user?.fullName}}</h4>
                     </div>
                     <div class="d-flex justify-content-center level">
                       <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon><p class="">Verified Customer</p>
@@ -28,6 +28,7 @@
                     </div>
               </div>
           </div>
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit($event)">
           <div class="section-vc-two">
               <mat-accordion class="vc-headers-align">
                   <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
@@ -36,50 +37,54 @@
                        <strong>Old Password </strong>
                       </mat-panel-title>
                       <mat-panel-description>
-                        Enter your Old Password
+                        {{passwordFields.oldPassword}}
                         <mat-icon>lock_clock</mat-icon>
                       </mat-panel-description>
                     </mat-expansion-panel-header>
-                
-                 
+
+
                       <div class="d-flex">
                         <mat-form-field class=" flex-fill p-3">
-                          <mat-label>Enter your password</mat-label>
-                          <input matInput [type]="hideoldpassword ? 'password' : 'text'">
+                          <mat-label>Enter your old password</mat-label>
+                          <input matInput [type]="hideoldpassword ? 'password' : 'text'"
+                                 formControlName="oldPassword">
                           <button mat-icon-button matSuffix (click)="hideoldpassword = !hideoldpassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideoldpassword">
                             <mat-icon>{{hideoldpassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                           </button>
+                          <mat-error>Old Password is required</mat-error>
                         </mat-form-field>
                       </div>
-                    
+
                     <mat-action-row>
-                      <button mat-button color="primary" (click)="nextStep()">Next</button>
+                      <button mat-button color="primary" (click)="nextStep()" type="button">Next</button>
                     </mat-action-row>
                   </mat-expansion-panel>
-                
+
                   <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
                     <mat-expansion-panel-header>
                       <mat-panel-title>
                         <strong>New Password </strong>
                       </mat-panel-title>
                       <mat-panel-description>
-                        Enter your New Password
+                        {{passwordFields.password}}
                         <mat-icon>lock_reset</mat-icon>
                       </mat-panel-description>
                     </mat-expansion-panel-header>
                     <div class="d-flex">
                       <mat-form-field class=" flex-fill p-3">
-                        <mat-label>Enter your password</mat-label>
-                        <input matInput [type]="hidenewpassword ? 'password' : 'text'">
+                        <mat-label>Enter your new password</mat-label>
+                        <input matInput [type]="hidenewpassword ? 'password' : 'text'"
+                               formControlName="password">
                         <button mat-icon-button matSuffix (click)="hidenewpassword = !hidenewpassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidenewpassword">
                           <mat-icon>{{hidenewpassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error>New Password is required</mat-error>
                       </mat-form-field>
                     </div>
-                
+
                     <mat-action-row>
-                      <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                      <button mat-button color="primary" (click)="nextStep()">Next</button>
+                      <button mat-button color="warn" (click)="prevStep()" type="button">Previous</button>
+                      <button mat-button color="primary" (click)="nextStep()" type="button">Next</button>
                     </mat-action-row>
                   </mat-expansion-panel>
 
@@ -89,31 +94,33 @@
                        <strong>Confirm Password</strong>
                       </mat-panel-title>
                       <mat-panel-description>
-                        Reenter your Password
+                        {{passwordFields.passwordC}}
                         <mat-icon>sync_lock</mat-icon>
                       </mat-panel-description>
                     </mat-expansion-panel-header>
-                
+
                     <div class="d-flex">
                       <mat-form-field class=" flex-fill p-3">
-                        <mat-label>Enter your password</mat-label>
-                        <input matInput [type]="hidereenterpassword ? 'password' : 'text'">
+                        <mat-label>Confirm your new password</mat-label>
+                        <input matInput [type]="hidereenterpassword ? 'password' : 'text'"
+                               formControlName="passwordC">
                         <button mat-icon-button matSuffix (click)="hidereenterpassword = !hidereenterpassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidereenterpassword">
                           <mat-icon>{{hidereenterpassword ? 'visibility_off' : 'visibility'}}</mat-icon>
                         </button>
+                        <mat-error>{{errFields.pdmTxt}}</mat-error>
                       </mat-form-field>
                     </div>
-                
+
                     <mat-action-row>
-                      <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                      <button mat-button color="primary" (click)="nextStep()">Finish</button>
+                      <button mat-button color="warn" (click)="prevStep()" type="button">Previous</button>
+                      <button mat-button color="primary" type="submit">Finish</button>
                     </mat-action-row>
                   </mat-expansion-panel>
-                      
+
                 </mat-accordion>
           </div>
           <div class="force-overflow"></div>
-      </div>      
+        </form>
+      </div>
     </div>
   </div>
-  

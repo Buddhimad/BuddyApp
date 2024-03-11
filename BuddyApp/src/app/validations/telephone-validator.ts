@@ -1,11 +1,17 @@
 import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 let setLetter = true;
-export function ValidateTelephone(errFields:any): ValidatorFn {
+
+export function ValidateTelephone(errFields: any, optional: any): ValidatorFn {
+  // console.log(123)
   return (control: AbstractControl): ValidationErrors | null => {
     // let setLetter = true;
     // let TELEPHONE_REGEX = /^[0-9]{3}[-][0-9]{7}$/; // Regular Expression 1
+    // console.log(1,control.value)
     let TELEPHONE_REGEX = /^[0-9]{3}[0-9]{7}$/; // Regular Expression 1
+    if (control.value != undefined && control.value === '' && optional) {
+      return null
+    }
     if (control.value != undefined) {
       if (control.value.length == 0) {
         errFields.contactTxt = 'Contact Number is required'

@@ -7,7 +7,7 @@
           <input class="checkbox" type="checkbox"/>
           <header>
             <div class="sender-info">
-              <span class="subject">Notice ID : {{notice.notice_id}}</span>
+              <span class="subject">Notice ID : {{notice.noticeId}}</span>
               <div class="d-flex">
                 <mat-icon matListItemIcon style="margin-left: -5px"
                 >medication
@@ -23,19 +23,21 @@
               <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon"
                           fontIcon="call"></mat-icon>
-                <strong class="ms-2">Contact</strong> : <span class="ms-2">{{notice.contact_number_1}}</span>
+                <strong class="ms-2">Contact</strong> :
+                <span class="ms-2">{{notice.customer.contactNumber_1}}</span>
+                <span class="ms-2">{{notice.customer.contactNumber_2}}</span>
               </div>
             </div>
             <div class="d-flex mt-3">
               <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon"
                           fontIcon="zoom_in_map"></mat-icon>
-                <strong class="ms-2">District</strong> : <span class="ms-2">{{notice.district_name}}</span>
+                <strong class="ms-2">District</strong> : <span class="ms-2">{{notice.town.district.name}}</span>
               </div>
               <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon"
                           fontIcon="location_city"></mat-icon>
-                <strong class="ms-2">Town</strong> : <span class="ms-2">{{notice.town_name}}</span>
+                <strong class="ms-2">Town</strong> : <span class="ms-2">{{notice.town.name}}</span>
               </div>
             </div>
             <div class="row mt-3">
@@ -46,7 +48,7 @@
               </div>
             </div>
             <div class="row mt-3">
-              <p>{{notice.notice_txt}}</p>
+              <p>{{notice.noticeTxt}}</p>
             </div>
           </div>
           <div class="box-buttons">

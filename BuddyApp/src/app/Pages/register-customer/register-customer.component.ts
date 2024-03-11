@@ -63,7 +63,7 @@ export class RegisterCustomerComponent implements OnInit {
 
   @ViewChild('stepper') private myStepper: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService, private sharedService: SharedService) {
+  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService, private sharedService: SharedService, private router: Router) {
   }
 
   ngOnInit() {
@@ -73,17 +73,17 @@ export class RegisterCustomerComponent implements OnInit {
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       nic: ['', [Validators.required, ValidateNIC(this.errFields)]],
-      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields)]],
+      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, false)]],
       password: ['', [Validators.required, PasswordConfirm(this.errFields)]],
       passwordC: ['', [Validators.required, PasswordConfirm(this.errFields)]]
     });
     // this.firstFormGroup = this._formBuilder.group({
     //   full_name: ['im', Validators.required],
-    //   email: ['im', [Validators.required, ValidateEmail(this.errFields)]],
+    //   email: ['im@g.c', [Validators.required, ValidateEmail(this.errFields)]],
     //   gender: ['Male', Validators.required],
     //   dob: ['2024-01-01', Validators.required],
-    //   nic: ['95', [Validators.required, ValidateNIC(this.errFields)]],
-    //   contact_number_1: ['077', [Validators.required, ValidateTelephone(this.errFields)]],
+    //   nic: ['951661520V', [Validators.required, ValidateNIC(this.errFields)]],
+    //   contact_number_1: ['0771234567', [Validators.required, ValidateTelephone(this.errFields, false)]],
     //   password: ['qwe', [Validators.required, PasswordConfirm(this.errFields)]],
     //   passwordC: ['qwe', [Validators.required, PasswordConfirm(this.errFields)]]
     // });
@@ -117,27 +117,47 @@ export class RegisterCustomerComponent implements OnInit {
   }
 
   onSubmit(e: any) {
+    // console.log(2233)
     e.preventDefault()
     if (this.firstFormGroup.valid && this.secondFormGroup.valid) {
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
       customerForm = JSON.parse(JSON.stringify(customerForm))
+      let customer = {
+        nic: customerForm.nic,
+        gender: customerForm.gender,
+        dob: customerForm.dob,
+        contactNumber_1: customerForm.contact_number_1,
+        contactNumber_2: customerForm.contact_number_2,
+        appUser: {
+          fullName: customerForm.full_name,
+          address: customerForm.address,
+          email: customerForm.email,
+          username: customerForm.email,
+          password: customerForm.password,
+          userType: 'customer',
+          userVerify: 1,
+          town: {
+            id: customerForm.town
+          }
+        }
+      }
       // console.log(customerForm)
-      customerForm.username = customerForm.email
-      customerForm.user_id = '2233'
+      // customerForm.username = customerForm.email
+      // customerForm.user_id = '2233'
       // customerForm.district = customerForm.district.district.district_id
       // customerForm.province = customerForm.province.province.province_id
-      customerForm.town_town_id = customerForm.town
-      customerForm.user_verify = 1
-      customerForm.user_type = 'customer'
-      customerForm.created_at = '2023-02-02'
-      customerForm.updated_at = '2023-02-02'
-      customerForm.district = undefined
-      customerForm.province = undefined
-      console.log(customerForm)
+      // customerForm.town_town_id = customerForm.town
+      // customerForm.userVerify = 1
+      // customerForm.userType = 'customer'
+      // customerForm.created_at = '2023-02-02'
+      // customerForm.updated_at = '2023-02-02'
+      // customerForm.district = undefined
+      // customerForm.province = undefined
+      // console.log(customer)
 
-      this.registerCustomerS.addCustomer(customerForm).subscribe((customer) => {
+      this.registerCustomerS.addCustomer(customer).subscribe((customer) => {
         this.myStepper.next();
         // this.patient.patientId = patient.patientId;
         // this.success = 1;
@@ -148,4 +168,7 @@ export class RegisterCustomerComponent implements OnInit {
     }
   }
 
+  resetForm() {
+    this.router.navigate(['/'])
+  }
 }
