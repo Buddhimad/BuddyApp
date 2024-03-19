@@ -3,35 +3,20 @@
     <div class="col-md-12 mt-3">
       <h3><strong>Buddy</strong></h3>
       <p class="mb-4">Crafting Connections, Delivering Excellence</p>
-      <mat-stepper labelPosition="bottom" #stepper [linear]="!linear">
+
+      <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel></ng-template>
+            <!--            <ng-template matStepLabel></ng-template>-->
             <div class="row mt-3">
               <div class="col-sm-6">
                 <mat-form-field class="full-width">
                   <mat-label>User email</mat-label>
                   <input
                     matInput
-                    type="email"
-                    [(ngModel)]="useremailvalue"
-                    [formControl]="useremailFormControl"
+                    formControlName="email"
                   />
-                  @if (useremailvalue) {
-                  <button
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="useremailvalue = ''"
-                  >
-                    <mat-icon>close</mat-icon>
-                  </button>
-                  } @if (useremailFormControl.hasError('email') &&
-                  !useremailFormControl.hasError('required')) {
-                  <mat-error>Please provide a valid email address</mat-error>
-                  } @if (useremailFormControl.hasError('required')) {
-                  <mat-error>User email is <strong>required</strong></mat-error>
-                  }
+                  <mat-error>{{errFields.emailTxt}}</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
@@ -39,24 +24,9 @@
                   <mat-label>Pharmacy name</mat-label>
                   <input
                     matInput
-                    placeholder="Enter pharmacy name"
-                    [(ngModel)]="pharmacynamevalue"
-                    formControlName="pharmacynameCtrl"
-                    required
+                    formControlName="name"
                   />
-                  @if (pharmacynamevalue) {
-                    <button
-                      matSuffix
-                      mat-icon-button
-                      aria-label="Clear"
-                      (click)="pharmacynamevalue = ''"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                    }
-                  @if (pharmacynameFormControl.hasError('required')) {
-                    <mat-error>Pharmacy name <strong>required</strong></mat-error>
-                    }
+                  <mat-error>Pharmacy name is required</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -67,8 +37,7 @@
                   <input
                     matInput
                     [type]="hidepw ? 'password' : 'text'"
-                    required
-                    [formControl]="passwordFormControl"
+                    formControlName="password"
                   />
                   <button
                     mat-icon-button
@@ -79,11 +48,9 @@
                   >
                     <mat-icon>{{
                       hidepw ? "visibility_off" : "visibility"
-                    }}</mat-icon>
+                      }}</mat-icon>
                   </button>
-                  @if (passwordFormControl.hasError('required')) {
-                    <mat-error>Password is <strong>required</strong></mat-error>
-                    }
+                  <mat-error>Password is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
@@ -92,8 +59,7 @@
                   <input
                     matInput
                     [type]="hidecpw ? 'password' : 'text'"
-                    required
-                    [formControl]="confirmpasswordFormControl"
+                    formControlName="passwordC"
                   />
                   <button
                     mat-icon-button
@@ -104,11 +70,9 @@
                   >
                     <mat-icon>{{
                       hidecpw ? "visibility_off" : "visibility"
-                    }}</mat-icon>
+                      }}</mat-icon>
                   </button>
-                  @if (confirmpasswordFormControl.hasError('required')) {
-                    <mat-error>Password confirm is <strong>required</strong></mat-error>
-                    }
+                  <mat-error>{{errFields.pdmTxt}}</mat-error>
                 </mat-form-field>
               </div>
             </div>
@@ -116,20 +80,9 @@
               <div class="col-sm-6 col-md-4">
                 <mat-form-field class="full-width">
                   <mat-label>Owner's name</mat-label>
-                  <input matInput placeholder="Enter owner's name" [formControl]="ownersnameFormControl" required [(ngModel)]="ownersnamevalue" formControlName="ownersnamectrl"/>
-                  @if (ownersnamevalue) {
-                    <button
-                      matSuffix
-                      mat-icon-button
-                      aria-label="Clear"
-                      (click)="ownersnamevalue = ''"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                    }
-                    @if (ownersnameFormControl.hasError('required')) {
-                      <mat-error>Owner's name is <strong>required</strong></mat-error>
-                      }
+                  <input matInput
+                         formControlName="ownerName"/>
+                  <mat-error>Owner's name is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-4">
@@ -139,30 +92,13 @@
                   <mat-label>Owner's NIC</mat-label>
                   <input
                     matInput
-                    #nicinput
-                    maxlength="10"
-                    placeholder="Enter owner's NIC"
-                    required
-                    [(ngModel)]="ownernicvalue"
-                    formControlName="ownernicctrl"
-                    [formControl]="ownernicFormControl"
+                    formControlName="ownerNic"
                   />
                   <mat-hint align="end"
-                  >{{ nicinput.value.length }}/10</mat-hint
-                >
-                  @if (ownernicvalue) {
-                    <button
-                      matSuffix
-                      mat-icon-button
-                      aria-label="Clear"
-                      (click)="ownernicvalue = ''"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                    }
-                    @if (ownernicFormControl.hasError('required')) {
-                      <mat-error>Owner's NIC <strong>required</strong></mat-error>
-                      }
+                  >{{ firstFormGroup.get('ownerNic').value.length }}/10
+                  </mat-hint
+                  >
+                  <mat-error>Owner's nic is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6 col-md-4">
@@ -171,45 +107,42 @@
                   <input
                     type="tel"
                     matInput
-                    placeholder="Owner's contact no"
-                    #contactnoinput
-                    maxlength="10"
-                    required
-                    [(ngModel)]="ownercontactnovalue"
-                    formControlName="ownercontactnoctrl"
-                    [formControl]="ownercontactnoFormControl"
+                    formControlName="contact_no"
                   />
                   <mat-hint align="end"
-                    >{{ contactnoinput.value.length }}/10</mat-hint
+                  >{{ firstFormGroup.get('contact_no').value.length }}/10
+                  </mat-hint
                   >
-                  @if (ownercontactnovalue) {
-                    <button
-                      matSuffix
-                      mat-icon-button
-                      aria-label="Clear"
-                      (click)="ownercontactnovalue = ''"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                    }
-                    @if (ownercontactnoFormControl.hasError('required')) {
-                      <mat-error>Owner's contact number is <strong>required</strong></mat-error>
-                      }
+                  <mat-error>Owner's contact no is required</mat-error>
                 </mat-form-field>
               </div>
             </div>
-            <div class="d-flex mt-3">
-              <button
-                mat-raised-button
-                color="primary"
-                class="primary-color ml-auto btn-rnext"
-                matStepperNext
-              >
-                Next
-              </button>
+
+            <div style="display: flex;justify-content: flex-end;margin-top: 20px">
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="primary-color ml-auto btn-rnext"
+                  matStepperPrevious
+                >
+                  Back
+                </button>
+              </div>
+              <div style="margin-left: 20px">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="primary-color ml-auto btn-rnext"
+                  matStepperNext
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </form>
         </mat-step>
+
         <mat-step [stepControl]="secondFormGroup">
           <form [formGroup]="secondFormGroup">
             <ng-template matStepLabel></ng-template>
@@ -219,103 +152,86 @@
                   <mat-label>Pharmacy Address</mat-label>
                   <input
                     matInput
-                    placeholder="Enter pharmacy address"
-                    required
-                    [(ngModel)]="pharmacyaddressvalue"
-                    formControlName="pharmacyaddressctrl"
-                    [formControl]="pharmacyaddressFormControl"
+                    formControlName="address"
                   />
-                  @if (pharmacyaddressvalue) {
-                    <button
-                      matSuffix
-                      mat-icon-button
-                      aria-label="Clear"
-                      (click)="pharmacyaddressvalue = ''"
-                    >
-                      <mat-icon>close</mat-icon>
-                    </button>
-                    }
-                    @if (pharmacyaddressFormControl.hasError('required')) {
-                      <mat-error>Pharmacy address is <strong>required</strong></mat-error>
-                      }
+                  <mat-error>Pharmacy address is required</mat-error>
                 </mat-form-field>
               </div>
               <div class="col-sm-6">
                 <mat-form-field class="full-width">
-                    <mat-label>Owner's Address</mat-label>
-                     <input
-                      matInput
-                      placeholder="Enter owner's address"
-                      required
-                      [(ngModel)]="owneraddressvalue"
-                      formControlName="owneraddressctrl"
-                      [formControl]="owneraddressFormControl"
-                    />
-                    @if (owneraddressvalue) {
-                      <button
-                        matSuffix
-                        mat-icon-button
-                        aria-label="Clear"
-                        (click)="owneraddressvalue = ''"
-                      >
-                        <mat-icon>close</mat-icon>
-                      </button>
-                      }
-                      @if (owneraddressFormControl.hasError('required')) {
-                        <mat-error>Owner's address is <strong>required</strong></mat-error>
-                        }
-                  </mat-form-field>
+                  <mat-label>Owner's Address</mat-label>
+                  <input
+                    matInput
+                    formControlName="ownerAddress"
+                  />
+                  <mat-error>Owner's address is required</mat-error>
+                </mat-form-field>
               </div>
             </div>
             <div class="row mt-2">
-                <div class="col-sm-4">
-                  <div class="input-group">
-                    <label for="upnic" class="mb-2 text-grey" style="color: rgba(0, 0, 0, 0.6);">Copy of owner's NIC</label>
-                    <input id="upnic" type="file" placeholder="Copy of Owner's NIC">
-                    </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <label for="upnic" class="mb-2 text-grey" style="color: rgba(0, 0, 0, 0.6);">Copy of owner's
+                    NIC</label>
+                  <input id="upnic" type="file" placeholder="Copy of Owner's NIC">
                 </div>
-                <div class="col-sm-4">
-                  <div class="input-group">
-                    <label for="upohebowb" class="mb-2 text-grey">Copy of Owner's Home Electricity Bill or Water Bill</label>
-                    <input type="file" id="upohebowb">
-                    </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <label for="upohebowb" class="mb-2 text-grey">Copy of Owner's Home Electricity Bill or Water
+                    Bill</label>
+                  <input type="file" id="upohebowb">
                 </div>
-                <div class="col-sm-4">
-                  <div class="input-group">
-                    <label for="upphebowb" class="mb-2 text-grey"> Copy of Pharmacy Electricity Bill or Water Bill</label>
-                    <input type="file" id="upphebowb">
-                    </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <label for="upphebowb" class="mb-2 text-grey"> Copy of Pharmacy Electricity Bill or Water Bill</label>
+                  <input type="file" id="upphebowb">
+                </div>
               </div>
             </div>
             <div class="row mt-3">
-                <div class="col-sm-4">
-                  <div class="input-group">
-                    <label for="upbr" class="mb-2 text-grey">Copy of Pharmacy Business Registration</label>
-                    <input type="file" id="upbr">
-                    </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <label for="upbr" class="mb-2 text-grey">Copy of Pharmacy Business Registration</label>
+                  <input type="file" id="upbr">
                 </div>
-                <div class="col-sm-4">
-                  <div class="input-group">
-                    <label for="upphphoto" class="mb-2 text-grey">Upload photo of Pharmacy</label>
-                    <input type="file" id="upphphoto">
-                    </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="input-group">
+                  <label for="upphphoto" class="mb-2 text-grey">Upload photo of Pharmacy</label>
+                  <input type="file" id="upphphoto">
                 </div>
-                <div class="col-sm-4">
-                    
-                </div>
+              </div>
+              <div class="col-sm-4">
+
+              </div>
             </div>
-            <div class="d-flex mt-3">
-              <button
-                mat-raised-button
-                color="primary"
-                class="primary-color ml-auto btn-rnext"
-                matStepperNext
-              >
-                Next
-              </button>
+            <div style="display: flex;justify-content: flex-end;margin-top: 20px">
+              <div>
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="primary-color ml-auto btn-rnext"
+                  matStepperPrevious
+                >
+                  Back
+                </button>
+              </div>
+              <div style="margin-left: 20px">
+                <button
+                  mat-raised-button
+                  color="primary"
+                  class="primary-color ml-auto btn-rnext"
+                  matStepperNext
+                >
+                  Next
+                </button>
+              </div>
             </div>
           </form>
         </mat-step>
+
         <mat-step [stepControl]="thirdFormGroup">
           <div class="row mt-3">
             <div class="col-md-12">
@@ -323,52 +239,64 @@
             </div>
           </div>
           <form [formGroup]="thirdFormGroup">
-          <div class="row mt-3">
-            <div class="col-sm-4">
-          <mat-form-field class="full-width">
-            <mat-label>Province</mat-label>
-            <mat-select  name="province" [formControl]="provinceFormControl">
-             
-                <!-- <mat-option value="southern">Southern</mat-option> -->
-            </mat-select>
-            @if (provinceFormControl.hasError('required')) {
-              <mat-error>Pharmacy located province is <strong>required</strong></mat-error>
-              }
-          </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-          <mat-form-field class="full-width">
-            <mat-label>District</mat-label>
-            <mat-select name="district" [formControl]="districtFormControl">
-                <!-- <mat-option value="galle">Galle</mat-option> -->
-            </mat-select>
-            @if (districtFormControl.hasError('required')) {
-              <mat-error>Pharmacy located district is <strong>required</strong></mat-error>
-              }
-          </mat-form-field>
-          </div>
-          <div class="col-sm-4">
-          <mat-form-field class="full-width">
-            <mat-label>Town</mat-label>
-            <mat-select name="town" [formControl]="townFormControl">
-                <!-- <mat-option value="galle">Galle</mat-option> -->
-            </mat-select>
-            @if (townFormControl.hasError('required')) {
-              <mat-error>Pharmacy located town is <strong>required</strong></mat-error>
-              }
-          </mat-form-field>
-          </div>
-          <div class="d-flex mt-3">
-            <button
-              mat-raised-button
-              color="primary"
-              class="primary-color ml-auto btn-rnext"
-              matStepperNext
-            >
-              Next
-            </button>
-          </div>
-          </div>
+            <div class="row mt-3">
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Province</mat-label>
+                  <mat-select name="province" formControlName="province"
+                              (ngModelChange)="getDistricts($event)">
+
+                    <mat-option *ngFor="let province of provinces" [value]="province"
+                    >{{province.name}}</mat-option>
+                  </mat-select>
+                  <mat-error>Province is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>District</mat-label>
+                  <mat-select name="district" formControlName="district"
+                              (ngModelChange)="getTowns($event)">
+                    <mat-option *ngFor="let district of districts" [value]="district"
+                    >{{district.name}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>District is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-sm-4">
+                <mat-form-field class="full-width">
+                  <mat-label>Town</mat-label>
+                  <mat-select name="town" formControlName="town">
+                    <mat-option *ngFor="let town of towns" [value]="town.id">{{town.name}}</mat-option>
+                    <!-- <mat-option value="galle">Galle</mat-option> -->
+                  </mat-select>
+                  <mat-error>Town is required</mat-error>
+                </mat-form-field>
+              </div>
+              <div style="display: flex;justify-content: flex-end;margin-top: 20px">
+                <div>
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="primary-color ml-auto btn-rnext"
+                    matStepperPrevious
+                  >
+                    Back
+                  </button>
+                </div>
+                <div style="margin-left: 20px">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="primary-color ml-auto btn-rnext"
+                    matStepperNext
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
           </form>
         </mat-step>
         <mat-step>
@@ -376,33 +304,37 @@
           <div class="wrapperAlert">
 
             <div class="contentAlert">
-          
+
               <div class="topHalf">
-          
-                <p><svg viewBox="0 0 512 512" width="100" title="check-circle">
-                  <path d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z" />
-                  </svg></p>
+
+                <p>
+                  <svg viewBox="0 0 512 512" width="100" title="check-circle">
+                    <path
+                      d="M504 256c0 136.967-111.033 248-248 248S8 392.967 8 256 119.033 8 256 8s248 111.033 248 248zM227.314 387.314l184-184c6.248-6.248 6.248-16.379 0-22.627l-22.627-22.627c-6.248-6.249-16.379-6.249-22.628 0L216 308.118l-70.059-70.059c-6.248-6.248-16.379-6.248-22.628 0l-22.627 22.627c-6.248 6.248-6.248 16.379 0 22.627l104 104c6.249 6.249 16.379 6.249 22.628.001z"/>
+                  </svg>
+                </p>
                 <h1>Congratulations</h1>
-          
-               <ul class="bg-bubbles">
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-                 <li></li>
-               </ul>
+
+                <ul class="bg-bubbles">
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                </ul>
               </div>
               <div class="bottomHalf">
-                <p>Well Done!, Your account is now active! Please allow a few hours for all features to be fully accessible. Thank you for your patience.</p>
-          
+                <p>Well Done!, Your account is now active! Please allow a few hours for all features to be fully
+                  accessible. Thank you for your patience.</p>
+
               </div>
-            </div>        
-          
+            </div>
+
           </div>
           <div class="d-flex mt-3">
             <button
@@ -411,11 +343,11 @@
               class="primary-color ml-auto btn-rnext"
               (click)="navigateToDestination('/')"
             >
-             Finish
+              Finish
             </button>
           </div>
         </mat-step>
-      </mat-stepper>
+      </mat-horizontal-stepper>
     </div>
   </div>
 </div>

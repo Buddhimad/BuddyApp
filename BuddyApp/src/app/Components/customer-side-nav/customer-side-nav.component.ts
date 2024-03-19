@@ -1,22 +1,23 @@
-import { AfterViewInit, Component, Inject, OnDestroy } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Subscription } from 'rxjs';
-import { SharedService } from '../../Services/shared-service.service';
-import { MatListModule } from '@angular/material/list';
-import { SideNavLiElement } from '../../Interfaces/side-nav-li-element';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
+import {AfterViewInit, Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import {CommonModule, DOCUMENT} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {Subscription} from 'rxjs';
+import {SharedService} from '../../Services/shared-service.service';
+import {MatListModule} from '@angular/material/list';
+import {SideNavLiElement} from '../../Interfaces/side-nav-li-element';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 import {
   CdkDragDrop,
   moveItemInArray,
   CdkDrag,
   CdkDropList,
 } from '@angular/cdk/drag-drop';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatRippleModule } from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+import {NoticesService} from "../notices/notices.service";
 
 
 @Component({
@@ -39,28 +40,32 @@ import { MatRippleModule } from '@angular/material/core';
   templateUrl: './customer-side-nav.component.html',
   styleUrl: './customer-side-nav.component.css',
 })
-export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
+export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnInit {
   private subscription: Subscription;
   nativeElement: any;
   _document: any;
   isShowing = false;
   imageUrl: any;
+  user
+  noticesCount = 0
 
   constructor(
     private sharedService: SharedService,
-    @Inject(DOCUMENT) _document: Document
+    @Inject(DOCUMENT) _document: Document,
+    private noticesService: NoticesService
   ) {
     this._document = _document;
     // this.subscription = this.sharedService.sharedFunction$.subscribe(() => {
     //   this.openDrawerFunction();
     // });
-    this.subscription=this.sharedService.sideNavControlFunction.subscribe((user:any)=>{
+    this.subscription = this.sharedService.sideNavControlFunction.subscribe((user: any) => {
       console.log(user);
-       // if(user=='sp'){
-          this.openDrawerFunction();
-       // }
+      // if(user=='sp'){
+      this.openDrawerFunction();
+      // }
     })
   }
+
   ngAfterViewInit(): void {
     this.nativeElement = this._document.getElementById(
       'customer-side-navigation'
@@ -90,6 +95,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       reader.readAsDataURL(file);
     }
   }
+
   // {
   //   name: 'Delivery',
   //   path: 'notice/delivery',
@@ -101,7 +107,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
       name: 'All',
       path: 'customer/dashboard',
       icon: 'home',
-      response_count: 250,
+      response_count: this.noticesCount,
     },
     {
       name: 'Pharmacy',
@@ -133,13 +139,25 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit {
   ];
 
 
-
   onRippleClick(): void {
     // Handle the click event here
-   // console.log('Ripple effect clicked!');
+    // console.log('Ripple effect clicked!');
   }
 
-  changeRoutes(route:String){
-      this.sharedService.callChangeRouteFunction(route);
+  changeRoutes(route: String) {
+    this.sharedService.callChangeRouteFunction(route);
+  }
+
+  ngOnInit(): void {
+    this.user = this.sharedService.getUserByLS()
+    this.getNoticesCustomer()
+  }
+
+
+
+  getNoticesCustomer() {
+    this.sharedService.notices.subscribe((notices: []) => {
+      this.noticesCount = notices.length
+    })
   }
 }

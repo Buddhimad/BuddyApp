@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SharedService} from '../../Services/shared-service.service';
 import {CustomerDashboardService} from "../../Pages/customer-dashboard/customer-dashboard.service";
+import {NoticesService} from "./notices.service";
 
 @Component({
   selector: 'app-notices',
@@ -19,10 +20,12 @@ import {CustomerDashboardService} from "../../Pages/customer-dashboard/customer-
 export class NoticesComponent implements OnInit {
   private subscription: Subscription;
   iscreatenoticeshow: Boolean = true;
-  notices: any[] = []
+  notices = []
+
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
+              private noticesService: NoticesService,
               private router: Router, private sharedService: SharedService, private customerDashboardService: CustomerDashboardService) {
     this.subscription = this.sharedService.routeControlFunction.subscribe((route: any) => {
       this.navigateToDestination(route);
@@ -43,14 +46,10 @@ export class NoticesComponent implements OnInit {
   }
 
   getNoticesCustomer() {
-    // console.log(localStorage)
-    try {
-      this.customerDashboardService.getNoticesCustomer(this.sharedService.getUserIdByLS()).subscribe(result => {
-        this.notices = result
-        console.log(result)
+    this.sharedService.notices.subscribe((notices: []) => {
+      notices.forEach(notice => {
+        this.notices.push(notice)
       })
-    } catch (e) {
-      // console.log(e);
-    }
+    })
   }
 }

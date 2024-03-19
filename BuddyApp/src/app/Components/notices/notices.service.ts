@@ -1,12 +1,14 @@
 import {Injectable} from '@angular/core';
+import {Observable, Subject} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {SharedService} from "../../Services/shared-service.service";
-import {Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerDashboardService {
+export class NoticesService {
+
+
 
   constructor(private http: HttpClient, private sharedService: SharedService) {
   }

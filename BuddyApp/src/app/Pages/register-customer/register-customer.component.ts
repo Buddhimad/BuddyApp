@@ -18,13 +18,13 @@ import {Router} from '@angular/router';
 import {EmailErrorStateMatcher} from './../../utility/Validators/EmailErrorStateMatcher';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
-import {RegisterCustomerService} from "./register-customer.service";
 import {PasswordConfirm} from "../../validations/chk-password";
 import {MatStepper} from '@angular/material/stepper';
 import {ValidateNIC} from "../../validations/nic-validator";
 import {ValidateTelephone} from "../../validations/telephone-validator";
 import {ValidateEmail} from "../../validations/email-validator";
 import {SharedService} from "../../Services/shared-service.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-customer',
@@ -63,8 +63,9 @@ export class RegisterCustomerComponent implements OnInit {
 
   @ViewChild('stepper') private myStepper: MatStepper;
 
-  constructor(private _formBuilder: FormBuilder, private registerCustomerS: RegisterCustomerService, private sharedService: SharedService, private router: Router) {
+  constructor(private _formBuilder: FormBuilder, private sharedService: SharedService, private router: Router, private http: HttpClient) {
   }
+
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
@@ -93,7 +94,6 @@ export class RegisterCustomerComponent implements OnInit {
       district: ['', Validators.required],
       town: ['', Validators.required]
     });
-
     this.loadTowns()
   }
 
@@ -124,12 +124,20 @@ export class RegisterCustomerComponent implements OnInit {
       // console.log(this.secondFormGroup.value)
       let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
       customerForm = JSON.parse(JSON.stringify(customerForm))
+
+      let contactDetails = []
+      contactDetails.push({
+        number: customerForm.contact_number_1
+      })
+      if (customerForm.contact_number_2 !== undefined) {
+        contactDetails.push({
+          number: customerForm.contact_number_2
+        })
+      }
       let customer = {
         nic: customerForm.nic,
         gender: customerForm.gender,
         dob: customerForm.dob,
-        contactNumber_1: customerForm.contact_number_1,
-        contactNumber_2: customerForm.contact_number_2,
         appUser: {
           fullName: customerForm.full_name,
           address: customerForm.address,
@@ -140,7 +148,8 @@ export class RegisterCustomerComponent implements OnInit {
           userVerify: 1,
           town: {
             id: customerForm.town
-          }
+          },
+          contactDetails: contactDetails
         }
       }
       // console.log(customerForm)
@@ -157,7 +166,7 @@ export class RegisterCustomerComponent implements OnInit {
       // customerForm.province = undefined
       // console.log(customer)
 
-      this.registerCustomerS.addCustomer(customer).subscribe((customer) => {
+      this.http.post<any>(this.sharedService.publicUrl + 'app_user/customer_signup', customer).subscribe((customer) => {
         this.myStepper.next();
         // this.patient.patientId = patient.patientId;
         // this.success = 1;

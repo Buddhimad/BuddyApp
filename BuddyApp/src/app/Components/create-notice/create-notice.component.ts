@@ -12,7 +12,6 @@ import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
-import {RegisterCustomerService} from "../../Pages/register-customer/register-customer.service";
 import {CreateNoticeService} from "./create-notice.service";
 import {SharedService} from "../../Services/shared-service.service";
 import {Router} from "@angular/router";
@@ -100,14 +99,14 @@ export class CreateNoticeComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    if (province !== undefined) {
+    if (province !== undefined || province !== null) {
       this.districts = province.districts
     }
   }
 
   getTowns(district: any) {
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    if (district !== undefined) {
+    if (district !== undefined || district !== null) {
       this.towns = district.towns
     }
     // })

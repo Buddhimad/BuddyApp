@@ -18,10 +18,13 @@ export class SharedService {
   public routeControlFunction = this.routeControlSubject.asObservable();
   public sideNavControlFunction = this.sideNavControlSubject.asObservable();
 
+  public notices = new Subject()
+
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private http: HttpClient) {
+    this.getNoticesCustomer()
   }
 
   public callChangeRouteFunction(route: any): void {
@@ -137,19 +140,25 @@ export class SharedService {
 
   }
 
-  getUserIdByLS(){
+  getUserIdByLS() {
     try {
-     return JSON.parse(localStorage.getItem('user')).id
+      return JSON.parse(localStorage.getItem('user')).id
     } catch (e) {
       // console.log(e);
     }
   }
 
-  getUserByLS(){
+  getUserByLS() {
     try {
       return JSON.parse(localStorage.getItem('user'))
     } catch (e) {
       // console.log(e);
     }
+  }
+
+  getNoticesCustomer() {
+    this.http.get<any>(this.publicUrl + 'notice/get_notices_customer/' + this.getUserIdByLS()).subscribe(result => {
+      this.notices.next(result)
+    })
   }
 }
