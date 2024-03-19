@@ -180,4 +180,8 @@ export class RegisterCustomerComponent implements OnInit {
   resetForm() {
     this.router.navigate(['/'])
   }
+
+  navigateToDestination(destination: String) {
+    this.router.navigate([destination]);
+  }
 }
