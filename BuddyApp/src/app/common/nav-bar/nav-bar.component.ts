@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { SharedService } from '../../common/shared-service.service';
+import { SharedService } from '../shared-service.service';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
-import {DateAgoPipe} from './../../Pipes/date-ago.pipe'
+import {DateAgoPipe} from '../../Pipes/date-ago.pipe'
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,7 +29,7 @@ export class NavBarComponent{
   //  this.sharedService.callSharedFunction();
   // this.href = this.router.url;
   // console.log(this.router.url);
-    this.sharedService.callOpenSideNavFunction('/sp/pharmacy/dashboard');
+    this.sharedService.callOpenSideNavFunction('switch');
   }
 
   changeRoutes(url:any):void{

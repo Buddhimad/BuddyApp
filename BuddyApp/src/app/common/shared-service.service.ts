@@ -20,6 +20,8 @@ export class SharedService {
 
   public notices = new Subject()
 
+  navOpened = false
+
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
@@ -28,7 +30,7 @@ export class SharedService {
   }
 
   public callChangeRouteFunction(route: any): void {
-    console.log(route);
+    // console.log(route);
     this.routeControlSubject.next(route);
   }
 
@@ -36,8 +38,19 @@ export class SharedService {
     this.sharedFunctionSubject.next();
   }
 
-  public callOpenSideNavFunction(account_type: any): void {
-    this.sideNavControlSubject.next(account_type);
+  public callOpenSideNavFunction(type): void {
+    this.sideNavControlSubject.next(type);
+    // if (type === 'switch') {
+    //   this.sideNavControlSubject.next();
+    //   if (this.navOpened) {
+    //     this.navOpened = false
+    //   } else {
+    //     this.navOpened = true
+    //   }
+    // } else if (type === 'close') {
+    //   this.navOpened = false
+    //   this.sideNavControlSubject.next();
+    // }
   }
 
   townsSubject = new Subject<void>();

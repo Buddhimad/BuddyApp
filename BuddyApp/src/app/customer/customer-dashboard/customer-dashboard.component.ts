@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {NavBarComponent} from "../../Components/nav-bar/nav-bar.component";
+import {NavBarComponent} from "../../common/nav-bar/nav-bar.component";
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
@@ -28,6 +28,7 @@ export class CustomerDashboardComponent {
   }
 
   navigateToDestination(destination: String) {
+    this.sharedService.callOpenSideNavFunction('close');
     if (destination == "/customer/createnotice") {
       this.iscreatenoticeshow = false;
     } else {
@@ -36,7 +37,7 @@ export class CustomerDashboardComponent {
     this.router.navigate([destination]);
   }
 
-  getNoticesCustomer() {
-
+  collapseNav(){
+    this.sharedService.callOpenSideNavFunction('close');
   }
 }

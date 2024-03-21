@@ -12,7 +12,7 @@
         <span class="glyphicon glyphicon-camera"></span>
         <span>Change Image</span>
       </label>
-      <input id="file" type="file" onchange="loadFile(event)" />
+      <input id="file" type="file" onchange="loadFile(event)"/>
       <img
         src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
         id="output"
@@ -28,34 +28,41 @@
         cdkDropList
         cdkDropListOrientation="horizontal"
       >
-      <mat-chip class="subheader-box mat-subheader" cdkDrag>Notice</mat-chip>
+        <mat-chip class="subheader-box mat-subheader" cdkDrag>Notice</mat-chip>
       </mat-chip-set>
 
-      @for (li_element of side_nav_list; track li_element) {
-      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
+      <!--      @for (li_element of side_nav_list; track li_element) {-->
+      <!--      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">-->
+      <!--        <mat-icon matListItemIcon>{{ li_element.icon }}</mat-icon>-->
+      <!--        <div matListItemTitle matBadge="{{li_element.response_count}}" matBadgeColor="warn">-->
+      <!--          <strong>{{ li_element.name }}</strong>-->
+      <!--        </div>-->
+      <!--        &lt;!&ndash; <div matListItemLine matBadge="4" matBadgeOverlap="false" class="demo-section" ></div> &ndash;&gt;-->
+      <!--        &lt;!&ndash; <div matListItemLine>{{folder.updated | date}}</div> &ndash;&gt;-->
+      <!--      </mat-list-item>-->
+      <!--      }-->
+
+      <mat-list-item *ngFor="let li_element of side_nav_list" matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{ li_element.icon }}</mat-icon>
         <div matListItemTitle matBadge="{{li_element.response_count}}" matBadgeColor="warn">
           <strong>{{ li_element.name }}</strong>
         </div>
-        <!-- <div matListItemLine matBadge="4" matBadgeOverlap="false" class="demo-section" ></div> -->
-        <!-- <div matListItemLine>{{folder.updated | date}}</div> -->
       </mat-list-item>
-      }
       <mat-divider class="mb-2"></mat-divider>
       <mat-chip-set
-      class="subheader-chip"
-      cdkDropList
-      cdkDropListOrientation="horizontal"
-    >
-    <mat-chip class="subheader-box mat-subheader" cdkDrag>Settings</mat-chip>
-    </mat-chip-set>
+        class="subheader-chip"
+        cdkDropList
+        cdkDropListOrientation="horizontal"
+      >
+        <mat-chip class="subheader-box mat-subheader" cdkDrag>Settings</mat-chip>
+      </mat-chip-set>
       @for (li_element of settings_list; track li_element) {
       <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{li_element.icon}}</mat-icon>
         <div matListItemTitle><strong>{{li_element.name}}</strong></div>
         <!-- <div matListItemLine>{{note.updated | date}}</div> -->
       </mat-list-item>
-    }
+      }
     </mat-list>
   </div>
 </mat-drawer>

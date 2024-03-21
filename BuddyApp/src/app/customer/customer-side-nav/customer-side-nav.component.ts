@@ -57,10 +57,10 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
     // this.subscription = this.sharedService.sharedFunction$.subscribe(() => {
     //   this.openDrawerFunction();
     // });
-    this.subscription = this.sharedService.sideNavControlFunction.subscribe((user: any) => {
-      console.log(user);
+    this.subscription = this.sharedService.sideNavControlFunction.subscribe((type: any) => {
+      // console.log(user);
       // if(user=='sp'){
-      this.openDrawerFunction();
+      this.openDrawerFunction(type);
       // }
     })
   }
@@ -71,11 +71,15 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
     );
   }
 
-  openDrawerFunction() {
-    if (!this.isShowing) {
-      return (this.isShowing = true);
-    } else {
-      return (this.isShowing = false);
+  openDrawerFunction(type) {
+    if (type === 'switch') {
+      if (!this.isShowing) {
+        this.isShowing = true;
+      } else {
+        this.isShowing = false;
+      }
+    } else if (type === 'close') {
+      this.isShowing = false;
     }
   }
 
@@ -141,6 +145,7 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
   onRippleClick(): void {
     // Handle the click event here
     // console.log('Ripple effect clicked!');
+    this.isShowing = false
   }
 
   changeRoutes(route: String) {
@@ -151,7 +156,6 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
     this.user = this.sharedService.getUserByLS()
     this.getNoticesCustomer()
   }
-
 
 
   getNoticesCustomer() {
