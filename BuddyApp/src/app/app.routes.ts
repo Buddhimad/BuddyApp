@@ -10,15 +10,15 @@ import {ShopProfileComponent} from './Components/shop-profile/shop-profile.compo
 import {CustomerAccountComponent} from './customer/customer-account/customer-account.component';
 import {VeryfyCustomerComponent} from './customer/veryfy-customer/veryfy-customer.component';
 import {NotificationPanelComponent} from './Components/notification-panel/notification-panel.component';
-import {SecurityComponent} from './customer/security/security.component';
+import {PasswordResetComponent} from './common/password-reset/password-reset.component';
 import {ServiceProviderIndexComponent} from './Pages/service-provider-index/service-provider-index.component';
 import {PharmacyDashboardComponent} from './pharmacy/pharmacy-dashboard/pharmacy-dashboard.component';
 import {PharmacyResponseViewComponent} from './pharmacy/pharmacy-response-view/pharmacy-response-view.component';
 import {CustomerProfileComponent} from './customer/customer-profile/customer-profile.component';
 import {PharmacyAccountComponent} from './pharmacy/pharmacy-account/pharmacy-account.component';
 import {
-  ServiceProviderAccountSecurityComponent
-} from './pharmacy/service-provider-account-security/service-provider-account-security.component';
+  PharmacySecurityComponent
+} from './pharmacy/pharmacy-security/pharmacy-security.component';
 import {VerifyPharmacyAccountComponent} from './pharmacy/verify-pharmacy-account/verify-pharmacy-account.component';
 import {PharmacyBillingInfoComponent} from './pharmacy/pharmacy-billing-info/pharmacy-billing-info.component';
 
@@ -68,7 +68,7 @@ export const routes: Routes = [
       },
       {
         path: 'security',
-        component: SecurityComponent
+        component: PasswordResetComponent
       }
     ],
   },
@@ -98,7 +98,7 @@ export const routes: Routes = [
       },
       {
         path: 'security',
-        component: ServiceProviderAccountSecurityComponent
+        component: PharmacySecurityComponent
       },
       {
         path: 'verify',

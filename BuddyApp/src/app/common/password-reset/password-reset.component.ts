@@ -7,20 +7,20 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatNativeDateModule} from '@angular/material/core';
-import {SharedService} from "../../common/shared-service.service";
+import {SharedService} from "../shared-service.service";
 import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ValidateTelephone} from "../../validations/telephone-validator";
 import {PasswordConfirm} from "../../validations/chk-password";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-security',
+  selector: 'app-password-reset',
   standalone: true,
   imports: [CommonModule, MatDatepickerModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, ReactiveFormsModule],
-  templateUrl: './security.component.html',
-  styleUrl: './security.component.css'
+  templateUrl: './password-reset.component.html',
+  styleUrl: './password-reset.component.css'
 })
-export class SecurityComponent implements OnInit {
+export class PasswordResetComponent implements OnInit {
   step = 0;
   hideoldpassword = true;
   hidenewpassword = true;

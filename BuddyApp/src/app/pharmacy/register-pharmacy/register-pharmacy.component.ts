@@ -151,7 +151,7 @@ export class RegisterPharmacyComponent implements OnInit {
         ownerName: pharmacyForm.ownerName,
         ownerAddress: pharmacyForm.ownerAddress,
         appUser: {
-          name: pharmacyForm.name,
+          fullName: pharmacyForm.name,
           address: pharmacyForm.address,
           email: pharmacyForm.email,
           username: pharmacyForm.email,
