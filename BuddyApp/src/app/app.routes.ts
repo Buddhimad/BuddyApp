@@ -21,6 +21,7 @@ import {
 } from './pharmacy/pharmacy-security/pharmacy-security.component';
 import {VerifyPharmacyAccountComponent} from './pharmacy/verify-pharmacy-account/verify-pharmacy-account.component';
 import {PharmacyBillingInfoComponent} from './pharmacy/pharmacy-billing-info/pharmacy-billing-info.component';
+import {CustomerSecurityComponent} from "./customer/customer-security/customer-security.component";
 
 export const routes: Routes = [
   {path: '', component: WelcomeComponent},
@@ -31,11 +32,11 @@ export const routes: Routes = [
   },
   {path: 'registercustomer', component: RegisterCustomerComponent},
   {
-    path: 'customer/dashboard',
+    path: 'customer',
     component: CustomerDashboardComponent,
     children: [
       {
-        path: '',
+        path: 'dashboard',
         component: NoticesComponent,
       },
       {
@@ -68,7 +69,7 @@ export const routes: Routes = [
       },
       {
         path: 'security',
-        component: PasswordResetComponent
+        component: CustomerSecurityComponent
       }
     ],
   },

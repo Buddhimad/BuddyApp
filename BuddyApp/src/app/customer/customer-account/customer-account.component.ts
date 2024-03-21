@@ -103,7 +103,7 @@ export class CustomerAccountComponent implements OnInit {
 
   setUser(user) {
     // console.log(user)
-    this.firstFormGroup.controls.address.setValue(user.customer.appUser.address);
+    this.firstFormGroup.controls.address.setValue(user?.customer.appUser.address);
     // let province = this.provinces.find(obj => {
     //   return obj.id === user.customer.appUser.town.district.province.id
     // })
@@ -118,7 +118,7 @@ export class CustomerAccountComponent implements OnInit {
     this.provinces.find(province => {
       province.districts.find(district => {
         district.towns.find(town => {
-          if (town.id === user.customer.appUser.town.id) {
+          if (town.id === user?.customer.appUser.town.id) {
             // console.log(province,district,town)
             provinceObj = province
             districtObj = district
@@ -134,15 +134,20 @@ export class CustomerAccountComponent implements OnInit {
     this.getTowns(districtObj)
     this.firstFormGroup.controls.province.setValue(provinceObj);
     this.firstFormGroup.controls.district.setValue(districtObj);
-    this.user.customer.appUser.town = JSON.parse(JSON.stringify(townObj))
-    this.user.customer.appUser.town.district =  JSON.parse(JSON.stringify(districtObj))
-    this.user.customer.appUser.town.district.province =  JSON.parse(JSON.stringify(provinceObj))
+    // this.user={
+    //   customer: null
+    // }
+    if (this.user && this.user.customer && this.user.customer.appUser) {
+      this.user.customer.appUser.town = JSON.parse(JSON.stringify(townObj))
+      this.user.customer.appUser.town.district = JSON.parse(JSON.stringify(districtObj))
+      this.user.customer.appUser.town.district.province = JSON.parse(JSON.stringify(provinceObj))
+    }
     // this.user.customer.appUser.town = townObj
     // this.user.customer.appUser.town.district = districtObj
     // this.user.customer.appUser.town.district.province = provinceObj
     this.firstFormGroup.controls.town.setValue(townObj);
-    this.firstFormGroup.controls.contact_number_1.setValue(user.customer.contactNumber_1);
-    this.firstFormGroup.controls.contact_number_2.setValue(user.customer.contactNumber_2);
+    this.firstFormGroup.controls.contact_number_1.setValue(user?.customer.contactNumber_1);
+    this.firstFormGroup.controls.contact_number_2.setValue(user?.customer.contactNumber_2);
     // console.log( this.user)
   }
 

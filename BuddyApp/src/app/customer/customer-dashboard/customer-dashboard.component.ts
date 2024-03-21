@@ -28,7 +28,7 @@ export class CustomerDashboardComponent {
   }
 
   navigateToDestination(destination: String) {
-    if (destination == "/customer/dashboard/createnotice") {
+    if (destination == "/customer/createnotice") {
       this.iscreatenoticeshow = false;
     } else {
       this.iscreatenoticeshow = true;

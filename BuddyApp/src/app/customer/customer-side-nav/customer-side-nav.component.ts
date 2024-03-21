@@ -119,19 +119,19 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
   settings_list = [
     {
       name: 'Verify Account',
-      path: 'customer/dashboard/verify/account',
+      path: 'customer/verify/account',
       icon: 'verified_user',
       response_count: 250,
     },
     {
       name: 'Security',
-      path: 'customer/dashboard/security',
+      path: 'customer/security',
       icon: 'security',
       response_count: 250,
     },
     {
       name: 'Profile',
-      path: 'customer/dashboard/account',
+      path: 'customer/account',
       icon: 'account_circle',
       response_count: 250,
     },

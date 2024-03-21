@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
@@ -22,21 +22,21 @@ import {
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css',
 })
-export class WelcomeComponent {
+export class WelcomeComponent implements OnInit {
   firstFormGroup: any;
   hide = true;
-  user = {
-    username: '',
-    password: ''
-  }
+  // user = {
+  //   username: '',
+  //   password: ''
+  // }
 
   constructor(private router: Router, private welcomeService: WelcomeService, private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
-    this.firstFormGroup = new FormGroup({
-      username: new FormControl(),
-      password: new FormControl()
+    this.firstFormGroup = this._formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
   }
@@ -47,20 +47,22 @@ export class WelcomeComponent {
 
   login(e: any) {
     e.preventDefault()
-    this.welcomeService.login(this.user).subscribe(result => {
-      // console.log(result)
-      if (result) {
-        try {
-          localStorage.setItem('user', JSON.stringify(result))
-        } catch (e) {
-          // console.log(e);
+    if (this.firstFormGroup.valid) {
+      this.welcomeService.login(this.firstFormGroup.value).subscribe(result => {
+        // console.log(result)
+        if (result) {
+          try {
+            localStorage.setItem('user', JSON.stringify(result))
+          } catch (e) {
+            // console.log(e);
+          }
+          if (result.userType === 'customer') {
+            this.router.navigate(['/customer/dashboard']);
+          } else if (result.userType === 'pharmacy') {
+            this.router.navigate(['/pharmacy/dashboard']);
+          }
         }
-        if (result.userType === 'customer') {
-          this.router.navigate(['/customer/dashboard']);
-        } else if (result.userType === 'pharmacy') {
-          this.router.navigate(['/pharmacy/dashboard']);
-        }
-      }
-    })
+      })
+    }
   }
 }
