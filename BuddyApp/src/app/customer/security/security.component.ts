@@ -127,7 +127,11 @@ export class SecurityComponent implements OnInit {
 
   nextStep(e) {
     e.preventDefault()
-    if (this.firstFormGroup.valid) {
+    if (this.firstFormGroup.valid && this.step === 0) {
+      this.step++;
+    } else if (this.secondFormGroup.valid && this.step === 1) {
+      this.step++;
+    } else if (this.thirdFormGroup.valid) {
       this.step++;
     }
   }

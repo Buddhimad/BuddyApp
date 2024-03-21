@@ -92,7 +92,7 @@ export class ServiceProviderAccountSecurityComponent implements OnInit {
   }
 
   onSubmit(e: any) {
-    console.log(this.thirdFormGroup.value)
+    // console.log(this.thirdFormGroup.value)
     e.preventDefault()
     if (this.thirdFormGroup.valid) {
       // console.log(this.firstFormGroup.value)
@@ -121,7 +121,13 @@ export class ServiceProviderAccountSecurityComponent implements OnInit {
 
   nextStep(e) {
     e.preventDefault()
-    this.step++;
+    if (this.firstFormGroup.valid && this.step === 0) {
+      this.step++;
+    } else if (this.secondFormGroup.valid && this.step === 1) {
+      this.step++;
+    } else if (this.thirdFormGroup.valid) {
+      this.step++;
+    }
   }
 
   prevStep() {
