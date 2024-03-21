@@ -6,9 +6,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
-import { SharedService } from '../../Services/shared-service.service';
+import { SharedService } from '../../common/shared-service.service';
 import { Subscription } from 'rxjs';
-import { SPSideNavComponent } from '../../Components/sp-side-nav/sp-side-nav.component';
+import { SPSideNavComponent } from '../../pharmacy/sp-side-nav/sp-side-nav.component';
 
 
 @Component({

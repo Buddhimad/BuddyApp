@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import { Notification } from './../../Interfaces/notification';
 import {DateAgoPipe} from './../../Pipes/date-ago.pipe'
 import {MatIconModule} from '@angular/material/icon';
 
@@ -15,7 +14,7 @@ import {MatIconModule} from '@angular/material/icon';
 })
 export class NotificationPanelComponent {
 
-  notification_list:Notification[]=[
+  notification_list=[
     {
       responders_name:"Loyde Pharmacy",
       message:"Loyde Pharmacy respond to your notice",

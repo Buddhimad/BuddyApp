@@ -3,10 +3,9 @@ import { CommonModule } from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { SharedService } from '../../Services/shared-service.service';
+import { SharedService } from '../../common/shared-service.service';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatMenuModule} from '@angular/material/menu';
-import { Notification } from './../../Interfaces/notification';
 import {DateAgoPipe} from './../../Pipes/date-ago.pipe'
 import { Router } from '@angular/router';
 
@@ -24,7 +23,7 @@ export class NavBarComponent{
     // intl.strings = englishStrings;
     // intl.changes.next();
   }
- 
+
 
   openDrawer(): void {
   //  this.sharedService.callSharedFunction();
@@ -39,7 +38,7 @@ export class NavBarComponent{
 
 
 
-  notification_list:Notification[]=[
+  notification_list=[
     {
       responders_name:"Loyde Pharmacy",
       message:"Loyde Pharmacy respond to your notice",

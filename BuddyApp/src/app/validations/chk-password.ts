@@ -1,6 +1,6 @@
 import {AbstractControl, FormGroup, ValidationErrors, ValidatorFn} from "@angular/forms";
 
-export function PasswordConfirm(errFields: any): ValidatorFn {
+export function PasswordConfirm(errFields: any, secondFormGroup?): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     // const value: string = control.value || '';
     //
@@ -22,8 +22,12 @@ export function PasswordConfirm(errFields: any): ValidatorFn {
     }
 
     // Access the value of the other field using its name
-    const passwordValue: string = formGroup.get('password')?.value || '';
-    const passwordCValue: string = formGroup.get('passwordC')?.value || '';
+    let passwordValue: string = formGroup.get('password')?.value || '';
+    let passwordCValue: string = formGroup.get('passwordC')?.value || '';
+
+    if (secondFormGroup !== undefined) {
+      passwordValue = secondFormGroup.get('password')?.value || '';
+    }
 
 
     // if(formGroup!==undefined){
