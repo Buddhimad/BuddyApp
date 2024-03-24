@@ -1,0 +1,266 @@
+<div class="content">
+  <!-- <div class="image">
+    <img src="https://i.postimg.cc/bryMmCQB/profile-image.jpg" alt="Profile Image">
+  </div> -->
+  <div class="profile-pic d-flex justify-content-center mb-3">
+    <label class="-label" for="file">
+      <span class="glyphicon glyphicon-camera"></span>
+      <span>Change Image</span>
+    </label>
+    <input id="file" type="file" onchange="loadFile(event)"/>
+    <img
+      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
+      id="output"
+      width="200"
+    />
+  </div>
+  <div class="d-flex justify-content-center">
+    <h4>{{userObj?.appUser?.fullName}}</h4>
+  </div>
+  <div class="d-flex justify-content-center level" *ngIf="userObj?.appUser?.userVerify">
+    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>
+    <p class="" *ngIf="userType==='customer'">Verified Customer</p>
+    <p class="" *ngIf="userType==='pharmacy'">Verified Pharmacy</p>
+  </div>
+  <div class="d-flex justify-content-center">
+    <div class="rating">
+      <!-- Five stars -->
+      <span class="star">&#9733;</span>
+      <span class="star">&#9733;</span>
+      <span class="star">&#9733;</span>
+      <span class="star">&#9733;</span>
+      <span class="star">&#9734;</span>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-between mt-3">
+    <h5 class="card-title">Intro</h5>
+    <button mat-raised-button color="primary" class="color-grey h-fit-content"
+            (click)="showEdit()" *ngIf="!isEditClick"
+    >
+      <mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon>
+      Edit
+    </button>
+  </div>
+  <hr>
+  <div *ngIf="isEditClick">
+    <div class="card card-body">
+      <div class="container">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit($event)">
+
+          <div class="row p-1" *ngIf="userType==='pharmacy'">
+            <label class="text-grey"><strong>
+              <mat-icon class="align-top" aria-hidden="false" aria-label="duration icon"
+                        fontIcon="meeting_room"></mat-icon>
+              Duration</strong></label>
+            <table class="table table-bordered mt-2">
+              <thead>
+              <tr>
+                <th scope="col" class="text-primary text-center">Day</th>
+                <th scope="col" class="text-primary text-center">Is Open</th>
+                <th scope="col" class="text-primary text-center">Open</th>
+                <th scope="col" class="text-primary text-center">Close</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let day of weekdays">
+                <th scope="row" class="text-success">{{ day.name }}</th>
+                <td class="text-center">
+                  <input
+                    type="checkbox"
+                    name=""
+                    id=""
+                    class="form-check-input"
+                  />
+                </td>
+                <td>
+                  <input type="time">
+<!--                  <select class="form-control">-->
+<!--                    <option *ngFor="let opentime of openTimes" value="">{{ opentime }}</option>-->
+<!--                  </select>-->
+                </td>
+                <td>
+                  <input type="time">
+<!--                  <select class="form-control">-->
+<!--                    <option *ngFor="let closetime of closeTimes" value="closetime">{{ closetime }}</option>-->
+<!--                  </select>-->
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="row p-1">
+            <label class="text-grey">
+              <mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon>
+              <span class="va-top"><Strong>Contact Number</Strong></span></label>
+            <div class="col-12">
+              <mat-form-field class="example-full-width">
+                <mat-label>Phone number 1</mat-label>
+                <input
+                  matInput
+                  formControlName="contact_number_1"
+                />
+                <mat-icon matSuffix>call</mat-icon>
+                <mat-error>{{errFields.contactTxts[0]}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-12">
+              <mat-form-field class="example-full-width">
+                <mat-label>Phone number 2</mat-label>
+                <input
+                  matInput
+                  formControlName="contact_number_2"
+                />
+                <mat-icon matSuffix>call</mat-icon>
+                <mat-hint>Optional</mat-hint>
+                <mat-error>{{errFields.contactTxts[1]}}</mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row p-1" style="margin-top: 10px">
+            <label class="text-grey">
+              <mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location"
+                        class="me-2"></mat-icon>
+              <span class="va-top"><strong>Address</strong></span></label>
+            <mat-form-field>
+              <mat-label>Enter your address</mat-label>
+              <textarea matInput formControlName="address"></textarea>
+              <mat-error>Address is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row p-1">
+            <label class="text-grey">
+              <mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon>
+              <span class="va-top"><strong>Province</strong></span></label>
+            <mat-form-field>
+              <mat-label>Select your province</mat-label>
+              <mat-select name="province" formControlName="province"
+                          (ngModelChange)="getDistricts($event)">
+
+                <mat-option *ngFor="let province of provinces" [value]="province"
+                >{{province.name}}</mat-option>
+              </mat-select>
+              <mat-error>Province is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row p-1">
+            <label class="text-grey">
+              <mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on"
+                        class="me-2"></mat-icon>
+              <span class="va-top"><strong>District</strong></span></label>
+            <mat-form-field>
+              <mat-label>Select your district</mat-label>
+              <mat-select name="district" formControlName="district"
+                          (ngModelChange)="getTowns($event)">
+                <mat-option *ngFor="let district of districts" [value]="district"
+                >{{district.name}}</mat-option>
+                <!-- <mat-option value="galle">Galle</mat-option> -->
+              </mat-select>
+              <mat-error>District is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row p-1">
+            <label class="text-grey">
+              <mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city"
+                        class="me-2"></mat-icon>
+              <span class="va-top"><Strong>Town</Strong></span></label>
+            <mat-form-field>
+              <mat-label>Select your town</mat-label>
+              <mat-select name="town" formControlName="town">
+                <mat-option *ngFor="let town of towns" [value]="town">{{town.name}}</mat-option>
+                <!-- <mat-option value="galle">Galle</mat-option> -->
+              </mat-select>
+              <mat-error>Town is required</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="d-flex justify-content-end p-1">
+            <button mat-raised-button color="primary" class="primary-color h-fit-content"
+                    type="submit"
+            >
+              <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>
+              Save
+            </button>
+            <button mat-raised-button color="primary" class="primary-color h-fit-content"
+                    (click)="showEdit()" style="margin-left: 10px"
+            >
+              <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+  <div *ngIf="!isEditClick">
+
+    <div class="row p-1" *ngIf="userType==='pharmacy'">
+      <label class="text-grey"
+      >
+        <mat-icon
+          aria-hidden="false"
+          aria-label="open-close icon"
+          fontIcon="store"
+          class="me-2"
+        ></mat-icon
+        >
+        <span class="va-top"><Strong>Open - Close</Strong></span></label
+      >
+      <div class="d-flex">
+        <div class="flex-shrink-0 me-5">
+          <select class="form-select form-select-sm ms-5" aria-label="weekdays" (change)="getDay($event)">
+            <option *ngFor="let day of weekdays" [value]="day.id">{{day.name}}</option>
+          </select>
+        </div>
+        <div class="flex-grow-1 ms-5">
+          <span class="text-primary-emphasis bg-primary-subtle border border-primary-subtle p-2">
+          <strong>{{daySlot?.open}}</strong>
+          </span>
+          <span class="p-2"><strong>-</strong></span>
+          <span class="text-danger-emphasis bg-danger-subtle border border-danger-subtle p-2">
+            <strong>{{daySlot?.close}}</strong>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row p-1" style="margin-top: 10px">
+      <label class="text-grey">
+        <mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon>
+        <span class="va-top"><Strong>Contact Number</Strong></span></label>
+      <p class="ms-5" *ngFor="let contactDetail of userObj?.appUser?.contactDetails">
+        {{contactDetail.number}}
+      </p>
+      <!--              <p class="ms-5">{{userObj?.contactNumber_2}}</p>-->
+    </div>
+    <div class="row p-1">
+      <label class="text-grey">
+        <mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location"
+                  class="me-2"></mat-icon>
+        <span class="va-top"><strong>Address</strong></span></label>
+      <p class="ms-5">{{userObj?.appUser?.address}}</p>
+    </div>
+    <div class="row p-1">
+      <label class="text-grey">
+        <mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon>
+        <span class="va-top"><strong>Province</strong></span></label>
+      <p class="ms-5">{{userObj?.appUser?.town?.district?.province?.name}}</p>
+    </div>
+    <div class="row p-1">
+      <label class="text-grey">
+        <mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on"
+                  class="me-2"></mat-icon>
+        <span class="va-top"><strong>District</strong></span></label>
+      <p class="ms-5">{{userObj?.appUser?.town?.district?.name}}</p>
+    </div>
+    <div class="row p-1">
+      <label class="text-grey">
+        <mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city"
+                  class="me-2"></mat-icon>
+        <span class="va-top"><Strong>Town</Strong></span></label>
+      <p class="ms-5">{{userObj?.appUser?.town?.name}}</p>
+    </div>
+
+  </div>
+</div>

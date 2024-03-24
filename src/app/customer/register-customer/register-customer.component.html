@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-md-3">
                   <mat-form-field class="w-100">
-                    <mat-label>Contact number</mat-label>
+                    <mat-label>Contact number 1</mat-label>
                     <input
                       matInput
                       placeholder="Enter your contact number"
@@ -120,7 +120,34 @@
                     >
                       <mat-icon>close</mat-icon>
                     </button>
-                    <mat-error>{{errFields.contactTxt}}</mat-error>
+                    <mat-error>{{errFields.contactTxts[0]}}</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Contact number 2</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter your contact number"
+                      formControlName="contact_number_2"
+                    />
+                    <mat-hint>(Optional)</mat-hint>
+                    <mat-hint align="end"
+                    >{{ firstFormGroup.get('contact_number_2').value.length }}/10
+                    </mat-hint
+                    >
+                    <button
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="firstFormGroup.get('contact_number_2').reset()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error>{{errFields.contactTxts[1]}}</mat-error>
                   </mat-form-field>
                 </div>
               </div>

@@ -17,6 +17,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {Router} from '@angular/router';
 import {SharedService} from "../../common/shared-service.service";
 import {HttpClient} from "@angular/common/http";
+import {ValidateTelephone} from "../../validations/telephone-validator";
+import {PasswordConfirm} from "../../validations/chk-password";
+import {ValidateNIC} from "../../validations/nic-validator";
 
 @Component({
   selector: 'app-register-pharmacy',
@@ -45,7 +48,7 @@ export class RegisterPharmacyComponent implements OnInit {
   errFields = {
     pdmTxt: 'Confirm your password',
     nicTxt: 'NIC is required',
-    contactTxt: 'Contact Number is required',
+    contactTxts: ['Contact Number is required', ''],
     emailTxt: 'Email is required'
   }
 
@@ -61,11 +64,12 @@ export class RegisterPharmacyComponent implements OnInit {
     this.firstFormGroup = this._formBuilder.group({
       email: ['', Validators.required],
       ownerName: ['', Validators.required],
-      ownerNic: ['', Validators.required],
-      contact_number: ['', Validators.required],
+      ownerNic: ['', [Validators.required, ValidateNIC(this.errFields)]],
+      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, 0)]],
+      contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
       name: ['', Validators.required],
-      password: ['', Validators.required],
-      passwordC: ['', Validators.required],
+      password: ['', [Validators.required, PasswordConfirm(this.errFields)]],
+      passwordC: ['', [Validators.required, PasswordConfirm(this.errFields)]]
     });
     this.secondFormGroup = this._formBuilder.group({
       ownerAddress: ['', Validators.required],
@@ -121,31 +125,36 @@ export class RegisterPharmacyComponent implements OnInit {
 
       let contactDetails = []
       contactDetails.push({
-        number: pharmacyForm.contact_number
+        number: pharmacyForm.contact_number_1
       })
+      if (pharmacyForm.contact_number_2 !== undefined && pharmacyForm.contact_number_2 !== '') {
+        contactDetails.push({
+          number: pharmacyForm.contact_number_2
+        })
+      }
       // if (pharmacyForm.contact_number_2 !== undefined) {
       //   contactDetails.push({
       //     number: pharmacyForm.contact_number_2
       //   })
       // }
 
-    //   email: ['im1@g.c', Validators.required],
-    //     ownerName: ['im', Validators.required],
-    //     ownerNic: ['961561150V', Validators.required],
-    //     contact_number: ['0771234567', Validators.required],
-    //     name: ['ga', Validators.required],
-    //     password: ['111', Validators.required],
-    //     passwordC: ['111', Validators.required],
-    // });
-    // this.secondFormGroup = this._formBuilder.group({
-    //   ownerAddress: ['as', Validators.required],
-    //   address: ['asd', Validators.required]
-    // });
-    // this.thirdFormGroup = this._formBuilder.group({
-    //   province: ['', Validators.required],
-    //   district: ['', Validators.required],
-    //   town: ['', Validators.required]
-    //
+      //   email: ['im1@g.c', Validators.required],
+      //     ownerName: ['im', Validators.required],
+      //     ownerNic: ['961561150V', Validators.required],
+      //     contact_number: ['0771234567', Validators.required],
+      //     name: ['ga', Validators.required],
+      //     password: ['111', Validators.required],
+      //     passwordC: ['111', Validators.required],
+      // });
+      // this.secondFormGroup = this._formBuilder.group({
+      //   ownerAddress: ['as', Validators.required],
+      //   address: ['asd', Validators.required]
+      // });
+      // this.thirdFormGroup = this._formBuilder.group({
+      //   province: ['', Validators.required],
+      //   district: ['', Validators.required],
+      //   town: ['', Validators.required]
+      //
       let pharmacy = {
         ownerNic: pharmacyForm.ownerNic,
         ownerName: pharmacyForm.ownerName,
@@ -161,7 +170,7 @@ export class RegisterPharmacyComponent implements OnInit {
           town: {
             id: pharmacyForm.town
           },
-          contactDetails: contactDetails
+          contactDetails: JSON.stringify(contactDetails)
         }
       }
       // console.log(customerForm)

@@ -51,7 +51,7 @@ export class RegisterCustomerComponent implements OnInit {
   errFields = {
     pdmTxt: 'Confirm your password',
     nicTxt: 'NIC is required',
-    contactTxt: 'Contact Number is required',
+    contactTxts: ['Contact Number is required', ''],
     emailTxt: 'Email is required'
   }
   firstFormGroup: any;
@@ -74,7 +74,8 @@ export class RegisterCustomerComponent implements OnInit {
       gender: ['', Validators.required],
       dob: ['', Validators.required],
       nic: ['', [Validators.required, ValidateNIC(this.errFields)]],
-      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, false)]],
+      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, 0)]],
+      contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
       password: ['', [Validators.required, PasswordConfirm(this.errFields)]],
       passwordC: ['', [Validators.required, PasswordConfirm(this.errFields)]]
     });
@@ -129,11 +130,12 @@ export class RegisterCustomerComponent implements OnInit {
       contactDetails.push({
         number: customerForm.contact_number_1
       })
-      if (customerForm.contact_number_2 !== undefined) {
+      if (customerForm.contact_number_2 !== undefined && customerForm.contact_number_2 !== '') {
         contactDetails.push({
           number: customerForm.contact_number_2
         })
       }
+
       let customer = {
         nic: customerForm.nic,
         gender: customerForm.gender,
@@ -149,7 +151,7 @@ export class RegisterCustomerComponent implements OnInit {
           town: {
             id: customerForm.town
           },
-          contactDetails: contactDetails
+          contactDetails: JSON.stringify(contactDetails)
         }
       }
       // console.log(customerForm)
@@ -164,7 +166,7 @@ export class RegisterCustomerComponent implements OnInit {
       // customerForm.updated_at = '2023-02-02'
       // customerForm.district = undefined
       // customerForm.province = undefined
-      // console.log(customer)
+      console.log(customer)
 
       this.http.post<any>(this.sharedService.publicUrl + 'app_user/customer_signup', customer).subscribe((customer) => {
         this.myStepper.next();

@@ -6,19 +6,21 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTable, MatTableModule } from '@angular/material/table';
+import {AccountInfoComponent} from "../../common/account-info/account-info.component";
 
 @Component({
   selector: 'app-pharmacy-account',
   standalone: true,
-  imports: [
-    CommonModule,
-    MatIconModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatInputModule,
-    MatFormFieldModule,
-    MatTableModule,
-  ],
+    imports: [
+        CommonModule,
+        MatIconModule,
+        MatButtonModule,
+        MatSelectModule,
+        MatInputModule,
+        MatFormFieldModule,
+        MatTableModule,
+        AccountInfoComponent,
+    ],
   templateUrl: './pharmacy-account.component.html',
   styleUrl: './pharmacy-account.component.css',
 })
