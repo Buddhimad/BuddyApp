@@ -99,16 +99,18 @@ export class CreateNoticeComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    if (province !== undefined || province !== null) {
-      this.districts = province.districts
-    }
+    this.districts = this.sharedService.getDistrictsForProvince(province, this.firstFormGroup)
+    // if (province !== undefined || province !== null) {
+    //   this.districts = province.districts
+    // }
   }
 
   getTowns(district: any) {
+    this.towns = this.sharedService.getTownsForDistrict(district, this.firstFormGroup)
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    if (district !== undefined || district !== null) {
-      this.towns = district.towns
-    }
+    // if (district !== undefined || district !== null) {
+    //   this.towns = district.towns
+    // }
     // })
   }
 

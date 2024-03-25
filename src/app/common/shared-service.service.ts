@@ -153,6 +153,23 @@ export class SharedService {
 
   }
 
+  getDistrictsForProvince(province, formGroup) {
+    if (province !== undefined) {
+      formGroup.controls.district.setValue('');
+      formGroup.controls.town.setValue('');
+      return province.districts
+    }
+  }
+
+  getTownsForDistrict(district, formGroup) {
+    // this.registerCustomerS.getTowns(district).subscribe(result => {
+    if (district !== undefined) {
+      formGroup.controls.town.setValue('');
+      return district.towns
+    }
+    // })
+  }
+
   getUserIdByLS() {
     try {
       return JSON.parse(localStorage.getItem('user')).id

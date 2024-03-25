@@ -108,12 +108,14 @@ export class RegisterCustomerComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    this.districts = province.districts
+    this.districts = this.sharedService.getDistrictsForProvince(province, this.secondFormGroup)
+    // this.districts = province.districts
   }
 
   getTowns(district: any) {
+    this.towns = this.sharedService.getTownsForDistrict(district, this.secondFormGroup)
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    this.towns = district.towns
+    // this.towns = district.towns
     // })
   }
 

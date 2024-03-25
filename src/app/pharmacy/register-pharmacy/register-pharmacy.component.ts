@@ -105,19 +105,21 @@ export class RegisterPharmacyComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    this.districts = province.districts
+    this.districts = this.sharedService.getDistrictsForProvince(province, this.thirdFormGroup)
+    // this.districts = province.districts
   }
 
   getTowns(district: any) {
+    this.towns = this.sharedService.getTownsForDistrict(district, this.thirdFormGroup)
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    this.towns = district.towns
+    // this.towns = district.towns
     // })
   }
 
   onSubmit(e: any) {
     // console.log(2233)
     e.preventDefault()
-    if (this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup) {
+    if (this.firstFormGroup.valid && this.secondFormGroup.valid && this.thirdFormGroup.valid) {
       // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       let pharmacyForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value, this.thirdFormGroup.value);

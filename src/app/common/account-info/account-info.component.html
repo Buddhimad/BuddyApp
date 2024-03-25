@@ -68,22 +68,22 @@
                 <td class="text-center">
                   <input
                     type="checkbox"
-                    name=""
-                    id=""
                     class="form-check-input"
+                    [checked]="day.io"
+                    (change)="day.io?day.io=false:day.io=true"
                   />
                 </td>
                 <td>
-                  <input type="time">
-<!--                  <select class="form-control">-->
-<!--                    <option *ngFor="let opentime of openTimes" value="">{{ opentime }}</option>-->
-<!--                  </select>-->
+                  <input type="time" [(ngModel)]="day.open" [ngModelOptions]="{standalone: true}">
+                  <!--                  <select class="form-control">-->
+                  <!--                    <option *ngFor="let opentime of openTimes" value="">{{ opentime }}</option>-->
+                  <!--                  </select>-->
                 </td>
                 <td>
-                  <input type="time">
-<!--                  <select class="form-control">-->
-<!--                    <option *ngFor="let closetime of closeTimes" value="closetime">{{ closetime }}</option>-->
-<!--                  </select>-->
+                  <input type="time" [(ngModel)]="day.close" [ngModelOptions]="{standalone: true}">
+                  <!--                  <select class="form-control">-->
+                  <!--                    <option *ngFor="let closetime of closeTimes" value="closetime">{{ closetime }}</option>-->
+                  <!--                  </select>-->
                 </td>
               </tr>
               </tbody>
@@ -205,7 +205,10 @@
           class="me-2"
         ></mat-icon
         >
-        <span class="va-top"><Strong>Open - Close</Strong></span></label
+        <span class="va-top"><Strong>Open - Close
+          <span style="color: green;padding-left: 5px" *ngIf="openOrClose">(Opened)</span>
+          <span style="color: red;padding-left: 5px" *ngIf="!openOrClose">(Closed)</span>
+        </Strong></span></label
       >
       <div class="d-flex">
         <div class="flex-shrink-0 me-5">
@@ -215,11 +218,11 @@
         </div>
         <div class="flex-grow-1 ms-5">
           <span class="text-primary-emphasis bg-primary-subtle border border-primary-subtle p-2">
-          <strong>{{daySlot?.open}}</strong>
+          <strong>{{formatTime(daySlot?.open)}}</strong>
           </span>
           <span class="p-2"><strong>-</strong></span>
           <span class="text-danger-emphasis bg-danger-subtle border border-danger-subtle p-2">
-            <strong>{{daySlot?.close}}</strong>
+            <strong>{{formatTime(daySlot?.close)}}</strong>
           </span>
         </div>
       </div>

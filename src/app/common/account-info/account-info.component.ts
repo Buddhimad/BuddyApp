@@ -6,7 +6,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ValidateTelephone} from "../../validations/telephone-validator";
 import {Router} from "@angular/router";
 import {SharedService} from "../shared-service.service";
@@ -16,7 +16,7 @@ import EventEmitter from "events";
 @Component({
   selector: 'app-account-info',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, FormsModule],
   templateUrl: './account-info.component.html',
   styleUrl: './account-info.component.css'
 })
@@ -26,13 +26,13 @@ export class AccountInfoComponent implements OnInit {
   @Input() userType;
 
   weekdays = [
-    {id: 0, name: 'Monday'},
-    {id: 1, name: 'Tuesday'},
-    {id: 2, name: 'Wednesday'},
-    {id: 3, name: 'Thursday'},
-    {id: 4, name: 'Friday'},
-    {id: 5, name: 'Saturday'},
-    {id: 6, name: 'Sunday'}
+    {id: 0, name: 'Monday', open: '00:00', close: '00:00', io: false},
+    {id: 1, name: 'Tuesday', open: '00:00', close: '00:00', io: false},
+    {id: 2, name: 'Wednesday', open: '00:00', close: '00:00', io: false},
+    {id: 3, name: 'Thursday', open: '00:00', close: '00:00', io: false},
+    {id: 4, name: 'Friday', open: '00:00', close: '00:00', io: false},
+    {id: 5, name: 'Saturday', open: '00:00', close: '00:00', io: false},
+    {id: 6, name: 'Sunday', open: '00:00', close: '00:00', io: false}
   ]
 
   daySlot
@@ -53,6 +53,7 @@ export class AccountInfoComponent implements OnInit {
   towns: any = []
 
   userObj;
+  openOrClose
 
   constructor(private _formBuilder: FormBuilder, private router: Router, private sharedService: SharedService, private http: HttpClient) {
   }
@@ -88,13 +89,21 @@ export class AccountInfoComponent implements OnInit {
     if (this.userType === 'customer') {
       this.http.get<any>(this.sharedService.publicUrl + 'customer/get/' + this.sharedService.getUserIdByLS()).subscribe(user => {
         this.userObj = user?.customer
-        console.log(this.userObj)
+        // console.log(this.userObj)
         this.setUser(this.userObj)
       })
-    } else {
+    } else if (this.userType === 'pharmacy') {
       this.http.get<any>(this.sharedService.publicUrl + 'pharmacy/get/' + this.sharedService.getUserIdByLS()).subscribe(user => {
         this.userObj = user?.pharmacy
-        console.log(this.userObj)
+        if (this.userObj) {
+          let duration = JSON.parse(this.userObj?.duration)
+          for (let i = 0; i < 7; i++) {
+            this.weekdays[i].open = duration[i].open
+            this.weekdays[i].close = duration[i].close
+            this.weekdays[i].io = duration[i].io === 1
+          }
+        }
+        // console.log(this.userObj)
         this.setUser(this.userObj)
       })
     }
@@ -103,16 +112,6 @@ export class AccountInfoComponent implements OnInit {
   setUser(userObj) {
     // console.log(JSON.parse(this.userObj?.duration)[0])
     this.firstFormGroup.controls.address.setValue(userObj?.appUser?.address);
-    // let province = this.provinces.find(obj => {
-    //   return obj.id === userObj.appUser.town.district.province.id
-    // })
-    // this.firstFormGroup.controls.province.setValue(province);
-    // this.getDistricts(province)
-    // let district = this.districts.find(obj => {
-    //   return obj.id === userObj.appUser.town.district.id
-    // })
-    // this.firstFormGroup.controls.district.setValue(district);
-    // this.getTowns(district)
     let provinceObj, districtObj, townObj
     this.provinces.find(province => {
       province.districts.find(district => {
@@ -142,7 +141,10 @@ export class AccountInfoComponent implements OnInit {
       this.userObj.appUser.town.district = JSON.parse(JSON.stringify(districtObj))
       this.userObj.appUser.town.district.province = JSON.parse(JSON.stringify(provinceObj))
       this.userObj.appUser.contactDetails = JSON.parse(userObj?.appUser?.contactDetails)
-      this.daySlot = JSON.parse(userObj?.duration)[0]
+      if (this.userType === 'pharmacy') {
+        this.daySlot = JSON.parse(userObj?.duration)[0]
+        this.setSelectedDay(0)
+      }
     }
     // this.userObj.appUser.town = townObj
     // this.userObj.appUser.town.district = districtObj
@@ -156,49 +158,13 @@ export class AccountInfoComponent implements OnInit {
     // console.log(11,this.userObj)
   }
 
-  loadTowns() {
-    this.sharedService.getTowns().subscribe(towns => {
-      // console.log(towns)
-      this.provinces = towns
-      this.getUser()
-    })
-  }
-
-  getDistricts(province: any) {
-    if (province !== undefined) {
-      this.districts = province.districts
-    }
-  }
-
-  getTowns(district: any) {
-    // this.registerCustomerS.getTowns(district).subscribe(result => {
-    if (district !== undefined) {
-      this.towns = district.towns
-    }
-    // })
-  }
-
   onSubmit(e: any) {
     e.preventDefault()
     if (this.firstFormGroup.valid) {
-      // console.log(this.firstFormGroup.value)
+      console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       // let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
       let userForm = JSON.parse(JSON.stringify(this.firstFormGroup.value))
-      // console.log(customerForm)
-      // customerForm.username = customerForm.email
-      // customerForm.user_id = this.sharedService.getUserId()
-      // customerForm.customer_id = this.sharedService.getUserId()
-      // customerForm.district = customerForm.district.district.district_id
-      // customerForm.province = customerForm.province.province.province_id
-      // customerForm.town_town_id = customerForm.town
-      // customerForm.user_verify = 1
-      // customerForm.user_type = 'customer'
-      // customerForm.created_at = '2023-02-02'
-      // customerForm.updated_at = '2023-02-02'
-      // customerForm.district = undefined
-      // customerForm.province = undefined
-      // console.log(customerForm.contact_number_2 !== '')
 
       let contactDetails = []
       contactDetails.push({
@@ -212,7 +178,7 @@ export class AccountInfoComponent implements OnInit {
 
       if (this.userType === 'customer') {
         let customer = {
-          customerId: this.sharedService.getUserIdByLS(),
+          id: this.sharedService.getUserIdByLS(),
           appUser: {
             id: this.sharedService.getUserIdByLS(),
             address: userForm.address,
@@ -222,7 +188,7 @@ export class AccountInfoComponent implements OnInit {
         }
         // console.log(customer)
 
-        this.http.put<any>(this.sharedService.publicUrl + 'customer/update/' + customer.customerId, customer).subscribe((result) => {
+        this.http.put<any>(this.sharedService.publicUrl + 'customer/update/' + customer.id, customer).subscribe((result) => {
           this.showEdit()
           this.userObj.appUser.address = customer.appUser.address
           this.userObj.appUser.contactDetails = customer.appUser.contactDetails
@@ -233,14 +199,94 @@ export class AccountInfoComponent implements OnInit {
           console.log(error)
           // this.success = 2;
         })
+
+      } else if (this.userType === 'pharmacy') {
+        let duration = [];
+        for (let i = 0; i < 7; i++) {
+          duration.push({
+            day: i,
+            io: this.weekdays[i].io ? 1 : 0,
+            open: this.weekdays[i].open,
+            close: this.weekdays[i].close
+          })
+        }
+
+        let pharmacy = {
+          id: this.sharedService.getUserIdByLS(),
+          duration: JSON.stringify(duration),
+          appUser: {
+            id: this.sharedService.getUserIdByLS(),
+            address: userForm.address,
+            town: userForm.town,
+            contactDetails: JSON.stringify(contactDetails)
+          }
+        }
+
+        this.http.put<any>(this.sharedService.publicUrl + 'pharmacy/update/' + pharmacy.id, pharmacy).subscribe((result) => {
+          this.showEdit()
+          this.userObj.appUser.address = pharmacy.appUser.address
+          this.userObj.appUser.contactDetails = pharmacy.appUser.contactDetails
+          // this.userObj.contactNumber_2 = customer.contactNumber_2
+          this.userObj.appUser.town = pharmacy.appUser.town
+          this.userObj.duration = pharmacy.duration
+          this.setSelectedDay(0)
+
+          this.setUser(this.userObj)
+        }, (error) => {
+          console.log(error)
+          // this.success = 2;
+        })
+
+        // console.log(this.weekdays)
       }
     }
   }
 
   getDay(event) {
     const selectedId = event.target.value;
+    this.setSelectedDay(selectedId)
+  }
+
+  setSelectedDay(selectedId) {
     let weekday = this.weekdays.find(option => option.id == selectedId);
 
     this.daySlot = JSON.parse(this.userObj?.duration)[weekday.id]
+    this.openOrClose = this.daySlot.io
+  }
+
+  loadTowns() {
+    this.sharedService.getTowns().subscribe(towns => {
+      // console.log(towns)
+      this.provinces = towns
+      this.getUser()
+    })
+  }
+
+  getDistricts(province: any) {
+    this.districts = this.sharedService.getDistrictsForProvince(province, this.firstFormGroup)
+    // if (province !== undefined) {
+    //   this.firstFormGroup.controls.district.setValue('');
+    //   this.firstFormGroup.controls.town.setValue('');
+    //   this.districts = province.districts
+    // }
+  }
+
+  getTowns(district: any) {
+    this.towns = this.sharedService.getTownsForDistrict(district, this.firstFormGroup)
+    // this.registerCustomerS.getTowns(district).subscribe(result => {
+    // if (district !== undefined) {
+    //   this.firstFormGroup.controls.town.setValue('');
+    //   this.towns = district.towns
+    // }
+    // })
+  }
+
+  formatTime(timeString) {
+    if (timeString !== null) {
+      const [hourString, minute] = timeString.split(":");
+      const hour = +hourString % 24;
+      return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
+    }
+    return ''
   }
 }
