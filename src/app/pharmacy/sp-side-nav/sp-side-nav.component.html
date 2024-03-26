@@ -3,7 +3,7 @@
   class="sp-dashboard-sidenav"
   mode="side"
   id="sp-side-navigation"
-  [opened]="isOpen"
+  [opened]="isShowing"
   style="width: 320px"
 >
   <div class="container">
@@ -23,7 +23,7 @@
       <strong class="text-center"> Loyde Pharmacy </strong>
     </div>
     <mat-list
-    
+
     >
       <mat-chip-set
         class="subheader-chip"
@@ -33,8 +33,8 @@
       <mat-chip class="subheader-box mat-subheader" cdkDrag>Notice</mat-chip>
       </mat-chip-set>
 
-      @for (li_element of side_nav_list; track li_element) {
-      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
+<!--      @for (li_element of side_nav_list; track li_element) {-->
+      <mat-list-item *ngFor="let li_element of side_nav_list" matRipple class="ripple-container" (click)="changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{ li_element.icon }}</mat-icon>
         <div matListItemTitle matBadge="{{li_element.response_count}}" matBadgeColor="warn">
           <strong>{{ li_element.name }}</strong>
@@ -42,7 +42,7 @@
         <!-- <div matListItemLine matBadge="4" matBadgeOverlap="false" class="demo-section" ></div> -->
         <!-- <div matListItemLine>{{folder.updated | date}}</div> -->
       </mat-list-item>
-      }
+<!--      }-->
       <mat-divider class="mb-2"></mat-divider>
       <mat-chip-set
       class="subheader-chip"
@@ -51,13 +51,13 @@
     >
     <mat-chip class="subheader-box mat-subheader" cdkDrag>Settings</mat-chip>
     </mat-chip-set>
-      @for (li_element of settings_list; track li_element) {
-      <mat-list-item matRipple class="ripple-container" (click)="onRippleClick();changeRoutes(li_element.path);">
+<!--      @for (li_element of settings_list; track li_element) {-->
+      <mat-list-item *ngFor="let li_element of settings_list" matRipple class="ripple-container" (click)="changeRoutes(li_element.path);">
         <mat-icon matListItemIcon>{{li_element.icon}}</mat-icon>
         <div matListItemTitle><strong>{{li_element.name}}</strong></div>
         <!-- <div matListItemLine>{{note.updated | date}}</div> -->
       </mat-list-item>
-    }
+<!--    }-->
     </mat-list>
   </div>
 </mat-drawer>

@@ -1,5 +1,5 @@
 import {Routes} from '@angular/router';
-import {WelcomeComponent} from './welcome/welcome.component';
+import {WelcomeComponent} from './common/welcome/welcome.component';
 import {RegisterPharmacyComponent} from './pharmacy/register-pharmacy/register-pharmacy.component';
 import {RegisterDeliveryPersonComponent} from './Pages/register-delivery-person/register-delivery-person.component';
 import {RegisterCustomerComponent} from './customer/register-customer/register-customer.component';
@@ -11,7 +11,7 @@ import {CustomerAccountComponent} from './customer/customer-account/customer-acc
 import {VeryfyCustomerComponent} from './customer/veryfy-customer/veryfy-customer.component';
 import {NotificationPanelComponent} from './Components/notification-panel/notification-panel.component';
 import {PasswordResetComponent} from './common/password-reset/password-reset.component';
-import {ServiceProviderIndexComponent} from './Pages/service-provider-index/service-provider-index.component';
+import {PharmacyMainComponent} from './Pages/pharmacy-main/pharmacy-main.component';
 import {PharmacyDashboardComponent} from './pharmacy/pharmacy-dashboard/pharmacy-dashboard.component';
 import {PharmacyResponseViewComponent} from './pharmacy/pharmacy-response-view/pharmacy-response-view.component';
 import {CustomerProfileComponent} from './customer/customer-profile/customer-profile.component';
@@ -75,7 +75,7 @@ export const routes: Routes = [
   },
   {
     path: 'pharmacy',
-    component: ServiceProviderIndexComponent,
+    component: PharmacyMainComponent,
     children: [
       {
         path: 'dashboard',

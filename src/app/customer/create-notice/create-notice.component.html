@@ -54,7 +54,7 @@
               <div class="col-sm-12 col-md-4 col-lg-4">
                 <div class="input-group w-100">
                   <label for="upphopre" class="mb-2 text-grey">Photos of Prescription</label>
-                  <input type="file" id="upphopre">
+                  <input type="file" id="upphopre" (change)="onFileChange($event)" formControlName="mImage">
                   <mat-hint><strong>Optional</strong></mat-hint>
                 </div>
               </div>

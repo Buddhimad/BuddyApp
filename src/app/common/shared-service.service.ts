@@ -2,6 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {DOCUMENT} from "@angular/common";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +11,13 @@ export class SharedService {
 
   publicUrl = 'http://localhost:8080/api/buddy/'
 
-  private sharedFunctionSubject = new Subject<void>();
-  private sideNavControlSubject = new Subject<void>();
-  private routeControlSubject = new Subject<void>();
+  // sharedFunctionSubject = new Subject<void>();
+  sideNavControlSubject = new Subject<void>();
+  // routeControlSubject = new Subject<void>();
 
-  public sharedFunction$ = this.sharedFunctionSubject.asObservable();
-  public routeControlFunction = this.routeControlSubject.asObservable();
-  public sideNavControlFunction = this.sideNavControlSubject.asObservable();
+  // public sharedFunction$ = this.sharedFunctionSubject.asObservable();
+  // public routeControlFunction = this.routeControlSubject.asObservable();
+  // public sideNavControlFunction = this.sideNavControlSubject.asObservable();
 
   public notices = new Subject()
 
@@ -25,18 +26,19 @@ export class SharedService {
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private http: HttpClient) {
+              private http: HttpClient,private router:Router) {
     this.getNoticesCustomer()
   }
 
   public callChangeRouteFunction(route: any): void {
+    this.router.navigate([route])
     // console.log(route);
-    this.routeControlSubject.next(route);
+    // this.routeControlSubject.next(route);
   }
 
-  public callSharedFunction(): void {
-    this.sharedFunctionSubject.next();
-  }
+  // public callSharedFunction(): void {
+  //   this.sharedFunctionSubject.next();
+  // }
 
   public callOpenSideNavFunction(type): void {
     this.sideNavControlSubject.next(type);

@@ -6,7 +6,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {Router} from "@angular/router";
-import {WelcomeService} from "../../welcome/welcome.service";
+import {WelcomeService} from "../../common/welcome/welcome.service";
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
 import {SharedService} from "../../common/shared-service.service";
 import {ValidateEmail} from "../../validations/email-validator";

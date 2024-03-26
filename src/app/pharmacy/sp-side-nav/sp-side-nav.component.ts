@@ -38,7 +38,7 @@ import { MatRippleModule } from '@angular/material/core';
   styleUrl: './sp-side-nav.component.css',
 })
 export class SPSideNavComponent {
-  isOpen = false;
+  isShowing = false;
   private subscription: Subscription;
 
   constructor(private sharedService: SharedService) {
@@ -46,18 +46,22 @@ export class SPSideNavComponent {
     //   console.log("fucked SP");
     //   this.openDrawerFunction();
     // });
-    this.subscription=this.sharedService.sideNavControlFunction.subscribe((user:any)=>{
-      console.log(user);
+    this.subscription=this.sharedService.sideNavControlSubject.subscribe((type)=>{
+      // console.log(type);
        // if(user=='sp'){
-          this.openDrawerFunction();
+          this.openDrawerFunction(type);
        // }
     })
   }
-  openDrawerFunction() {
-    if (!this.isOpen) {
-      return (this.isOpen = true);
-    } else {
-      return (this.isOpen = false);
+  openDrawerFunction(type) {
+    if (type === 'switch') {
+      if (!this.isShowing) {
+        this.isShowing = true;
+      } else {
+        this.isShowing = false;
+      }
+    } else if (type === 'close') {
+      this.isShowing = false;
     }
   }
 
@@ -106,10 +110,11 @@ export class SPSideNavComponent {
       response_count: 250,
     }
   ];
-  onRippleClick(): void {}
+  // onRippleClick(): void {}
 
   changeRoutes(route: String) {
     this.sharedService.callChangeRouteFunction(route);
+    this.openDrawerFunction('close')
   }
 
 

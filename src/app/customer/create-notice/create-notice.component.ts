@@ -12,9 +12,9 @@ import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
-import {CreateNoticeService} from "./create-notice.service";
 import {SharedService} from "../../common/shared-service.service";
 import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
 
 @Component({
   selector: 'app-create-notice',
@@ -58,13 +58,15 @@ export class CreateNoticeComponent implements OnInit {
       person_name: ['', Validators.required],
       contact_number_1: ['', Validators.required],
       contact_number_2: [''],
-      notice_txt: ['']
+      notice_txt: [''],
+      mImage: ['']
     });
     this.firstFormGroup = this._formBuilder.group({
       person_name: ['im', Validators.required],
       contact_number_1: ['0771234567', Validators.required],
       contact_number_2: [''],
-      notice_txt: ['qwe']
+      notice_txt: ['qwe'],
+      mImage: ['']
     });
     this.secondFormGroup = this._formBuilder.group({
       province: ['', Validators.required],
@@ -78,7 +80,8 @@ export class CreateNoticeComponent implements OnInit {
   isOptional = false;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private _formBuilder: FormBuilder, private createNoticeS: CreateNoticeService, private sharedService: SharedService, private router: Router) {
+              private http: HttpClient,
+              private _formBuilder: FormBuilder, private sharedService: SharedService, private router: Router) {
   }
 
   // {value: 'delivery_notice', viewValue: 'Delivery Notice'}
@@ -112,6 +115,13 @@ export class CreateNoticeComponent implements OnInit {
     //   this.towns = district.towns
     // }
     // })
+  }
+
+  selectedFile
+  onFileChange(event: any) {
+    if (event.target.files.length > 0) {
+      this.selectedFile = event.target.files[0];
+    }
   }
 
   onSubmit(e: any) {
@@ -152,14 +162,30 @@ export class CreateNoticeComponent implements OnInit {
         town: noticeForm.town
       };
 
-      this.createNoticeS.addNotice(c_notice).subscribe((notice) => {
-        this.myStepper.next();
-        // this.patient.patientId = patient.patientId;
-        // this.success = 1;
-      }, (error) => {
-        console.log(error)
-        // this.success = 2;
-      })
+      const HttpUploadOptions = {
+        headers: new HttpHeaders({ "Content-Type": "multipart/form-data"})
+      }
+
+      const formData = new FormData();
+      formData.append('data', JSON.stringify(c_notice));
+      formData.append('image', this.selectedFile);
+      // this.http.post(this.sharedService.publicUrl + 'notice/add_notice_customer', formData, HttpUploadOptions).subscribe((notice) => {
+      //   this.myStepper.next();
+      //   // this.patient.patientId = patient.patientId;
+      //   // this.success = 1;
+      // }, (error) => {
+      //   console.log(error)
+      //   // this.success = 2;
+      // })
+
+      // this.http.post<any>(this.sharedService.publicUrl + 'notice/add_notice_customer', c_notice).subscribe((notice) => {
+      //   this.myStepper.next();
+      //   // this.patient.patientId = patient.patientId;
+      //   // this.success = 1;
+      // }, (error) => {
+      //   console.log(error)
+      //   // this.success = 2;
+      // })
     }
   }
 

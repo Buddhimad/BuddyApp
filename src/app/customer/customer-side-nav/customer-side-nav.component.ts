@@ -16,7 +16,6 @@ import {
 import {MatChipsModule} from '@angular/material/chips';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatRippleModule} from '@angular/material/core';
-import {NoticesService} from "../notices/notices.service";
 
 
 @Component({
@@ -51,13 +50,12 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
   constructor(
     private sharedService: SharedService,
     @Inject(DOCUMENT) _document: Document,
-    private noticesService: NoticesService
   ) {
     this._document = _document;
     // this.subscription = this.sharedService.sharedFunction$.subscribe(() => {
     //   this.openDrawerFunction();
     // });
-    this.subscription = this.sharedService.sideNavControlFunction.subscribe((type: any) => {
+    this.subscription = this.sharedService.sideNavControlSubject.subscribe((type: any) => {
       // console.log(user);
       // if(user=='sp'){
       this.openDrawerFunction(type);
@@ -142,14 +140,15 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
   ];
 
 
-  onRippleClick(): void {
-    // Handle the click event here
-    // console.log('Ripple effect clicked!');
-    this.isShowing = false
-  }
+  // onRippleClick(): void {
+  //   // Handle the click event here
+  //   // console.log('Ripple effect clicked!');
+  //   this.isShowing = false
+  // }
 
   changeRoutes(route: String) {
     this.sharedService.callChangeRouteFunction(route);
+    this.openDrawerFunction('close')
   }
 
   ngOnInit(): void {

@@ -12,12 +12,21 @@ import { SPSideNavComponent } from '../../pharmacy/sp-side-nav/sp-side-nav.compo
 
 
 @Component({
-  selector: 'app-service-provider-index',
+  selector: 'app-pharmacy-main',
   standalone: true,
   imports: [CommonModule,RouterOutlet,NavBarComponent,MatButtonModule,MatSidenavModule,MatInputModule,MatIconModule,SPSideNavComponent],
-  templateUrl: './service-provider-index.component.html',
-  styleUrl: './service-provider-index.component.css'
+  templateUrl: './pharmacy-main.component.html',
+  styleUrl: './pharmacy-main.component.css'
 })
-export class ServiceProviderIndexComponent {
+export class PharmacyMainComponent {
 
+  constructor(private router: Router, private sharedService: SharedService) {
+    // this.subscription = this.sharedService.routeControlSubject.subscribe((route: any) => {
+    //   this.navigateToDestination(route);
+    // })
+  }
+
+  collapseNav() {
+    this.sharedService.callOpenSideNavFunction('close');
+  }
 }

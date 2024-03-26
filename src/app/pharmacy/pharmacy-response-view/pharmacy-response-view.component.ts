@@ -27,12 +27,13 @@ export class PharmacyResponseViewComponent {
   value='';
   private subscription: Subscription;
   constructor(private router: Router, private sharedService: SharedService) {
-    this.subscription = this.sharedService.routeControlFunction.subscribe((route:any)=>{
-      this.navigateToDestination(route);
-    })
+    // this.subscription = this.sharedService.routeControlSubject.subscribe((route:any)=>{
+    //   this.navigateToDestination(route);
+    // })
    }
    navigateToDestination(destination:String) {
-    this.router.navigate([destination]);
+    // this.router.navigate([destination]);
+     this.sharedService.callChangeRouteFunction(destination)
   }
   range = new FormGroup({
     start: new FormControl<Date | null>(null),

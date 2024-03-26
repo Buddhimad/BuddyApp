@@ -7,8 +7,6 @@ import {MatChipsModule} from '@angular/material/chips';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SharedService} from '../../common/shared-service.service';
-import {CustomerDashboardService} from "../customer-dashboard/customer-dashboard.service";
-import {NoticesService} from "./notices.service";
 
 @Component({
   selector: 'app-notices',
@@ -25,11 +23,10 @@ export class NoticesComponent implements OnInit {
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private noticesService: NoticesService,
-              private router: Router, private sharedService: SharedService, private customerDashboardService: CustomerDashboardService) {
-    this.subscription = this.sharedService.routeControlFunction.subscribe((route: any) => {
-      this.navigateToDestination(route);
-    })
+              private router: Router, private sharedService: SharedService) {
+    // this.subscription = this.sharedService.routeControlSubject.subscribe((route: any) => {
+    //   this.navigateToDestination(route);
+    // })
   }
 
   ngOnInit() {
@@ -37,12 +34,13 @@ export class NoticesComponent implements OnInit {
   }
 
   navigateToDestination(destination: String) {
-    if (destination == "/customer/createnotice") {
-      this.iscreatenoticeshow = false;
-    } else {
-      this.iscreatenoticeshow = true;
-    }
-    this.router.navigate([destination]);
+    // if (destination == "/customer/createnotice") {
+    //   this.iscreatenoticeshow = false;
+    // } else {
+    //   this.iscreatenoticeshow = true;
+    // }
+    // this.router.navigate([destination]);
+    this.sharedService.callChangeRouteFunction(destination)
   }
 
   getNoticesCustomer() {

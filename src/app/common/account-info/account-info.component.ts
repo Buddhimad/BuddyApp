@@ -285,7 +285,7 @@ export class AccountInfoComponent implements OnInit {
     if (timeString !== null) {
       const [hourString, minute] = timeString.split(":");
       const hour = +hourString % 24;
-      return (hour % 12 || 12) + ":" + minute + (hour < 12 ? "AM" : "PM");
+      return (hour % 12 || 12) + ":" + minute + (hour < 12 ? " AM" : " PM");
     }
     return ''
   }

@@ -22,22 +22,23 @@ export class CustomerDashboardComponent {
   iscreatenoticeshow: Boolean = true;
 
   constructor(private router: Router, private sharedService: SharedService) {
-    this.subscription = this.sharedService.routeControlFunction.subscribe((route: any) => {
-      this.navigateToDestination(route);
-    })
+    // this.subscription = this.sharedService.routeControlSubject.subscribe((route: any) => {
+    //   this.navigateToDestination(route);
+    // })
   }
 
   navigateToDestination(destination: String) {
-    this.sharedService.callOpenSideNavFunction('close');
-    if (destination == "/customer/createnotice") {
-      this.iscreatenoticeshow = false;
-    } else {
-      this.iscreatenoticeshow = true;
-    }
-    this.router.navigate([destination]);
+    // this.sharedService.callOpenSideNavFunction('close');
+    // if (destination == "/customer/createnotice") {
+    //   this.iscreatenoticeshow = false;
+    // } else {
+    //   this.iscreatenoticeshow = true;
+    // }
+    // this.router.navigate([destination]);
+    this.sharedService.callChangeRouteFunction(destination)
   }
 
-  collapseNav(){
+  collapseNav() {
     this.sharedService.callOpenSideNavFunction('close');
   }
 }
