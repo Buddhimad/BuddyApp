@@ -102,14 +102,14 @@ export class CreateNoticeComponent implements OnInit {
   }
 
   getDistricts(province: any) {
-    this.districts = this.sharedService.getDistrictsForProvince(province, this.firstFormGroup)
+    this.districts = this.sharedService.getDistrictsForProvince(province, this.secondFormGroup)
     // if (province !== undefined || province !== null) {
     //   this.districts = province.districts
     // }
   }
 
   getTowns(district: any) {
-    this.towns = this.sharedService.getTownsForDistrict(district, this.firstFormGroup)
+    this.towns = this.sharedService.getTownsForDistrict(district, this.secondFormGroup)
     // this.registerCustomerS.getTowns(district).subscribe(result => {
     // if (district !== undefined || district !== null) {
     //   this.towns = district.towns
@@ -167,16 +167,18 @@ export class CreateNoticeComponent implements OnInit {
       }
 
       const formData = new FormData();
-      formData.append('data', JSON.stringify(c_notice));
-      formData.append('image', this.selectedFile);
-      // this.http.post(this.sharedService.publicUrl + 'notice/add_notice_customer', formData, HttpUploadOptions).subscribe((notice) => {
-      //   this.myStepper.next();
+      formData.append('notice', JSON.stringify(c_notice));
+      formData.append('images', this.selectedFile);
+      // console.log(JSON.stringify(c_notice))
+      console.log(formData.get('notice'))
+      this.http.post(this.sharedService.publicUrl + 'notice/add_notice_customer', formData).subscribe((notice) => {
+        this.myStepper.next();
       //   // this.patient.patientId = patient.patientId;
       //   // this.success = 1;
-      // }, (error) => {
-      //   console.log(error)
+      }, (error) => {
+        console.log(error)
       //   // this.success = 2;
-      // })
+      })
 
       // this.http.post<any>(this.sharedService.publicUrl + 'notice/add_notice_customer', c_notice).subscribe((notice) => {
       //   this.myStepper.next();
