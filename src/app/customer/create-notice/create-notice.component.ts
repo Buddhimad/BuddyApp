@@ -69,7 +69,7 @@ export class CreateNoticeComponent implements OnInit {
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       person_name: ['', Validators.required],
-      contact_number_1: ['0771234567', [Validators.required, ValidateTelephone(this.errFields, 0)]],
+      contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, 0)]],
       contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
       prescription: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]],
       mImage: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]]
