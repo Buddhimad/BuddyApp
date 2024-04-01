@@ -14,11 +14,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-pharmacy-billing-info',
-  standalone: true,
-  providers: [NativeDateAdapter],
-  imports: [CommonModule,MatExpansionModule,MatIconModule,MatButtonModule,MatInputModule,MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule,MatNativeDateModule,MatTooltipModule],
+  // standalone: true,
+  // providers: [NativeDateAdapter],
+  // imports: [CommonModule,MatExpansionModule,MatIconModule,MatButtonModule,MatInputModule,MatFormFieldModule, MatDatepickerModule, FormsModule, ReactiveFormsModule,MatNativeDateModule,MatTooltipModule],
   templateUrl: './pharmacy-billing-info.component.html',
-  styleUrl: './pharmacy-billing-info.component.css'
+  styleUrls: ['./pharmacy-billing-info.component.css']
 })
 export class PharmacyBillingInfoComponent {
   panelOpenState = false;

@@ -12,10 +12,10 @@ import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-customer-dashboard',
-  standalone: true,
+  // standalone: true,
   templateUrl: './customer-dashboard.component.html',
-  styleUrl: './customer-dashboard.component.css',
-  imports: [CommonModule, NavBarComponent, MatButtonModule, MatSidenavModule, CustomerSideNavComponent, MatIconModule, RouterOutlet, MatInputModule]
+  styleUrls: ['./customer-dashboard.component.css'],
+  // imports: [CommonModule, NavBarComponent, MatButtonModule, MatSidenavModule, CustomerSideNavComponent, MatIconModule, RouterOutlet, MatInputModule]
 })
 export class CustomerDashboardComponent {
   private subscription: Subscription;

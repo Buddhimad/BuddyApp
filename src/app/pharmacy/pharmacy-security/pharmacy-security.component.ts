@@ -15,10 +15,10 @@ import {PasswordResetComponent} from "../../common/password-reset/password-reset
 
 @Component({
   selector: 'app-service-provider-account-security',
-  standalone: true,
-  imports: [CommonModule, MatDatepickerModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, ReactiveFormsModule, PasswordResetComponent],
+  // standalone: true,
+  // imports: [CommonModule, MatDatepickerModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, ReactiveFormsModule, PasswordResetComponent],
   templateUrl: './pharmacy-security.component.html',
-  styleUrl: './pharmacy-security.component.css'
+  styleUrls: ['./pharmacy-security.component.css']
 })
 export class PharmacySecurityComponent implements OnInit {
 

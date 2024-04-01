@@ -18,11 +18,11 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-pharmacy-dashboard',
-  standalone: true,
-  providers: [NativeDateAdapter],
-  imports: [CommonModule, MatIconModule, MatTooltipModule, MatMenuModule, MatChipsModule, MatInputModule, MatFormFieldModule, NgxMaterialTimepickerModule, MatDatepickerModule, JsonPipe, MatNativeDateModule, FormsModule, ReactiveFormsModule],
+  // standalone: true,
+  // providers: [NativeDateAdapter],
+  // imports: [CommonModule, MatIconModule, MatTooltipModule, MatMenuModule, MatChipsModule, MatInputModule, MatFormFieldModule, NgxMaterialTimepickerModule, MatDatepickerModule, JsonPipe, MatNativeDateModule, FormsModule, ReactiveFormsModule],
   templateUrl: './pharmacy-dashboard.component.html',
-  styleUrl: './pharmacy-dashboard.component.css'
+  styleUrls: ['./pharmacy-dashboard.component.css']
 })
 export class PharmacyDashboardComponent {
   value = '';

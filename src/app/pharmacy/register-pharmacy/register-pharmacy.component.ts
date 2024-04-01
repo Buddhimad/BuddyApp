@@ -23,24 +23,24 @@ import {ValidateNIC} from "../../validations/nic-validator";
 
 @Component({
   selector: 'app-register-pharmacy',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-  ],
+  // standalone: true,
+  // imports: [
+  //   CommonModule,
+  //   MatStepperModule,
+  //   FormsModule,
+  //   ReactiveFormsModule,
+  //   MatFormFieldModule,
+  //   MatInputModule,
+  //   MatButtonModule,
+  //   MatIconModule,
+  //   MatSelectModule,
+  // ],
   templateUrl: './register-pharmacy.component.html',
-  styleUrl: './register-pharmacy.component.css',
+  styleUrls: ['./register-pharmacy.component.css'],
 })
 export class RegisterPharmacyComponent implements OnInit {
 
-  @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('stepper') private myStepper;
 
   constructor(private _formBuilder: FormBuilder, private sharedService: SharedService, private router: Router, private http: HttpClient) {
   }

@@ -21,24 +21,24 @@ import {AccountInfoComponent} from "../../common/account-info/account-info.compo
 
 @Component({
   selector: 'app-customer-account',
-  standalone: true,
+  // standalone: true,
   // imports: [CommonModule, MatIconModule, MatButtonModule, MatSelectModule, MatInputModule, MatFormFieldModule, FormsModule],
-  imports: [
-    CommonModule,
-    MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    AccountInfoComponent,
-  ],
+  // imports: [
+  //   CommonModule,
+  //   MatStepperModule,
+  //   FormsModule,
+  //   ReactiveFormsModule,
+  //   MatFormFieldModule,
+  //   MatInputModule,
+  //   MatButtonModule,
+  //   MatIconModule,
+  //   MatSelectModule,
+  //   MatDatepickerModule,
+  //   MatNativeDateModule,
+  //   AccountInfoComponent,
+  // ],
   templateUrl: './customer-account.component.html',
-  styleUrl: './customer-account.component.css'
+  styleUrls: ['./customer-account.component.css']
 })
 export class CustomerAccountComponent implements OnInit {
   // isEditClick: Boolean = false;

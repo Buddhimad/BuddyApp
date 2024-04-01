@@ -8,30 +8,36 @@ import {
 } from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatStepper, MatStepperModule} from '@angular/material/stepper';
+// import {MatStepper, MatStepperModule} from '@angular/material/stepper';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {SharedService} from "../../common/shared-service.service";
 import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ValidatePrescription} from "../../validations/prescription-validator";
+import {ValidateTelephone} from "../../validations/telephone-validator";
+
+// import {MatFileUploadModule} from "angular-material-fileupload";
 
 @Component({
   selector: 'app-create-notice',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatIconModule
-  ],
+  // standalone: true,
+  // imports: [
+  //   CommonModule,
+  //   MatButtonModule,
+  //   MatStepperModule,
+  //   FormsModule,
+  //   ReactiveFormsModule,
+  //   MatFormFieldModule,
+  //   MatInputModule,
+  //   MatSelectModule,
+  //   MatIconModule,
+  //   MatFileUploadModule
+  //   // MatFileUploadModule
+  // ],
   templateUrl: './create-notice.component.html',
-  styleUrl: './create-notice.component.css',
+  styleUrls: ['./create-notice.component.css'],
 })
 export class CreateNoticeComponent implements OnInit {
   selectedNoticeType: any = 'pharmacy_notice';
@@ -39,6 +45,7 @@ export class CreateNoticeComponent implements OnInit {
   selected_suitable_vehicle_type: any;
   firstFormGroup: any;
   secondFormGroup: any;
+  fileUploadQueue
 
   provinces: any = []
   districts: any = []
@@ -51,23 +58,29 @@ export class CreateNoticeComponent implements OnInit {
   }
   // localStorage = this.document.defaultView?.localStorage;
 
-  @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('stepper') private myStepper;
+
+  errFields = {
+    contactTxts: ['Contact Number is required', ''],
+  }
+
+  firstIsSubmitted = false
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       person_name: ['', Validators.required],
-      contact_number_1: ['', Validators.required],
-      contact_number_2: [''],
-      notice_txt: [''],
-      mImage: ['']
+      contact_number_1: ['0771234567', [Validators.required, ValidateTelephone(this.errFields, 0)]],
+      contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
+      prescription: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]],
+      mImage: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]]
     });
-    this.firstFormGroup = this._formBuilder.group({
-      person_name: ['im', Validators.required],
-      contact_number_1: ['0771234567', Validators.required],
-      contact_number_2: [''],
-      notice_txt: ['qwe'],
-      mImage: ['']
-    });
+    // this.firstFormGroup = this._formBuilder.group({
+    //   person_name: ['im', Validators.required],
+    //   contact_number_1: ['0771234567', Validators.required],
+    //   contact_number_2: [''],
+    //   prescription: ['',Validators.required],
+    //   mImage: ['']
+    // });
     this.secondFormGroup = this._formBuilder.group({
       province: ['', Validators.required],
       district: ['', Validators.required],
@@ -117,12 +130,16 @@ export class CreateNoticeComponent implements OnInit {
     // })
   }
 
-  selectedFile
-  onFileChange(event: any) {
-    if (event.target.files.length > 0) {
-      this.selectedFile = event.target.files[0];
-    }
-  }
+  selectedFiles = []
+
+  // onFileChange(event: any) {
+  //   if (event.target.files.length > 0) {
+  //     for (let file of event.target.files) {
+  //       console.log(file)
+  //       this.selectedFiles.push(file);
+  //     }
+  //   }
+  // }
 
   onSubmit(e: any) {
     e.preventDefault()
@@ -151,7 +168,7 @@ export class CreateNoticeComponent implements OnInit {
       // console.log(noticeForm)
 
       let c_notice = {
-        noticeTxt: noticeForm.notice_txt,
+        prescription: noticeForm.prescription,
         noticeType: 'customer',
         contactNumber_1: noticeForm.contact_number_1,
         contactNumber_2: noticeForm.contact_number_2,
@@ -163,21 +180,29 @@ export class CreateNoticeComponent implements OnInit {
       };
 
       const HttpUploadOptions = {
-        headers: new HttpHeaders({ "Content-Type": "multipart/form-data"})
+        headers: new HttpHeaders({"Content-Type": "multipart/form-data"})
       }
 
       const formData = new FormData();
       formData.append('notice', JSON.stringify(c_notice));
-      formData.append('images', this.selectedFile);
+      // formData.append('images', this.selectedFiles);
+      // console.log(this.selectedFiles)
+      // if (this.selectedFiles.length === 0) {
+      //   console.log(11)
+      //   formData.append('images', null);
+      // }
+      for (let file of this.selectedFiles) {
+        formData.append('images', file);
+      }
       // console.log(JSON.stringify(c_notice))
-      console.log(formData.get('notice'))
+      // console.log(formData.get('notice'))
       this.http.post(this.sharedService.publicUrl + 'notice/add_notice_customer', formData).subscribe((notice) => {
         this.myStepper.next();
-      //   // this.patient.patientId = patient.patientId;
-      //   // this.success = 1;
+        //   // this.patient.patientId = patient.patientId;
+        //   // this.success = 1;
       }, (error) => {
         console.log(error)
-      //   // this.success = 2;
+        //   // this.success = 2;
       })
 
       // this.http.post<any>(this.sharedService.publicUrl + 'notice/add_notice_customer', c_notice).subscribe((notice) => {
@@ -191,7 +216,24 @@ export class CreateNoticeComponent implements OnInit {
     }
   }
 
+  @ViewChild('firstFormDirective') firstFormDirective
+  @ViewChild('secondFormDirective') secondFormDirective
+
   resetForm() {
-    this.router.navigate(['/'])
+    this.myStepper.reset()
+    this.firstFormGroup.reset()
+    this.secondFormGroup.reset()
+    this.firstFormDirective.resetForm()
+    this.secondFormDirective.resetForm()
+    this.firstIsSubmitted = false
+    // this.firstFormGroup.get('person_name').reset()
+    // setInterval(()=>{
+    //   console.log(55)
+    //   this.firstFormGroup.reset()
+    //   this.secondFormGroup.reset()
+    // },2000)
+
+
+    // this.router.navigate(['/'])
   }
 }

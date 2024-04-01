@@ -26,7 +26,7 @@ export class SharedService {
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private http: HttpClient,private router:Router) {
+              private http: HttpClient, private router: Router) {
     this.getNoticesCustomer()
   }
 
@@ -156,7 +156,7 @@ export class SharedService {
   }
 
   getDistrictsForProvince(province, formGroup) {
-    if (province !== undefined) {
+    if (province !== undefined && province !== null) {
       formGroup.controls.district.setValue('');
       formGroup.controls.town.setValue('');
       return province.districts
@@ -165,7 +165,7 @@ export class SharedService {
 
   getTownsForDistrict(district, formGroup) {
     // this.registerCustomerS.getTowns(district).subscribe(result => {
-    if (district !== undefined) {
+    if (district !== undefined && district !== null) {
       formGroup.controls.town.setValue('');
       return district.towns
     }

@@ -10,10 +10,10 @@ import {SharedService} from '../../common/shared-service.service';
 
 @Component({
   selector: 'app-notices',
-  standalone: true,
-  imports: [CommonModule, MatIconModule, MatTooltipModule, MatMenuModule, MatChipsModule],
+  // standalone: true,
+  // imports: [CommonModule, MatIconModule, MatTooltipModule, MatMenuModule, MatChipsModule],
   templateUrl: './notices.component.html',
-  styleUrl: './notices.component.css'
+  styleUrls: ['./notices.component.css']
 })
 export class NoticesComponent implements OnInit {
   private subscription: Subscription;

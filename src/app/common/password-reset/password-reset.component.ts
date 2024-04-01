@@ -15,10 +15,8 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-password-reset',
-  standalone: true,
-  imports: [CommonModule, MatDatepickerModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, MatNativeDateModule, ReactiveFormsModule],
   templateUrl: './password-reset.component.html',
-  styleUrl: './password-reset.component.css'
+  styleUrls: ['./password-reset.component.css']
 })
 export class PasswordResetComponent implements OnInit {
   step = 0;

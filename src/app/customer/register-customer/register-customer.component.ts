@@ -28,22 +28,22 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-register-customer',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatStepperModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-  ],
+  // standalone: true,
+  // imports: [
+  //   CommonModule,
+  //   MatStepperModule,
+  //   FormsModule,
+  //   ReactiveFormsModule,
+  //   MatFormFieldModule,
+  //   MatInputModule,
+  //   MatButtonModule,
+  //   MatIconModule,
+  //   MatSelectModule,
+  //   MatDatepickerModule,
+  //   MatNativeDateModule,
+  // ],
   templateUrl: './register-customer.component.html',
-  styleUrl: './register-customer.component.css',
+  styleUrls: ['./register-customer.component.css'],
 })
 export class RegisterCustomerComponent implements OnInit {
   hidepw = true;
@@ -61,7 +61,7 @@ export class RegisterCustomerComponent implements OnInit {
   districts: any = []
   towns: any = []
 
-  @ViewChild('stepper') private myStepper: MatStepper;
+  @ViewChild('stepper') private myStepper;
 
   constructor(private _formBuilder: FormBuilder, private sharedService: SharedService, private router: Router, private http: HttpClient) {
   }

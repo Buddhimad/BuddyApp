@@ -7,10 +7,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 @Component({
   selector: 'app-customer-profile',
-  standalone: true,
-  imports: [CommonModule,MatIconModule,MatButtonModule,MatSelectModule,MatInputModule,MatFormFieldModule],
+  // standalone: true,
+  // imports: [CommonModule,MatIconModule,MatButtonModule,MatSelectModule,MatInputModule,MatFormFieldModule],
   templateUrl: './customer-profile.component.html',
-  styleUrl: './customer-profile.component.css'
+  styleUrls: ['./customer-profile.component.css']
 })
 export class CustomerProfileComponent {
 

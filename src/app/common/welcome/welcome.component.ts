@@ -17,10 +17,8 @@ import {
 
 @Component({
   selector: 'app-welcome',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatIconModule, MatInputModule, MatFormFieldModule, FormsModule, ReactiveFormsModule],
   templateUrl: './welcome.component.html',
-  styleUrl: './welcome.component.css',
+  styleUrls: ['./welcome.component.css',]
 })
 export class WelcomeComponent implements OnInit {
   firstFormGroup: any;

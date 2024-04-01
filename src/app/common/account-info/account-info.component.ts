@@ -11,14 +11,11 @@ import {ValidateTelephone} from "../../validations/telephone-validator";
 import {Router} from "@angular/router";
 import {SharedService} from "../shared-service.service";
 import {HttpClient} from "@angular/common/http";
-import EventEmitter from "events";
 
 @Component({
   selector: 'app-account-info',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, FormsModule],
   templateUrl: './account-info.component.html',
-  styleUrl: './account-info.component.css'
+  styleUrls: ['./account-info.component.css']
 })
 export class AccountInfoComponent implements OnInit {
 

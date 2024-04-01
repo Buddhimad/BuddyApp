@@ -7,10 +7,9 @@ export function ValidateTelephone(errFields: any, index: any): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     // let setLetter = true;
     // let TELEPHONE_REGEX = /^[0-9]{3}[-][0-9]{7}$/; // Regular Expression 1
-    // console.log(1,control.value)
+    // console.log(control.value)
     let TELEPHONE_REGEX = /^[0-9]{3}[0-9]{7}$/; // Regular Expression 1
-    if (control.value === '' && index > 0 ||
-      control.value === undefined && index > 0) {
+    if (control.value === '' && index > 0 || control.value === undefined && index > 0 || control.value === null && index > 0) {
       return null
     }
     if (control.value != undefined) {

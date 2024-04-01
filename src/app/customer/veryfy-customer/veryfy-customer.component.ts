@@ -10,10 +10,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-veryfy-customer',
-  standalone: true,
-  imports: [CommonModule,MatDatepickerModule,MatButtonModule,MatExpansionModule,MatFormFieldModule,MatIconModule,MatInputModule,MatNativeDateModule],
+  // standalone: true,
+  // imports: [CommonModule,MatDatepickerModule,MatButtonModule,MatExpansionModule,MatFormFieldModule,MatIconModule,MatInputModule,MatNativeDateModule],
   templateUrl: './veryfy-customer.component.html',
-  styleUrl: './veryfy-customer.component.css'
+  styleUrls: ['./veryfy-customer.component.css']
 })
 export class VeryfyCustomerComponent {
   step = 0;

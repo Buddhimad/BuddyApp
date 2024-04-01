@@ -18,10 +18,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-pharmacy-response-view',
-  standalone: true,
-  imports: [CommonModule,MatIconModule,MatTooltipModule,MatMenuModule,MatChipsModule,MatInputModule,MatFormFieldModule,NgxMaterialTimepickerModule,MatDatepickerModule,JsonPipe,MatNativeDateModule,FormsModule, ReactiveFormsModule],
+  // standalone: true,
+  // imports: [CommonModule,MatIconModule,MatTooltipModule,MatMenuModule,MatChipsModule,MatInputModule,MatFormFieldModule,NgxMaterialTimepickerModule,MatDatepickerModule,JsonPipe,MatNativeDateModule,FormsModule, ReactiveFormsModule],
   templateUrl: './pharmacy-response-view.component.html',
-  styleUrl: './pharmacy-response-view.component.css'
+  styleUrls: ['./pharmacy-response-view.component.css']
 })
 export class PharmacyResponseViewComponent {
   value='';

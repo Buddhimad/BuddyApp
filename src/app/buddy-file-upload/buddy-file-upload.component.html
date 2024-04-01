@@ -1,0 +1,21 @@
+<mat-form-field class="w-100 mt-2" [formGroup]="uploadFormGroup">
+  <div class="input-group w-100">
+    <mat-label for="upphopre" class="mb-2 text-grey" style="margin-top: 5px">{{topicTxt}}</mat-label>
+    <input multiple type="file" style="display:none;" id="upphopre" (change)="onFileChange($event)">
+    <label for="upphopre"
+           style="margin-left: 20px;padding: 5px 10px 5px 10px;border-radius: 5px;background-color: orange;font-weight: bold">
+      Click to upload images</label>
+    <input matInput class="invisible" formControlName="mImage">
+
+    <!--                  <mat-hint><strong>Optional</strong></mat-hint>-->
+  </div>
+  <mat-error>Should upload photos or write the prescription</mat-error>
+  <!--<div class="mat-fileup-err"></div>-->
+<!--  <div class="file_list" *ngFor="let file of filesToUpload">{{file.name}}</div>-->
+  <table style="margin-top: 5px">
+    <tr *ngFor="let file of filesToUpload;let i=index">
+      <td>{{file.name}}</td>
+      <td style="padding-left: 8px;cursor: pointer;color: red" (click)="removeImg(i)">[X]</td>
+    </tr>
+  </table>
+</mat-form-field>

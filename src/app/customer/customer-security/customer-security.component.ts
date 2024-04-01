@@ -13,10 +13,10 @@ import {PasswordResetComponent} from "../../common/password-reset/password-reset
 
 @Component({
   selector: 'app-customer-security',
-  standalone: true,
-  imports: [CommonModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, ReactiveFormsModule, PasswordResetComponent],
+  // standalone: true,
+  // imports: [CommonModule, MatButtonModule, MatExpansionModule, MatFormFieldModule, MatIconModule, MatInputModule, ReactiveFormsModule, PasswordResetComponent],
   templateUrl: './customer-security.component.html',
-  styleUrl: './customer-security.component.css'
+  styleUrls: ['./customer-security.component.css']
 })
 export class CustomerSecurityComponent implements OnInit {
 

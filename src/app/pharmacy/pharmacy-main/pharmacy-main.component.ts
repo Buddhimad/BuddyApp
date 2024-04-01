@@ -13,10 +13,10 @@ import { SPSideNavComponent } from '../../pharmacy/sp-side-nav/sp-side-nav.compo
 
 @Component({
   selector: 'app-pharmacy-main',
-  standalone: true,
-  imports: [CommonModule,RouterOutlet,NavBarComponent,MatButtonModule,MatSidenavModule,MatInputModule,MatIconModule,SPSideNavComponent],
+  // standalone: true,
+  // imports: [CommonModule,RouterOutlet,NavBarComponent,MatButtonModule,MatSidenavModule,MatInputModule,MatIconModule,SPSideNavComponent],
   templateUrl: './pharmacy-main.component.html',
-  styleUrl: './pharmacy-main.component.css'
+  styleUrls: ['./pharmacy-main.component.css']
 })
 export class PharmacyMainComponent {
 

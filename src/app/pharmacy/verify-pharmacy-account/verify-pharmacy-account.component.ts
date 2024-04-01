@@ -10,10 +10,10 @@ import {MatNativeDateModule} from '@angular/material/core';
 
 @Component({
   selector: 'app-verify-pharmacy-account',
-  standalone: true,
-  imports: [CommonModule,MatDatepickerModule,MatButtonModule,MatExpansionModule,MatFormFieldModule,MatIconModule,MatInputModule,MatNativeDateModule],
+  // standalone: true,
+  // imports: [CommonModule,MatDatepickerModule,MatButtonModule,MatExpansionModule,MatFormFieldModule,MatIconModule,MatInputModule,MatNativeDateModule],
   templateUrl: './verify-pharmacy-account.component.html',
-  styleUrl: './verify-pharmacy-account.component.css'
+  styleUrls: ['./verify-pharmacy-account.component.css']
 })
 export class VerifyPharmacyAccountComponent {
   step = 0;

@@ -7,35 +7,35 @@ import { SharedService } from '../../common/shared-service.service';
 import { MatListModule } from '@angular/material/list';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  CdkDrag,
-  CdkDropList,
-} from '@angular/cdk/drag-drop';
+// import {
+//   CdkDragDrop,
+//   moveItemInArray,
+//   CdkDrag,
+//   CdkDropList,
+// } from '@angular/cdk/drag-drop';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatRippleModule } from '@angular/material/core';
 
 @Component({
   selector: 'app-sp-side-nav',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatDividerModule,
-    MatChipsModule,
-    CdkDropList,
-    CdkDrag,
-    MatBadgeModule,
-    MatRippleModule,
-  ],
+  // standalone: true,
+  // imports: [
+  //   CommonModule,
+  //   MatButtonModule,
+  //   MatSidenavModule,
+  //   MatListModule,
+  //   MatDividerModule,
+  //   MatIconModule,
+  //   MatDividerModule,
+  //   MatChipsModule,
+  //   CdkDropList,
+  //   CdkDrag,
+  //   MatBadgeModule,
+  //   MatRippleModule,
+  // ],
   templateUrl: './sp-side-nav.component.html',
-  styleUrl: './sp-side-nav.component.css',
+  styleUrls: ['./sp-side-nav.component.css'],
 })
 export class SPSideNavComponent {
   isShowing = false;

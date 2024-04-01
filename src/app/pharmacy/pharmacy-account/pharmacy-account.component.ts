@@ -10,19 +10,19 @@ import {AccountInfoComponent} from "../../common/account-info/account-info.compo
 
 @Component({
   selector: 'app-pharmacy-account',
-  standalone: true,
-    imports: [
-        CommonModule,
-        MatIconModule,
-        MatButtonModule,
-        MatSelectModule,
-        MatInputModule,
-        MatFormFieldModule,
-        MatTableModule,
-        AccountInfoComponent,
-    ],
+  // standalone: true,
+  //   imports: [
+  //       CommonModule,
+  //       MatIconModule,
+  //       MatButtonModule,
+  //       MatSelectModule,
+  //       MatInputModule,
+  //       MatFormFieldModule,
+  //       MatTableModule,
+  //       AccountInfoComponent,
+  //   ],
   templateUrl: './pharmacy-account.component.html',
-  styleUrl: './pharmacy-account.component.css',
+  styleUrls: ['./pharmacy-account.component.css'],
 })
 export class PharmacyAccountComponent {
   isEditClick: Boolean = false;
