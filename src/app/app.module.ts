@@ -11,7 +11,6 @@ import {MatInputModule} from "@angular/material/input";
 import {MatNativeDateModule, MatOptionModule, MatRippleModule, NativeDateAdapter} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AccountInfoqqComponent} from './account-infoqq/account-infoqq.component';
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
 import {CommonModule} from "@angular/common";
 import {MatToolbarModule} from "@angular/material/toolbar";
@@ -53,14 +52,13 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {RouterOutlet} from "@angular/router";
 import {MatListModule} from "@angular/material/list";
-import { BuddyFileUploadComponent } from './buddy-file-upload/buddy-file-upload.component';
+import { BuddyFileUploadComponent } from './common/buddy-file-upload/buddy-file-upload.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     AccountInfoComponent,
-    AccountInfoqqComponent,
     NavBarComponent,
     PasswordResetComponent,
     WelcomeComponent,
