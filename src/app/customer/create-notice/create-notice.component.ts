@@ -64,15 +64,17 @@ export class CreateNoticeComponent implements OnInit {
     contactTxts: ['Contact Number is required', ''],
   }
 
-  firstIsSubmitted = false
+  // firstIsSubmitted = false
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       person_name: ['', Validators.required],
       contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, 0)]],
       contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
-      prescription: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]],
-      mImage: ['', [Validators.required, ValidatePrescription(this.firstIsSubmitted)]]
+      prescription: ['', [Validators.required, ValidatePrescription()]],
+      imageUploadFormGroup: this._formBuilder.group({
+        mImage: ['', [Validators.required, ValidatePrescription()]]
+      })
     });
     // this.firstFormGroup = this._formBuilder.group({
     //   person_name: ['im', Validators.required],
@@ -179,9 +181,9 @@ export class CreateNoticeComponent implements OnInit {
         town: noticeForm.town
       };
 
-      const HttpUploadOptions = {
-        headers: new HttpHeaders({"Content-Type": "multipart/form-data"})
-      }
+      // const HttpUploadOptions = {
+      //   headers: new HttpHeaders({"Content-Type": "multipart/form-data"})
+      // }
 
       const formData = new FormData();
       formData.append('notice', JSON.stringify(c_notice));
@@ -225,7 +227,8 @@ export class CreateNoticeComponent implements OnInit {
     this.secondFormGroup.reset()
     this.firstFormDirective.resetForm()
     this.secondFormDirective.resetForm()
-    this.firstIsSubmitted = false
+    this.selectedFiles = []
+    // this.firstIsSubmitted = false
     // this.firstFormGroup.get('person_name').reset()
     // setInterval(()=>{
     //   console.log(55)

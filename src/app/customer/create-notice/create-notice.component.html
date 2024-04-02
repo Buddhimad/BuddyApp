@@ -87,10 +87,10 @@
                 <!--                    &lt;!&ndash;                  <mat-hint><strong>Optional</strong></mat-hint>&ndash;&gt;-->
                 <!--                  </div>-->
                 <!--                <div *ngFor="let file of selectedFiles">{{file.name}}</div>-->
-                <app-buddy-file-upload
+                <app-buddy-file-upload formGroupName="imageUploadFormGroup"
                   [filesToUpload]="selectedFiles"
-                  [uploadFormGroup]="firstFormGroup"
-                  [topicTxt]="'Photos of Prescription'"></app-buddy-file-upload>
+                  [topicTxt]="'Photos of Prescription'"
+                  [errMessage]="'Should upload photos or write the prescription'"></app-buddy-file-upload>
                 <!--                </mat-form-field>-->
               </div>
 
@@ -141,7 +141,6 @@
                 color="primary"
                 class="primary-color ml-auto btn-rnext"
                 matStepperNext
-                (click)="firstIsSubmitted=true"
               >
                 Next
               </button>

@@ -3,7 +3,7 @@
   align-items: center;
 }
 
-.cvc-headers-align .mat-mdc-form-field+.mat-mdc-form-field {
+.cvc-headers-align .mat-mdc-form-field + .mat-mdc-form-field {
   margin-left: 8px;
 }
 
@@ -46,60 +46,62 @@
 }
 
 .level {
-    font-size: 0.8em;
-    background-color: #FFB74D;
-    width: fit-content;
-    padding: 3px;
-    border-radius: 5px;
-    font-weight: bolder;
-    letter-spacing: 1px;
-    height: 25px;
-    display: block;
-    margin: 0px auto 10px;
-  }
+  font-size: 0.8em;
+  background-color: #FFB74D;
+  width: fit-content;
+  padding: 3px;
+  border-radius: 5px;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  height: 25px;
+  display: block;
+  margin: 0px auto 10px;
+}
 
-  .level mat-icon{
-    font-size: 1.5em;
-  }
-  
-  .name {
-    font-size: 1.25em;
-    font-weight: bolder;
-    letter-spacing: 1px;
-  }
-  
-  .box .rating {
-    display: inline-block;
-  }
+.level mat-icon {
+  font-size: 1.5em;
+}
 
-  .box .star {
-    color: #FB8C00;
-    font-size: 25px;
-  }
+.name {
+  font-size: 1.25em;
+  font-weight: bolder;
+  letter-spacing: 1px;
+}
 
-  input[type=file] {
-    width: -webkit-fill-available;
-    max-width: 100%;
-    color: #444;
-    padding: 5px;
-    background: #fff;
-    /* border-radius: 8px; */
-    border: 1px solid #c4c8cb;
-  }
-  
-  input[type=file]::file-selector-button {
-    margin-right: 20px;
-    border: none;
-    background: black;
-    padding: 10px 20px;
-    /* border-radius: 8px; */
-    color: #fff;
-    cursor: pointer;
-    transition: background .2s ease-in-out;
-  }
-  
-  input[type=file]::file-selector-button:hover {
-    background: #fb8633;
-  }
-  
-  
+.box .rating {
+  display: inline-block;
+}
+
+.box .star {
+  color: #FB8C00;
+  font-size: 25px;
+}
+
+input[type=file] {
+  width: -webkit-fill-available;
+  max-width: 100%;
+  color: #444;
+  padding: 5px;
+  background: #fff;
+  /* border-radius: 8px; */
+  border: 1px solid #c4c8cb;
+}
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  border: none;
+  background: black;
+  padding: 10px 20px;
+  /* border-radius: 8px; */
+  color: #fff;
+  cursor: pointer;
+  transition: background .2s ease-in-out;
+}
+
+input[type=file]::file-selector-button:hover {
+  background: #fb8633;
+}
+
+button {
+  font-weight: bold;
+}

@@ -1,85 +1,135 @@
 <div class="row justify-content-center">
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
     <div class="content-grid content-grid-scroll">
-        <div class="section-cvc-one mt-3 mb-3">
-            <div class="box pt-2">
-                <div class="img-container">
-                    <img src="http://siga-aluminio.com.mx/wp-content/uploads/2019/01/person2.jpg" alt="profile" class="profile-img"> 
-                </div>
-                <div class="quote">
-                  <mat-icon id="quote" aria-hidden="false" aria-label="radio_button_checked icon" fontIcon="radio_button_checked"></mat-icon>
-                  <!-- <i class="fa-solid fa-quote-right" id="quote"></i> -->
-                </div>
-                  <div class="d-flex justify-content-center">
-                    <h4>Buddhima Vajirapani Dahanayake</h4>
-                  </div>
-                  <div class="d-flex justify-content-center level">
-                    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon><p class="">Verified Customer</p>
-                  </div>
-                  <div class="d-flex justify-content-center">
-                    <div class="rating">
-                      <!-- Five stars -->
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9734;</span>
-                    </div>
-                  </div>
+      <div class="section-cvc-one mt-3 mb-3">
+        <div class="box pt-2">
+          <div class="img-container">
+            <img src="http://siga-aluminio.com.mx/wp-content/uploads/2019/01/person2.jpg" alt="profile"
+                 class="profile-img">
+          </div>
+          <div class="quote">
+            <mat-icon id="quote" aria-hidden="false" aria-label="radio_button_checked icon"
+                      fontIcon="radio_button_checked"></mat-icon>
+            <!-- <i class="fa-solid fa-quote-right" id="quote"></i> -->
+          </div>
+          <div class="d-flex justify-content-center">
+            <h4>{{user?.fullName}}</h4>
+          </div>
+          <div class="d-flex justify-content-center level">
+            <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>
+            <p class="">Verified Customer</p>
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="rating">
+              <!-- Five stars -->
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9733;</span>
+              <span class="star">&#9734;</span>
             </div>
+          </div>
         </div>
-        <div class="section-cvc-two">
-            <mat-accordion class="cvc-headers-align">
-                <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                     <strong>Verify Identity </strong>
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Upload both sides of NIC
-                      <mat-icon>upload</mat-icon>
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-              
-               
-                    <div class="d-flex flex-fill">
-                      <div class="input-group">
-                        <label for="upphphoto" class="mb-2 text-grey"></label>
-                        <input type="file" id="upphphoto">
-                        </div>
-                    </div>
-                  
-                  <mat-action-row>
-                    <button mat-button color="primary" (click)="nextStep()">Next</button>
-                  </mat-action-row>
-                </mat-expansion-panel>
-              
-                <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      <strong>Verify Location </strong>
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      Photo of Electricity or Water bill
-                      <mat-icon>upload</mat-icon>
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <div class="d-flex flex-fill">
-                    <div class="input-group">
-                      <label for="upphphoto" class="mb-2 text-grey"></label>
-                      <input type="file" id="upphphoto">
-                      </div>
-                  </div>
-              
-                  <mat-action-row>
-                    <button mat-button color="warn" (click)="prevStep()">Previous</button>
-                    <button mat-button color="primary" (click)="nextStep()">Next</button>
-                  </mat-action-row>
-                </mat-expansion-panel>
-                    
-              </mat-accordion>
-        </div>
-        <div class="force-overflow"></div>
-    </div>      
+      </div>
+      <div class="section-cvc-two">
+        <mat-accordion class="cvc-headers-align">
+          <form [formGroup]="firstFormGroup" (ngSubmit)="nextStep($event,0)" #firstFormDirective="ngForm">
+            <mat-expansion-panel [disabled]="step!==0" [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>Verify Identity </strong>
+                </mat-panel-title>
+                <mat-panel-description>
+                  Upload both sides of NIC
+                  <mat-icon>upload</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+
+
+              <div class="col-12">
+                <!--                <mat-form-field class="w-100 mt-2" >-->
+                <!--                  <div class="input-group w-100">-->
+                <!--                    <mat-label for="upphopre" class="mb-2 text-grey" style="margin-top: 5px">cvb</mat-label>-->
+                <!--                    <input multiple type="file" style="display:none;" id="upphopre" >-->
+                <!--                    <label for="upphopre"-->
+                <!--                           style="margin-left: 20px;padding: 5px 10px 5px 10px;border-radius: 5px;background-color: orange;font-weight: bold">-->
+                <!--                      Click to upload images</label>-->
+                <!--                    <input matInput class="invisible" [formControlName]="'mImageNIC'">-->
+                <!--                    &lt;!&ndash;                  <mat-hint><strong>Optional</strong></mat-hint>&ndash;&gt;-->
+                <!--                  </div>-->
+                <!--                  <mat-error>asd</mat-error>-->
+                <!--                  &lt;!&ndash;<div class="mat-fileup-err"></div>&ndash;&gt;-->
+                <!--                  &lt;!&ndash;  <div class="file_list" *ngFor="let file of filesToUpload">{{file.name}}</div>&ndash;&gt;-->
+
+                <!--                </mat-form-field>-->
+
+                <app-buddy-file-upload formGroupName="nicFormGroup"
+                                       [filesToUpload]="selectedFilesNIC"
+                                       [topicTxt]="''"
+                                       [errMessage]="'NIC is required'"></app-buddy-file-upload>
+
+
+                <!--                      <div class="input-group">-->
+                <!--                        <label for="upphphoto" class="mb-2 text-grey"></label>-->
+                <!--                        <input type="file" id="upphphoto">-->
+                <!--                        </div>-->
+                <!--                <mat-form-field class="w-100 mt-2" [formGroup]="firstFormGroup">-->
+                <!--                  <div class="input-group w-100">-->
+                <!--                    <mat-label for="upphopre" class="mb-2 text-grey" style="margin-top: 5px">balla</mat-label>-->
+                <!--                    <input multiple type="file" style="display:none;" id="upphopre" >-->
+                <!--                    <label for="upphopre"-->
+                <!--                           style="margin-left: 20px;padding: 5px 10px 5px 10px;border-radius: 5px;background-color: orange;font-weight: bold">-->
+                <!--                      Click to upload images</label>-->
+                <!--                    <input matInput class="invisible" [formControlName]="'mImageNIC'">-->
+                <!--                    &lt;!&ndash;                  <mat-hint><strong>Optional</strong></mat-hint>&ndash;&gt;-->
+                <!--                  </div>-->
+                <!--                  <mat-error>pakaya</mat-error>-->
+                <!--                  &lt;!&ndash;<div class="mat-fileup-err"></div>&ndash;&gt;-->
+                <!--                  &lt;!&ndash;  <div class="file_list" *ngFor="let file of filesToUpload">{{file.name}}</div>&ndash;&gt;-->
+                <!--&lt;!&ndash;                  <table style="margin-top: 5px">&ndash;&gt;-->
+                <!--&lt;!&ndash;                    <tr *ngFor="let file of filesToUpload;let i=index">&ndash;&gt;-->
+                <!--&lt;!&ndash;                      <td>{{file.name}}</td>&ndash;&gt;-->
+                <!--&lt;!&ndash;                      <td style="padding-left: 8px;cursor: pointer;color: red" (click)="removeImg(i)">[X]</td>&ndash;&gt;-->
+                <!--&lt;!&ndash;                    </tr>&ndash;&gt;-->
+                <!--&lt;!&ndash;                  </table>&ndash;&gt;-->
+                <!--                </mat-form-field>-->
+
+              </div>
+
+              <mat-action-row>
+                <button mat-button color="primary" type="submit">Next</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </form>
+
+          <form [formGroup]="secondFormGroup" (ngSubmit)="nextStep($event,1)" #secondFormDirective="ngForm">
+            <mat-expansion-panel [disabled]="step!==1" [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <strong>Verify Location </strong>
+                </mat-panel-title>
+                <mat-panel-description>
+                  Photo of Electricity or Water bill
+                  <mat-icon>upload</mat-icon>
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              <div class="col-12">
+                <app-buddy-file-upload formGroupName="locationFormGroup"
+                                       [filesToUpload]="selectedFilesLocation"
+                                       [topicTxt]="''"
+                                       [indexFU]="1"
+                                       [errMessage]="'Location is required'"></app-buddy-file-upload>
+              </div>
+
+              <mat-action-row>
+                <button mat-button color="warn" type="button" (click)="prevStep()">Previous</button>
+                <button mat-button color="primary" type="submit">Finish</button>
+              </mat-action-row>
+            </mat-expansion-panel>
+          </form>
+        </mat-accordion>
+      </div>
+      <div class="force-overflow"></div>
+    </div>
   </div>
 </div>

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatButtonModule} from '@angular/material/button';
@@ -24,9 +24,11 @@ export class PasswordResetComponent implements OnInit {
   hidenewpassword = true;
   hidereenterpassword = true;
 
+  mainFormGroup
   firstFormGroup: any;
   secondFormGroup: any;
   thirdFormGroup: any;
+
   errFields = {
     pdmTxt: 'Confirm your password'
   }
@@ -49,54 +51,75 @@ export class PasswordResetComponent implements OnInit {
     });
 
     this.secondFormGroup = this._formBuilder.group({
-      password: ['', [Validators.required, PasswordConfirm(this.errFields)]],
+      password: [''],
     });
 
     this.thirdFormGroup = this._formBuilder.group({
       passwordC: ['', [Validators.required, PasswordConfirm(this.errFields, this.secondFormGroup)]],
     });
 
+    this.secondFormGroup.get('password').addValidators([Validators.required, PasswordConfirm(this.errFields, undefined, this.thirdFormGroup)]);
+
+    // this.mainFormGroup = {
+    //   firstFormGroup: this.firstFormGroup,
+    //   secondFormGroup: this.secondFormGroup,
+    //   thirdFormGroup: this.thirdFormGroup
+    // };
+
     this.firstFormGroup.controls['oldPassword'].valueChanges.subscribe(value => {
-      if (value === '') {
-        this.passwordFields.oldPassword = 'Enter your old password'
-      } else {
-        this.passwordFields.oldPassword = ''
-        for (let i = 0; i < value.length; i++) {
-          this.passwordFields.oldPassword += '*'
+      if (value !== null) {
+        if (value === '') {
+          this.passwordFields.oldPassword = 'Enter your old password'
+        } else {
+          this.passwordFields.oldPassword = ''
+          for (let i = 0; i < value.length; i++) {
+            this.passwordFields.oldPassword += '*'
+          }
         }
+      } else {
+        this.passwordFields.oldPassword = 'Enter your old password'
       }
     });
 
     this.secondFormGroup.controls['password'].valueChanges.subscribe(value => {
-      if (value === '') {
-        this.passwordFields.password = 'Enter your new password'
-      } else {
-        this.passwordFields.password = ''
-        for (let i = 0; i < value.length; i++) {
-          this.passwordFields.password += '*'
+      if (value !== null) {
+        if (value === '') {
+          this.passwordFields.password = 'Enter your new password'
+        } else {
+          this.passwordFields.password = ''
+          for (let i = 0; i < value.length; i++) {
+            this.passwordFields.password += '*'
+          }
         }
+        // this.thirdFormGroup.controls['passwordC'].setValue('')
+      } else {
+        this.passwordFields.password = 'Enter your new password'
       }
     });
 
     this.thirdFormGroup.controls['passwordC'].valueChanges.subscribe(value => {
-      if (value === '') {
-        this.passwordFields.passwordC = 'Confirm your new password'
-      } else {
-        this.passwordFields.passwordC = ''
-        for (let i = 0; i < value.length; i++) {
-          this.passwordFields.passwordC += '*'
+      if (value !== null) {
+        if (value === '') {
+          this.passwordFields.passwordC = 'Confirm your new password'
+        } else {
+          this.passwordFields.passwordC = ''
+          for (let i = 0; i < value.length; i++) {
+            this.passwordFields.passwordC += '*'
+          }
         }
+      } else {
+        this.passwordFields.passwordC = 'Confirm your new password'
       }
     });
   }
 
-  onControlValueChange(v) {
-    console.log(v)
-    // doTheJobHere();
-  }
+  // onControlValueChange(v) {
+  //   console.log(v)
+  //   // doTheJobHere();
+  // }
 
   onSubmit(e: any) {
-    console.log(this.thirdFormGroup.value)
+    // console.log(this.thirdFormGroup.value)
     e.preventDefault()
     if (this.thirdFormGroup.valid) {
       // console.log(this.firstFormGroup.value)
@@ -113,7 +136,7 @@ export class PasswordResetComponent implements OnInit {
         }
       }
       this.http.put<any>(this.sharedService.publicUrl + 'app_user/reset_password/' + pharmacy.appUser.id, pharmacy).subscribe(result => {
-
+        this.resetForm()
       })
       // console.log(customer)
     }
@@ -125,16 +148,29 @@ export class PasswordResetComponent implements OnInit {
 
   nextStep(e) {
     e.preventDefault()
+    // this.mainFormGroup.val++
     if (this.firstFormGroup.valid && this.step === 0) {
       this.step++;
     } else if (this.secondFormGroup.valid && this.step === 1) {
-      this.step++;
-    } else if (this.thirdFormGroup.valid) {
       this.step++;
     }
   }
 
   prevStep() {
     this.step--;
+  }
+
+  @ViewChild('firstFormDirective') firstFormDirective
+  @ViewChild('secondFormDirective') secondFormDirective
+  @ViewChild('thirdFormDirective') thirdFormDirective
+
+  resetForm() {
+    this.step = 0
+    this.firstFormGroup.reset()
+    this.secondFormGroup.reset()
+    this.thirdFormGroup.reset()
+    this.firstFormDirective.resetForm()
+    this.secondFormDirective.resetForm()
+    this.thirdFormDirective.resetForm()
   }
 }
