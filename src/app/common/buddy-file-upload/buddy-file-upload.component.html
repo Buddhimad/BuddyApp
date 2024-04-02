@@ -2,9 +2,7 @@
   <div class="input-group w-100">
     <mat-label for="imgUp" class="mb-2 text-grey" style="margin-top: 5px">{{topicTxt}}</mat-label>
     <input multiple type="file" style="display:none;" [id]="'imgUp'+indexFU" (change)="onFileChange($event)">
-    <label [for]="'imgUp'+indexFU"
-           style="margin-left: 20px;padding: 5px 10px 5px 10px;border-radius: 5px;background-color: orange;font-weight: bold">
-      Click to upload images</label>
+    <label class="submitBtn" [for]="'imgUp'+indexFU">Click to Upload Images</label>
     <input matInput class="invisible" formControlName="mImage">
     <!--                  <mat-hint><strong>Optional</strong></mat-hint>-->
     <!--    <input type="text" formControlName="mImage" matInput>-->
