@@ -38,7 +38,10 @@ export class BuddyFileUploadComponent implements OnInit {
         })
         if (!exsFile) {
           // console.log(file)
-          this.filesToUpload.push(file);
+          this.filesToUpload.push({
+            fileObj: file,
+            src: URL.createObjectURL(file)
+          });
           this.uploadFormGroup.controls['mImage'].setValue(this.filesToUpload.length);
           // console.log(this.filesToUpload)
           // console.log(this.uploadFormGroup.controls['mImage'])
@@ -53,5 +56,17 @@ export class BuddyFileUploadComponent implements OnInit {
     if (this.filesToUpload.length <= 0) {
       this.uploadFormGroup.controls['mImage'].setValue('');
     }
+  }
+
+  imgSrc
+  viewImgModal = false
+
+  viewImg(file) {
+    this.imgSrc = file.src
+    this.viewImgModal = true
+  }
+
+  closeImg() {
+    this.viewImgModal = false
   }
 }

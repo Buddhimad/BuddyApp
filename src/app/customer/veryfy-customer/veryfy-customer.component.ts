@@ -62,14 +62,14 @@ export class VeryfyCustomerComponent implements OnInit {
     //   formData.append('images', null);
     // }
     for (let file of this.selectedFilesNIC) {
-      formData.append('imagesNIC', file);
+      formData.append('imagesNIC', file.fileObj);
     }
     for (let file of this.selectedFilesLocation) {
-      formData.append('imagesLocation', file);
+      formData.append('imagesLocation', file.fileObj);
     }
     // console.log(JSON.stringify(c_notice))
     // console.log(formData.get('notice'))
-    this.http.post(this.sharedService.publicUrl + 'customer/verify_customer_images', formData).subscribe((notice) => {
+    this.http.post(this.sharedService.publicUrl + 'customer/verify_customer', formData).subscribe((notice) => {
       this.resetForm()
       // this.myStepper.next();
       //   // this.patient.patientId = patient.patientId;

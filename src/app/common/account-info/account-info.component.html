@@ -2,40 +2,41 @@
   <!-- <div class="image">
     <img src="https://i.postimg.cc/bryMmCQB/profile-image.jpg" alt="Profile Image">
   </div> -->
-  <div class="profile-pic d-flex justify-content-center mb-3">
-    <label class="-label" for="file">
-      <span class="glyphicon glyphicon-camera"></span>
-      <span>Change Image</span>
-    </label>
-    <input id="file" type="file" onchange="loadFile(event)"/>
-    <img
-      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"
-      id="output"
-      width="200"
-    />
-  </div>
-  <div class="d-flex justify-content-center">
-    <h4>{{userObj?.appUser?.fullName}}</h4>
-  </div>
-  <div class="d-flex justify-content-center level" *ngIf="userObj?.appUser?.userVerify">
-    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>
-    <p class="" *ngIf="userType==='customer'">Verified Customer</p>
-    <p class="" *ngIf="userType==='pharmacy'">Verified Pharmacy</p>
-  </div>
-  <div class="d-flex justify-content-center">
-    <div class="rating">
-      <!-- Five stars -->
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9734;</span>
-    </div>
-  </div>
+<!--  <div class="profile-pic d-flex justify-content-center mb-3">-->
+<!--    <label class="-label" for="file">-->
+<!--      <span class="glyphicon glyphicon-camera"></span>-->
+<!--      <span>Change Image</span>-->
+<!--    </label>-->
+<!--    <input id="file" type="file" onchange="loadFile(event)"/>-->
+<!--    <img-->
+<!--      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"-->
+<!--      id="output"-->
+<!--      width="200"-->
+<!--    />-->
+<!--  </div>-->
+<!--  <div class="d-flex justify-content-center">-->
+<!--    <h4>{{userObj?.appUser?.fullName}}</h4>-->
+<!--  </div>-->
+<!--  <div class="d-flex justify-content-center level" *ngIf="userObj?.appUser?.userVerify">-->
+<!--    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>-->
+<!--    <p class="" *ngIf="userType==='customer'">Verified Customer</p>-->
+<!--    <p class="" *ngIf="userType==='pharmacy'">Verified Pharmacy</p>-->
+<!--  </div>-->
+<!--  <div class="d-flex justify-content-center">-->
+<!--    <div class="rating">-->
+<!--      &lt;!&ndash; Five stars &ndash;&gt;-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9734;</span>-->
+<!--    </div>-->
+<!--  </div>-->
+  <app-profile-header [user]="userObj.appUser"></app-profile-header>
 
   <div class="d-flex justify-content-between mt-3">
     <h5 class="card-title">Intro</h5>
-    <button mat-raised-button color="primary" class="color-grey h-fit-content"
+    <button type="button" mat-raised-button color="primary" class="color-grey h-fit-content"
             (click)="showEdit()" *ngIf="!isEditClick"
     >
       <mat-icon aria-hidden="false" aria-label="edit icon" fontIcon="edit"></mat-icon>
@@ -181,7 +182,7 @@
               <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>
               Save
             </button>
-            <button mat-raised-button color="primary" class="primary-color h-fit-content"
+            <button type="button" mat-raised-button color="primary" class="primary-color h-fit-content"
                     (click)="showEdit()" style="margin-left: 10px"
             >
               <mat-icon aria-hidden="false" aria-label="save icon" fontIcon="save"></mat-icon>

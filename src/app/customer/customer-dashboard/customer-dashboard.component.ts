@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {NavBarComponent} from "../../common/nav-bar/nav-bar.component";
 import {MatButtonModule} from '@angular/material/button';
@@ -17,7 +17,7 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./customer-dashboard.component.css'],
   // imports: [CommonModule, NavBarComponent, MatButtonModule, MatSidenavModule, CustomerSideNavComponent, MatIconModule, RouterOutlet, MatInputModule]
 })
-export class CustomerDashboardComponent {
+export class CustomerDashboardComponent implements OnInit{
   private subscription: Subscription;
   iscreatenoticeshow: Boolean = true;
 
@@ -40,5 +40,8 @@ export class CustomerDashboardComponent {
 
   collapseNav() {
     this.sharedService.callOpenSideNavFunction('close');
+  }
+
+  ngOnInit(): void {
   }
 }

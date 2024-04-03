@@ -53,6 +53,7 @@ import {MatSidenavModule} from "@angular/material/sidenav";
 import {RouterOutlet} from "@angular/router";
 import {MatListModule} from "@angular/material/list";
 import { BuddyFileUploadComponent } from './common/buddy-file-upload/buddy-file-upload.component';
+import { ProfileHeaderComponent } from './common/profile-header/profile-header.component';
 
 
 @NgModule({
@@ -81,7 +82,8 @@ import { BuddyFileUploadComponent } from './common/buddy-file-upload/buddy-file-
     VerifyPharmacyAccountComponent,
     PharmacyMainComponent,
     DateAgoPipe,
-    BuddyFileUploadComponent
+    BuddyFileUploadComponent,
+    ProfileHeaderComponent
   ],
   imports: [
     BrowserModule,

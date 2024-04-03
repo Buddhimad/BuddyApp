@@ -44,7 +44,9 @@ export class NoticesComponent implements OnInit {
   }
 
   getNoticesCustomer() {
-    this.sharedService.notices.subscribe((notices: []) => {
+    console.log(44)
+    this.sharedService.getNoticesCustomer().subscribe((notices: []) => {
+      // console.log(notices)
       notices.forEach(notice => {
         this.notices.push(notice)
       })

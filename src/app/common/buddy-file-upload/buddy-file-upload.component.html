@@ -1,7 +1,8 @@
 <mat-form-field class="w-100 mt-2" [formGroup]="uploadFormGroup">
   <div class="input-group w-100">
     <mat-label for="imgUp" class="mb-2 text-grey" style="margin-top: 5px">{{topicTxt}}</mat-label>
-    <input multiple type="file" style="display:none;" [id]="'imgUp'+indexFU" (change)="onFileChange($event)">
+    <input accept="image/png, image/jpg, image/jpeg" multiple type="file" style="display:none;" [id]="'imgUp'+indexFU"
+           (change)="onFileChange($event)">
     <label class="submitBtn" [for]="'imgUp'+indexFU">Click to Upload Images</label>
     <input matInput class="invisible" formControlName="mImage">
     <!--                  <mat-hint><strong>Optional</strong></mat-hint>-->
@@ -12,8 +13,22 @@
   <!--  <div class="file_list" *ngFor="let file of filesToUpload">{{file.name}}</div>-->
   <table style="margin-top: 5px">
     <tr *ngFor="let file of filesToUpload;let i=index">
-      <td>{{file.name}}</td>
-      <td style="padding-left: 8px;cursor: pointer;color: red" (click)="removeImg(i)">[X]</td>
+      <td style="padding-right: 5px">
+        <img (click)="viewImg(file)" [src]="file.src" alt="" width="60px" height="60px"
+             class="modal-hover-opacity"
+             data-toggle="modal" data-target="#myModal">
+      </td>
+      <td>{{file.fileObj.name}}</td>
+      <td style="padding-left: 8px;cursor: pointer;color: red" (click)="removeImg(i)">
+        <span style="font-size: 30px">&times;</span>
+      </td>
     </tr>
   </table>
 </mat-form-field>
+
+<!-- The Modal -->
+<div id="myModal" class="modal" #divModal [ngStyle]="{'display':viewImgModal?'block':'none'}">
+  <span class="close" style="margin-top: 50px" (click)="closeImg()">&times;</span>
+  <img class="modal-content" [src]="imgSrc">
+  <div id="caption"></div>
+</div>

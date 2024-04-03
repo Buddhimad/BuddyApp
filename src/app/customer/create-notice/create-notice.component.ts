@@ -194,7 +194,7 @@ export class CreateNoticeComponent implements OnInit {
       //   formData.append('images', null);
       // }
       for (let file of this.selectedFiles) {
-        formData.append('images', file);
+        formData.append('imagesNotices', file.fileObj);
       }
       // console.log(JSON.stringify(c_notice))
       // console.log(formData.get('notice'))

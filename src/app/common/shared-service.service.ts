@@ -27,7 +27,7 @@ export class SharedService {
 
   constructor(@Inject(DOCUMENT) private document: Document,
               private http: HttpClient, private router: Router) {
-    this.getNoticesCustomer()
+    // this.getNoticesCustomer()
   }
 
   public callChangeRouteFunction(route: any): void {
@@ -189,8 +189,9 @@ export class SharedService {
   }
 
   getNoticesCustomer() {
-    this.http.get<any>(this.publicUrl + 'notice/get_notices_customer/' + this.getUserIdByLS()).subscribe(result => {
-      this.notices.next(result)
-    })
+    // this.http.get<any>(this.publicUrl + 'notice/get_notices_customer/' + this.getUserIdByLS()).subscribe(result => {
+    //   this.notices.next(result)
+    // })
+    return this.http.get<any>(this.publicUrl + 'notice/get_notices_customer/' + this.getUserIdByLS())
   }
 }
