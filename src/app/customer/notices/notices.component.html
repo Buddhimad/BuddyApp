@@ -53,13 +53,22 @@
                 <p>{{noticeObj.notice.noticeTxt === null ? 'N/A' : noticeObj.notice.noticeTxt}}</p>
               </div>
               <div class="col-12" style="padding: 0px">
-                <div style="font-weight: bold;margin-bottom: 5px;padding-left: 12px">Images</div>
+                <div style="font-weight: bold;padding-left: 12px">Images</div>
                 <!--                <p>{{noticeObj.notice.noticeTxt}}</p>-->
+                <div *ngIf="noticeObj.images?.length>0" style="margin-top: 5px">
                 <span style="padding: 8px;" *ngFor="let image of noticeObj.images" (click)="viewImg(image)">
                   <img width="60px" height="60px" [src]="image" alt=""
                        style="border: 2px solid #d0d0d0;padding: 2px;margin-bottom: 8px">
                 </span>
+                </div>
+                <div *ngIf="noticeObj.images===undefined" style="padding-left: 12px">
+                  N/A
+                </div>
               </div>
+              <!--              <div class="col-12" style="padding: 0px" *ngIf="noticeObj.images.length===0">-->
+              <!--                <div style="font-weight: bold;margin-bottom: 5px;">Images</div>-->
+              <!--                <p>N/A</p>-->
+              <!--              </div>-->
             </div>
             <!--            <div class="row mt-3">-->
             <!--              <div style="font-weight: bold">Description</div>-->
