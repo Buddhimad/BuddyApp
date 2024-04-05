@@ -14,7 +14,7 @@
   <table style="margin-top: 5px">
     <tr *ngFor="let file of filesToUpload;let i=index">
       <td style="padding-right: 5px">
-        <img (click)="viewImg(file)" [src]="file.src" alt="" width="60px" height="60px"
+        <img (click)="viewImg(file.src)" [src]="file.src" alt="" width="60px" height="60px"
              class="modal-hover-opacity"
              data-toggle="modal" data-target="#myModal">
       </td>
@@ -26,9 +26,11 @@
   </table>
 </mat-form-field>
 
+<app-image-viewer></app-image-viewer>
+
 <!-- The Modal -->
-<div id="myModal" class="modal" #divModal [ngStyle]="{'display':viewImgModal?'block':'none'}">
-  <span class="close" style="margin-top: 50px" (click)="closeImg()">&times;</span>
-  <img class="modal-content" [src]="imgSrc">
-  <div id="caption"></div>
-</div>
+<!--<div id="myModal" class="modal" #divModal [ngStyle]="{'display':viewImgModal?'block':'none'}">-->
+<!--  <span class="close" style="margin-top: 50px" (click)="closeImg()">&times;</span>-->
+<!--  <img class="modal-content" [src]="imgSrc">-->
+<!--  <div id="caption"></div>-->
+<!--</div>-->

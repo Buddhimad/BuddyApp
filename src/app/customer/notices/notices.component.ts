@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {CommonModule, DOCUMENT} from '@angular/common';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -7,6 +7,7 @@ import {MatChipsModule} from '@angular/material/chips';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SharedService} from '../../common/shared-service.service';
+import {ImageViewerComponent} from "../../common/image-viewer/image-viewer.component";
 
 @Component({
   selector: 'app-notices',
@@ -44,12 +45,24 @@ export class NoticesComponent implements OnInit {
   }
 
   getNoticesCustomer() {
-    console.log(44)
+    // console.log(44)
     this.sharedService.getNoticesCustomer().subscribe((notices: []) => {
-      // console.log(notices)
-      notices.forEach(notice => {
-        this.notices.push(notice)
-      })
+      this.notices=notices
+      console.log(notices)
+      // for (let notice of notices) {
+      //   // notices.forEach(notice => {
+      //   this.notices.push(notice)
+      // }
     })
+  }
+
+  getContactDetails(notice) {
+    return JSON.parse(notice?.customer?.appUser.contactDetails)
+  }
+
+  @ViewChild(ImageViewerComponent) imgViewer;
+
+  viewImg(file) {
+    this.imgViewer.viewImg(file)
   }
 }

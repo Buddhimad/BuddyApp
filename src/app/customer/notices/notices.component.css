@@ -235,7 +235,7 @@
 }
 .box-content > .bottom {
   margin: 0 auto;
-  padding: 0 30px; 
+  padding: 0 30px;
   position: relative;
   width: initial;
 }
@@ -289,7 +289,7 @@
 
 .shop-open{
   background-color: lightgreen;
- 
+
 }
 .shop-open .mat-icon{
   color: black !important;
@@ -297,7 +297,7 @@
 
 .shop-close{
   background-color: #EF5350;
- 
+
 }
 .shop-close .mat-icon{
   color: black !important;
@@ -334,3 +334,7 @@
 mat-chip .mat-icon{
   color: #FB8C00 !important;
 }
+
+/*==============================================================================================*/
+
+

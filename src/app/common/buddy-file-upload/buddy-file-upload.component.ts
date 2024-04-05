@@ -1,5 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {ControlContainer, FormBuilder, FormGroup, FormGroupDirective, Validators} from "@angular/forms";
+import {ImageViewerComponent} from "../image-viewer/image-viewer.component";
 
 @Component({
   selector: 'app-buddy-file-upload',
@@ -58,15 +59,16 @@ export class BuddyFileUploadComponent implements OnInit {
     }
   }
 
-  imgSrc
-  viewImgModal = false
+  // imgSrc
+  // viewImgModal = false
+
+  @ViewChild(ImageViewerComponent) imgViewer;
 
   viewImg(file) {
-    this.imgSrc = file.src
-    this.viewImgModal = true
+    this.imgViewer.viewImg(file)
   }
-
-  closeImg() {
-    this.viewImgModal = false
-  }
+  //
+  // closeImg() {
+  //   this.viewImgModal = false
+  // }
 }

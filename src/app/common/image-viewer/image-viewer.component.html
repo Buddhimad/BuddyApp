@@ -1,0 +1,5 @@
+<div id="myModal" class="modal" #divModal [ngStyle]="{'display':viewImgModal?'block':'none'}">
+  <span class="close" style="margin-top: 50px" (click)="closeImg()">&times;</span>
+  <img class="modal-content" [src]="imgSrc">
+  <div id="caption"></div>
+</div>

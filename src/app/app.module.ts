@@ -54,6 +54,7 @@ import {RouterOutlet} from "@angular/router";
 import {MatListModule} from "@angular/material/list";
 import { BuddyFileUploadComponent } from './common/buddy-file-upload/buddy-file-upload.component';
 import { ProfileHeaderComponent } from './common/profile-header/profile-header.component';
+import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
 
 
 @NgModule({
@@ -83,7 +84,8 @@ import { ProfileHeaderComponent } from './common/profile-header/profile-header.c
     PharmacyMainComponent,
     DateAgoPipe,
     BuddyFileUploadComponent,
-    ProfileHeaderComponent
+    ProfileHeaderComponent,
+    ImageViewerComponent
   ],
   imports: [
     BrowserModule,

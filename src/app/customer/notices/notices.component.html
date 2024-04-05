@@ -3,18 +3,18 @@
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
     <div class="inbox inbox-scroll">
       <div class="inbox-list">
-        <div class="message-item unread" *ngFor="let notice of notices">
+        <div class="message-item unread" *ngFor="let noticeObj of notices">
           <input class="checkbox" type="checkbox"/>
           <header>
             <div class="sender-info">
-              <span class="subject">Notice ID : {{notice.id}}</span>
-              <div class="d-flex">
-                <mat-icon matListItemIcon style="margin-left: -5px"
-                >medication
-                </mat-icon
-                >
-                <span class="from" style="margin-top: 3px">Pharmacy</span>
-              </div>
+              <span class="subject">Notice ID : {{noticeObj.notice.id}}</span>
+              <!--              <div class="d-flex">-->
+              <!--                <mat-icon matListItemIcon style="margin-left: -5px"-->
+              <!--                >medication-->
+              <!--                </mat-icon-->
+              <!--                >-->
+              <!--                <span class="from" style="margin-top: 3px">Pharmacy</span>-->
+              <!--              </div>-->
             </div>
             <span class="time">2 days ago</span>
           </header>
@@ -24,31 +24,51 @@
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon"
                           fontIcon="call"></mat-icon>
                 <strong class="ms-2">Contact</strong> :
-                <span>{{notice.customer.contactNumber_1}}</span> | <span>{{notice.customer.contactNumber_2}}</span>
+                <span *ngFor="let contact of getContactDetails(noticeObj.notice)">
+                  {{contact.number}}
+              </span>
               </div>
             </div>
             <div class="d-flex mt-3">
               <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="District icon"
                           fontIcon="zoom_in_map"></mat-icon>
-                <strong class="ms-2">District</strong> : <span class="ms-2">{{notice.town.district.name}}</span>
+                <strong class="ms-2">District</strong> : <span
+                class="ms-2">{{noticeObj.notice.town.district.name}}</span>
               </div>
               <div class="flex-fill">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Town icon"
                           fontIcon="location_city"></mat-icon>
-                <strong class="ms-2">Town</strong> : <span class="ms-2">{{notice.town.name}}</span>
+                <strong class="ms-2">Town</strong> : <span class="ms-2">{{noticeObj.notice.town.name}}</span>
               </div>
             </div>
-            <div class="row mt-3">
+            <div class="row mt-3" style="border: 2px solid #dad9d9;padding: 10px 5px 5px;margin-right: 10px">
               <div class="col-12 col-sm-12 col-md-12 col-lg-12">
                 <mat-icon aria-hidden="false" class="va-bottom" aria-label="Example home icon"
                           fontIcon="description"></mat-icon>
                 <strong class="ms-2">Prescription</strong>
               </div>
+              <div class="col-12" style="margin-top: 8px">
+                <div style="font-weight: bold">Description</div>
+                <p>{{noticeObj.notice.noticeTxt === null ? 'N/A' : noticeObj.notice.noticeTxt}}</p>
+              </div>
+              <div class="col-12" style="padding: 0px">
+                <div style="font-weight: bold;margin-bottom: 5px;padding-left: 12px">Images</div>
+                <!--                <p>{{noticeObj.notice.noticeTxt}}</p>-->
+                <span style="padding: 8px;" *ngFor="let image of noticeObj.images" (click)="viewImg(image)">
+                  <img width="60px" height="60px" [src]="image" alt=""
+                       style="border: 2px solid #d0d0d0;padding: 2px;margin-bottom: 8px">
+                </span>
+              </div>
             </div>
-            <div class="row mt-3">
-              <p>{{notice.noticeTxt}}</p>
-            </div>
+            <!--            <div class="row mt-3">-->
+            <!--              <div style="font-weight: bold">Description</div>-->
+            <!--              <p>{{notice.noticeTxt}}</p>-->
+            <!--            </div>-->
+            <!--            <div class="row mt-3">-->
+            <!--              <div style="font-weight: bold">Images</div>-->
+            <!--              <p>{{notice.noticeTxt}}</p>-->
+            <!--            </div>-->
           </div>
           <div class="box-buttons">
             <div class="row mt-3">
@@ -753,3 +773,11 @@
 
   </div> -->
 </div>
+
+<app-image-viewer></app-image-viewer>
+
+<!--<div id="modalNotice" class="modal" #divModal [ngStyle]="{'display':viewImgModal?'block':'none'}">-->
+<!--  <span class="close" style="margin-top: 50px" (click)="closeImg()">&times;</span>-->
+<!--  <img class="modal-content" [src]="imgSrc">-->
+<!--  <div id="caption"></div>-->
+<!--</div>-->
