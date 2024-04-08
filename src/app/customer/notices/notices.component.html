@@ -50,10 +50,10 @@
               </div>
               <div class="col-12" style="margin-top: 8px">
                 <div style="font-weight: bold">Description</div>
-                <p>{{noticeObj.notice.noticeTxt === null ? 'N/A' : noticeObj.notice.noticeTxt}}</p>
+                <p style="white-space: pre-wrap;">{{noticeObj.notice.prescription === '' ? 'Not Available' : noticeObj.notice.prescription}}</p>
               </div>
               <div class="col-12" style="padding: 0px">
-                <div style="font-weight: bold;padding-left: 12px">Images</div>
+                <div style="font-weight: bold;padding-left: 12px">Attachments</div>
                 <!--                <p>{{noticeObj.notice.noticeTxt}}</p>-->
                 <div *ngIf="noticeObj.images?.length>0" style="margin-top: 5px">
                 <span style="padding: 8px;" *ngFor="let image of noticeObj.images" (click)="viewImg(image)">
@@ -62,7 +62,7 @@
                 </span>
                 </div>
                 <div *ngIf="noticeObj.images===undefined" style="padding-left: 12px">
-                  N/A
+                  Not Available
                 </div>
               </div>
               <!--              <div class="col-12" style="padding: 0px" *ngIf="noticeObj.images.length===0">-->

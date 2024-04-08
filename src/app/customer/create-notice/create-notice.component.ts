@@ -162,9 +162,9 @@ export class CreateNoticeComponent implements OnInit {
       // noticeForm.notice_type = 'customer_notice'
       // noticeForm.created_at = '2023-02-02'
       // noticeForm.updated_at = '2023-02-02'
-      // this.selectedArea.province = noticeForm.province.province.province_name
-      // this.selectedArea.district = noticeForm.district.district.district_name
-      // this.selectedArea.town = noticeForm.town.town_name
+      this.selectedArea.province = noticeForm.province.name
+      this.selectedArea.district = noticeForm.district.name
+      this.selectedArea.town = noticeForm.town.name
       // // customerForm.district = undefined
       // // customerForm.province = undefined
       // console.log(noticeForm)
