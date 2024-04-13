@@ -432,3 +432,7 @@ mat-error {
   font-size: 12px;
   font-weight: bold;
 }
+
+::ng-deep .mat-horizontal-stepper-header{
+  pointer-events: none !important;
+}

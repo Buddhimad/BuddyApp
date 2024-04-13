@@ -27,6 +27,14 @@ export class NavBarComponent {
     this.sharedService.callChangeRouteFunction(url);
   }
 
+  logout() {
+    try {
+      localStorage.clear()
+    } catch (e) {
+      // console.log(e);
+    }
+    this.router.navigate([''])
+  }
 
   notification_list = [
     {

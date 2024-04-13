@@ -5,7 +5,6 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {Router} from '@angular/router';
-import {WelcomeService} from "./welcome.service";
 import {
   FormControl,
   Validators,
@@ -14,6 +13,8 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
+import {SharedService} from "../shared-service.service";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-welcome',
@@ -28,7 +29,8 @@ export class WelcomeComponent implements OnInit {
   //   password: ''
   // }
 
-  constructor(private router: Router, private welcomeService: WelcomeService, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private _formBuilder: FormBuilder,
+              private sharedService: SharedService, private http: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -46,7 +48,7 @@ export class WelcomeComponent implements OnInit {
   login(e: any) {
     e.preventDefault()
     if (this.firstFormGroup.valid) {
-      this.welcomeService.login(this.firstFormGroup.value).subscribe(result => {
+      this.http.post<any>(this.sharedService.publicUrl + 'app_user/login', this.firstFormGroup.value).subscribe(result => {
         // console.log(result)
         if (result) {
           try {

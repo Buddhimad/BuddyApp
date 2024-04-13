@@ -4,7 +4,7 @@
       <h3><strong>Buddy</strong></h3>
       <p class="mb-4">Crafting Connections, Delivering Excellence</p>
       <mat-horizontal-stepper [linear]="true" #stepper="matHorizontalStepper">
-        <mat-step [stepControl]="firstFormGroup">
+        <mat-step [stepControl]="firstFormGroup" [completed]="false">
           <form [formGroup]="firstFormGroup">
             <!--            <ng-template matStepLabel>Fill out your name</ng-template>-->
             <div class="row mt-3">
@@ -236,7 +236,7 @@
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="secondFormGroup">
+        <mat-step [stepControl]="secondFormGroup" [completed]="false">
           <form [formGroup]="secondFormGroup" (ngSubmit)="onSubmit($event)">
 
             <div class="row mt-3">
@@ -324,7 +324,7 @@
             </div>
           </form>
         </mat-step>
-        <mat-step>
+        <mat-step [completed]="false">
 <!--          <ng-template matStepLabel>Done</ng-template>-->
           <div class="wrapperAlert">
 

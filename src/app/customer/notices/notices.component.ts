@@ -8,6 +8,7 @@ import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {SharedService} from '../../common/shared-service.service';
 import {ImageViewerComponent} from "../../common/image-viewer/image-viewer.component";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
   selector: 'app-notices',
@@ -24,7 +25,7 @@ export class NoticesComponent implements OnInit {
   // localStorage = this.document.defaultView?.localStorage;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              private router: Router, private sharedService: SharedService) {
+              private router: Router, private sharedService: SharedService, private http: HttpClient) {
     // this.subscription = this.sharedService.routeControlSubject.subscribe((route: any) => {
     //   this.navigateToDestination(route);
     // })
@@ -46,8 +47,8 @@ export class NoticesComponent implements OnInit {
 
   getNoticesCustomer() {
     // console.log(44)
-    this.sharedService.getNoticesCustomer().subscribe((notices: []) => {
-      this.notices=notices
+    this.http.get<any>(this.sharedService.publicUrl + 'notice/get_notices_customer/' + this.sharedService.getUserIdByLS()).subscribe((notices: []) => {
+      this.notices = notices
       console.log(notices)
       // for (let notice of notices) {
       //   // notices.forEach(notice => {
