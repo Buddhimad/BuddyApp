@@ -84,6 +84,9 @@ export class PharmacyDashboardComponent implements OnInit {
         responseTxt: noticeForm.responseTxt,
         notice: {
           id: noticeObj?.notice?.id
+        },
+        pharmacy: {
+          id: this.sharedService.getUserIdByLS()
         }
       };
 

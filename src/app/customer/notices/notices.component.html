@@ -124,12 +124,13 @@
                   ></mat-icon>
                   20
                 </mat-chip>
+
                 <mat-chip
                   class="primary_chip flex-fill"
                   matTooltip="Respond"
                   matTooltipHideDelay="100"
                   data-bs-toggle="collapse"
-                  data-bs-target="#noticeid_response_list"
+                  [attr.data-bs-target]="noticeObj?.notice?.responses.length>0?'#'+noticeObj?.notice?.id:''"
                   aria-expanded="false"
                   aria-controls="noticeid_response_list"
                 >
@@ -139,7 +140,7 @@
                     aria-label="contact icon"
                     fontIcon="mark_email_read"
                   ></mat-icon>
-                  5
+                  {{noticeObj?.notice?.responses.length}}
                 </mat-chip>
                 <!-- <mat-chip
                   class="primary_chip float-right"
@@ -163,8 +164,8 @@
             </div>
 
           </div>
-          <div class="collapse mt-3" id="noticeid_response_list">
-            <div class="card unread mt-2">
+          <div class="collapse mt-3" [id]="noticeObj?.notice?.id">
+            <div class="card unread mt-2" *ngFor="let response of noticeObj?.notice?.responses">
               <div class="box-header">
                 <h3>
                   <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')"
@@ -173,7 +174,8 @@
                     src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
                     alt=""
                   />
-                    Roswell Parian</a
+                    {{response?.pharmacy?.appUser?.fullName}}
+                  </a
                   >
                   <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
                   <div class="rating">
@@ -221,105 +223,6 @@
                     <mat-chip
                       class="chip ms-auto bd-highlight thumbs_up not_respond"
                       matTooltip="Let us know you received response"
-                      matTooltipHideDelay="100"
-                    >
-                      <mat-icon
-                        color="success"
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="received icon"
-                        fontIcon="thumb_up"
-                      ></mat-icon>
-                    </mat-chip>
-                  </mat-chip-listbox>
-                  <mat-chip-listbox class="d-flex">
-                    <mat-chip
-                      class="primary_chip flex-fill"
-                      matTooltip="Contact us"
-                      matTooltipHideDelay="100"
-                    >
-                      <mat-icon
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="contact icon"
-                        fontIcon="phone_in_talk"
-                      ></mat-icon>
-                      0912 243 892
-                    </mat-chip>
-                    <mat-chip
-                      class="primary_chip flex-fill"
-                      matTooltip="Our Address"
-                      matTooltipHideDelay="100"
-                    >
-                      <mat-icon
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="Example home icon"
-                        fontIcon="location_on"
-                      ></mat-icon>
-                      44 Wakwella Rd, Galle 80000
-                    </mat-chip>
-                  </mat-chip-listbox>
-                </div>
-              </div>
-            </div>
-            <div class="card unread mt-2">
-              <div class="box-header">
-                <h3>
-                  <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')"
-                     class="subject"
-                  ><img
-                    src="https://static.wixstatic.com/media/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg/v1/fill/w_640,h_426,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/abe5aa_3ff2132c9a13404494017dab519b1bb1~mv2.jpg"
-                    alt=""
-                  />
-                    Roswell Parian</a
-                  >
-                  <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
-                  <div class="rating">
-                    <!-- Five stars -->
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9733;</span>
-                    <span class="star">&#9734;</span>
-                    <span class="star">&#9734;</span>
-                  </div>
-                </h3>
-                <span
-                ><mat-icon
-                  aria-hidden="false"
-                  aria-label="response_settings"
-                  fontIcon="more_vert"
-                  [matMenuTriggerFor]="response_settings_menu"
-                ></mat-icon
-                ></span>
-                <div class="window"><span></span></div>
-                <mat-menu #response_settings_menu="matMenu">
-                  <button mat-menu-item>Item 1</button>
-                  <button mat-menu-item>Item 2</button>
-                </mat-menu>
-              </div>
-              <div class="box-content">
-                <div class="bottom">
-                  <mat-chip-listbox class="d-flex bd-highlight" aria-label="pharmacy_information_listbox">
-                    <mat-chip class="primary_chip bd-highlight" matTooltip="Price" matTooltipHideDelay="100">
-                      <mat-icon
-                        matChipAvatar
-                        aria-hidden="false"
-                        aria-label="price icon"
-                        fontIcon="payments"
-                      ></mat-icon>
-                      1200
-                    </mat-chip>
-                    <mat-chip
-                      class="chip shop-close bd-highlight"
-                      matTooltip="We're Close"
-                      matTooltipHideDelay="100"
-                    >
-                      Closed
-                    </mat-chip>
-                    <mat-chip
-                      class="chip ms-auto bd-highlight thumbs_up respond"
-                      matTooltip="Thank you for noticing us"
                       matTooltipHideDelay="100"
                     >
                       <mat-icon
