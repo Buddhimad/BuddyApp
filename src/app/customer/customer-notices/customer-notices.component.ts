@@ -62,7 +62,7 @@ export class CustomerNoticesComponent implements OnInit {
 
   funcViewNotice(noticeObj, view) {
     if (view) {
-      console.log(noticeObj)
+      // console.log(noticeObj)
       this.noticeObj = noticeObj;
       this.viewNotice = true
     } else {

@@ -1,17 +1,23 @@
 <div class="row justify-content-center">
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+    <div style="display:flex;padding: 20px">
+      <div style="width: calc(100% - 30px);font-size: 20px;font-weight: bold;color: #018829">Notices</div>
+      <div (click)="getNoticesCustomer()">
+        <i style="display:flex;text-align: right;font-size: 30px;color: green;cursor: pointer" class="fa fa-refresh"></i>
+      </div>
+    </div>
     <div class="inbox inbox-scroll">
-
       <div class="inbox-list" *ngIf="!viewNotice">
         <div class="message-item unread" *ngFor="let noticeObj of notices" style="padding: 4px">
           <div class="notice-head" (click)="funcViewNotice(noticeObj,true)"
                [ngStyle]="{'font-weight':noticeObj?.seen?'normal':'bold'}" style="display:flex;">
             <div style="width: calc(100% - 20px)">{{'Notice - ' + noticeObj?.notice?.id}}</div>
             <div style="display:flex;margin-top: 3px">
-<!--              <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px" class="fa fa-commenting"-->
-<!--                 [ngStyle]="{'color':'gray'}"></i>-->
-              <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px" class="fa fa-check"
+              <!--              <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px" class="fa fa-commenting"-->
+              <!--                 [ngStyle]="{'color':'gray'}"></i>-->
+              <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px"
+                 class="fa fa-check"
                  [ngStyle]="{'color':'gray'}"></i>
             </div>
           </div>
@@ -24,7 +30,7 @@
             <i class="fa fa-arrow-left" aria-hidden="true"
                style="font-size: 30px"></i>
           </div>
-<!--          <input class="checkbox" type="checkbox"/>-->
+          <!--          <input class="checkbox" type="checkbox"/>-->
           <header>
             <div class="sender-info">
               <span class="subject">Notice ID : {{noticeObj?.notice?.id}}</span>
