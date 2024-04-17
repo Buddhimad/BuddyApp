@@ -338,3 +338,12 @@ mat-chip .mat-icon{
 /*==============================================================================================*/
 
 
+.notice-head:hover{
+  /*color: #6980f6;*/
+  border-color: #6980f6;
+}
+
+.notice-head{
+  border: 2px solid #d2d2d2;
+  padding: 4px;
+}

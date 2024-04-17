@@ -10,6 +10,8 @@ import {Router} from "@angular/router";
 export class SharedService {
 
   publicUrl = 'http://localhost:8080/api/buddy/'
+  mqtt_url: '192.168.8.11'
+  mqtt_port: 9001
 
   // sharedFunctionSubject = new Subject<void>();
   sideNavControlSubject = new Subject<void>();

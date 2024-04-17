@@ -11,7 +11,7 @@ import {CustomerSecurityComponent} from "./customer/customer-security/customer-s
 import {VeryfyCustomerComponent} from "./customer/veryfy-customer/veryfy-customer.component";
 import {CustomerAccountComponent} from "./customer/customer-account/customer-account.component";
 import {CreateNoticeComponent} from "./customer/create-notice/create-notice.component";
-import {NoticesComponent} from "./customer/notices/notices.component";
+import {CustomerNoticesComponent} from "./customer/customer-notices/customer-notices.component";
 import {CustomerDashboardComponent} from "./customer/customer-dashboard/customer-dashboard.component";
 import {RegisterCustomerComponent} from "./customer/register-customer/register-customer.component";
 import {RegisterPharmacyComponent} from "./pharmacy/register-pharmacy/register-pharmacy.component";
@@ -32,15 +32,15 @@ const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        component: NoticesComponent,
+        component: CustomerNoticesComponent,
       },
       {
         path: 'pharmacynotices',
-        component: NoticesComponent
+        component: CustomerNoticesComponent
       },
       {
         path: 'deliverynotices',
-        component: NoticesComponent
+        component: CustomerNoticesComponent
       },
       {
         path: 'createnotice',

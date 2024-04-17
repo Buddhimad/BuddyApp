@@ -11,16 +11,19 @@ import {ImageViewerComponent} from "../../common/image-viewer/image-viewer.compo
 import {HttpClient} from "@angular/common/http";
 
 @Component({
-  selector: 'app-notices',
+  selector: 'app-customer-notices',
   // standalone: true,
   // imports: [CommonModule, MatIconModule, MatTooltipModule, MatMenuModule, MatChipsModule],
-  templateUrl: './notices.component.html',
-  styleUrls: ['./notices.component.css']
+  templateUrl: './customer-notices.component.html',
+  styleUrls: ['./customer-notices.component.css']
 })
-export class NoticesComponent implements OnInit {
+export class CustomerNoticesComponent implements OnInit {
   private subscription: Subscription;
   iscreatenoticeshow: Boolean = true;
   notices = []
+
+  viewNotice = false
+  noticeObj
 
   // localStorage = this.document.defaultView?.localStorage;
 
@@ -55,6 +58,16 @@ export class NoticesComponent implements OnInit {
       //   this.notices.push(notice)
       // }
     })
+  }
+
+  funcViewNotice(noticeObj, view) {
+    if (view) {
+      console.log(noticeObj)
+      this.noticeObj = noticeObj;
+      this.viewNotice = true
+    } else {
+      this.viewNotice = false
+    }
   }
 
   getContactDetails(notice) {

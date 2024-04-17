@@ -30,7 +30,7 @@ import {CustomerSecurityComponent} from "./customer/customer-security/customer-s
 import {CustomerSideNavComponent} from "./customer/customer-side-nav/customer-side-nav.component";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {NoticesComponent} from "./customer/notices/notices.component";
+import {CustomerNoticesComponent} from "./customer/customer-notices/customer-notices.component";
 import {RegisterCustomerComponent} from "./customer/register-customer/register-customer.component";
 import {VeryfyCustomerComponent} from "./customer/veryfy-customer/veryfy-customer.component";
 import {MatTableModule} from "@angular/material/table";
@@ -52,10 +52,16 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {RouterOutlet} from "@angular/router";
 import {MatListModule} from "@angular/material/list";
-import { BuddyFileUploadComponent } from './common/buddy-file-upload/buddy-file-upload.component';
-import { ProfileHeaderComponent } from './common/profile-header/profile-header.component';
-import { ImageViewerComponent } from './common/image-viewer/image-viewer.component';
+import {BuddyFileUploadComponent} from './common/buddy-file-upload/buddy-file-upload.component';
+import {ProfileHeaderComponent} from './common/profile-header/profile-header.component';
+import {ImageViewerComponent} from './common/image-viewer/image-viewer.component';
+import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
+import {SharedService} from "./common/shared-service.service";
 
+export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
+  hostname: 'localhost',
+  port: 9001,
+}
 
 @NgModule({
   declarations: [
@@ -69,7 +75,7 @@ import { ImageViewerComponent } from './common/image-viewer/image-viewer.compone
     CustomerDashboardComponent,
     CustomerSecurityComponent,
     CustomerSideNavComponent,
-    NoticesComponent,
+    CustomerNoticesComponent,
     RegisterCustomerComponent,
     VeryfyCustomerComponent,
     CustomerProfileComponent,
@@ -96,7 +102,8 @@ import { ImageViewerComponent } from './common/image-viewer/image-viewer.compone
     MatToolbarModule, MatIconModule, MatBadgeModule, MatMenuModule,
     MatDatepickerModule, MatExpansionModule, MatNativeDateModule, MatStepperModule,
     MatTooltipModule, MatChipsModule, MatTableModule,
-    MatDividerModule, MatRippleModule, NgxMaterialTimepickerModule, MatSidenavModule, MatListModule
+    MatDividerModule, MatRippleModule, NgxMaterialTimepickerModule, MatSidenavModule, MatListModule,
+    MqttModule.forRoot(MQTT_SERVICE_OPTIONS)
   ],
   // exports:[
   //   MatButtonModule, MatFormFieldModule, MatIconModule, MatInputModule, MatOptionModule, MatSelectModule,
