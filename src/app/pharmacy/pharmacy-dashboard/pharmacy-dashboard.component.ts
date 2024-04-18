@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {CommonModule, DatePipe} from '@angular/common';
 import {FormGroup, FormControl, FormsModule, ReactiveFormsModule, Validators, FormBuilder} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -46,8 +46,17 @@ export class PharmacyDashboardComponent implements OnInit {
 
   notices = []
 
+  todayNoticesCount = {
+    messages: 0,
+    responses: 0
+  }
+  allNoticesCount = {
+    messages: 0,
+    responses: 0
+  }
+
   constructor(private router: Router, private sharedService: SharedService, private http: HttpClient,
-              private _formBuilder: FormBuilder, private _mqttService: MqttService) {
+              private _formBuilder: FormBuilder, private _mqttService: MqttService, private datePipe: DatePipe) {
     this.subscribeNewTopic()
     // this.subscription = this.sharedService.routeControlSubject.subscribe((route:any)=>{
     //   console.log(route);
@@ -55,8 +64,10 @@ export class PharmacyDashboardComponent implements OnInit {
     // })
   }
 
+  searchedNotices = true
+
   ngOnInit(): void {
-    this.getNoticesPharmacy()
+    this.filterNotices(0)
     this.respFormGroup = this._formBuilder.group({
       availability: [true],
       price: [''],
@@ -65,24 +76,103 @@ export class PharmacyDashboardComponent implements OnInit {
     });
   }
 
+  noticesMain
+
   getNoticesPharmacy() {
-    // console.log(44)
-    this.http.get<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy/' + this.sharedService.getUserByLS().townId).subscribe((noticesTown: []) => {
-      this.noticesTown = noticesTown
-      this.notices = noticesTown.slice()
-      // for (let notice of this.notices) {
-      //   notice['seen'] = false
-      //   if (notice.responded) {
-      //     notice['seen'] = true
-      //   }
-      // }
-      // console.log(noticesTown)
-      // for (let notice of noticesTown) {
-      //   // noticesTown.forEach(notice => {
-      //   this.noticesTown.push(notice)
-      // }
+    // if (this.searchedNotices) {
+    let data = {
+      pharmacyId: this.sharedService.getUserIdByLS(),
+      townId: this.sharedService.getUserByLS().townId,
+      startDate: this.startDate,
+      endDate: this.endDate
+    }
+    this.http.post<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy', data).subscribe((notices) => {
+      this.noticesMain = notices
+      this.setHeadersAndMsgs(0)
     })
+    // }
   }
+
+  noticeSection = 0
+
+  filterNotices(val) {
+    if (val === 0) {
+      this.noticeSection = val
+      let date = new Date();
+      this.startDate = date
+      this.endDate = date
+      this.range.controls['startDate'].setValue(this.startDate)
+      this.range.controls['endDate'].setValue(this.endDate)
+      this.notices = this.noticesMain?.dateNotices
+      if (this.searchedNotices) {
+        this.getNoticesPharmacy()
+        this.searchedNotices = false
+      }
+    } else if (val === 1) {
+      this.noticeSection = val
+      this.startDate = null
+      this.endDate = null
+      this.notices = this.noticesMain?.allNotices
+    } else if (val === 2) {
+      this.searchedNotices = true
+      this.startDate = this.range.controls['startDate'].value
+      this.endDate = this.range.controls['endDate'].value
+      this.getNoticesPharmacy()
+    } else if (val === 3) {
+      this.searchedNotices = true
+    }
+    // console.log(this.range.controls['startDate'].value)
+    // console.log(this.range.controls['endDate'].value)
+  }
+
+  subscribeNewTopic(): void {
+    let that = this;
+    // console.log(this._mqttService.clientId)
+    // if (!this.mqttSubscribed) {
+    //   this.mqttSubscribed = true
+    // if (localStorage.getItem('user') !== null) {
+    // console.log(this.getDeviceId())
+    this._mqttService.observables = {}
+    this._mqttService.observe(this.sharedService.getUserByLS()['townId']).subscribe((message: IMqttMessage) => {
+      let notice = JSON.parse(message.payload.toString())
+      this.setHeadersAndMsgs(1, notice)
+    });
+    // }
+  }
+
+  funcViewNotice(noticeObj, view) {
+    if (view) {
+      // console.log(noticeObj)
+      this.noticeObj = noticeObj;
+      this.viewNotice = true
+      if (!noticeObj.seen) {
+        let c_notice = {
+          notice: {
+            id: noticeObj?.notice?.id
+          },
+          pharmacy: {
+            id: this.sharedService.getUserIdByLS()
+          },
+          accepted: 1
+        };
+
+        this.http.post(this.sharedService.publicUrl + 'notice/msg_read_pharmacy', c_notice).subscribe((response) => {
+          if (response) {
+            noticeObj.response = response
+            noticeObj.seen = true
+            this.setHeadersAndMsgs(2, noticeObj)
+            // console.log(noticeObj)
+          }
+        }, (error) => {
+          console.log(error)
+          //   // this.success = 2;
+        })
+      }
+    } else {
+      this.viewNotice = false
+    }
+  }
+
 
   onSubmit(e, noticeObj) {
     e.preventDefault()
@@ -119,6 +209,7 @@ export class PharmacyDashboardComponent implements OnInit {
         if (response) {
           noticeObj.response = response
           noticeObj.responded = true
+          this.setHeadersAndMsgs(2, noticeObj)
           // console.log(noticeObj)
         }
         //   // this.patient.patientId = patient.patientId;
@@ -140,65 +231,60 @@ export class PharmacyDashboardComponent implements OnInit {
     }
   }
 
-  getContactDetails(notice) {
-    return JSON.parse(notice?.customer?.appUser.contactDetails)
-  }
-
-  funcViewNotice(noticeObj, view) {
-    if (view) {
-      console.log(noticeObj)
-      this.noticeObj = noticeObj;
-      this.viewNotice = true
-      if (!noticeObj.seen) {
-        let c_notice = {
-          notice: {
-            id: noticeObj?.notice?.id
-          },
-          pharmacy: {
-            id: this.sharedService.getUserIdByLS()
-          },
-          accepted: 1
-        };
-
-        this.http.post(this.sharedService.publicUrl + 'notice/msg_read_pharmacy', c_notice).subscribe((response) => {
-          if (response) {
-            noticeObj.response = response
-            noticeObj.seen = true
-            // console.log(noticeObj)
-          }
-        }, (error) => {
-          console.log(error)
-          //   // this.success = 2;
-        })
+  setHeadersAndMsgs(val, noticeObj?) {
+    if (val === 0) { //set counts
+      this.notices = this.noticesMain.dateNotices
+      // console.log(notices)
+      // this.todayNoticesCount.messages = notices.dateNotices.length
+      // if (val === 1) {
+      this.todayNoticesCount.messages = this.noticesMain.dateNotices.length
+      this.todayNoticesCount.responses = 0
+      for (let response of this.noticesMain.dateNotices) {
+        if (response.responded) {
+          this.todayNoticesCount.responses++;
+        }
       }
-    } else {
-      this.viewNotice = false
+      // }
+      // this.allNoticesCount.messages = notices.allNotices.length
+      this.allNoticesCount.messages = this.noticesMain.allNotices.length
+      this.allNoticesCount.responses = 0
+      for (let response of this.noticesMain.allNotices) {
+        if (response.responded) {
+          this.allNoticesCount.responses++;
+        }
+      }
+    } else if (val === 1) { // mqtt
+      this.noticesMain.dateNotices.unshift(noticeObj)
+      this.noticesMain.allNotices.unshift(noticeObj)
+      this.todayNoticesCount.messages = this.noticesMain.dateNotices.length
+      this.allNoticesCount.messages = this.noticesMain.allNotices.length
+    } else if (val === 2) { // responded
+      if (this.noticeSection === 0) { // today
+        let notice = this.noticesMain.allNotices.find(notice => {
+          return notice.notice.id === noticeObj.notice.id
+        })
+        Object.assign(notice, noticeObj);
+      } else if (this.noticeSection === 1) { // all
+        let notice = this.noticesMain.dateNotices.find(notice => {
+          return notice.notice.id === noticeObj.notice.id
+        })
+        Object.assign(notice, noticeObj);
+      }
+
+      this.todayNoticesCount.responses=0
+      for (let response of this.noticesMain.dateNotices) {
+        if (response.responded) {
+          this.todayNoticesCount.responses++;
+        }
+      }
+
+      this.allNoticesCount.responses = 0
+      for (let response of this.noticesMain.allNotices) {
+        if (response.responded) {
+          this.allNoticesCount.responses++;
+        }
+      }
     }
-  }
-
-  @ViewChild(ImageViewerComponent) imgViewer;
-
-  viewImg(file) {
-    this.imgViewer.viewImg(file)
-  }
-
-  subscribeNewTopic(): void {
-    let that = this;
-    // console.log(this._mqttService.clientId)
-    // if (!this.mqttSubscribed) {
-    //   this.mqttSubscribed = true
-    // if (localStorage.getItem('user') !== null) {
-    // console.log(this.getDeviceId())
-    this._mqttService.observables = {}
-    this._mqttService.observe(this.sharedService.getUserByLS()['townId']).subscribe((message: IMqttMessage) => {
-      // that.cubeData.next(JSON.parse(message.payload.toString()))
-      let notice = JSON.parse(message.payload.toString())
-      // this.notices = noticesTown.slice()
-      // notice['seen'] = false
-      this.notices.unshift(notice)
-      console.log(JSON.parse(message.payload.toString()))
-    });
-    // }
   }
 
   navigateToDestination(destination: String) {
@@ -207,9 +293,22 @@ export class PharmacyDashboardComponent implements OnInit {
   }
 
   range = new FormGroup({
-    start: new FormControl<Date | null>(null),
-    end: new FormControl<Date | null>(null),
+    startDate: new FormControl<Date | null>(null),
+    endDate: new FormControl<Date | null>(null),
   });
+
+  startDate
+  endDate
+
+  @ViewChild(ImageViewerComponent) imgViewer;
+
+  viewImg(file) {
+    this.imgViewer.viewImg(file)
+  }
+
+  getContactDetails(notice) {
+    return JSON.parse(notice?.customer?.appUser.contactDetails)
+  }
 
   // getContactDetails(notice) {
   //   return JSON.parse(notice?.customer?.appUser.contactDetails)
@@ -226,7 +325,7 @@ export class PharmacyDashboardComponent implements OnInit {
   //   this.pharmacyDashboardService.viewNotice.next(0)
   // }
 
-  getDivPositions(event) {
-    console.log(event);
-  }
+  // getDivPositions(event) {
+  //   console.log(event);
+  // }
 }

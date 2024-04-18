@@ -12,7 +12,7 @@ import {MatNativeDateModule, MatOptionModule, MatRippleModule, NativeDateAdapter
 import {MatSelectModule} from "@angular/material/select";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {DateAgoPipe} from "./pipes/date-ago.pipe";
-import {CommonModule} from "@angular/common";
+import {CommonModule, DatePipe} from "@angular/common";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatBadgeModule} from "@angular/material/badge";
 import {MatMenuModule} from "@angular/material/menu";
@@ -112,7 +112,7 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   //   MatTooltipModule, MatChipsModule, MatTableModule,
   //   MatDividerModule, MatRippleModule,
   // ],
-  providers: [DateAgoPipe, NativeDateAdapter],
+  providers: [DateAgoPipe, NativeDateAdapter, DatePipe],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
