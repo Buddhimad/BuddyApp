@@ -11,14 +11,14 @@
       <div class="inbox-list" *ngIf="!viewNotice">
         <div class="message-item unread" *ngFor="let noticeObj of notices" style="padding: 4px">
           <div class="notice-head" (click)="funcViewNotice(noticeObj,true)"
-               [ngStyle]="{'font-weight':noticeObj?.seen?'normal':'bold'}" style="display:flex;">
+               style="display:flex;font-weight: bold">
             <div style="width: calc(100% - 20px)">{{'Notice - ' + noticeObj?.notice?.id}}</div>
             <div style="display:flex;margin-top: 3px">
               <!--              <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px" class="fa fa-commenting"-->
               <!--                 [ngStyle]="{'color':'gray'}"></i>-->
-              <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px"
+              <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;"
                  class="fa fa-check"
-                 [ngStyle]="{'color':'gray'}"></i>
+                 [ngStyle]="{'color':noticeObj.seen?'#4689ff':'gray'}"></i>
             </div>
           </div>
         </div>
@@ -159,6 +159,7 @@
                   [attr.data-bs-target]="noticeObj?.notice?.responses.length>0?'#'+noticeObj?.notice?.id:''"
                   aria-expanded="false"
                   aria-controls="noticeid_response_list"
+                  (click)="readResponses(noticeObj)"
                 >
                   <mat-icon
                     matChipAvatar

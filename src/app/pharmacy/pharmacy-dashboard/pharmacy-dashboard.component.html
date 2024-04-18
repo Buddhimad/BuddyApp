@@ -1,6 +1,17 @@
 <div class="inbox inbox-scroll" xmlns="http://www.w3.org/1999/html">
   <div class="row align-items-stretch" *ngIf="!viewNotice">
-    <div class="c-dashboardInfo col-6" (click)="filterNotices(0)">
+
+    <div *ngIf="searchedNotices" class="c-dashboardInfo col-6" (click)="filterNotices(0)">
+      <div class="wrap">
+        <h4 style="margin-top: 40px;border: 1px solid #cecece;border-radius: 5px;padding: 5px 1px"
+          class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
+        >
+          View Notices Today
+        </h4>
+      </div>
+    </div>
+
+    <div *ngIf="!searchedNotices" class="c-dashboardInfo col-6" (click)="filterNotices(0)">
       <div class="wrap">
         <h4
           class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
@@ -28,6 +39,7 @@
       >
       </div>
     </div>
+
     <div class="c-dashboardInfo col-6" (click)="filterNotices(1)">
       <div class="wrap">
         <h4
@@ -125,10 +137,10 @@
                [ngStyle]="{'color':'green'}"></i>
             <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px"
                class="fa fa-commenting"
-               [ngStyle]="{'color':'gray'}"></i>
+               [ngStyle]="{'color':noticeObj?.responseRead?'#4689ff':'gray'}"></i>
             <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px"
                class="fa fa-check"
-               [ngStyle]="{'color':'gray'}"></i>
+               [ngStyle]="{'color':noticeObj?.responseRead?'#4689ff':'gray'}"></i>
           </div>
         </div>
       </div>

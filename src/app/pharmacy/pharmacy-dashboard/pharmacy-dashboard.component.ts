@@ -57,7 +57,7 @@ export class PharmacyDashboardComponent implements OnInit {
 
   constructor(private router: Router, private sharedService: SharedService, private http: HttpClient,
               private _formBuilder: FormBuilder, private _mqttService: MqttService, private datePipe: DatePipe) {
-    this.subscribeNewTopic()
+    this.subscribeMqttTopic()
     // this.subscription = this.sharedService.routeControlSubject.subscribe((route:any)=>{
     //   console.log(route);
     //   this.navigateToDestination(route);
@@ -83,9 +83,10 @@ export class PharmacyDashboardComponent implements OnInit {
     let data = {
       pharmacyId: this.sharedService.getUserIdByLS(),
       townId: this.sharedService.getUserByLS().townId,
-      startDate: this.startDate,
-      endDate: this.endDate
+      startDate: this.datePipe.transform(this.startDate, "yyyy-MM-dd"),
+      endDate: this.datePipe.transform(this.endDate, "yyyy-MM-dd"),
     }
+    console.log(data)
     this.http.post<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy', data).subscribe((notices) => {
       this.noticesMain = notices
       this.setHeadersAndMsgs(0)
@@ -117,6 +118,8 @@ export class PharmacyDashboardComponent implements OnInit {
       this.searchedNotices = true
       this.startDate = this.range.controls['startDate'].value
       this.endDate = this.range.controls['endDate'].value
+      // this.todayNoticesCount.messages = 0
+      // this.todayNoticesCount.responses = 0
       this.getNoticesPharmacy()
     } else if (val === 3) {
       this.searchedNotices = true
@@ -125,7 +128,7 @@ export class PharmacyDashboardComponent implements OnInit {
     // console.log(this.range.controls['endDate'].value)
   }
 
-  subscribeNewTopic(): void {
+  subscribeMqttTopic(): void {
     let that = this;
     // console.log(this._mqttService.clientId)
     // if (!this.mqttSubscribed) {
@@ -137,6 +140,16 @@ export class PharmacyDashboardComponent implements OnInit {
       let notice = JSON.parse(message.payload.toString())
       this.setHeadersAndMsgs(1, notice)
     });
+
+    this._mqttService.observe(this.sharedService.getUserIdByLS()).subscribe((message: IMqttMessage) => {
+      let notice = JSON.parse(message.payload.toString())
+      console.log(notice)
+      // let notice = this.noticesMain.allNotices.find(notice => {
+      //   return notice.notice.id === noticeMsg.noticeId
+      // })
+      this.setHeadersAndMsgs(3, notice)
+    });
+    console.log(this._mqttService.observables)
     // }
   }
 
@@ -271,7 +284,7 @@ export class PharmacyDashboardComponent implements OnInit {
         Object.assign(notice, noticeObj);
       }
 
-      this.todayNoticesCount.responses=0
+      this.todayNoticesCount.responses = 0
       for (let response of this.noticesMain.dateNotices) {
         if (response.responded) {
           this.todayNoticesCount.responses++;
@@ -284,6 +297,15 @@ export class PharmacyDashboardComponent implements OnInit {
           this.allNoticesCount.responses++;
         }
       }
+    } else if (val === 3) { // responded
+      let notice = this.noticesMain.allNotices.find(notice => {
+        return notice.notice.id === noticeObj.noticeId
+      })
+      notice.responseRead = true
+      notice = this.noticesMain.dateNotices.find(notice => {
+        return notice.notice.id === noticeObj.noticeId
+      })
+      notice.responseRead = true
     }
   }
 

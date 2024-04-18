@@ -60,6 +60,31 @@ export class CustomerNoticesComponent implements OnInit {
     })
   }
 
+  readResponses(noticeObj) {
+    // console.log(noticeObj)
+    if (noticeObj?.notice?.responses.length > 0 && !noticeObj?.seen) {
+      // console.log(2)
+      let c_notice = {
+        notice: {
+          id: noticeObj?.notice?.id
+        }
+      };
+
+      this.http.post(this.sharedService.publicUrl + 'notice/msg_read_customer', c_notice).subscribe((response) => {
+        if (response) {
+          // noticeObj.response = response
+          noticeObj.seen = true
+          // noticeObj.responseRead = true
+          // this.setHeadersAndMsgs(2, noticeObj)
+          // console.log(noticeObj)
+        }
+      }, (error) => {
+        console.log(error)
+        //   // this.success = 2;
+      })
+    }
+  }
+
   funcViewNotice(noticeObj, view) {
     if (view) {
       // console.log(noticeObj)
