@@ -4,7 +4,7 @@
     <div *ngIf="searchedNotices" class="c-dashboardInfo col-6" (click)="filterNotices(0)">
       <div class="wrap">
         <h4 style="margin-top: 40px;border: 1px solid #cecece;border-radius: 5px;padding: 5px 1px"
-          class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
+            class="heading heading5 hind-font medium-font-weight c-dashboardInfo__title"
         >
           View Notices Today
         </h4>
@@ -86,7 +86,8 @@
         </div>
         <div class="col-12">
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterNotices(3)">Search Notices</button>
+            <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterNotices(3)">Search Notices
+            </button>
           </div>
         </div>
       </div>
@@ -111,14 +112,30 @@
         </div>
         <div class="col-12">
           <div class="row justify-content-center">
-            <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterNotices(2)">Filter By Date</button>
+            <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterNotices(2)">Filter By Date
+            </button>
           </div>
         </div>
       </div>
     </div>
-<!--    <div class="row justify-content-center">-->
-<!--      <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterDate(2)">Filter</button>-->
-<!--    </div>-->
+
+    <div style="display:flex;margin-top: 5px">
+      <div style="margin-right: 20px;margin-left: 5px">
+        <label for="received">
+          <input id="received" type="checkbox" [checked]="receivedMsgs" (click)="viewRespondedAndReceivedMsgs(0)">
+          Received
+        </label>
+      </div>
+      <div>
+        <label for="responded">
+          <input id="responded" type="checkbox" [checked]="respondedMsgs" (click)="viewRespondedAndReceivedMsgs(1)">
+          Responded
+        </label>
+      </div>
+    </div>
+    <!--    <div class="row justify-content-center">-->
+    <!--      <button type="button" class="btn btn-primary m-2 flex-fill" (click)="filterDate(2)">Filter</button>-->
+    <!--    </div>-->
     <!--    <div>-->
     <!--        <i style="display:flex;text-align: right;font-size: 18px;color: green" class="fa fa-circle">-->
     <!--          <span style="padding-left: 2px"> - New</span>-->
@@ -129,7 +146,7 @@
   <div class="inbox-list">
     <div class="message-item unread" *ngIf="!viewNotice" style="padding: 4px">
       <div *ngFor="let noticeObj of notices" style="padding: 4px">
-        <div class="notice-head" (click)="funcViewNotice(noticeObj,true)"
+        <div *ngIf="noticeObj.showMsg" class="notice-head" (click)="funcViewNotice(noticeObj,true)"
              [ngStyle]="{'font-weight':noticeObj?.seen?'normal':'bold'}" style="display:flex;">
           <div style="width: calc(100% - 20px)">{{'Notice - ' + noticeObj?.notice?.id}}</div>
           <div style="display:flex;margin-top: 3px">
@@ -137,10 +154,10 @@
                [ngStyle]="{'color':'green'}"></i>
             <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px"
                class="fa fa-commenting"
-               [ngStyle]="{'color':noticeObj?.responseRead?'#4689ff':'gray'}"></i>
+               [ngStyle]="{'color':noticeObj?.responseRead?'#005dff':'#a9a9a9'}"></i>
             <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px"
                class="fa fa-check"
-               [ngStyle]="{'color':noticeObj?.responseRead?'#4689ff':'gray'}"></i>
+               [ngStyle]="{'color':noticeObj?.responseRead?'#005dff':'#a9a9a9'}"></i>
           </div>
         </div>
       </div>

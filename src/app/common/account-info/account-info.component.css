@@ -306,3 +306,7 @@
 .color-grey{
   background-color: #263238 !important;
 }
+
+input[type=checkbox] {
+  transform: scale(1.2);
+}

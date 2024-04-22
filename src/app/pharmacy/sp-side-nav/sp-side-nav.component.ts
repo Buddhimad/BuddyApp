@@ -71,17 +71,17 @@ export class SPSideNavComponent {
 
   side_nav_list = [
     {
-      name: 'Received',
+      name: 'Dashboard',
       path: 'pharmacy/dashboard',
       icon: 'home',
       response_count: 250,
     },
-    {
-      name: 'Responded',
-      path: 'pharmacy/respond',
-      icon: 'back_hand',
-      response_count: 100,
-    },
+    // {
+    //   name: 'Responded',
+    //   path: 'pharmacy/respond',
+    //   icon: 'back_hand',
+    //   response_count: 100,
+    // },
   ];
 
   settings_list = [

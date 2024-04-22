@@ -23,13 +23,13 @@ export class AccountInfoComponent implements OnInit {
   @Input() userType;
 
   weekdays = [
-    {id: 0, name: 'Monday', open: '00:00', close: '00:00', io: false},
-    {id: 1, name: 'Tuesday', open: '00:00', close: '00:00', io: false},
-    {id: 2, name: 'Wednesday', open: '00:00', close: '00:00', io: false},
-    {id: 3, name: 'Thursday', open: '00:00', close: '00:00', io: false},
-    {id: 4, name: 'Friday', open: '00:00', close: '00:00', io: false},
-    {id: 5, name: 'Saturday', open: '00:00', close: '00:00', io: false},
-    {id: 6, name: 'Sunday', open: '00:00', close: '00:00', io: false}
+    {id: 0, name: 'Monday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 1, name: 'Tuesday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 2, name: 'Wednesday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 3, name: 'Thursday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 4, name: 'Friday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 5, name: 'Saturday', open: '00:00', close: '00:00', io: false, err: false},
+    {id: 6, name: 'Sunday', open: '00:00', close: '00:00', io: false, err: false}
   ]
 
   daySlot
@@ -158,7 +158,7 @@ export class AccountInfoComponent implements OnInit {
   onSubmit(e: any) {
     e.preventDefault()
     if (this.firstFormGroup.valid) {
-      console.log(this.firstFormGroup.value)
+      // console.log(this.firstFormGroup.value)
       // console.log(this.secondFormGroup.value)
       // let customerForm = Object.assign(this.firstFormGroup.value, this.secondFormGroup.value);
       let userForm = JSON.parse(JSON.stringify(this.firstFormGroup.value))
@@ -197,7 +197,7 @@ export class AccountInfoComponent implements OnInit {
           // this.success = 2;
         })
 
-      } else if (this.userType === 'pharmacy') {
+      } else if (this.userType === 'pharmacy' && this.checkTimeDiff()) {
         let duration = [];
         for (let i = 0; i < 7; i++) {
           duration.push({
@@ -246,9 +246,43 @@ export class AccountInfoComponent implements OnInit {
 
   setSelectedDay(selectedId) {
     let weekday = this.weekdays.find(option => option.id == selectedId);
-
+// console.log(this.userObj?.durationAuto)
     this.daySlot = JSON.parse(this.userObj?.duration)[weekday.id]
-    this.openOrClose = this.daySlot.io
+    this.openOrClose = JSON.parse(this.userObj?.durationAuto)[weekday.id].io
+    // console.log(this.openOrClose)
+  }
+
+  checkTimeDiff(day = null) {
+    if (day !== null) {
+      let open = day.open.split(":");
+      let close = day.close.split(":");
+      let openDate = new Date(0, 0, 0, parseInt(open[0]), parseInt(open[1]), 0);
+      let closeDate = new Date(0, 0, 0, parseInt(close[0]), parseInt(close[1]), 0);
+      if (closeDate.getTime() - openDate.getTime() > 0) {
+        day.err = false
+      } else {
+        day.err = true
+      }
+      return false
+    } else {
+      for (let dayObj of this.weekdays) {
+        let open = dayObj.open.split(":");
+        let close = dayObj.close.split(":");
+        let openDate = new Date(0, 0, 0, parseInt(open[0]), parseInt(open[1]), 0);
+        let closeDate = new Date(0, 0, 0, parseInt(close[0]), parseInt(close[1]), 0);
+        if (closeDate.getTime() - openDate.getTime() > 0) {
+          dayObj.err = false
+        } else {
+          dayObj.err = true
+        }
+      }
+      for (let dayObj of this.weekdays) {
+        if (dayObj.err) {
+          return false
+        }
+      }
+      return true
+    }
   }
 
   loadTowns() {
@@ -279,6 +313,7 @@ export class AccountInfoComponent implements OnInit {
   }
 
   formatTime(timeString) {
+    // console.log(timeString)
     if (timeString !== null) {
       const [hourString, minute] = timeString.split(":");
       const hour = +hourString % 24;

@@ -42,6 +42,9 @@ export class PharmacyDashboardComponent implements OnInit {
   respFormGroup
   submitted = false
 
+  receivedMsgs = true
+  respondedMsgs = true
+
   noticeObj
 
   notices = []
@@ -307,6 +310,44 @@ export class PharmacyDashboardComponent implements OnInit {
       })
       notice.responseRead = true
     }
+  }
+
+  viewRespondedAndReceivedMsgs(val) {
+    if (val === 0) {
+      if (this.receivedMsgs) {
+        this.receivedMsgs = false
+      } else {
+        this.receivedMsgs = true
+      }
+      for (let notice of this.noticesMain.dateNotices) {
+        if (!notice.responded) {
+          notice.showMsg = this.receivedMsgs
+        }
+      }
+      for (let notice of this.noticesMain.allNotices) {
+        if (!notice.responded) {
+          notice.showMsg = this.receivedMsgs
+        }
+      }
+    } else if (val === 1) {
+      if (this.respondedMsgs) {
+        this.respondedMsgs = false
+      } else {
+        this.respondedMsgs = true
+      }
+      for (let notice of this.noticesMain.dateNotices) {
+        if (notice.responded) {
+          notice.showMsg = this.respondedMsgs
+        }
+      }
+      for (let notice of this.noticesMain.allNotices) {
+        if (notice.responded) {
+          notice.showMsg = this.respondedMsgs
+        }
+      }
+    }
+
+
   }
 
   navigateToDestination(destination: String) {

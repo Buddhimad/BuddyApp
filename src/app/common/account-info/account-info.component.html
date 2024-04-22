@@ -2,36 +2,36 @@
   <!-- <div class="image">
     <img src="https://i.postimg.cc/bryMmCQB/profile-image.jpg" alt="Profile Image">
   </div> -->
-<!--  <div class="profile-pic d-flex justify-content-center mb-3">-->
-<!--    <label class="-label" for="file">-->
-<!--      <span class="glyphicon glyphicon-camera"></span>-->
-<!--      <span>Change Image</span>-->
-<!--    </label>-->
-<!--    <input id="file" type="file" onchange="loadFile(event)"/>-->
-<!--    <img-->
-<!--      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"-->
-<!--      id="output"-->
-<!--      width="200"-->
-<!--    />-->
-<!--  </div>-->
-<!--  <div class="d-flex justify-content-center">-->
-<!--    <h4>{{userObj?.appUser?.fullName}}</h4>-->
-<!--  </div>-->
-<!--  <div class="d-flex justify-content-center level" *ngIf="userObj?.appUser?.userVerify">-->
-<!--    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>-->
-<!--    <p class="" *ngIf="userType==='customer'">Verified Customer</p>-->
-<!--    <p class="" *ngIf="userType==='pharmacy'">Verified Pharmacy</p>-->
-<!--  </div>-->
-<!--  <div class="d-flex justify-content-center">-->
-<!--    <div class="rating">-->
-<!--      &lt;!&ndash; Five stars &ndash;&gt;-->
-<!--      <span class="star">&#9733;</span>-->
-<!--      <span class="star">&#9733;</span>-->
-<!--      <span class="star">&#9733;</span>-->
-<!--      <span class="star">&#9733;</span>-->
-<!--      <span class="star">&#9734;</span>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="profile-pic d-flex justify-content-center mb-3">-->
+  <!--    <label class="-label" for="file">-->
+  <!--      <span class="glyphicon glyphicon-camera"></span>-->
+  <!--      <span>Change Image</span>-->
+  <!--    </label>-->
+  <!--    <input id="file" type="file" onchange="loadFile(event)"/>-->
+  <!--    <img-->
+  <!--      src="https://cdn.pixabay.com/photo/2017/08/06/21/01/louvre-2596278_960_720.jpg"-->
+  <!--      id="output"-->
+  <!--      width="200"-->
+  <!--    />-->
+  <!--  </div>-->
+  <!--  <div class="d-flex justify-content-center">-->
+  <!--    <h4>{{userObj?.appUser?.fullName}}</h4>-->
+  <!--  </div>-->
+  <!--  <div class="d-flex justify-content-center level" *ngIf="userObj?.appUser?.userVerify">-->
+  <!--    <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon>-->
+  <!--    <p class="" *ngIf="userType==='customer'">Verified Customer</p>-->
+  <!--    <p class="" *ngIf="userType==='pharmacy'">Verified Pharmacy</p>-->
+  <!--  </div>-->
+  <!--  <div class="d-flex justify-content-center">-->
+  <!--    <div class="rating">-->
+  <!--      &lt;!&ndash; Five stars &ndash;&gt;-->
+  <!--      <span class="star">&#9733;</span>-->
+  <!--      <span class="star">&#9733;</span>-->
+  <!--      <span class="star">&#9733;</span>-->
+  <!--      <span class="star">&#9733;</span>-->
+  <!--      <span class="star">&#9734;</span>-->
+  <!--    </div>-->
+  <!--  </div>-->
   <app-profile-header [user]="userObj?.appUser"></app-profile-header>
 
   <div class="d-flex justify-content-between mt-3">
@@ -58,30 +58,40 @@
               <thead>
               <tr>
                 <th scope="col" class="text-primary text-center">Day</th>
-                <th scope="col" class="text-primary text-center">Is Open</th>
+                <!--                <th scope="col" class="text-primary text-center">Is Open</th>-->
                 <th scope="col" class="text-primary text-center">Open</th>
                 <th scope="col" class="text-primary text-center">Close</th>
               </tr>
               </thead>
               <tbody>
               <tr *ngFor="let day of weekdays">
-                <th scope="row" class="text-success">{{ day.name }}</th>
-                <td class="text-center">
-                  <input
-                    type="checkbox"
-                    class="form-check-input"
-                    [checked]="day.io"
-                    (change)="day.io?day.io=false:day.io=true"
-                  />
-                </td>
+                <th scope="row" class="text-success">
+                  <span [ngStyle]="{'color':day.err?'red':'green'}">
+                {{ day.name }}
+                  </span>
+                </th>
+                <!--                <td class="text-center">-->
+                <!--                  <input-->
+                <!--                    type="checkbox"-->
+                <!--                    class="form-check-input"-->
+                <!--                    [checked]="day.io"-->
+                <!--                    (change)="day.io?day.io=false:day.io=true"-->
+                <!--                  />-->
+                <!--                </td>-->
                 <td>
-                  <input type="time" [(ngModel)]="day.open" [ngModelOptions]="{standalone: true}">
+                  <input type="time" [(ngModel)]="day.open" [ngModelOptions]="{standalone: true}"
+                         style="border: 1px solid"
+                         [ngStyle]="{'border-color':day.err?'red':'#777777'}"
+                         (change)="checkTimeDiff(day)">
                   <!--                  <select class="form-control">-->
                   <!--                    <option *ngFor="let opentime of openTimes" value="">{{ opentime }}</option>-->
                   <!--                  </select>-->
                 </td>
                 <td>
-                  <input type="time" [(ngModel)]="day.close" [ngModelOptions]="{standalone: true}">
+                  <input type="time" [(ngModel)]="day.close" [ngModelOptions]="{standalone: true}"
+                         style="border: 1px solid"
+                         [ngStyle]="{'border-color':day.err?'red':'#777777'}"
+                         (change)="checkTimeDiff(day)">
                   <!--                  <select class="form-control">-->
                   <!--                    <option *ngFor="let closetime of closeTimes" value="closetime">{{ closetime }}</option>-->
                   <!--                  </select>-->
@@ -197,20 +207,25 @@
   <div *ngIf="!isEditClick">
 
     <div class="row p-1" *ngIf="userType==='pharmacy'">
-      <label class="text-grey"
-      >
-        <mat-icon
-          aria-hidden="false"
-          aria-label="open-close icon"
-          fontIcon="store"
-          class="me-2"
-        ></mat-icon
-        >
-        <span class="va-top"><Strong>Open - Close
-          <span style="color: green;padding-left: 5px" *ngIf="openOrClose">(Opened)</span>
-          <span style="color: red;padding-left: 5px" *ngIf="!openOrClose">(Closed)</span>
-        </Strong></span></label
-      >
+      <label class="text-grey" style="margin-bottom: 5px;">
+        <span class="va-top" style="display:flex;margin-bottom: 15px">
+          <mat-icon
+            aria-hidden="false"
+            aria-label="open-close icon"
+            fontIcon="store"
+            class="me-2"
+          ></mat-icon
+          >
+          <Strong style="width: calc(100% - 190px)">Open - Close
+            <span style="color: green;padding-left: 5px" *ngIf="openOrClose">(Opened)</span>
+            <span style="color: red;padding-left: 5px" *ngIf="!openOrClose">(Closed)</span>
+          </Strong>
+          <div style="margin-bottom: 5px">
+            <span style="padding-right: 15px;font-weight: bold">Temporary {{openOrClose?'Close':'Open'}}</span>
+            <input type="checkbox">
+          </div>
+        </span>
+      </label>
       <div class="d-flex">
         <div class="flex-shrink-0 me-5">
           <select class="form-select form-select-sm ms-5" aria-label="weekdays" (change)="getDay($event)">
