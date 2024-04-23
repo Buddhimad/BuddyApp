@@ -85,7 +85,7 @@ const routes: Routes = [
       //   component: NotificationPanelComponent
       // },
       {
-        path: 'customername/profile',
+        path: 'customer/profile',
         component: CustomerProfileComponent
       },
       {

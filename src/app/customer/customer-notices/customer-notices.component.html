@@ -1,7 +1,7 @@
 <div class="row justify-content-center">
 
   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-    <div style="display:flex;padding: 20px">
+    <div style="display:flex;padding: 20px" *ngIf="!viewNotice">
       <div style="width: calc(100% - 30px);font-size: 20px;font-weight: bold;color: #00a82e">Notices</div>
       <div (click)="getNoticesCustomer()">
         <i style="display:flex;text-align: right;font-size: 30px;color: #00a82e;cursor: pointer" class="fa fa-refresh"></i>
