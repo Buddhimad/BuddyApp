@@ -1,185 +1,232 @@
+<div class="profile-section inbox-scroll">
+  <div class="box1 box" style="padding: 16px;">
 
-      <div class="profile-section inbox-scroll">
-      <div class="box1 box ">
-          <div class="content">
-            <div class="profile-pic d-flex justify-content-center mb-3">
-              <label class="-label" for="file">
-                <!-- <span class="glyphicon glyphicon-camera"></span>
-                <span>Change Image</span> -->
-              </label>
-              <!-- <input id="file" type="file" onchange="loadFile(event)" /> -->
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/1200px-Pierre-Person.jpg"
-                id="output"
-                width="200"
-              />
-            </div>
-            <div class="d-flex justify-content-center">
-              <h4>Buddhima Vajirapani Dahanayake</h4>
-            </div>
-            <div class="d-flex justify-content-center level">
-              <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon><p class="">Verified Customer</p>
-            </div>
-            <div class="d-flex justify-content-center">
-              <div class="rating">
-                <!-- Five stars -->
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9733;</span>
-                <span class="star">&#9734;</span>
-              </div>
-            </div>
+    <div (click)="goBack()" style="margin-bottom: 30px">
+      <i class="fa fa-arrow-left" aria-hidden="true"
+         style="font-size: 30px"></i>
+    </div>
 
-            <div class="d-flex justify-content-between mt-3">
-             <h5 class="card-title">Intro</h5>
-             <button type="button" mat-raised-button color="primary" class="primary-color h-fit-content"
-             data-bs-toggle="collapse" data-bs-target="#rate_review_collapse" aria-expanded="false" aria-controls="rate_review_collapse"
-             ><mat-icon aria-hidden="false" aria-label="star_rate icon" fontIcon="star_rate"></mat-icon> Write a Review</button>
-            </div>
-            <hr>
-            <div class="collapse" id="rate_review_collapse">
-              <div class="card card-body">
-                <div class="container">
-                  <div class="review-container">
-                    <!-- Rating Section -->
-                    <div class="mb-3">
-                      <mat-form-field class="w-100">
-                        <mat-label>Rating:</mat-label>
-                        <mat-select id="rating" name="rating">
-                          <mat-option value="5">5 stars</mat-option>
-                          <mat-option value="4">4 stars</mat-option>
-                          <mat-option value="3">3 stars</mat-option>
-                          <mat-option value="2">2 stars</mat-option>
-                          <mat-option value="1">1 star</mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                    </div>
-                    <!-- Review Textarea -->
-                    <div class="mb-3">
-                      <mat-form-field class="w-100">
-                        <mat-label>Write a review:</mat-label>
-                        <textarea matInput id="review" name="review"></textarea>
-                      </mat-form-field>
-                    </div>
+    <div class="content">
+      <!--            <div class="profile-pic d-flex justify-content-center mb-3">-->
+      <!--              <label class="-label" for="file">-->
+      <!--                &lt;!&ndash; <span class="glyphicon glyphicon-camera"></span>-->
+      <!--                <span>Change Image</span> &ndash;&gt;-->
+      <!--              </label>-->
+      <!--              &lt;!&ndash; <input id="file" type="file" onchange="loadFile(event)" /> &ndash;&gt;-->
+      <!--              <img-->
+      <!--                src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Pierre-Person.jpg/1200px-Pierre-Person.jpg"-->
+      <!--                id="output"-->
+      <!--                width="200"-->
+      <!--              />-->
+      <!--            </div>-->
+      <!--            <div class="d-flex justify-content-center">-->
+      <!--              <h4>Buddhima Vajirapani Dahanayake</h4>-->
+      <!--            </div>-->
+      <!--            <div class="d-flex justify-content-center level">-->
+      <!--              <mat-icon aria-hidden="false" aria-label="Example verified_user icon" fontIcon="verified_user"></mat-icon><p class="">Verified Customer</p>-->
+      <!--            </div>-->
+      <!--            <div class="d-flex justify-content-center">-->
+      <!--              <div class="rating">-->
+      <!--                &lt;!&ndash; Five stars &ndash;&gt;-->
+      <!--                <span class="star">&#9733;</span>-->
+      <!--                <span class="star">&#9733;</span>-->
+      <!--                <span class="star">&#9733;</span>-->
+      <!--                <span class="star">&#9733;</span>-->
+      <!--                <span class="star">&#9734;</span>-->
+      <!--              </div>-->
+      <!--            </div>-->
+      <app-profile-header [user]="userObj?.appUser"></app-profile-header>
 
-                    <button type="submit" class="btn btn-primary mr-auto">Submit Review</button>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location" class="me-2"></mat-icon><span class="va-top"><strong>Address</strong></span></label>
-              <p class="ms-5">123 Main Street, Shopville</p>
-              </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon><span class="va-top"><strong>Province</strong></span></label>
-              <p class="ms-5">Example Province</p>
-              </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on" class="me-2"></mat-icon><span class="va-top"><strong>District</strong></span></label>
-              <p class="ms-5">Example District</p>
-             </div>
-              <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city" class="me-2"></mat-icon><span class="va-top"><Strong>Located Town</Strong></span></label>
-              <p class="ms-5">Example Town</p>
-            </div>
-            <div class="row p-1">
-              <label class="text-grey"><mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon><span class="va-top"><Strong>Contact Number</Strong></span></label>
-              <p class="ms-5">0765363827</p>
-            </div>
-          </div>
-
-        </div>
-          <div class="ratings-card ratings-vertical mt-2">
-            <div class="d-flex justify-content-between">
-              <div class="card-title">Ratings</div>
-              <div>
-                <span class="me-2"><strong>3.8</strong></span>
-                <div class="rating">
-                  <!-- Five stars -->
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9733;</span>
-                  <span class="star">&#9734;</span>
-                </div>
-                </div>
-            </div>
-
-                      <div class="card-content">
-                          <div class="group-a">
-                              <div class="ratings-wrapper">
-                                  <div class="rating-star">5 Star</div>
-                                  <div class="rating-precentage">
-                                      <div class="inner" style="--value:69%"></div>
-                                  </div>
-                              </div>
-                              <div class="ratings-wrapper">
-                                  <div class="rating-star">4 Star</div>
-                                  <div class="rating-precentage">
-                                      <div class="inner" style="--value:50%"></div>
-                                  </div>
-                              </div>
-                              <div class="ratings-wrapper">
-                                  <div class="rating-star">3 Star</div>
-                                  <div class="rating-precentage">
-                                      <div class="inner" style="--value:75%"></div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="group-b">
-                              <div class="ratings-wrapper">
-                                  <div class="rating-star">2 Star</div>
-                                  <div class="rating-precentage">
-                                      <div class="inner" style="--value:95%"></div>
-                                  </div>
-                              </div>
-                              <div class="ratings-wrapper">
-                                  <div class="rating-star">1 Star</div>
-                                  <div class="rating-precentage">
-                                      <div class="inner" style="--value:90%"></div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-          <div>
-            <div class="review-card mt-2">
-              <div class="card-title">Reviews & Ratings</div>
-              <div class="testimonial-box">
-                <!--top------------------------->
-                <div class="box-top">
-                    <!--profile----->
-                    <div class="profile">
-                        <!--img---->
-                        <div class="review-profile-img">
-                            <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png" />
-                        </div>
-                        <!--name-and-username-->
-                        <div class="name-user">
-                            <strong>Liam mendes</strong>
-                            <span>liammendes</span>
-                        </div>
-                    </div>
-                    <!--reviews------>
-                    <div class="rating">
-                      <!-- Five stars -->
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9733;</span>
-                      <span class="star">&#9734;</span>
-                    </div>
-                </div>
-                <!--Comments---------------------------------------->
-                <div class="client-comment">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt blanditiis sed atque cumque.</p>
-                </div>
-            </div>
-            </div>
-          </div>
-        <div class="force-overflow"></div>
+      <div class="d-flex justify-content-between mt-3">
+        <h5 class="card-title">Intro</h5>
+        <button type="button" mat-raised-button color="primary" class="primary-color h-fit-content"
+                data-bs-toggle="collapse" data-bs-target="#rate_review_collapse" aria-expanded="false"
+                aria-controls="rate_review_collapse" #reviewBtn
+        >
+          <mat-icon aria-hidden="false" aria-label="star_rate icon" fontIcon="star_rate"></mat-icon>
+          Write a Review
+        </button>
       </div>
+      <hr>
+      <div class="collapse" id="rate_review_collapse">
+        <form [formGroup]="firstFormGroup" (ngSubmit)="onSubmit($event)"
+              #firstFormDirective="ngForm">
+          <div class="card card-body">
+            <div class="container">
+              <div class="review-container">
+                <!-- Rating Section -->
+                <div class="mb-3">
+                  <div class="rating" style="display:flex;">
+                    <!-- Five stars -->
+                    <div style="margin-right: 15px;padding-top: 8px;font-weight: bold">Rating</div>
+                    <div>
+                    <span class="star" *ngFor="let star of reviewStars;let i=index"
+                          (click)="setStars(i+1)" style="cursor: pointer">
+                    {{star.rated ? '&#9733;' : '&#9734;'}}
+                    </span>
+                    </div>
+                    <mat-error style="margin-left: 40px;padding-top: 10px"
+                               *ngIf="submitted && reviewVal===0">
+                      Rating is required
+                    </mat-error>
+                    <!--                  <span class="star">&#9733;</span>-->
+                    <!--                  <span class="star">&#9733;</span>-->
+                    <!--                  <span class="star">&#9733;</span>-->
+                    <!--                  <span class="star">&#9734;</span>-->
+                  </div>
+                  <!--                <mat-form-field class="w-100">-->
+                  <!--                  <mat-label>Rating:</mat-label>-->
+                  <!--                  <mat-select id="rating" name="rating">-->
+                  <!--                    <mat-option value="5">5 stars</mat-option>-->
+                  <!--                    <mat-option value="4">4 stars</mat-option>-->
+                  <!--                    <mat-option value="3">3 stars</mat-option>-->
+                  <!--                    <mat-option value="2">2 stars</mat-option>-->
+                  <!--                    <mat-option value="1">1 star</mat-option>-->
+                  <!--                  </mat-select>-->
+                  <!--                </mat-form-field>-->
+                </div>
+                <!-- Review Textarea -->
+                <div class="mb-3">
+                  <mat-form-field class="w-100">
+                    <mat-label>Write a review:</mat-label>
+                    <textarea matInput id="review" name="review"
+                              formControlName="reviewTxt"></textarea>
+                    <mat-error>Review is required</mat-error>
+                  </mat-form-field>
+                </div>
+
+                <button type="submit" class="btn btn-primary mr-auto" style="font-weight: bold">Submit Review</button>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+
+      <div class="row p-1">
+        <label class="text-grey">
+          <mat-icon aria-hidden="false" aria-label="my_location icon" fontIcon="my_location" class="me-2"></mat-icon>
+          <span class="va-top"><strong>Address</strong></span></label>
+        <p class="ms-5">{{userObj?.appUser?.address}}</p>
+      </div>
+      <div class="row p-1">
+        <label class="text-grey">
+          <mat-icon aria-hidden="false" aria-label="map icon" fontIcon="map" class="me-2"></mat-icon>
+          <span class="va-top"><strong>Province</strong></span></label>
+        <p class="ms-5">{{userObj?.appUser?.town?.district?.province?.name}}</p>
+      </div>
+      <div class="row p-1">
+        <label class="text-grey">
+          <mat-icon aria-hidden="false" aria-label="location_on icon" fontIcon="location_on" class="me-2"></mat-icon>
+          <span class="va-top"><strong>District</strong></span></label>
+        <p class="ms-5">{{userObj?.appUser?.town?.district?.name}}</p>
+      </div>
+      <div class="row p-1">
+        <label class="text-grey">
+          <mat-icon aria-hidden="false" aria-label="location_city icon" fontIcon="location_city"
+                    class="me-2"></mat-icon>
+          <span class="va-top"><Strong>Located Town</Strong></span></label>
+        <p class="ms-5">{{userObj?.appUser?.town?.name}}</p>
+      </div>
+      <div class="row p-1">
+        <label class="text-grey">
+          <mat-icon aria-hidden="false" aria-label="call icon" fontIcon="call" class="me-2"></mat-icon>
+          <span class="va-top"><Strong>Contact Number</Strong></span></label>
+        <p class="ms-5" *ngFor="let contactDetail of userObj?.appUser?.contactDetails">
+          {{contactDetail.number}}
+      </div>
+    </div>
+
+  </div>
+  <div class="ratings-card ratings-vertical mt-2">
+    <div class="d-flex justify-content-between">
+      <div class="card-title">Ratings</div>
+      <div>
+        <span class="me-2"><strong>3.8</strong></span>
+        <div class="rating">
+          <!-- Five stars -->
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9733;</span>
+          <span class="star">&#9734;</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-content">
+      <div class="group-a">
+        <div class="ratings-wrapper">
+          <div class="rating-star">5 Star</div>
+          <div class="rating-precentage">
+            <div class="inner" style="--value:69%"></div>
+          </div>
+        </div>
+        <div class="ratings-wrapper">
+          <div class="rating-star">4 Star</div>
+          <div class="rating-precentage">
+            <div class="inner" style="--value:50%"></div>
+          </div>
+        </div>
+        <div class="ratings-wrapper">
+          <div class="rating-star">3 Star</div>
+          <div class="rating-precentage">
+            <div class="inner" style="--value:75%"></div>
+          </div>
+        </div>
+      </div>
+      <div class="group-b">
+        <div class="ratings-wrapper">
+          <div class="rating-star">2 Star</div>
+          <div class="rating-precentage">
+            <div class="inner" style="--value:95%"></div>
+          </div>
+        </div>
+        <div class="ratings-wrapper">
+          <div class="rating-star">1 Star</div>
+          <div class="rating-precentage">
+            <div class="inner" style="--value:90%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="review-card mt-2">
+      <div class="card-title">Reviews & Ratings</div>
+      <div class="testimonial-box">
+        <!--top------------------------->
+        <div class="box-top">
+          <!--profile----->
+          <div class="profile">
+            <!--img---->
+            <div class="review-profile-img">
+              <img src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"/>
+            </div>
+            <!--name-and-username-->
+            <div class="name-user">
+              <strong>Liam mendes</strong>
+              <span>liammendes</span>
+            </div>
+          </div>
+          <!--reviews------>
+          <div class="rating">
+            <!-- Five stars -->
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9733;</span>
+            <span class="star">&#9734;</span>
+          </div>
+        </div>
+        <!--Comments---------------------------------------->
+        <div class="client-comment">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem, quaerat quis? Provident temporibus
+            architecto asperiores nobis maiores nisi a. Quae doloribus ipsum aliquam tenetur voluptates incidunt
+            blanditiis sed atque cumque.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="force-overflow"></div>
+</div>

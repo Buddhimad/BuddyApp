@@ -56,6 +56,7 @@ import {ProfileHeaderComponent} from './common/profile-header/profile-header.com
 import {ImageViewerComponent} from './common/image-viewer/image-viewer.component';
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 import {SharedService} from "./common/shared-service.service";
+import { ProfileHeaderSmallComponent } from './common/profile-header-small/profile-header-small.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -89,7 +90,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     DateAgoPipe,
     BuddyFileUploadComponent,
     ProfileHeaderComponent,
-    ImageViewerComponent
+    ImageViewerComponent,
+    ProfileHeaderSmallComponent
   ],
   imports: [
     BrowserModule,
