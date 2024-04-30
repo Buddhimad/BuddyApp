@@ -12,11 +12,15 @@
     <span>March 21,18:45pm <i class="fa fa-globe"></i></span>
     <div class="rating">
       <!-- Five stars -->
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9733;</span>
-      <span class="star">&#9734;</span>
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9733;</span>-->
+<!--      <span class="star">&#9734;</span>-->
+      <span class="star" *ngFor="let star of getStars(appUser?.ratingScore);let i=index"
+            style="cursor: pointer">
+                    {{star.rated ? '&#9733;' : '&#9734;'}}
+                    </span>
     </div>
   </h3>
   <span

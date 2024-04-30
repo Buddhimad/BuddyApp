@@ -20,6 +20,7 @@ import {ImageViewerComponent} from "../../common/image-viewer/image-viewer.compo
 import {ValidateTelephone} from "../../validations/telephone-validator";
 import {ValidatePrescription} from "../../validations/prescription-validator";
 import {IMqttMessage, MqttService} from "ngx-mqtt";
+import {PharmacyDashboardService} from "./pharmacy-dashboard.service";
 
 @Component({
   selector: 'app-pharmacy-dashboard',
@@ -49,20 +50,15 @@ export class PharmacyDashboardComponent implements OnInit {
 
   notices = []
 
-  todayNoticesCount = {
-    messages: 0,
-    responses: 0
-  }
-  allNoticesCount = {
-    messages: 0,
-    responses: 0
-  }
+  todayNoticesCount = this.pdService.todayNoticesCount
+  allNoticesCount = this.pdService.allNoticesCount
 
   showCustomer = false
 
   constructor(private router: Router, private sharedService: SharedService, private http: HttpClient,
-              private _formBuilder: FormBuilder, private _mqttService: MqttService, private datePipe: DatePipe) {
-    this.subscribeMqttTopic()
+              private _formBuilder: FormBuilder, private _mqttService: MqttService, private datePipe: DatePipe,
+              private pdService: PharmacyDashboardService) {
+    // this.subscribeMqttTopic()
     // this.subscription = this.sharedService.routeControlSubject.subscribe((route:any)=>{
     //   console.log(route);
     //   this.navigateToDestination(route);
@@ -72,7 +68,10 @@ export class PharmacyDashboardComponent implements OnInit {
   searchedNotices = true
 
   ngOnInit(): void {
+    // this.pdService.isInDashboard = true
+    // if (this.pdService.isInDashboard) {
     this.filterNotices(0)
+    // }
     // this.viewNotice = this.pdService.preState.viewNotice
     // this.noticeObj = this.pdService.preState.noticeObj
     this.respFormGroup = this._formBuilder.group({
@@ -83,31 +82,31 @@ export class PharmacyDashboardComponent implements OnInit {
     });
   }
 
-  noticesMain
+  // noticesMain
 
-  getNoticesPharmacy() {
-    // if (this.searchedNotices) {
-    let data = {
-      pharmacyId: this.sharedService.getUserIdByLS(),
-      townId: this.sharedService.getUserByLS().townId,
-      startDate: this.datePipe.transform(this.startDate, "yyyy-MM-dd"),
-      endDate: this.datePipe.transform(this.endDate, "yyyy-MM-dd"),
-    }
-    // console.log(data)
-    // if (this.pdService.preState.noticesMain === undefined) {
-    this.http.post<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy', data).subscribe((notices) => {
-      this.noticesMain = notices
-      // console.log(this.noticesMain)
-      this.setHeadersAndMsgs(0)
-    })
-    // } else {
-    //   this.noticesMain = this.pdService.preState.noticesMain
-    //   this.setHeadersAndMsgs(0)
-    // }
-    // }
-  }
+  // getNoticesPharmacy() {
+  //   // if (this.searchedNotices) {
+  //   let data = {
+  //     pharmacyId: this.sharedService.getUserIdByLS(),
+  //     townId: this.sharedService.getUserByLS().townId,
+  //     startDate: this.datePipe.transform(this.startDate, "yyyy-MM-dd"),
+  //     endDate: this.datePipe.transform(this.endDate, "yyyy-MM-dd"),
+  //   }
+  //   // console.log(data)
+  //   // if (this.pdService.preState.noticesMain === undefined) {
+  //   this.http.post<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy', data).subscribe((notices) => {
+  //     this.noticesMain = notices
+  //     // console.log(this.noticesMain)
+  //     this.setHeadersAndMsgs(0)
+  //   })
+  //   // } else {
+  //   //   this.noticesMain = this.pdService.preState.noticesMain
+  //   //   this.setHeadersAndMsgs(0)
+  //   // }
+  //   // }
+  // }
 
-  noticeSection = 0
+  // noticeSection = 0
 
   filterNotices(val) {
     // this.pdService.preState.filterNoticesVal = val
@@ -115,22 +114,22 @@ export class PharmacyDashboardComponent implements OnInit {
     // this.startDate = date
     // this.endDate = date
     if (val === 0) {
-      this.noticeSection = val
+      this.pdService.noticeSection = val
       let date = new Date();
       this.startDate = date
       this.endDate = date
       this.range.controls['startDate'].setValue(this.startDate)
       this.range.controls['endDate'].setValue(this.endDate)
-      this.notices = this.noticesMain?.dateNotices
+      this.notices = this.pdService.noticesMain?.dateNotices
       if (this.searchedNotices) {
-        this.getNoticesPharmacy()
+        // this.pdService.getNoticesPharmacy(this.startDate, this.endDate)
         this.searchedNotices = false
       }
     } else if (val === 1) {
-      this.noticeSection = val
+      this.pdService.noticeSection = val
       this.startDate = null
       this.endDate = null
-      this.notices = this.noticesMain?.allNotices
+      this.notices = this.pdService.noticesMain?.allNotices
       // console.log(this.pdService.customerId)
       // if (this.pdService.customerId !== undefined) {
       //   this.range.controls['startDate'].setValue(this.startDate)
@@ -145,7 +144,8 @@ export class PharmacyDashboardComponent implements OnInit {
       this.endDate = this.range.controls['endDate'].value
       // this.todayNoticesCount.messages = 0
       // this.todayNoticesCount.responses = 0
-      this.getNoticesPharmacy()
+      let date = new Date();
+      this.pdService.getNoticesPharmacy(date, date)
     } else if (val === 3) {
       this.searchedNotices = true
     }
@@ -153,30 +153,30 @@ export class PharmacyDashboardComponent implements OnInit {
     // console.log(this.range.controls['endDate'].value)
   }
 
-  subscribeMqttTopic(): void {
-    let that = this;
-    // console.log(this._mqttService.clientId)
-    // if (!this.mqttSubscribed) {
-    //   this.mqttSubscribed = true
-    // if (localStorage.getItem('user') !== null) {
-    // console.log(this.getDeviceId())
-    this._mqttService.observables = {}
-    this._mqttService.observe(this.sharedService.getUserByLS()['townId']).subscribe((message: IMqttMessage) => {
-      let notice = JSON.parse(message.payload.toString())
-      this.setHeadersAndMsgs(1, notice)
-    });
-
-    this._mqttService.observe(this.sharedService.getUserIdByLS()).subscribe((message: IMqttMessage) => {
-      let notice = JSON.parse(message.payload.toString())
-      // console.log(notice)
-      // let notice = this.noticesMain.allNotices.find(notice => {
-      //   return notice.notice.id === noticeMsg.noticeId
-      // })
-      this.setHeadersAndMsgs(3, notice)
-    });
-    // console.log(this._mqttService.observables)
-    // }
-  }
+  // subscribeMqttTopic(): void {
+  //   let that = this;
+  //   // console.log(this._mqttService.clientId)
+  //   // if (!this.mqttSubscribed) {
+  //   //   this.mqttSubscribed = true
+  //   // if (localStorage.getItem('user') !== null) {
+  //   // console.log(this.getDeviceId())
+  //   this._mqttService.observables = {}
+  //   this._mqttService.observe(this.sharedService.getUserByLS()['townId']).subscribe((message: IMqttMessage) => {
+  //     let notice = JSON.parse(message.payload.toString())
+  //     this.setHeadersAndMsgs(1, notice)
+  //   });
+  //
+  //   this._mqttService.observe(this.sharedService.getUserIdByLS()).subscribe((message: IMqttMessage) => {
+  //     let notice = JSON.parse(message.payload.toString())
+  //     // console.log(notice)
+  //     // let notice = this.noticesMain.allNotices.find(notice => {
+  //     //   return notice.notice.id === noticeMsg.noticeId
+  //     // })
+  //     this.setHeadersAndMsgs(3, notice)
+  //   });
+  //   // console.log(this._mqttService.observables)
+  //   // }
+  // }
 
   funcViewNotice(noticeObj, view) {
     if (view) {
@@ -200,7 +200,7 @@ export class PharmacyDashboardComponent implements OnInit {
           if (response) {
             noticeObj.response = response
             noticeObj.seen = true
-            this.setHeadersAndMsgs(2, noticeObj)
+            this.pdService.setHeadersAndMsgs(2, noticeObj)
             // console.log(noticeObj)
           }
         }, (error) => {
@@ -250,7 +250,7 @@ export class PharmacyDashboardComponent implements OnInit {
         if (response) {
           noticeObj.response = response
           noticeObj.responded = true
-          this.setHeadersAndMsgs(2, noticeObj)
+          this.pdService.setHeadersAndMsgs(2, noticeObj)
           // console.log(noticeObj)
         }
         //   // this.patient.patientId = patient.patientId;
@@ -272,74 +272,75 @@ export class PharmacyDashboardComponent implements OnInit {
     }
   }
 
-  setHeadersAndMsgs(val, noticeObj?) {
-    if (val === 0) { //set counts
-      this.notices = this.noticesMain.dateNotices
-      // console.log(notices)
-      // this.todayNoticesCount.messages = notices.dateNotices.length
-      // if (val === 1) {
-      this.todayNoticesCount.messages = this.noticesMain?.dateNotices?.length
-      this.todayNoticesCount.responses = 0
-      if (this.noticesMain?.dateNotices !== undefined) {
-        for (let response of this.noticesMain?.dateNotices) {
-          if (response.responded) {
-            this.todayNoticesCount.responses++;
-          }
-        }
-      }
-      // }
-      // this.allNoticesCount.messages = notices.allNotices.length
-      this.allNoticesCount.messages = this.noticesMain?.allNotices?.length
-      this.allNoticesCount.responses = 0
-      if (this.noticesMain?.allNotices !== undefined) {
-        for (let response of this.noticesMain.allNotices) {
-          if (response.responded) {
-            this.allNoticesCount.responses++;
-          }
-        }
-      }
-    } else if (val === 1) { // mqtt
-      this.noticesMain.dateNotices.unshift(noticeObj)
-      this.noticesMain.allNotices.unshift(noticeObj)
-      this.todayNoticesCount.messages = this.noticesMain.dateNotices.length
-      this.allNoticesCount.messages = this.noticesMain.allNotices.length
-    } else if (val === 2) { // responded
-      if (this.noticeSection === 0) { // today
-        let notice = this.noticesMain.allNotices.find(notice => {
-          return notice.notice.id === noticeObj.notice.id
-        })
-        Object.assign(notice, noticeObj);
-      } else if (this.noticeSection === 1) { // all
-        let notice = this.noticesMain.dateNotices.find(notice => {
-          return notice.notice.id === noticeObj.notice.id
-        })
-        Object.assign(notice, noticeObj);
-      }
-
-      this.todayNoticesCount.responses = 0
-      for (let response of this.noticesMain.dateNotices) {
-        if (response.responded) {
-          this.todayNoticesCount.responses++;
-        }
-      }
-
-      this.allNoticesCount.responses = 0
-      for (let response of this.noticesMain.allNotices) {
-        if (response.responded) {
-          this.allNoticesCount.responses++;
-        }
-      }
-    } else if (val === 3) { // responded
-      let notice = this.noticesMain.allNotices.find(notice => {
-        return notice.notice.id === noticeObj.noticeId
-      })
-      notice.responseRead = true
-      notice = this.noticesMain.dateNotices.find(notice => {
-        return notice.notice.id === noticeObj.noticeId
-      })
-      notice.responseRead = true
-    }
-  }
+  // setHeadersAndMsgs(val, noticeObj?) {
+  //   if (val === 0) { //set counts
+  //     this.notices = this.noticesMain.dateNotices
+  //     // console.log(notices)
+  //     // this.todayNoticesCount.messages = notices.dateNotices.length
+  //     // if (val === 1) {
+  //     this.todayNoticesCount.messages = this.noticesMain?.dateNotices?.length
+  //     this.todayNoticesCount.responses = 0
+  //     if (this.noticesMain?.dateNotices !== undefined) {
+  //       for (let response of this.noticesMain?.dateNotices) {
+  //         if (response.responded) {
+  //           this.todayNoticesCount.responses++;
+  //         }
+  //       }
+  //     }
+  //     // }
+  //     // this.allNoticesCount.messages = notices.allNotices.length
+  //     this.allNoticesCount.messages = this.noticesMain?.allNotices?.length
+  //     this.allNoticesCount.responses = 0
+  //     if (this.noticesMain?.allNotices !== undefined) {
+  //       for (let response of this.noticesMain.allNotices) {
+  //         if (response.responded) {
+  //           this.allNoticesCount.responses++;
+  //         }
+  //       }
+  //     }
+  //   } else if (val === 1) { // mqtt
+  //     this.noticesMain.dateNotices.unshift(noticeObj)
+  //     this.noticesMain.allNotices.unshift(noticeObj)
+  //     this.todayNoticesCount.messages = this.noticesMain.dateNotices.length
+  //     this.allNoticesCount.messages = this.noticesMain.allNotices.length
+  //   } else if (val === 2) { // responded
+  //     if (this.noticeSection === 0) { // today
+  //       let notice = this.noticesMain.allNotices.find(notice => {
+  //         return notice.notice.id === noticeObj.notice.id
+  //       })
+  //       Object.assign(notice, noticeObj);
+  //     } else if (this.noticeSection === 1) { // all
+  //       let notice = this.noticesMain.dateNotices.find(notice => {
+  //         return notice.notice.id === noticeObj.notice.id
+  //       })
+  //       Object.assign(notice, noticeObj);
+  //     }
+  //
+  //     this.todayNoticesCount.responses = 0
+  //     for (let response of this.noticesMain.dateNotices) {
+  //       if (response.responded) {
+  //         this.todayNoticesCount.responses++;
+  //       }
+  //     }
+  //
+  //     this.allNoticesCount.responses = 0
+  //     for (let response of this.noticesMain.allNotices) {
+  //       if (response.responded) {
+  //         this.allNoticesCount.responses++;
+  //       }
+  //     }
+  //   } else if (val === 3) { // responded
+  //     let notice = this.noticesMain.allNotices.find(notice => {
+  //       return notice.notice.id === noticeObj.noticeId
+  //     })
+  //     notice.responseRead = true
+  //     notice = this.noticesMain.dateNotices.find(notice => {
+  //       return notice.notice.id === noticeObj.noticeId
+  //     })
+  //     notice.responseRead = true
+  //   }
+  //   this.setNewNoticesNotify()
+  // }
 
   viewRespondedAndReceivedMsgs(val) {
     if (val === 0) {
@@ -348,12 +349,12 @@ export class PharmacyDashboardComponent implements OnInit {
       } else {
         this.receivedMsgs = true
       }
-      for (let notice of this.noticesMain.dateNotices) {
+      for (let notice of this.pdService.noticesMain.dateNotices) {
         if (!notice.responded) {
           notice.showMsg = this.receivedMsgs
         }
       }
-      for (let notice of this.noticesMain.allNotices) {
+      for (let notice of this.pdService.noticesMain.allNotices) {
         if (!notice.responded) {
           notice.showMsg = this.receivedMsgs
         }
@@ -364,12 +365,12 @@ export class PharmacyDashboardComponent implements OnInit {
       } else {
         this.respondedMsgs = true
       }
-      for (let notice of this.noticesMain.dateNotices) {
+      for (let notice of this.pdService.noticesMain.dateNotices) {
         if (notice.responded) {
           notice.showMsg = this.respondedMsgs
         }
       }
-      for (let notice of this.noticesMain.allNotices) {
+      for (let notice of this.pdService.noticesMain.allNotices) {
         if (notice.responded) {
           notice.showMsg = this.respondedMsgs
         }
@@ -378,6 +379,15 @@ export class PharmacyDashboardComponent implements OnInit {
 
 
   }
+
+  // setNewNoticesNotify() {
+  //   this.pdService.newMessages.next(
+  //     this.noticesMain.allNotices.filter(notice => {
+  //       return !notice?.seen
+  //     }).length
+  //   )
+  //   this.notices = this.noticesMain.dateNotices
+  // }
 
   viewCustomer() {
     // this.pdService.customerId = this.noticeObj?.notice?.customer?.appUser?.id

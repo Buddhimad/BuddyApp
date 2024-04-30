@@ -465,5 +465,5 @@
 <app-image-viewer></app-image-viewer>
 
 <app-customer-profile *ngIf="showCustomer"
-                      [customer]="noticeObj?.notice?.customer"
+                      [user]="noticeObj?.notice.customer"
                       (goBackFunc)="goBack($event)"></app-customer-profile>

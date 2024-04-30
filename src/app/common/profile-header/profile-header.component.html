@@ -27,11 +27,10 @@
     <div class="d-flex justify-content-center pb-3">
       <div class="rating">
         <!-- Five stars -->
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9733;</span>
-        <span class="star">&#9734;</span>
+        <span class="star" *ngFor="let star of getStars(user?.ratingScore);let i=index"
+              style="cursor: pointer">
+                    {{star.rated ? '&#9733;' : '&#9734;'}}
+                    </span>
       </div>
     </div>
   </div>

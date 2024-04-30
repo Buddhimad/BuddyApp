@@ -57,6 +57,7 @@ import {ImageViewerComponent} from './common/image-viewer/image-viewer.component
 import {IMqttServiceOptions, MqttModule} from "ngx-mqtt";
 import {SharedService} from "./common/shared-service.service";
 import { ProfileHeaderSmallComponent } from './common/profile-header-small/profile-header-small.component';
+import { ProfileReviewRatingComponent } from './common/profile-review-rating/profile-review-rating.component';
 
 export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
   hostname: 'localhost',
@@ -91,7 +92,8 @@ export const MQTT_SERVICE_OPTIONS: IMqttServiceOptions = {
     BuddyFileUploadComponent,
     ProfileHeaderComponent,
     ImageViewerComponent,
-    ProfileHeaderSmallComponent
+    ProfileHeaderSmallComponent,
+    ProfileReviewRatingComponent
   ],
   imports: [
     BrowserModule,

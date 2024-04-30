@@ -105,17 +105,17 @@ export class CustomerSideNavComponent implements OnDestroy, AfterViewInit, OnIni
   // },
   side_nav_list = [
     {
-      name: 'All',
+      name: 'Dashboard',
       path: 'customer/dashboard',
       icon: 'home',
       response_count: this.noticesCount,
     },
-    {
-      name: 'Pharmacy',
-      path: 'notice/pharmacy',
-      icon: 'medication',
-      response_count: 100,
-    }
+    // {
+    //   name: 'Pharmacy',
+    //   path: 'notice/pharmacy',
+    //   icon: 'medication',
+    //   response_count: 100,
+    // }
   ];
 
   settings_list = [

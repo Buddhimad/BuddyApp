@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { Subscription } from 'rxjs';
-import { SharedService } from '../../common/shared-service.service';
-import { MatListModule } from '@angular/material/list';
-import { MatDividerModule } from '@angular/material/divider';
-import { MatIconModule } from '@angular/material/icon';
+import {Component} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {MatButtonModule} from '@angular/material/button';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {Subscription} from 'rxjs';
+import {SharedService} from '../../common/shared-service.service';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
 // import {
 //   CdkDragDrop,
 //   moveItemInArray,
 //   CdkDrag,
 //   CdkDropList,
 // } from '@angular/cdk/drag-drop';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatRippleModule } from '@angular/material/core';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatRippleModule} from '@angular/material/core';
+import {PharmacyDashboardService} from "../pharmacy-dashboard/pharmacy-dashboard.service";
 
 @Component({
   selector: 'app-sp-side-nav',
@@ -41,18 +42,23 @@ export class SPSideNavComponent {
   isShowing = false;
   private subscription: Subscription;
 
-  constructor(private sharedService: SharedService) {
+  constructor(private sharedService: SharedService, private pdService: PharmacyDashboardService) {
     // this.subscription = this.sharedService.sharedFunction$.subscribe(() => {
     //   console.log("fucked SP");
     //   this.openDrawerFunction();
     // });
-    this.subscription=this.sharedService.sideNavControlSubject.subscribe((type)=>{
+    this.subscription = this.sharedService.sideNavControlSubject.subscribe((type) => {
       // console.log(type);
-       // if(user=='sp'){
-          this.openDrawerFunction(type);
-       // }
+      // if(user=='sp'){
+      this.openDrawerFunction(type);
+      // }
+    })
+
+    pdService.newMessagesSubscribe.subscribe((messages: any) => {
+      this.side_nav_list[0].response_count = messages.length
     })
   }
+
   openDrawerFunction(type) {
     if (type === 'switch') {
       if (!this.isShowing) {
@@ -110,6 +116,7 @@ export class SPSideNavComponent {
       response_count: 250,
     }
   ];
+
   // onRippleClick(): void {}
 
   changeRoutes(route: String) {

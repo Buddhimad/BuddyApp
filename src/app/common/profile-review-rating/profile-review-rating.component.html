@@ -1,0 +1,101 @@
+<div class="ratings-card ratings-vertical mt-2">
+  <div class="d-flex justify-content-between">
+    <div class="card-title">Ratings</div>
+    <div>
+      <span class="me-2"><strong>{{appUser?.ratingScore?.toFixed(1)}}</strong></span>
+      <div class="rating">
+        <!-- Five stars -->
+        <span class="star" *ngFor="let star of getStars(appUser?.ratingScore);let i=index"
+              style="cursor: pointer">
+                    {{star.rated ? '&#9733;' : '&#9734;'}}
+                    </span>
+        <!--        <span class="star" *ngFor="let start of getStars()">&#9733;</span>-->
+        <!--        <span class="star">&#9733;</span>-->
+        <!--        <span class="star">&#9733;</span>-->
+        <!--        <span class="star">&#9733;</span>-->
+        <!--        <span class="star">&#9734;</span>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="card-content">
+    <div class="group-a">
+      <div class="ratings-wrapper">
+        <div class="rating-star">5 Star</div>
+        <div class="rating-precentage">
+          <div class="inner"
+               [ngStyle]="{'--value':getStarVal(5)}"></div>
+        </div>
+      </div>
+      <div class="ratings-wrapper">
+        <div class="rating-star">4 Star</div>
+        <div class="rating-precentage">
+          <div class="inner"
+               [ngStyle]="{'--value':getStarVal(4)}"></div>
+        </div>
+      </div>
+      <div class="ratings-wrapper">
+        <div class="rating-star">3 Star</div>
+        <div class="rating-precentage">
+<!--          <div class="inner" style="&#45;&#45;value: 75%"></div>-->
+          <div class="inner"
+               [ngStyle]="{'--value':getStarVal(3)}"></div>
+        </div>
+      </div>
+    </div>
+    <div class="group-b">
+      <div class="ratings-wrapper">
+        <div class="rating-star">2 Star</div>
+        <div class="rating-precentage">
+          <div class="inner"
+               [ngStyle]="{'--value':getStarVal(2)}"></div>
+        </div>
+      </div>
+      <div class="ratings-wrapper">
+        <div class="rating-star">1 Star</div>
+        <div class="rating-precentage">
+          <div class="inner"
+               [ngStyle]="{'--value':getStarVal(1)}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <div class="review-card mt-2">
+    <div class="card-title">Reviews & Ratings</div>
+    <div class="testimonial-box" *ngFor="let review of appUser?.reviewRates">
+      <!--top------------------------->
+      <div class="box-top">
+        <!--profile----->
+        <div class="profile">
+          <!--img---->
+          <div class="review-profile-img">
+            <img
+              src="https://cdn3.iconfinder.com/data/icons/avatars-15/64/_Ninja-2-512.png"
+            />
+          </div>
+          <!--name-and-username-->
+          <div class="name-user">
+            <strong>{{review?.appUserPostedBy?.fullName}}</strong>
+            <span>{{review?.appUserPostedBy?.username}}</span>
+          </div>
+        </div>
+        <!--reviews------>
+        <div class="rating">
+          <!-- Five stars -->
+          <span class="star" *ngFor="let star of getStars(review?.reviewVal);let i=index"
+                style="cursor: pointer">
+                    {{star.rated ? '&#9733;' : '&#9734;'}}
+                    </span>
+        </div>
+      </div>
+      <!--Comments---------------------------------------->
+      <div class="client-comment">
+        <p>
+          {{review?.reviewTxt}}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

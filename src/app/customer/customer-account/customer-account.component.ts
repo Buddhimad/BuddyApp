@@ -101,10 +101,13 @@ export class CustomerAccountComponent implements OnInit {
     this.loadTowns()
   }
 
+  user
+
   getUser() {
     this.http.get<any>(this.sharedService.publicUrl + 'customer/get/' + this.sharedService.getUserIdByLS()).subscribe(user => {
+      this.user = user
       this.userObj = user?.customer
-      // console.log(this.userObj)
+      // console.log(this.user)
       this.setUser(this.userObj)
     })
   }

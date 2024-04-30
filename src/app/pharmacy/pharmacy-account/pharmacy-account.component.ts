@@ -227,7 +227,7 @@ export class PharmacyAccountComponent {
     this.daySlot = JSON.parse(this.userObj?.duration)[weekday.id]
     // this.openOrClose.permanent = JSON.parse(this.userObj?.durationAuto)[weekday.id].io
     // console.log(this.userObj)
-    // this.openOrClose.temporary = this.userObj?.tempOpenClose === 1
+    this.openOrClose.temporary = this.userObj?.tempOpenClose === 1
   }
 
   checkTimeDiff(day = null) {

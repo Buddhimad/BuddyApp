@@ -20,9 +20,9 @@ import {ValidateTelephone} from "../../validations/telephone-validator";
 })
 export class CustomerProfileComponent implements OnInit {
 
-  @Input() customer
+  @Input() user
   @Output() goBackFunc: EventEmitter<any> = new EventEmitter();
-  userObj;
+  // userObj;
   firstFormGroup
 
   reviewStars = []
@@ -33,8 +33,9 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userObj = this.customer
-    this.userObj.appUser.contactDetails = JSON.parse(this.userObj?.appUser?.contactDetails)
+    // console.log(this.user)
+    // this.user = this.user.customer
+    this.user.appUser.contactDetails = JSON.parse(this.user?.appUser?.contactDetails)
     this.firstFormGroup = this._formBuilder.group({
       // reviewVal: ['', Validators.required],
       reviewTxt: ['', Validators.required],
@@ -70,7 +71,7 @@ export class CustomerProfileComponent implements OnInit {
           id: this.sharedService.getUserIdByLS()
         },
         appUser: {
-          id: this.customer.appUser.id
+          id: this.user.appUser.id
         }
       }
       // console.log(customerForm)
@@ -80,14 +81,14 @@ export class CustomerProfileComponent implements OnInit {
       // customerForm.province = customerForm.province.province.province_id
       // customerForm.town_town_id = customerForm.town
       // customerForm.userVerify = 1
-      // customerForm.userType = 'customer'
+      // customerForm.userType = 'user'
       // customerForm.created_at = '2023-02-02'
       // customerForm.updated_at = '2023-02-02'
       // customerForm.district = undefined
       // customerForm.province = undefined
       // console.log(review)
 
-      this.http.post<any>(this.sharedService.publicUrl + 'app_user/add_review', review).subscribe((customer) => {
+      this.http.post<any>(this.sharedService.publicUrl + 'app_user/add_review', review).subscribe((user) => {
         this.resetForm()
         // this.myStepper.next();
         // this.patient.patientId = patient.patientId;
@@ -117,11 +118,11 @@ export class CustomerProfileComponent implements OnInit {
   }
 
   // getUser(id) {
-  //   this.http.get<any>(this.sharedService.publicUrl + 'customer/get/' + id).subscribe(user => {
-  //     this.userObj = user?.customer
-  //     this.userObj.appUser.contactDetails = JSON.parse(this.userObj?.appUser?.contactDetails)
-  //     // console.log(this.userObj)
-  //     // this.setUser(this.userObj)
+  //   this.http.get<any>(this.sharedService.publicUrl + 'user/get/' + id).subscribe(user => {
+  //     this.user = user?.user
+  //     this.user.appUser.contactDetails = JSON.parse(this.user?.appUser?.contactDetails)
+  //     // console.log(this.user)
+  //     // this.setUser(this.user)
   //   })
   // }
 
