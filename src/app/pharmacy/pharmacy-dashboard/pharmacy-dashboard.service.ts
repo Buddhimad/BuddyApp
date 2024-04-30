@@ -48,7 +48,16 @@ export class PharmacyDashboardService {
     // if (this.pdService.preState.noticesMain === undefined) {
     this.http.post<any>(this.sharedService.publicUrl + 'notice/get_notices_pharmacy', data).subscribe((notices) => {
       this.noticesMain = notices
-      // console.log(this.noticesMain)
+      // for (let notice of this.noticesMain?.dateNotices) {
+      //   // notice.customer.appUser.contactDetails = JSON.parse(notice?.customer?.appUser?.contactDetails)
+      // }
+      // for (let notice of this.noticesMain?.allNotices) {
+      //   console.log(notice)
+      //   notice.customer.appUser.contactDetails = JSON.parse(notice?.customer?.appUser?.contactDetails)
+      // }
+      // for (let notice of notices){
+      //   notice.customer
+      // }
       this.setHeadersAndMsgs(0)
     })
     // } else {

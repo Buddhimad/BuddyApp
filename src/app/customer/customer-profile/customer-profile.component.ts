@@ -35,7 +35,11 @@ export class CustomerProfileComponent implements OnInit {
   ngOnInit(): void {
     // console.log(this.user)
     // this.user = this.user.customer
-    this.user.appUser.contactDetails = JSON.parse(this.user?.appUser?.contactDetails)
+    try {
+      this.user.appUser.contactDetails = JSON.parse(this.user?.appUser?.contactDetails)
+    } catch (e) {
+
+    }
     this.firstFormGroup = this._formBuilder.group({
       // reviewVal: ['', Validators.required],
       reviewTxt: ['', Validators.required],
