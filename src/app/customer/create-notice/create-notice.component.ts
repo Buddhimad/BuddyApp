@@ -56,6 +56,8 @@ export class CreateNoticeComponent implements OnInit {
     district: '',
     town: ''
   }
+
+  titles = ['Mr.', 'Ms.', 'Dr.']
   // localStorage = this.document.defaultView?.localStorage;
 
   @ViewChild('stepper') private myStepper;
@@ -68,6 +70,7 @@ export class CreateNoticeComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
+      title: ['', Validators.required],
       person_name: ['', Validators.required],
       contact_number_1: ['', [Validators.required, ValidateTelephone(this.errFields, 0)]],
       contact_number_2: ['', [ValidateTelephone(this.errFields, 1)]],
@@ -174,7 +177,7 @@ export class CreateNoticeComponent implements OnInit {
         noticeType: 'customer',
         contactNumber_1: noticeForm.contact_number_1,
         contactNumber_2: noticeForm.contact_number_2,
-        personName: noticeForm.person_name,
+        personName: noticeForm.title + noticeForm.person_name,
         customer: {
           id: this.sharedService.getUserIdByLS()
         },

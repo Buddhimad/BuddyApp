@@ -8,25 +8,37 @@
           <form [formGroup]="firstFormGroup">
             <!--            <ng-template matStepLabel>Fill out your name</ng-template>-->
             <div class="row mt-3">
-              <div class="col-md-6">
-                <mat-form-field class="w-100">
-                  <mat-label>Full Name</mat-label>
-                  <input
-                    matInput
-                    placeholder="Enter your full name"
-                    formControlName="full_name"
-                  />
-                  <button
-                    type="button"
-                    matSuffix
-                    mat-icon-button
-                    aria-label="Clear"
-                    (click)="firstFormGroup.get('full_name').reset()"
-                  >
-                    <mat-icon>close</mat-icon>
-                  </button>
-                  <mat-error>Full Name is required</mat-error>
-                </mat-form-field>
+              <div class="col-md-6" style="display:flex;">
+                <div style="width: 100px;">
+                  <mat-form-field class="w-100">
+                    <mat-label>Title</mat-label>
+                    <mat-select name="town" formControlName="title">
+                      <mat-option *ngFor="let title of titles" [value]="title">{{title}}</mat-option>
+                      <!-- <mat-option value="galle">Galle</mat-option> -->
+                    </mat-select>
+                    <mat-error>Title is required</mat-error>
+                  </mat-form-field>
+                </div>
+                <div style="width: calc(100% - 100px);">
+                  <mat-form-field class="w-100">
+                    <mat-label>Full Name</mat-label>
+                    <input
+                      matInput
+                      placeholder="Enter your full name"
+                      formControlName="full_name"
+                    />
+                    <button
+                      type="button"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="firstFormGroup.get('full_name').reset()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-error>Full Name is required</mat-error>
+                  </mat-form-field>
+                </div>
               </div>
 
               <div class="col-md-6">
@@ -270,7 +282,7 @@
                               (ngModelChange)="getDistricts($event)">
 
                     <mat-option *ngFor="let province of provinces" [value]="province"
-                                >{{province.name}}</mat-option>
+                    >{{province.name}}</mat-option>
                   </mat-select>
                   <mat-error>Province is required</mat-error>
                 </mat-form-field>
@@ -281,7 +293,7 @@
                   <mat-select name="district" formControlName="district"
                               (ngModelChange)="getTowns($event)">
                     <mat-option *ngFor="let district of districts" [value]="district"
-                                >{{district.name}}</mat-option>
+                    >{{district.name}}</mat-option>
                     <!-- <mat-option value="galle">Galle</mat-option> -->
                   </mat-select>
                   <mat-error>District is required</mat-error>
@@ -299,33 +311,33 @@
               </div>
 
               <div style="display: flex;justify-content: flex-end;margin-top: 20px">
-                  <div>
-                    <button
-                      type="button"
-                      mat-raised-button
-                      color="primary"
-                      class="primary-color ml-auto btn-rnext"
-                      matStepperPrevious
-                    >
-                      Back
-                    </button>
-                  </div>
-                  <div style="margin-left: 20px">
-                    <button
-                      mat-raised-button
-                      color="primary"
-                      class="primary-color ml-auto btn-rnext"
-                      type="submit"
-                    >
-                      Finish
-                    </button>
-                  </div>
+                <div>
+                  <button
+                    type="button"
+                    mat-raised-button
+                    color="primary"
+                    class="primary-color ml-auto btn-rnext"
+                    matStepperPrevious
+                  >
+                    Back
+                  </button>
+                </div>
+                <div style="margin-left: 20px">
+                  <button
+                    mat-raised-button
+                    color="primary"
+                    class="primary-color ml-auto btn-rnext"
+                    type="submit"
+                  >
+                    Finish
+                  </button>
+                </div>
               </div>
             </div>
           </form>
         </mat-step>
         <mat-step [completed]="false">
-<!--          <ng-template matStepLabel>Done</ng-template>-->
+          <!--          <ng-template matStepLabel>Done</ng-template>-->
           <div class="wrapperAlert">
 
             <div class="contentAlert">

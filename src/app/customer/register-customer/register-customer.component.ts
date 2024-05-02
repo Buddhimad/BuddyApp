@@ -61,6 +61,8 @@ export class RegisterCustomerComponent implements OnInit {
   districts: any = []
   towns: any = []
 
+  titles = ['Mr.', 'Ms.', 'Dr.']
+
   @ViewChild('stepper') private myStepper;
 
   constructor(private _formBuilder: FormBuilder, private sharedService: SharedService, private router: Router, private http: HttpClient) {
@@ -69,6 +71,7 @@ export class RegisterCustomerComponent implements OnInit {
 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
+      title: ['', Validators.required],
       full_name: ['', Validators.required],
       email: ['', [Validators.required, ValidateEmail(this.errFields)]],
       gender: ['', Validators.required],
@@ -142,6 +145,7 @@ export class RegisterCustomerComponent implements OnInit {
         nic: customerForm.nic,
         gender: customerForm.gender,
         dob: customerForm.dob,
+        title: customerForm.title,
         appUser: {
           fullName: customerForm.full_name,
           address: customerForm.address,

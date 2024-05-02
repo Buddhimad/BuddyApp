@@ -6,8 +6,8 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatChipsModule} from '@angular/material/chips';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
-import {SharedService} from '../../common/shared-service.service';
-import {ImageViewerComponent} from "../../common/image-viewer/image-viewer.component";
+import {SharedService} from '../../../common/shared-service.service';
+import {ImageViewerComponent} from "../../../common/image-viewer/image-viewer.component";
 import {HttpClient} from "@angular/common/http";
 
 @Component({
@@ -52,7 +52,7 @@ export class CustomerNoticesComponent implements OnInit {
     // console.log(44)
     this.http.get<any>(this.sharedService.publicUrl + 'notice/get_notices_customer/' + this.sharedService.getUserIdByLS()).subscribe((notices: []) => {
       this.notices = notices
-      console.log(notices)
+      // console.log(notices)
       // for (let notice of notices) {
       //   // notices.forEach(notice => {
       //   this.notices.push(notice)
@@ -60,28 +60,45 @@ export class CustomerNoticesComponent implements OnInit {
     })
   }
 
-  readResponses(noticeObj) {
-    // console.log(noticeObj)
-    if (noticeObj?.notice?.responses.length > 0 && !noticeObj?.seen) {
-      // console.log(2)
-      let c_notice = {
-        notice: {
-          id: noticeObj?.notice?.id
-        }
-      };
+  responses = []
 
-      this.http.post(this.sharedService.publicUrl + 'notice/msg_read_customer', c_notice).subscribe((response) => {
-        if (response) {
-          // noticeObj.response = response
-          noticeObj.seen = true
-          // noticeObj.responseRead = true
-          // this.setHeadersAndMsgs(2, noticeObj)
-          // console.log(noticeObj)
+  readResponses(noticeObj, val) {
+    this.responses = []
+    // console.log(noticeObj)
+    if (val === 0) {
+      this.responses = noticeObj?.notice?.responses.slice()
+      // for (let response of noticeObj?.notice?.responses) {
+      //   if(response.accepted){
+      //
+      //   }
+      // }
+    } else if (val === 1) {
+      for (let response of noticeObj?.notice?.responses) {
+        if (response.accepted > 1) {
+          this.responses.push(response)
         }
-      }, (error) => {
-        console.log(error)
-        //   // this.success = 2;
-      })
+      }
+      if (this.responses.length > 0 && !noticeObj?.seen) {
+        // console.log(2)
+        let c_notice = {
+          notice: {
+            id: noticeObj?.notice?.id
+          }
+        };
+
+        this.http.post(this.sharedService.publicUrl + 'notice/msg_read_customer', c_notice).subscribe((response) => {
+          if (response) {
+            // noticeObj.response = response
+            noticeObj.seen = true
+            // noticeObj.responseRead = true
+            // this.setHeadersAndMsgs(2, noticeObj)
+            // console.log(noticeObj)
+          }
+        }, (error) => {
+          console.log(error)
+          //   // this.success = 2;
+        })
+      }
     }
   }
 
@@ -97,6 +114,33 @@ export class CustomerNoticesComponent implements OnInit {
 
   getContactDetails(notice) {
     return JSON.parse(notice?.customer?.appUser.contactDetails)
+  }
+
+  getViewsLength(responses) {
+    // console.log(responses)
+    return responses.filter(response => {
+      return response.accepted > 0
+    }).length
+  }
+
+  getResponsesLength(responses) {
+    // console.log(responses)
+    return responses.filter(response => {
+      return response.accepted > 1
+    }).length
+  }
+
+  isNewOrResponseReceived(noticeObj) {
+    // console.log(noticeObj?.notice?.responses)
+    if (noticeObj?.notice?.responses.length === 0) {
+      return true
+    }
+    for (let response of noticeObj?.notice?.responses) {
+      if (response.accepted < 3) {
+        return true
+      }
+    }
+    return false
   }
 
   @ViewChild(ImageViewerComponent) imgViewer;

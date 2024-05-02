@@ -18,11 +18,11 @@
       <ul class="custom-notifications">
         <li class="unread" *ngFor="let notification of notification_list">
           <a href="#" class="d-flex">
-            <div class="img me-3">
-              <img src="{{notification.profile_pic_url}}" alt="Image" class="img-fluid">
-            </div>
+<!--            <div class="img me-3">-->
+<!--              <img src="{{notification.profile_pic_url}}" alt="Image" class="img-fluid">-->
+<!--            </div>-->
             <div class="text">
-              <strong>{{notification.responders_name}} </strong>  respond to your {{notification.notice_type}} notice
+              <strong>{{notification.responders_name}} </strong> respond to your {{notification.notice_type}} notice
               {{notification.time_stamp| dateAgo}}
             </div>
           </a>

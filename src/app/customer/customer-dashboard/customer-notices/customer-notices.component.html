@@ -4,7 +4,8 @@
     <div style="display:flex;padding: 20px" *ngIf="!viewNotice">
       <div style="width: calc(100% - 30px);font-size: 20px;font-weight: bold;color: #00a82e">Notices</div>
       <div (click)="getNoticesCustomer()">
-        <i style="display:flex;text-align: right;font-size: 30px;color: #00a82e;cursor: pointer" class="fa fa-refresh"></i>
+        <i style="display:flex;text-align: right;font-size: 30px;color: #00a82e;cursor: pointer"
+           class="fa fa-refresh"></i>
       </div>
     </div>
     <div class="inbox inbox-scroll">
@@ -12,13 +13,15 @@
         <div class="message-item unread" *ngFor="let noticeObj of notices" style="padding: 4px">
           <div class="notice-head" (click)="funcViewNotice(noticeObj,true)"
                style="display:flex;font-weight: bold">
-            <div style="width: calc(100% - 20px)">{{'Notice - ' + noticeObj?.notice?.id}}</div>
+            <div style="width: calc(100% - 20px)"
+                 [ngStyle]="{'font-weight':isNewOrResponseReceived(noticeObj)?'bold':'normal'}">
+              {{'Notice - ' + noticeObj?.notice?.id}}</div>
             <div style="display:flex;margin-top: 3px">
               <!--              <i *ngIf="noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;margin-right: 5px" class="fa fa-commenting"-->
               <!--                 [ngStyle]="{'color':'gray'}"></i>-->
               <i *ngIf="noticeObj?.seen || noticeObj?.responded" style="display:flex;text-align: right;font-size: 20px;"
                  class="fa fa-check"
-                 [ngStyle]="{'color':noticeObj.seen?'#005dff':'#a9a9a9'}"></i>
+                 [ngStyle]="{'color':isNewOrResponseReceived(noticeObj)?'#a9a9a9':'#005dff'}"></i>
             </div>
           </div>
         </div>
@@ -139,8 +142,12 @@
                 </mat-chip>
                 <mat-chip
                   class="primary_chip flex-fill"
-                  matTooltip="Views"
+                  matTooltip="Respond"
                   matTooltipHideDelay="100"
+                  data-bs-toggle="collapse"
+                  [attr.data-bs-target]="getViewsLength(noticeObj?.notice?.responses)>0?'#'+noticeObj?.notice?.id:''"
+                  aria-expanded="false"
+                  (click)="readResponses(noticeObj,0)"
                 >
                   <mat-icon
                     matChipAvatar
@@ -148,7 +155,7 @@
                     aria-label="contact icon"
                     fontIcon="visibility"
                   ></mat-icon>
-                  20
+                  {{getViewsLength(noticeObj?.notice?.responses)}}
                 </mat-chip>
 
                 <mat-chip
@@ -156,10 +163,9 @@
                   matTooltip="Respond"
                   matTooltipHideDelay="100"
                   data-bs-toggle="collapse"
-                  [attr.data-bs-target]="noticeObj?.notice?.responses.length>0?'#'+noticeObj?.notice?.id:''"
+                  [attr.data-bs-target]="getResponsesLength(noticeObj?.notice?.responses)>0?'#'+noticeObj?.notice?.id:''"
                   aria-expanded="false"
-                  aria-controls="noticeid_response_list"
-                  (click)="readResponses(noticeObj)"
+                  (click)="readResponses(noticeObj,1)"
                 >
                   <mat-icon
                     matChipAvatar
@@ -167,7 +173,7 @@
                     aria-label="contact icon"
                     fontIcon="mark_email_read"
                   ></mat-icon>
-                  {{noticeObj?.notice?.responses.length}}
+                  {{getResponsesLength(noticeObj?.notice?.responses)}}
                 </mat-chip>
                 <!-- <mat-chip
                   class="primary_chip float-right"
@@ -192,7 +198,7 @@
 
           </div>
           <div class="collapse mt-3" [id]="noticeObj?.notice?.id">
-            <div class="card unread mt-2" *ngFor="let response of noticeObj?.notice?.responses">
+            <div class="card unread mt-2" *ngFor="let response of responses">
               <div class="box-header">
                 <h3>
                   <a href="javascript:void(0);" (click)="navigateToDestination('customer/dashboard/shopname/profile')"

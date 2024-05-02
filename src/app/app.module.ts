@@ -29,7 +29,7 @@ import {CustomerSecurityComponent} from "./customer/customer-security/customer-s
 import {CustomerSideNavComponent} from "./customer/customer-side-nav/customer-side-nav.component";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatTooltipModule} from "@angular/material/tooltip";
-import {CustomerNoticesComponent} from "./customer/customer-notices/customer-notices.component";
+import {CustomerNoticesComponent} from "./customer/customer-dashboard/customer-notices/customer-notices.component";
 import {RegisterCustomerComponent} from "./customer/register-customer/register-customer.component";
 import {VeryfyCustomerComponent} from "./customer/veryfy-customer/veryfy-customer.component";
 import {MatTableModule} from "@angular/material/table";

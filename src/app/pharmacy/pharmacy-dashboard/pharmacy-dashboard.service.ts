@@ -52,7 +52,7 @@ export class PharmacyDashboardService {
       //   // notice.customer.appUser.contactDetails = JSON.parse(notice?.customer?.appUser?.contactDetails)
       // }
       // for (let notice of this.noticesMain?.allNotices) {
-      //   console.log(notice)
+      //   console.log(notices)
       //   notice.customer.appUser.contactDetails = JSON.parse(notice?.customer?.appUser?.contactDetails)
       // }
       // for (let notice of notices){
@@ -76,8 +76,10 @@ export class PharmacyDashboardService {
     // console.log(this.getDeviceId())
     this._mqttService.observables = {}
     this._mqttService.observe(this.sharedService.getUserByLS()['townId']).subscribe((message: IMqttMessage) => {
-      let notice = JSON.parse(message.payload.toString())
-      this.setHeadersAndMsgs(1, notice)
+      // let notice = JSON.parse(message.payload.toString())
+      // this.setHeadersAndMsgs(1, notice)
+      let date = new Date()
+      this.getNoticesPharmacy(date, date)
     });
 
     this._mqttService.observe(this.sharedService.getUserIdByLS()).subscribe((message: IMqttMessage) => {

@@ -14,7 +14,7 @@ export class NavBarComponent {
   constructor(private sharedService: SharedService, private router: Router, private pdService: PharmacyDashboardService) {
     pdService.newMessagesSubscribe.subscribe((messages: any) => {
       // console.log(messages)
-      // this.notification_list = messages
+      this.notification_list = []
       for (let message of messages) {
         // console.log(message)
         this.notification_list.push({
